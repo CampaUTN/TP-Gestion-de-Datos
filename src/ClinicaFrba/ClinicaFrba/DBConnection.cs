@@ -8,25 +8,15 @@ using System.Configuration;
 
 namespace ClinicaFrba
 {
-    public class DBConnection
+    public static class DBConnection
     {
         private static DBConnection instance = null;
 
-        private string server = ConfigurationManager.AppSettings["server"].ToString();
-        private string user = ConfigurationManager.AppSettings["user"].ToString();
-        private string password = ConfigurationManager.AppSettings["password"].ToString();
+        private static string server = ConfigurationManager.AppSettings["server"].ToString();
+        private static string user = ConfigurationManager.AppSettings["user"].ToString();
+        private static string password = ConfigurationManager.AppSettings["password"].ToString();
 
-        private DBConnection() { }
-
-        public static DBConnection getInstance(){
-            if (instance == null) {
-                instance = new DBConnection();
-            }
-
-            return instance;
-        }
-
-        public SqlConnection getConnection(){
+        public static SqlConnection getConnection(){
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = "SERVER=" + server + "\\SQLSERVER2012;DATABASEGD2C2016;UID=" + user + ";PASSWORD=" + password + ";";
             return connection;
