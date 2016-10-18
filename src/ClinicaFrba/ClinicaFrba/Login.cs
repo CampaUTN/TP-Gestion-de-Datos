@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace ClinicaFrba.Login
+namespace ClinicaFrba
 {
     public partial class Login : Form
     {
@@ -35,6 +35,11 @@ namespace ClinicaFrba.Login
             if (!reader.HasRows){
                 MessageBox.Show("No existe el usuario '" + this.textUsuario + "' en el sistema", "Error de Login", MessageBoxButtons.OK);
             }
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
 
         }
     }

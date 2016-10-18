@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.Login
+﻿namespace ClinicaFrba
 {
     partial class Login
     {
@@ -44,7 +44,6 @@
             this.label1.Size = new System.Drawing.Size(111, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "LOGIN - Clinica FRBA";
-            //this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textUsuario
             // 
@@ -101,6 +100,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Login";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
