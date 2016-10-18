@@ -10,8 +10,6 @@ namespace ClinicaFrba
 {
     public static class DBConnection
     {
-        private static DBConnection instance = null;
-
         private static string server = ConfigurationManager.AppSettings["server"].ToString();
         private static string user = ConfigurationManager.AppSettings["user"].ToString();
         private static string password = ConfigurationManager.AppSettings["password"].ToString();
