@@ -10,7 +10,7 @@ namespace ClinicaFrba
 {
     public class DBConnection
     {
-        private DBConnection instance = null;
+        private static DBConnection instance = null;
 
         private string server = ConfigurationManager.AppSettings["server"].ToString();
         private string user = ConfigurationManager.AppSettings["user"].ToString();
@@ -18,7 +18,7 @@ namespace ClinicaFrba
 
         private DBConnection() { }
 
-        public DBConnection getInstance(){
+        public static DBConnection getInstance(){
             if (instance == null) {
                 instance = new DBConnection();
             }
