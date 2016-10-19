@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Abm_Planes
+namespace ClinicaFrba.Abm_Profesional
 {
-    public partial class Form1 : Form
+    public partial class AbmProfesional : Form
     {
-        public Form1()
+        public AbmProfesional()
         {
             InitializeComponent();
         }

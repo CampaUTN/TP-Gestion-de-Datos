@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.Registro_Resultado
 {
-    partial class Form1
+    partial class RegistroResultado
     {
         /// <summary>
         /// Required designer variable.

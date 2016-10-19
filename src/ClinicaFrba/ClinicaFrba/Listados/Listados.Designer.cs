@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Pedir_Turno
+﻿namespace ClinicaFrba.Listados
 {
-    partial class Form1
+    partial class Listados
     {
         /// <summary>
         /// Required designer variable.

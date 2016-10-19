@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Listados
+namespace ClinicaFrba.Abm_Especialidades_Medicas
 {
-    public partial class Form1 : Form
+    public partial class AbmEspMedicas : Form
     {
-        public Form1()
+        public AbmEspMedicas()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

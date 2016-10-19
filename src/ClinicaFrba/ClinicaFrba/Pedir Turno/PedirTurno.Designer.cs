@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Cancelar_Atencion
+﻿namespace ClinicaFrba.Pedir_Turno
 {
-    partial class Form1
+    partial class PedirTurno
     {
         /// <summary>
         /// Required designer variable.

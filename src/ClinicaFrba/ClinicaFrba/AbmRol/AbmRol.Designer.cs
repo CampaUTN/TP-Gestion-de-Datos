@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Registrar_Agenta_Medico
+﻿namespace ClinicaFrba.AbmRol
 {
-    partial class Form1
+    partial class AbmRol
     {
         /// <summary>
         /// Required designer variable.

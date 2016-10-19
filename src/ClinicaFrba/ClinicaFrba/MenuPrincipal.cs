@@ -50,18 +50,18 @@ namespace ClinicaFrba
         private void initialize_form_mapping()
         {
             this.frmsDisponibles = new Dictionary<int, Func<Form>>();
-            this.frmsDisponibles.Add(1, () => new Abm_Afiliado.Form1(this, this.username));
-            this.frmsDisponibles.Add(2, () => new Abm_Especialidades_Medicas.Form1(this));
-            this.frmsDisponibles.Add(3, () => new Abm_Planes.Form1(this));
-            this.frmsDisponibles.Add(4, () => new Abm_Profesional.Form1(this));
+            this.frmsDisponibles.Add(1, () => new Abm_Afiliado.AbmAfiliado(this, this.username));
+            this.frmsDisponibles.Add(2, () => new Abm_Especialidades_Medicas.AbmEspMedicas(this));
+            this.frmsDisponibles.Add(3, () => new Abm_Planes.AbmPlanes(this));
+            this.frmsDisponibles.Add(4, () => new Abm_Profesional.AbmProfesional(this));
             this.frmsDisponibles.Add(5, () => new Abm_Rol.Form1(this, this.username));
-            this.frmsDisponibles.Add(6, () => new Cancelar_Atencion.Form1(this, this.username));
-            this.frmsDisponibles.Add(7, () => new Compra_Bono.Form1(this, this.username));
-            this.frmsDisponibles.Add(8, () => new Listados.Form1(this, this.username));
-            this.frmsDisponibles.Add(9, () => new Pedir_Turno.Form1(this));
-            this.frmsDisponibles.Add(10, () => new Registrar_Agenta_Medico.Form1(this));
-            this.frmsDisponibles.Add(11, () => new Registro_Llegada.Form1(this, this.username));
-            this.frmsDisponibles.Add(11, () => new Registro_Resultado.Form1(this, this.username));
+            this.frmsDisponibles.Add(6, () => new Cancelar_Atencion.CancelarAtencion(this, this.username));
+            this.frmsDisponibles.Add(7, () => new Compra_Bono.CompraBono(this, this.username));
+            this.frmsDisponibles.Add(8, () => new Listados.Listados(this, this.username));
+            this.frmsDisponibles.Add(9, () => new Pedir_Turno.PedirTurno(this));
+            this.frmsDisponibles.Add(10, () => new Registrar_Agenta_Medico.RegistarAgenda(this));
+            this.frmsDisponibles.Add(11, () => new Registro_Llegada.RegistroLlegada(this, this.username));
+            this.frmsDisponibles.Add(11, () => new Registro_Resultado.RegistroResultado(this, this.username));
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Pedir_Turno
+namespace ClinicaFrba.Abm_Planes
 {
-    public partial class Form1 : Form
+    public partial class AbmPlanes : Form
     {
-        public Form1()
+        public AbmPlanes()
         {
             InitializeComponent();
         }
