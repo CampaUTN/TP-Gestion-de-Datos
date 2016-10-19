@@ -1,6 +1,5 @@
 USE GD2C2016;
 GO
-
 /* Eliminación de los objetos preexistentes */
 
 IF OBJECT_ID('CLINICA.RolXfuncionalidad','U') IS NOT NULL
@@ -12,50 +11,17 @@ IF OBJECT_ID('CLINICA.Funcionalidades','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.RolXUsuario','U') IS NOT NULL
     DROP TABLE CLINICA.RolXUsuario;
 
-IF OBJECT_ID('CLINICA.TipoCancelaciones','U') IS NOT NULL
-    DROP TABLE CLINICA.TipoCancelaciones;
-
-IF OBJECT_ID('CLINICA.HistorialAfiliados','U') IS NOT NULL
-    DROP TABLE CLINICA.HistorialAfiliados;
-
 IF OBJECT_ID('CLINICA.Roles','U') IS NOT NULL
     DROP TABLE CLINICA.Roles;
 
-
 IF OBJECT_ID('CLINICA.Administradores','U') IS NOT NULL
     DROP TABLE CLINICA.Administradores;
-    
-IF OBJECT_ID('CLINICA.Profesionales','U') IS NOT NULL
-    DROP TABLE CLINICA.Profesionales;
-    
-IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
-    DROP TABLE CLINICA.Usuarios;
-
+   
 IF OBJECT_ID('CLINICA.EspecialidadXProfesional','U') IS NOT NULL
     DROP TABLE CLINICA.EspecialidadXProfesional;
-    
-IF OBJECT_ID('CLINICA.Especialidades','U') IS NOT NULL
-    DROP TABLE CLINICA.Especialidades;
-    
-IF OBJECT_ID('CLINICA.TipoEspecialidades','U') IS NOT NULL
-    DROP TABLE CLINICA.TipoEspecialidades;
-
-IF OBJECT_ID('CLINICA.Horarios','U') IS NOT NULL
-    DROP TABLE CLINICA.Horarios;
-
-IF OBJECT_ID('CLINICA.Afiliados','U') IS NOT NULL
-    DROP TABLE CLINICA.Afiliados;
-
-IF OBJECT_ID('CLINICA.Planes','U') IS NOT NULL
-    DROP TABLE CLINICA.Planes;
-
-IF OBJECT_ID('CLINICA.Turnos','U') IS NOT NULL
-    DROP TABLE CLINICA.Turnos;
 
 IF OBJECT_ID('CLINICA.CancelacionesTurnos','U') IS NOT NULL
     DROP TABLE CLINICA.CancelacionesTurnos;
-    
-
     
 IF OBJECT_ID('CLINICA.Bonos','U') IS NOT NULL
     DROP TABLE CLINICA.Bonos;
@@ -66,9 +32,35 @@ IF OBJECT_ID('CLINICA.ComprasBonos','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.Consultas','U') IS NOT NULL
     DROP TABLE CLINICA.Consultas;
 
+IF OBJECT_ID('CLINICA.Turnos','U') IS NOT NULL
+    DROP TABLE CLINICA.Turnos;
 
+IF OBJECT_ID('CLINICA.Afiliados','U') IS NOT NULL
+    DROP TABLE CLINICA.Afiliados;
+	
+IF OBJECT_ID('CLINICA.TipoCancelacion','U') IS NOT NULL
+    DROP TABLE CLINICA.TipoCancelacion;
+	
+IF OBJECT_ID('CLINICA.Planes','U') IS NOT NULL
+    DROP TABLE CLINICA.Planes;
 
+IF OBJECT_ID('CLINICA.Horarios','U') IS NOT NULL
+    DROP TABLE CLINICA.Horarios;
 
+IF OBJECT_ID('CLINICA.HistorialAfiliado','U') IS NOT NULL
+    DROP TABLE CLINICA.HistorialAfiliado;
+
+IF OBJECT_ID('CLINICA.Especialidades','U') IS NOT NULL
+    DROP TABLE CLINICA.Especialidades;
+	
+IF OBJECT_ID('CLINICA.Profesionales','U') IS NOT NULL
+    DROP TABLE CLINICA.Profesionales;
+
+IF OBJECT_ID('CLINICA.TipoEspecialidad','U') IS NOT NULL
+    DROP TABLE CLINICA.TipoEspecialidad;
+
+IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
+    DROP TABLE CLINICA.Usuarios;
 
  /* TODO: PONER LOS NUESTROS */
 
@@ -192,14 +184,14 @@ CREATE TABLE CLINICA.Turnos(
     turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
   
-CREATE TABLE CLINICA.TiposCancelacion(
+CREATE TABLE CLINICA.TipoCancelacion(
 	tipo_id INT PRIMARY KEY IDENTITY,
   	tipo_detalle VARCHAR(256));
 
 CREATE TABLE CLINICA.CancelacionesTurnos(
 	canc_id INT PRIMARY KEY IDENTITY,
   	canc_turno INT FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id),
-	canc_tipo INT FOREIGN KEY REFERENCES CLINICA.TiposCancelacion(tipo_id),
+	canc_tipo INT FOREIGN KEY REFERENCES CLINICA.TipoCancelacion(tipo_id),
   	canc_detalle VARCHAR(225));  
   
 CREATE TABLE CLINICA.HistorialAfiliado(
@@ -268,8 +260,7 @@ INSERT INTO CLINICA.Usuarios(usua_nroDoc,usua_intentos,usua_nombre,usua_apellido
 INSERT INTO CLINICA.Usuarios(usua_id, usua_intentos, usua_nombre, usua_apellido, usua_tipoDoc, usua_direccion, usua_telefono, usua_fechaNacimiento, usua_password, usua_mail, usua_sexo)
 	SELECT  DISTINCT m.Paciente_Dni, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac,  @hash, m.Medico_Mail, NULL 
 	FROM gd_esquema.Maestra m
-	WHERE m.Medico_Dni IS NOT NULL 
-  ORDER BY m.Medico_Dni
+	WHERE m.Medico_Dni IS NOT NULL
 
 INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_cantidadHijos, afil_estadoCivil)  -- TODO: hacer bien
 	SELECT DISTINCT m.Paciente_Dni, m.Paciente_Dni, m.Plan_Med_Codigo, NULL, NULL
