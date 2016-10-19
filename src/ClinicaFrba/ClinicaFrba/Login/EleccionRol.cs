@@ -20,7 +20,7 @@ namespace ClinicaFrba
             InitializeComponent();
             this.frmLogin = frmLogin;
             this.userActivo = userActivo;
-            //Utils.populate(this.comboRolesPosibles, rolesAsignados);
+            Utilidades.Utils.llenar(this.comboRolesPosibles, rolesAsignados);
            
         }
 
