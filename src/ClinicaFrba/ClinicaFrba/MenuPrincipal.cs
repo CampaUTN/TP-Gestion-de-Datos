@@ -14,28 +14,28 @@ namespace ClinicaFrba
     public partial class MenuPrincipal : Form
     {
         Dictionary<int, Func<Form>> frmsDisponibles;
-        Form login_form;
+        Form frmLogin;
         string userActivo;
 
-        public MenuPrincipal(Form login_form, int role_code, string username)
+        public MenuPrincipal(Form frmLogin, int rolActivo, string userActivo)
         {
             InitializeComponent();
-            this.login_form = login_form;
-            this.userActivo = username;
-            this.initialize_form_mapping();
-            this.fill_list(role_code);
+            this.frmLogin=frmLogin;
+            this.userActivo = userActivo;
+            this.inicializarFrmsDisponibles();
+            this.fill_list(rolActivo);
         }
 
-        private void fill_list(int role_code)
+        private void fill_list(int rolActivo)
         {
             var parametrosSP = new List<KeyValuePair<string, object>>();
-            parametrosSP.Add(new KeyValuePair<string, object>("@role_id", role_code));
+            parametrosSP.Add(new KeyValuePair<string, object>("@role_id", rolActivo));
             var roles = new List<KeyValuePair<int, string>>();
 
-            using (SqlConnection connection = DBConnection.getConnection())
+            using (SqlConnection conexion = DBConnection.getConnection())
             { 
-                SqlCommand query = Utils.create_sp("CLINICA.FuncionalidadXRol", parametrosSP, connection);
-                connection.Open();
+                SqlCommand query = Utils.create_sp("CLINICA.FuncionalidadXRol", parametrosSP, conexion);
+                conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read())
                     roles.Add(new KeyValuePair<int, string>(Int32.Parse(reader["cod_fun"].ToString()), reader["descripcion"].ToString()));
@@ -47,10 +47,10 @@ namespace ClinicaFrba
             }
         }
 
-        private void initialize_form_mapping()
+        private void inicializarFrmsDisponibles()
         {
             this.frmsDisponibles = new Dictionary<int, Func<Form>>();
-            this.frmsDisponibles.Add(1, () => new Abm_Afiliado.AbmAfiliado(this, this.username));
+            this.frmsDisponibles.Add(1, () => new Abm_Afiliado.AbmAfiliado(this, this.userActivo));
             this.frmsDisponibles.Add(2, () => new Abm_Especialidades_Medicas.AbmEspMedicas(this));
             this.frmsDisponibles.Add(3, () => new Abm_Planes.AbmPlanes(this));
             this.frmsDisponibles.Add(4, () => new Abm_Profesional.AbmProfesional(this));
