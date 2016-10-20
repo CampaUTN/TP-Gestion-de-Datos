@@ -16,7 +16,7 @@ namespace ClinicaFrba
 
         public static SqlConnection getConnection(){
             SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = "SERVER=" + server + "\\SQLSERVER2012;DATABASEGD2C2016;UID=" + user + ";PASSWORD=" + password + ";";
+            connection.ConnectionString = "SERVER=" + server + "\\SQLSERVER2012; DATABASE = GD2C2016;UID=" + user + ";PASSWORD=" + password + ";";
             return connection;
         }
 
