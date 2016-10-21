@@ -97,7 +97,7 @@ GO
 
 /* Creación del esquema */
 
-CREATE SCHEMA CLINICA AUTHORIZATION gd;
+CREATE SCHEMA CLINICA-- AUTHORIZATION gd;
 GO
 
 
@@ -148,13 +148,6 @@ CREATE TABLE CLINICA.Profesionales(
   	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
   	prof_matricula VARCHAR(12));
   
-CREATE TABLE CLINICA.Horarios(
-		hora_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	hora_profesional INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id), 
-    hora_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id), 
-    hora_fecha DATE NOT NULL,
-    hora_inicio TIME NOT NULL);
-  
 CREATE TABLE CLINICA.TiposEspecialidades(
     tipo_id INT PRIMARY KEY,
     tipo_nombre VARCHAR(225));
@@ -163,6 +156,13 @@ CREATE TABLE CLINICA.Especialidades(
     espe_id INT PRIMARY KEY,
   	espe_nombre VARCHAR(256) NOT NULL,
     espe_tipo INT NOT NULL FOREIGN KEY REFERENCES CLINICA.TiposEspecialidades(tipo_id));
+
+CREATE TABLE CLINICA.Horarios(
+		hora_id INT NOT NULL IDENTITY PRIMARY KEY,
+  	hora_profesional INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id), 
+    hora_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id), 
+    hora_fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL);
 
 CREATE TABLE CLINICA.EspecialidadXProfesional(
 		espe_id INT FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id),
