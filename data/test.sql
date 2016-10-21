@@ -95,34 +95,10 @@ GO
 CREATE SCHEMA CLINICA AUTHORIZATION gd
 GO
 
-
-/*DROPEO TABLAS */
-DROP TABLE CLINICA.ComprasBonos
-DROP TABLE CLINICA.Bonos
-DROP TABLE CLINICA.Consultas
-DROP TABLE CLINICA.HistorialAfiliado
-DROP TABLE CLINICA.CancelacionesAfiliados
-DROP TABLE CLINICA.CancelacionesTurnos
-DROP TABLE CLINICA.Turnos
-DROP TABLE CLINICA.TiposCancelacion
-DROP TABLE CLINICA.Afiliados
-DROP TABLE CLINICA.Planes
-DROP TABLE CLINICA.EspecialidadXProfesional
-DROP TABLE CLINICA.Horarios
-DROP TABLE CLINICA.Especialidades
-DROP TABLE CLINICA.TiposEspecialidades
-DROP TABLE CLINICA.Profesionales
-DROP TABLE CLINICA.Administradores
-DROP TABLE CLINICA.RolXFuncionalidad
-DROP TABLE CLINICA.Funcionalidades
-DROP TABLE CLINICA.RolXUsuario
-DROP TABLE CLINICA.Roles
-DROP TABLE CLINICA.Usuarios
-
 /* Creación de las tablas */
 
 CREATE TABLE CLINICA.Usuarios(
-    usua_id INT PRIMARY KEY,
+    usua_id INT IDENTITY PRIMARY KEY,
     usua_username VARCHAR(20),
   	usua_password VARBINARY(225), -- TODO: inventar users y pass
   	usua_intentos TINYINT DEFAULT 0,
