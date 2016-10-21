@@ -74,20 +74,13 @@ IF OBJECT_ID('CLINICA._algo_') IS NOT NULL
 
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
-
-
-
-
-
-
-
+  
 
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
     DROP SCHEMA CLINICA
 GO
-
 
 
 /* Creación del esquema */
@@ -254,14 +247,13 @@ INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_
   WHERE m.Paciente_Dni IS NOT NULL
   ORDER BY m.Paciente_Dni
 
-  --Hasta aca anda
-  -- Esta de abajo tira: Infracción de la restricción PRIMARY KEY 'PK__Usuarios__EA3FBB9ADE06CF50'. No se puede insertar una clave duplicada en el objeto 'CLINICA.Usuarios'. El valor de la clave duplicada es (112396001)
---Profesionales. Funciona
-INSERT INTO CLINICA.Usuarios(usua_id, usua_intentos, usua_nombre, usua_apellido, usua_tipoDoc, usua_direccion, usua_telefono, usua_fechaNacimiento, usua_password, usua_mail, usua_sexo)
-	SELECT  DISTINCT m.Paciente_Dni*100+1, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac, NULL, m.Medico_Mail, NULL 
-	FROM gd_esquema.Maestra m
-	WHERE m.Medico_Dni IS NOT NULL
+  --Profesionales. Funciona
+INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+	SELECT DISTINCT Medico_Dni*100+1, Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
+	FROM gd_esquema.Maestra
+	WHERE Medico_Dni IS NOT NULL
 
+	--Tira Error: No se puede insertar un valor explicito en la columna de identidad de la tabla 'Afiliados' cuando IDENTITY_INSERT es OFF.
 INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_cantidadHijos, afil_estadoCivil)  -- TODO: hacer bien
 	SELECT DISTINCT m.Paciente_Dni, m.Paciente_Dni, m.Plan_Med_Codigo, NULL, NULL
 	FROM gd_esquema.Maestra m
