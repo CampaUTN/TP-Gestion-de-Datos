@@ -242,10 +242,9 @@ VALUES (0,'admin', @hash, 0);
 --Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
 INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-  SELECT DISTINCT m.Paciente_Dni*100+1,m.Paciente_Dni, 0,m.Paciente_Nombre, m.Paciente_Apellido, 'DNI', m.Paciente_Direccion, m.Paciente_Telefono, null, null, m.Paciente_Mail
-  FROM gd_esquema.Maestra m
-  WHERE m.Paciente_Dni IS NOT NULL
-  ORDER BY m.Paciente_Dni
+  SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni, 0,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
+  FROM gd_esquema.Maestra
+  WHERE Paciente_Dni IS NOT NULL
 
   --Profesionales. Funciona
 INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
@@ -253,38 +252,38 @@ INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_
 	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
 
-	--Tira Error: No se puede insertar un valor explicito en la columna de identidad de la tabla 'Afiliados' cuando IDENTITY_INSERT es OFF.
-INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_cantidadHijos, afil_estadoCivil)  -- TODO: hacer bien
-	SELECT DISTINCT m.Paciente_Dni, m.Paciente_Dni, m.Plan_Med_Codigo, NULL, NULL
-	FROM gd_esquema.Maestra m
-	WHERE m.Paciente_Dni IS NOT NULL
+	--Planes. Funciona
+	--Lo pongo arriba de antes porque sino tira error con las FK al no tener los planes cargados
+INSERT INTO CLINICA.Planes(plan_id, plan_nombre, plan_precioBono)
+	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta
+	FROM gd_esquema.Maestra
+	WHERE Plan_Med_Codigo IS NOT NULL
+
+--Afiliados. TODO: Ver tema del ID
+INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_cantidadHijos,afil_estadoCivil)  -- TODO: hacer bien
+	SELECT DISTINCT ((SELECT usua_id FROM CLINICA.Usuarios WHERE usua_nroDoc=Paciente_Dni)),
+					Plan_Med_Codigo, 0, NULL
+	FROM gd_esquema.Maestra
+	WHERE Paciente_Dni IS NOT NULL
 
 INSERT INTO CLINICA.Profesionales(prof_id,prof_matricula,prof_usuario)
 	SELECT DISTINCT Medico_Dni, NULL, (SELECT usua_id FROM CLINICA.Usuarios WHERE usua_nroDoc=Medico_Dni)
-	FROM gd_esquema.Maestra m
+	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
-
---Planes. Funciona
-INSERT INTO CLINICA.Planes(plan_id,plan_nombre,plan_precioBono)
-	SELECT DISTINCT m.Plan_Med_Codigo,m.Plan_Med_Descripcion, m.Plan_Med_Precio_Bono_Consulta
-	FROM gd_esquema.Maestra m
-	WHERE m.Plan_Med_Codigo IS NOT NULL 
-  ORDER BY m.Plan_Med_Codigo
     
   --Tipo Especialidad. Funciona
 INSERT INTO CLINICA.TipoEspecialidad(tipo_id, tipo_nombre)
-	SELECT DISTINCT m.Tipo_Especialidad_Codigo, m.Tipo_Especialidad_Descripcion 
-	FROM gd_esquema.Maestra m
-	WHERE m.Tipo_Especialidad_Codigo IS NOT NULL 
-  ORDER BY m.Tipo_Especialidad_Codigo
-  
-  
+	SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion 
+	FROM gd_esquema.Maestra 
+	WHERE Tipo_Especialidad_Codigo IS NOT NULL 
+	ORDER BY Tipo_Especialidad_Codigo
+    
   -- Especialidad. Funciona
 INSERT INTO CLINICA.Especialidades(espe_id, espe_tipo, espe_nombre)
-  SELECT DISTINCT m.Especialidad_Codigo, m.Tipo_Especialidad_Codigo, m.Especialidad_Descripcion
-  FROM gd_esquema.Maestra m
-  WHERE m.Especialidad_Codigo IS NOT NULL
-  ORDER BY m.Especialidad_Codigo  
+  SELECT DISTINCT Especialidad_Codigo, Tipo_Especialidad_Codigo, Especialidad_Descripcion
+  FROM gd_esquema.Maestra
+  WHERE Especialidad_Codigo IS NOT NULL
+  ORDER BY Especialidad_Codigo  
 
 INSERT INTO CLINICA.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional)
   SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni
@@ -292,7 +291,6 @@ INSERT INTO CLINICA.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_pr
   WHERE Medico_Dni IS NOT NULL
   GROUP BY Turno_Numero, Turno_Fecha, Especialidad_Codigo, Medico_Dni
   
-
     -- Turnos. Funciona
 INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
