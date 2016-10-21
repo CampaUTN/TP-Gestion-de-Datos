@@ -98,19 +98,19 @@ GO
 /* Creación de las tablas */
 
 CREATE TABLE CLINICA.Usuarios(
-    usua_id INT PRIMARY KEY,
+    usua_id BIGINT PRIMARY KEY,
     usua_username VARCHAR(20),
-  	usua_password VARBINARY(225), -- TODO: inventar users y pass
+  	usua_password VARBINARY(255), -- TODO: inventar users y pass
   	usua_intentos TINYINT DEFAULT 0,
-    usua_nombre VARCHAR(225),
-    usua_apellido VARCHAR(225),
+    usua_nombre VARCHAR(255),
+    usua_apellido VARCHAR(255),
   	usua_tipoDoc VARCHAR(20),
     usua_nroDoc DECIMAL(8,0),
-  	usua_direccion VARCHAR(50),
-  	usua_telefono VARCHAR(50),
+  	usua_direccion VARCHAR(255),
+  	usua_telefono DECIMAL(18,0),
   	usua_fechaNacimiento DATETIME,
   	usua_sexo VARCHAR(15),
-  	usua_mail VARCHAR(50));
+  	usua_mail VARCHAR(255));
 
 CREATE TABLE CLINICA.Roles(
     role_id INT IDENTITY NOT NULL,
@@ -120,8 +120,8 @@ CREATE TABLE CLINICA.Roles(
 
 
 CREATE TABLE CLINICA.RolXusuario(
-    usua_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
-    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
+    usua_id BIGINT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
+    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
     PRIMARY KEY (usua_id, role_id));
     
 
@@ -130,17 +130,17 @@ CREATE TABLE CLINICA.Funcionalidades(
   	func_nombre VARCHAR(225) NOT NULL );
   
 CREATE TABLE CLINICA.RolXfuncionalidad(
-    usua_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
-    cod_us INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidades(func_id),
-    PRIMARY KEY (usua_id, cod_us));
+    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
+    func_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidades(func_id),
+    PRIMARY KEY (role_id, func_id));
 
 CREATE TABLE CLINICA.Administradores(
 	admi_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	admi_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id));
+  	admi_usuario BIGINT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id));
   
 CREATE TABLE CLINICA.Profesionales(
 	prof_id INT NOT NULL PRIMARY KEY, -- viene a ser el DNI 
-  	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
+  	prof_usuario BIGINT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
   	prof_matricula VARCHAR(12));
   
 CREATE TABLE CLINICA.TipoEspecialidad(
@@ -171,7 +171,7 @@ CREATE TABLE CLINICA.Planes(
 
 CREATE TABLE CLINICA.Afiliados(
     afil_id INT IDENTITY PRIMARY KEY,
-    afil_usuario INT FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
+    afil_usuario BIGINT FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
     afil_plan INT FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
   	afil_estadoCivil VARCHAR(20),
   	afil_cantidadHijos INT DEFAULT 0);
@@ -250,8 +250,8 @@ VALUES (0,'admin', @hash, 0);
 
 --Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
-INSERT INTO CLINICA.Usuarios(usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-  SELECT DISTINCT m.Paciente_Dni, 0,m.Paciente_Nombre, m.Paciente_Apellido, 'DNI', m.Paciente_Direccion, m.Paciente_Telefono, null, null, m.Paciente_Mail
+INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+  SELECT DISTINCT m.Paciente_Dni*100+1,m.Paciente_Dni, 0,m.Paciente_Nombre, m.Paciente_Apellido, 'DNI', m.Paciente_Direccion, m.Paciente_Telefono, null, null, m.Paciente_Mail
   FROM gd_esquema.Maestra m
   WHERE m.Paciente_Dni IS NOT NULL
   ORDER BY m.Paciente_Dni
