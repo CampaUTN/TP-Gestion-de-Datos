@@ -67,7 +67,7 @@ IF OBJECT_ID('CLINICA.Consultas','U') IS NOT NULL
 
 
 
- /* TODO: PONER LOS NUESTROS */
+ /* TODO: PONER LOS NUESTROS 
 
 /* DROP PROCEDURES! */
 
@@ -83,7 +83,7 @@ IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
 
 
 
-
+  */
 
 
 
@@ -131,21 +131,21 @@ CREATE TABLE CLINICA.Roles(
     PRIMARY KEY (role_id));
 
 CREATE TABLE CLINICA.RolXfuncionalidad(
-    usua_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Rol(cod_rol),
-    cod_us INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidad(cod_fun),
-    PRIMARY KEY (cod_rol, cod_fun));
+    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Rol(role_id),
+    func_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidad(func_id),
+    PRIMARY KEY (role_id, func_id));
 
 CREATE TABLE CLINICA.Funcionalidades(
 		func_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	func_nombre NOT NULL VARCHAR(225));
+  	func_nombre VARCHAR(225) NOT NULL);
   
 CREATE TABLE CLINICA.Administradores(
 		admi_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	admi_usuario NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id));
+  	admi_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id));
   
 CREATE TABLE CLINICA.Profesional(
 		prof_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuario(usua_id));
+  	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuario(usua_id),
   	prof_matricula VARCHAR(12));
   
 CREATE TABLE CLINICA.Horario(
@@ -178,8 +178,8 @@ CREATE TABLE CLINICA.Afiliados(
 
 CREATE TABLE CLINICA.Turnos(
 		turn_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	turn_afiliado NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
-    turn_hora NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
+  	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
+    turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
   
 CREATE TABLE CLINICA.TiposCancelacion(
@@ -199,7 +199,7 @@ CREATE TABLE CLINICA.HistorialAfiliado(
 
 CREATE TABLE CLINICA.Consultas(
 		cons_id INT IDENTITY PRIMARY KEY NOT NULL,
-  	cons_turno FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id), -- nullable
+  	cons_turno INT FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id), -- nullable
     cons_fechaHoraConsulta DATETIME, -- nullable
     cons_fueConcretada TINYINT, -- nullable
     cons_sintomas VARCHAR(256), -- nullable
@@ -207,13 +207,13 @@ CREATE TABLE CLINICA.Consultas(
 
 CREATE TABLE CLINICA.Bonos(
   	bono_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	bono_afilCompra NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id),
-  	bono_nroConsulta FOREIGN KEY REFERENCES CLINICA.Consultas(cons_id),  -- nullable
+  	bono_afilCompra INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id),
+  	bono_nroConsulta INT FOREIGN KEY REFERENCES CLINICA.Consultas(cons_id),  -- nullable
   	bono_plan INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
-  	bono_afilUsado FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id));
+  	bono_afilUsado INT FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id));
 
 CREATE TABLE CLINICA.Planes(
-		plan_id PRIMARY KEY IDENTITY NOT NULL,
+		plan_id INT PRIMARY KEY IDENTITY NOT NULL,
   	plan_nombre VARCHAR(225) NOT NULL,
   	plan_precioBono NUMBER(12,2) NOT NULL);   
   
