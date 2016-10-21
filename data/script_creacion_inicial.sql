@@ -108,95 +108,102 @@ CREATE TABLE CLINICA.Usuarios(
     usua_id INT IDENTITY PRIMARY KEY,
     usua_username VARCHAR(20) NOT NULL,
   	usua_password VARCHAR(20) NOT NULL,
-  	usua_intentos TINYINT DEFAULT 0,
+  	usua_intentos TINYINT,
     usua_nombre VARCHAR(225),
     usua_apellido VARCHAR(225),
   	usua_tipoDoc VARCHAR(20),
-    usua_nroDoc NUMBER(8),
+    usua_nroDoc INT,
   	usua_direccion VARCHAR(50),
   	usua_telefono VARCHAR(50),
   	usua_fechaNacimiento DATETIME,
   	usua_sexo VARCHAR(15),
   	usua_mail VARCHAR(50));
 
-CREATE TABLE CLINICA.RolXusuario(
-    usua_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(usua_id),
-    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(role_id),
-    PRIMARY KEY (usua_id, role_id));
-    
 CREATE TABLE CLINICA.Roles(
     role_id INT IDENTITY NOT NULL,
     role_nombre VARCHAR(225),
   	role_habilitato TINYINT,
     PRIMARY KEY (role_id));
 
-CREATE TABLE CLINICA.RolXfuncionalidad(
-    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Rol(role_id),
-    func_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidad(func_id),
-    PRIMARY KEY (role_id, func_id));
+CREATE TABLE CLINICA.RolXusuario(
+    usua_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
+    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
+    PRIMARY KEY (usua_id, role_id));
 
 CREATE TABLE CLINICA.Funcionalidades(
 		func_id INT NOT NULL IDENTITY PRIMARY KEY,
   	func_nombre VARCHAR(225) NOT NULL);
+
+CREATE TABLE CLINICA.RolXfuncionalidad(
+    role_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Roles(role_id),
+    func_id INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Funcionalidades(func_id),
+    PRIMARY KEY (role_id, func_id));
   
 CREATE TABLE CLINICA.Administradores(
 		admi_id INT NOT NULL IDENTITY PRIMARY KEY,
   	admi_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id));
   
-CREATE TABLE CLINICA.Profesional(
+CREATE TABLE CLINICA.Profesionales(
 		prof_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuario(usua_id),
+  	prof_usuario INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
   	prof_matricula VARCHAR(12));
   
-CREATE TABLE CLINICA.Horario(
+CREATE TABLE CLINICA.Horarios(
 		hora_id INT NOT NULL IDENTITY PRIMARY KEY,
   	hora_profesional INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id), 
     hora_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id), 
     hora_fecha DATE NOT NULL,
     hora_inicio TIME NOT NULL);
   
-CREATE TABLE CLINICA.Especialidad(
-    espe_id INT PRIMARY KEY,
-  	espe_nombre VARCHAR(256) NOT NULL,
-    espe_tipo INT NOT NULL FOREIGN KEY REFERENCES CLINICA.TipoEspecialidad(tipo_id));
-
-CREATE TABLE CLINICA.TipoEspecialidad(
+CREATE TABLE CLINICA.TiposEspecialidades(
     tipo_id INT PRIMARY KEY,
     tipo_nombre VARCHAR(225));
 
+CREATE TABLE CLINICA.Especialidades(
+    espe_id INT PRIMARY KEY,
+  	espe_nombre VARCHAR(256) NOT NULL,
+    espe_tipo INT NOT NULL FOREIGN KEY REFERENCES CLINICA.TiposEspecialidades(tipo_id));
+
 CREATE TABLE CLINICA.EspecialidadXProfesional(
 		espe_id INT FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id),
-  	prof_id INT FOREIGN KEY REFERENCES CLIENTE.Profesionales(prof_id),
+  	prof_id INT FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id),
   	PRIMARY KEY (espe_id, prof_id));
-   
+
+CREATE TABLE CLINICA.Planes(
+		plan_id INT PRIMARY KEY IDENTITY NOT NULL,
+  	plan_nombre VARCHAR(225) NOT NULL,
+  	plan_precioBono FLOAT NOT NULL);   
+
 CREATE TABLE CLINICA.Afiliados(
     afil_id INT IDENTITY PRIMARY KEY,
     afil_usuario INT FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
     afil_plan INT FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
   	afil_estadoCivil VARCHAR(20),
-  	afil_cantidadHijos INT DEFAULT 0);
+  	afil_cantidadHijos INT);
+  
+CREATE TABLE CLINICA.TiposCancelacion(
+		tipo_id INT PRIMARY KEY IDENTITY,
+  	tipo_detalle VARCHAR(256));
+
+	
 
 CREATE TABLE CLINICA.Turnos(
 		turn_id INT NOT NULL IDENTITY PRIMARY KEY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
-  
-CREATE TABLE CLINICA.TiposCancelacion(
-		tipo_id INT PRIMARY KEY IDENTITY,
-  	tipo_detalle VARCHAR(256));
-
+	
 CREATE TABLE CLINICA.CancelacionesTurnos(
 		canc_id INT PRIMARY KEY IDENTITY,
   	canc_turno INT FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id),
-		canc_tipo INT FOREIGN KEY REFERENCES CLINICA.TipoCancelacion(tipo_id),
+		canc_tipo INT FOREIGN KEY REFERENCES CLINICA.TiposCancelacion(tipo_id),
   	canc_detalle VARCHAR(225));  
   
 CREATE TABLE CLINICA.HistorialAfiliado(
 		hist_id INT NOT NULL IDENTITY PRIMARY KEY,
   	hist_profesional INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id), 
     hist_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id));
-
+	
 CREATE TABLE CLINICA.Consultas(
 		cons_id INT IDENTITY PRIMARY KEY NOT NULL,
   	cons_turno INT FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id), -- nullable
@@ -204,24 +211,21 @@ CREATE TABLE CLINICA.Consultas(
     cons_fueConcretada TINYINT, -- nullable
     cons_sintomas VARCHAR(256), -- nullable
     cons_diagnostico VARCHAR(512)); -- nullable
-
+	
 CREATE TABLE CLINICA.Bonos(
   	bono_id INT NOT NULL IDENTITY PRIMARY KEY,
   	bono_afilCompra INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id),
   	bono_nroConsulta INT FOREIGN KEY REFERENCES CLINICA.Consultas(cons_id),  -- nullable
   	bono_plan INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
   	bono_afilUsado INT FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id));
-
-CREATE TABLE CLINICA.Planes(
-		plan_id INT PRIMARY KEY IDENTITY NOT NULL,
-  	plan_nombre VARCHAR(225) NOT NULL,
-  	plan_precioBono NUMBER(12,2) NOT NULL);   
   
 CREATE TABLE CLINICA.ComprasBonos(
 		comp_id INT NOT NULL IDENTITY PRIMARY KEY,
   	comp_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     comp_cantidad INT NOT NULL ,
-		comp_precioFinal NUMBER(12,2) NOT NULL);
+		comp_precioFinal FLOAT NOT NULL);
+
+
 
 
 /* Migración de datos desde la tabla maestra */
