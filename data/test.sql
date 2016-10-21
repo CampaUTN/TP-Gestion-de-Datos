@@ -98,7 +98,7 @@ GO
 /* Creación de las tablas */
 
 CREATE TABLE CLINICA.Usuarios(
-    usua_id INT IDENTITY PRIMARY KEY,
+    usua_id INT PRIMARY KEY,
     usua_username VARCHAR(20),
   	usua_password VARBINARY(225), -- TODO: inventar users y pass
   	usua_intentos TINYINT DEFAULT 0,
@@ -243,8 +243,10 @@ DECLARE @hash VARBINARY(225)
 SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
   
 --Administrativo
-INSERT INTO CLINICA.Usuarios(usua_username, usua_password, usua_intentos)
-VALUES ('admin', @hash, 0);
+INSERT INTO CLINICA.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
+VALUES (0,'admin', @hash, 0);
+
+-- HASTA ACA ANDA
 
 --Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
@@ -256,7 +258,7 @@ INSERT INTO CLINICA.Usuarios(usua_nroDoc,usua_intentos,usua_nombre,usua_apellido
 
 --Profesionales. Funciona
 INSERT INTO CLINICA.Usuarios(usua_id, usua_intentos, usua_nombre, usua_apellido, usua_tipoDoc, usua_direccion, usua_telefono, usua_fechaNacimiento, usua_password, usua_mail, usua_sexo)
-	SELECT  DISTINCT m.Paciente_Dni, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac,  @hash, m.Medico_Mail, NULL 
+	SELECT  DISTINCT m.Paciente_Dni, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac, NULL, m.Medico_Mail, NULL 
 	FROM gd_esquema.Maestra m
 	WHERE m.Medico_Dni IS NOT NULL
 
