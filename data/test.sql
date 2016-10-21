@@ -246,8 +246,6 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
 INSERT INTO CLINICA.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
 VALUES (0,'admin', @hash, 0);
 
--- HASTA ACA ANDA
-
 --Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
 INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
@@ -256,9 +254,11 @@ INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_
   WHERE m.Paciente_Dni IS NOT NULL
   ORDER BY m.Paciente_Dni
 
+  --Hasta aca anda
+  -- Esta de abajo tira: Infracción de la restricción PRIMARY KEY 'PK__Usuarios__EA3FBB9ADE06CF50'. No se puede insertar una clave duplicada en el objeto 'CLINICA.Usuarios'. El valor de la clave duplicada es (112396001)
 --Profesionales. Funciona
 INSERT INTO CLINICA.Usuarios(usua_id, usua_intentos, usua_nombre, usua_apellido, usua_tipoDoc, usua_direccion, usua_telefono, usua_fechaNacimiento, usua_password, usua_mail, usua_sexo)
-	SELECT  DISTINCT m.Paciente_Dni, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac, NULL, m.Medico_Mail, NULL 
+	SELECT  DISTINCT m.Paciente_Dni*100+1, 0, m.Medico_Nombre, m.Medico_Apellido, 'DNI', m.Medico_Direccion, m.Medico_Telefono ,m.Medico_Fecha_Nac, NULL, m.Medico_Mail, NULL 
 	FROM gd_esquema.Maestra m
 	WHERE m.Medico_Dni IS NOT NULL
 
