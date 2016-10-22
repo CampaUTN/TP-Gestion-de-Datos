@@ -18,53 +18,21 @@ namespace ClinicaFrba
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e){
+
+            //Valido que el usuario haya completado las cajitas
             if (faltaCompletar()){
-                MessageBox.Show("Datos incompletos! Complete los datos e intentelo de nuevo.");
+                MessageBox.Show("Datos incompletos! Complete los datos e intentelo de nuevo.", "Error de Login");
+                this.textContrasenia.Clear();
             }
             else {
-
-                var conexion = DBConnection.getConnection();
-
-                SqlCommand comando = new SqlCommand("spLogin", conexion);
-                
-                /* Tiene que ser un SP creado en el script que verifique del lado del motor la cantidad de intentos */
-                comando.CommandType = CommandType.StoredProcedure;
-                /* Aca van los parametros del SP, lo comento porque no se bien que mas va a necesitar
-                 * comando.Parameters.Add(new SqlParameter("@usuario",this.textUsuario.Text));
-                 * comando.Parameters.Add(new SqlParameter("@contrasenia",this.textContrasenia.Text));
-                 */
-
-
-                /* CON ESTO SE PUEDE VERIFICAR SI EL USUARIO ESTA O NO. FUNCA LA VERIFICACION, PERO NO EL RESTO
-                 *SqlCommand comando = new SqlCommand("SELECT usua_username FROM CLINICA.Usuarios WHERE usua_username = @usuario", conexion);
-                 *comando.Parameters.Add(new SqlParameter("@usuario", this.textUsuario.Text));
-                 * 
-                 */
-
-                conexion.Open();
-                SqlDataReader reader = comando.ExecuteReader();
-                List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
-
-                if (!reader.HasRows){
-
-                    MessageBox.Show("No existe el usuario '" + this.textUsuario.Text + "' en el sistema", "Error de Login", MessageBoxButtons.OK);
-                }
-                else{
-
-                    chequearPassWord(reader, rolesAsignados);
-                }
-                
-                reader.Close();
-                conexion.Close();
-
-                this.dividir(rolesAsignados);
-
-                this.textContrasenia.Clear();
+                //comienzo las validaciones de contraseña y asignacion del menu segun los roles
+                conectar();
+               
             }          
         }
         
+        //verifico la contrasenia
         private void chequearPassWord(SqlDataReader reader, List<KeyValuePair<int, string>> rolesAsignados)
         {
             while (reader.Read())
@@ -88,7 +56,7 @@ namespace ClinicaFrba
             }
         }
 
-
+        //le muestro al usuario la ventanita segun los roles
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
         {
             if (rolesAsignados.Count > 0)
@@ -99,10 +67,60 @@ namespace ClinicaFrba
                 (new EleccionRol(this, this.textUsuario.Text, rolesAsignados)).Show();
         }
 
-        private bool faltaCompletar()
-        {
+        private bool faltaCompletar(){
             return this.textContrasenia.Text.Length == 0 || this.textUsuario.Text.Length == 0;
 
+        }
+
+
+        private void conectar() {
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.Login_procedure", conexion);
+            
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@username", this.textUsuario.Text);
+            comando.Parameters.AddWithValue("@password", this.textContrasenia.Text);
+
+            SqlParameter retval = new SqlParameter("@cantidad", SqlDbType.Int);
+
+            retval.Direction = ParameterDirection.ReturnValue;
+            comando.Parameters.Add(retval);
+            conexion.Open();
+           
+            SqlDataReader reader = comando.ExecuteReader();
+
+            List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
+
+          int cantidadIntentos = (int)comando.Parameters["@cantidad"].Value;
+
+          switch (cantidadIntentos)
+          {
+              case -1:
+                  MessageBox.Show("No existe el usuario '" + this.textUsuario.Text + "' en el sistema. Intente con otro nombre", "Error de Login", MessageBoxButtons.OK);
+                  break;
+              case 0:
+                  MessageBox.Show("Ha ingresado 3 veces la contraseña incorrecta. El usuario ha sido bloqueado", "Error de Login", MessageBoxButtons.OK);
+                  break;
+              case 1: case 2: case 3:
+                  MessageBox.Show("La contraseña es incorrecta. Intentelo de nuevo", "Error de Login", MessageBoxButtons.OK);
+                  break;
+              default:
+                  MessageBox.Show("Bienvenido!");
+
+                  //TODO 1- Falla cuando ingreso la contraseña correcta :(
+                  //     2 - Aca debo consultar los roles y luego asignarselo
+                  break;
+          }
+            reader.Close();
+            conexion.Close();
+
+            this.dividir(rolesAsignados);
+
+            this.textContrasenia.Clear();
+            
         }
 
     }

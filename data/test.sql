@@ -75,6 +75,8 @@ IF OBJECT_ID('CLINICA._algo_') IS NOT NULL
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
   
+IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
+    DROP PROCEDURE CLINICA.Login_procedure 
 
 /* DROP SCHEMA */
 
@@ -237,7 +239,7 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
   
 --Administrativo
 INSERT INTO CLINICA.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
-VALUES (0,'admin', @hash, 0);
+VALUES (0,'admin', @hash, 3);
 
 --Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
@@ -307,3 +309,34 @@ INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_
 	FROM gd_esquema.Maestra m
 	WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL
   ORDER BY m.Turno_Numero
+
+/* CREO STORE PROCEDURES */
+USE GD2C2016;
+GO
+
+--PROCEDURE QUE CHEQUEA LOS INTENTOS
+CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password NVARCHAR(10))
+AS
+ BEGIN
+	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT
+	
+	SET @intentos = (SELECT usua_intentos FROM CLINICA.Usuarios WHERE usua_username = @username)
+    SET @hash = HASHBYTES('SHA2_256',@password);
+	SET @pass = (SELECT usua_password FROM CLINICA.Usuarios WHERE usua_username = @username)
+
+
+	IF(@intentos IS NULL) 	--me fijo si esta el usuario
+		SET @cantidad = -1
+
+	ELSE IF(@pass <> @hash)  --comparo las contrasenias
+			BEGIN
+				SET @cantidad = @intentos
+				IF(@intentos<> 0)  --verifico la cantidad de ceros. si aun le quedan, hago el update
+					UPDATE CLINICA.Usuarios SET usua_intentos = @intentos - 1 
+			END				
+		  ELSE
+			SET @cantidad = 2   --Todo bien! Contrasenia correcta!
+
+	RETURN @cantidad
+ END
+GO
