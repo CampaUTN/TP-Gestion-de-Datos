@@ -320,8 +320,10 @@ INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_
 	WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
   ORDER BY m.Turno_Numero
 
-
-
+  -- Para que el admin tenga todos los roles y poder testear
+insert into CLINICA.RolXusuario values (0,1)
+insert into CLINICA.RolXusuario values (0,2)
+insert into CLINICA.RolXusuario values (0,3)
 
 
 
@@ -344,7 +346,7 @@ IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
-	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT
+	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT, @rol 1
 	
 	SET @intentos = (SELECT usua_intentos FROM CLINICA.Usuarios WHERE usua_username = @username)
     SET @hash = HASHBYTES('SHA2_256',@password); --La que ingreso
@@ -363,7 +365,27 @@ AS
 			BEGIN
 			SET @cantidad = 4   --Todo bien! Contrasenia correcta!
 			UPDATE CLINICA.Usuarios SET usua_intentos = 3 WHERE usua_username=@username
+
 			END
 	RETURN @cantidad
+ END
+GO
+
+
+IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
+    DROP PROCEDURE CLINICA.getRolesUsuario 
+
+CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15)) --, @rolId INT OUTPUT, @rolNombre INT OUTPUT)
+AS
+ BEGIN
+	
+	DECLARE @userId INT -- Lo que viene por parametro es el usua_username, necesito el id para comparar con RolXusuario
+
+	SET @userId = (SELECT usua_id FROM CLINICA.Usuarios WHERE usua_username = @user)
+
+	SELECT rxu.role_id, r.role_nombre 
+	FROM CLINICA.RolXusuario rxu, CLINICA.Roles r 
+	WHERE rxu.usua_id=@userId AND rxu.role_id=r.role_id AND role_habilitato=1
+
  END
 GO

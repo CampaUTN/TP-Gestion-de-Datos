@@ -69,9 +69,26 @@ namespace ClinicaFrba
 
         private bool faltaCompletar(){
             return this.textContrasenia.Text.Length == 0 || this.textUsuario.Text.Length == 0;
-
         }
 
+        private List<KeyValuePair<int, string>> getRoles(string usuario)
+        {
+            var conexion = DBConnection.getConnection();
+
+            List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
+            SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@user", usuario);
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+            while(reader.Read()){
+                rolesAsignados.Add(new KeyValuePair<int,string> (Int32.Parse(reader["role_id"].ToString()),
+                                                                    reader["role_nombre"].ToString()));
+            }
+
+            return rolesAsignados;
+        }
 
         private void conectar() {
 
@@ -81,8 +98,11 @@ namespace ClinicaFrba
             
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@username", this.textUsuario.Text);
-            comando.Parameters.AddWithValue("@password", this.textContrasenia.Text);
+            string usuario = this.textUsuario.Text;
+            string contraseania = this.textContrasenia.Text;
+
+            comando.Parameters.AddWithValue("@username", usuario);
+            comando.Parameters.AddWithValue("@password", contraseania);
 
             SqlParameter retval = new SqlParameter("@cantidad", SqlDbType.Int);
             retval.Direction = ParameterDirection.ReturnValue;
@@ -114,16 +134,15 @@ namespace ClinicaFrba
                   break;
               case 4:
                   MessageBox.Show("Bienvenido!");
+                  rolesAsignados = this.getRoles(usuario);
+                  this.dividir(rolesAsignados);
 
-                  //TODO 1- Falla cuando ingreso la contraseña correcta :(
-                  //     2 - Aca debo consultar los roles y luego asignarselo
                   break;
           }
             reader.Close();
             conexion.Close();
 
             this.dividir(rolesAsignados);
-
             this.textContrasenia.Clear();
             
         }
