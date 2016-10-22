@@ -92,12 +92,18 @@ GO
 CREATE SCHEMA CLINICA AUTHORIZATION gd
 GO
 
+
+
+
+
+
+
 /* Creación de las tablas */
 
 CREATE TABLE CLINICA.Usuarios(
     usua_id BIGINT PRIMARY KEY,
     usua_username VARCHAR(20),
-  	usua_password VARBINARY(255), --  255 TODO: inventar users y pass
+  	usua_password VARBINARY(500), --  255 TODO: inventar users y pass
   	usua_intentos TINYINT DEFAULT 0,
     usua_nombre VARCHAR(255),
     usua_apellido VARCHAR(255),
@@ -307,7 +313,7 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	WHERE m.Turno_Numero IS NOT NULL 
   ORDER BY m.Turno_Numero
   
-  	-- Consultas. Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
+  	-- Consultas. NO Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
 INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, cons_diagnostico)
 	SELECT DISTINCT m.Turno_Numero, m.Bono_Consulta_Numero, m.Bono_Consulta_Fecha_Impresion, 1, m.Consulta_Sintomas, m.Consulta_Enfermedades
 	FROM gd_esquema.Maestra m
@@ -335,19 +341,19 @@ IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
 
 
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
-CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password NVARCHAR(10))
+CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
 	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT
 	
 	SET @intentos = (SELECT usua_intentos FROM CLINICA.Usuarios WHERE usua_username = @username)
-    SET @hash = HASHBYTES('SHA2_256',@password);
-	SET @pass = (SELECT usua_password FROM CLINICA.Usuarios WHERE usua_username = @username)
+    SET @hash = HASHBYTES('SHA2_256',@password); --La que ingreso
+	SET @pass = (SELECT usua_password FROM CLINICA.Usuarios WHERE usua_username = @username) -- La real
 
 	IF(@intentos IS NULL) 	--me fijo si esta el usuario
 		SET @cantidad = -1
 
-	ELSE IF(@pass <> @hash)  --comparo las contrasenias @password
+	ELSE IF(@hash <> @pass)  --comparo las contrasenias
 			BEGIN
 				SET @cantidad = @intentos
 				IF(@intentos<> 0)  --verifico la cantidad de ceros. si aun le quedan, hago el update
