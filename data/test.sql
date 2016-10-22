@@ -375,7 +375,7 @@ GO
 IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
     DROP PROCEDURE CLINICA.getRolesUsuario 
 
-CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15)) --, @rolId INT OUTPUT, @rolNombre INT OUTPUT)
+CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15))
 AS
  BEGIN
 	
@@ -386,6 +386,22 @@ AS
 	SELECT rxu.role_id, r.role_nombre 
 	FROM CLINICA.RolXusuario rxu, CLINICA.Roles r 
 	WHERE rxu.usua_id=@userId AND rxu.role_id=r.role_id AND role_habilitato=1
+
+ END
+GO
+
+
+IF OBJECT_ID('CLINICA.getFuncionalidadXRol') IS NOT NULL
+    DROP PROCEDURE CLINICA.getFuncionalidadXRol
+
+
+CREATE PROCEDURE CLINICA.getFuncionalidadXRol (@role_id int) 
+AS
+ BEGIN
+
+	SELECT rxf.func_id, f.func_nombre
+	FROM CLINICA.RolXfuncionalidad rxf, CLINICA.Funcionalidades f
+	WHERE rxf.func_id=f.func_id AND rxf.role_id=@role_id
 
  END
 GO

@@ -34,7 +34,7 @@ namespace ClinicaFrba
 
             using (SqlConnection conexion = DBConnection.getConnection())
             { 
-                SqlCommand query = Utilidades.Utils.crearSp("CLINICA.FuncionalidadXRol", parametrosSP, conexion);
+                SqlCommand query = Utilidades.Utils.crearSp("CLINICA.getFuncionalidadXRol", parametrosSP, conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()){
@@ -64,7 +64,7 @@ namespace ClinicaFrba
             this.funcDisponibles.Add(9, () => new Pedir_Turno.PedirTurno());
             this.funcDisponibles.Add(10, () => new Registrar_Agenta_Medico.RegistarAgenda());
             this.funcDisponibles.Add(11, () => new Registro_Llegada.RegistroLlegada());
-            this.funcDisponibles.Add(11, () => new Registro_Resultado.RegistroResultado());
+            this.funcDisponibles.Add(12, () => new Registro_Resultado.RegistroResultado());
         }
 
         private void button2_Click(object sender, EventArgs e)
