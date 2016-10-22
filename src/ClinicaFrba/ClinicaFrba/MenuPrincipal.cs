@@ -38,7 +38,7 @@ namespace ClinicaFrba
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()){
-                    funcionalidades.Add(new KeyValuePair<int, string>(Int32.Parse(reader["func_id"].ToString()), reader["detalle"].ToString()));
+                    funcionalidades.Add(new KeyValuePair<int, string>(Int32.Parse(reader["func_id"].ToString()), reader["func_nombre"].ToString()));
                 }
             }
             
