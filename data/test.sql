@@ -62,18 +62,20 @@ IF OBJECT_ID('CLINICA.TipoEspecialidad','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
     DROP TABLE CLINICA.Usuarios;
 
- /* TODO: PONER LOS NUESTROS */
 
-/* DROP PROCEDURES! */
 
-IF OBJECT_ID('CLINICA._algo_') IS NOT NULL
-    DROP PROCEDURE CLINICA._algo_
+
+
+
+
 
     
 /* DROP FUNCTIONS! */
 
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
+
+/* DROP PROCEDURES! */
   
 IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
     DROP PROCEDURE CLINICA.Login_procedure 
@@ -309,8 +311,18 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, cons_diagnostico)
 	SELECT DISTINCT m.Turno_Numero, m.Bono_Consulta_Numero, m.Bono_Consulta_Fecha_Impresion, 1, m.Consulta_Sintomas, m.Consulta_Enfermedades
 	FROM gd_esquema.Maestra m
-	WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL
+	WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
   ORDER BY m.Turno_Numero
+
+
+
+
+
+
+
+
+
+
 
 /* CREO STORE PROCEDURES */
 USE GD2C2016;
@@ -334,11 +346,13 @@ AS
 			BEGIN
 				SET @cantidad = @intentos
 				IF(@intentos<> 0)  --verifico la cantidad de ceros. si aun le quedan, hago el update
-					UPDATE CLINICA.Usuarios SET usua_intentos = @intentos - 1 
+					UPDATE CLINICA.Usuarios SET usua_intentos = @intentos - 1 WHERE usua_username=@username
 			END				
-		  ELSE
-			SET @cantidad = 3   --Todo bien! Contrasenia correcta!
-
+		  ELSE IF(@pass = @hash)
+			BEGIN
+			SET @cantidad = 4   --Todo bien! Contrasenia correcta!
+			UPDATE CLINICA.Usuarios SET usua_intentos = 3 WHERE usua_username=@username
+			END
 	RETURN @cantidad
  END
 GO
