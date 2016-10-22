@@ -326,6 +326,47 @@ insert into CLINICA.RolXusuario values (0,2)
 insert into CLINICA.RolXusuario values (0,3)
 
 
+insert into CLINICA.FUNCIONALIDADES values ('AbmAfiliado') --1
+insert into CLINICA.FUNCIONALIDADES values ('AbmEspMedicas') --2
+insert into CLINICA.FUNCIONALIDADES values ('AbmPlanes') --3
+insert into CLINICA.FUNCIONALIDADES values ('AbmProfesional') --4
+insert into CLINICA.FUNCIONALIDADES values ('AbmRol') --5
+insert into CLINICA.FUNCIONALIDADES values ('CancelarAtencion') --6
+insert into CLINICA.FUNCIONALIDADES values ('CompraBono') --7
+insert into CLINICA.FUNCIONALIDADES values ('Listados') --8
+insert into CLINICA.FUNCIONALIDADES values ('PedirTurno') --9
+insert into CLINICA.FUNCIONALIDADES values ('RegistarAgenda') --10
+insert into CLINICA.FUNCIONALIDADES values ('RegistroLlegada') --11
+insert into CLINICA.FUNCIONALIDADES values ('RegistroResultado') --12
+
+select * from CLINICA.RolXFuncionalidad
+
+-- role 1: afil role2: admin role3: prof
+
+insert into CLINICA.RolXfuncionalidad values (1,6) -- Afiliado - Cancelar Atencion
+insert into CLINICA.RolXfuncionalidad values (1,7) -- Afiliado - CompraBono
+insert into CLINICA.RolXfuncionalidad values (1,9) -- Afiliado - PedirTurno
+
+insert into CLINICA.RolXfuncionalidad values (3,6) -- Profesional - Cancelar Atencion 
+insert into CLINICA.RolXfuncionalidad values (3,8) -- Profesional - Listados????? CONFIRMAR
+insert into CLINICA.RolXfuncionalidad values (3,10) -- Profesional - Registrar Agenda
+insert into CLINICA.RolXfuncionalidad values (3,11) -- Profesional - Registrar Llegada???? CONFIRMAR
+insert into CLINICA.RolXfuncionalidad values (3,12) -- Profesional - Registrar Resultado
+
+insert into CLINICA.RolXfuncionalidad values (2,1) -- Administrativo - Todas
+insert into CLINICA.RolXfuncionalidad values (2,2)
+insert into CLINICA.RolXfuncionalidad values (2,3) 
+insert into CLINICA.RolXfuncionalidad values (2,4) 
+insert into CLINICA.RolXfuncionalidad values (2,5) 
+insert into CLINICA.RolXfuncionalidad values (2,6)
+insert into CLINICA.RolXfuncionalidad values (2,7) 
+insert into CLINICA.RolXfuncionalidad values (2,8) 
+insert into CLINICA.RolXfuncionalidad values (2,9) 
+insert into CLINICA.RolXfuncionalidad values (2,10) 
+insert into CLINICA.RolXfuncionalidad values (2,11) 
+insert into CLINICA.RolXfuncionalidad values (2,12) 
+
+
 
 
 
