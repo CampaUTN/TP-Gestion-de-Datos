@@ -94,9 +94,9 @@ namespace ClinicaFrba
 
             List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
 
-          int cantidadIntentos = (int)comando.Parameters["@cantidad"].Value;
+          int intentosRestantes = (int)comando.Parameters["@cantidad"].Value;
 
-          switch (cantidadIntentos)
+          switch (intentosRestantes)
           {
               case -1:
                   MessageBox.Show("No existe el usuario '" + this.textUsuario.Text + "' en el sistema. Intente con otro nombre", "Error de Login", MessageBoxButtons.OK);
@@ -108,7 +108,7 @@ namespace ClinicaFrba
                   MessageBox.Show("La contraseña es incorrecta. Ya ha ingresado 3 veces la contraseña incorrecta. El usuario ha sido bloqueado", "Error de Login", MessageBoxButtons.OK);
                   break;
               case 2: case 3:
-                  MessageBox.Show("La contraseña es incorrecta. Tiene " + (cantidadIntentos-1) + " intentos restantes", "Error de Login", MessageBoxButtons.OK);
+                  MessageBox.Show("La contraseña es incorrecta. Tiene " + (intentosRestantes - 1) + " intentos restantes", "Error de Login", MessageBoxButtons.OK);
                   break;
               case 4:
                   MessageBox.Show("Bienvenido!");
