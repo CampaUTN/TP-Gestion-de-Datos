@@ -97,7 +97,7 @@ GO
 CREATE TABLE CLINICA.Usuarios(
     usua_id BIGINT PRIMARY KEY,
     usua_username VARCHAR(20),
-  	usua_password VARBINARY(255), -- TODO: inventar users y pass
+  	usua_password VARBINARY(255), --  255 TODO: inventar users y pass
   	usua_intentos TINYINT DEFAULT 0,
     usua_nombre VARCHAR(255),
     usua_apellido VARCHAR(255),
@@ -328,6 +328,12 @@ INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_
 USE GD2C2016;
 GO
 
+
+
+IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
+    DROP PROCEDURE CLINICA.Login_procedure 
+
+
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password NVARCHAR(10))
 AS
@@ -338,17 +344,16 @@ AS
     SET @hash = HASHBYTES('SHA2_256',@password);
 	SET @pass = (SELECT usua_password FROM CLINICA.Usuarios WHERE usua_username = @username)
 
-
 	IF(@intentos IS NULL) 	--me fijo si esta el usuario
 		SET @cantidad = -1
 
-	ELSE IF(@pass <> @hash)  --comparo las contrasenias
+	ELSE IF(@pass <> @hash)  --comparo las contrasenias @password
 			BEGIN
 				SET @cantidad = @intentos
 				IF(@intentos<> 0)  --verifico la cantidad de ceros. si aun le quedan, hago el update
 					UPDATE CLINICA.Usuarios SET usua_intentos = @intentos - 1 WHERE usua_username=@username
 			END				
-		  ELSE IF(@pass = @hash)
+	ELSE
 			BEGIN
 			SET @cantidad = 4   --Todo bien! Contrasenia correcta!
 			UPDATE CLINICA.Usuarios SET usua_intentos = 3 WHERE usua_username=@username

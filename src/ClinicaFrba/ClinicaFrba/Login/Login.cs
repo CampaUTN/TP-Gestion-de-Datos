@@ -85,8 +85,8 @@ namespace ClinicaFrba
             comando.Parameters.AddWithValue("@password", this.textContrasenia.Text);
 
             SqlParameter retval = new SqlParameter("@cantidad", SqlDbType.Int);
-
             retval.Direction = ParameterDirection.ReturnValue;
+
             comando.Parameters.Add(retval);
             conexion.Open();
            
@@ -95,6 +95,8 @@ namespace ClinicaFrba
             List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
 
           int intentosRestantes = (int)comando.Parameters["@cantidad"].Value;
+
+          //MessageBox.Show("Pass ingre: " + comando.Parameters["@hash"].Value + "Real: " + comando.Parameters["@password"].Value);
 
           switch (intentosRestantes)
           {
