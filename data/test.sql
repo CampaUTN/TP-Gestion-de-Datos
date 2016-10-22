@@ -241,14 +241,14 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
 INSERT INTO CLINICA.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
 VALUES (0,'admin', @hash, 3);
 
---Afiliados. Funciona
+-- Usuarios desde Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
 INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
   SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni, 0,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
   FROM gd_esquema.Maestra
   WHERE Paciente_Dni IS NOT NULL
 
-  --Profesionales. Funciona
+-- Usuarios desde Profesionales. Funciona
 INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
 	SELECT DISTINCT Medico_Dni*100+1, Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
 	FROM gd_esquema.Maestra
@@ -268,6 +268,7 @@ INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_cantidadHijos,afil_e
 	FROM gd_esquema.Maestra
 	WHERE Paciente_Dni IS NOT NULL
 
+-- Profesionales. Funciona
 INSERT INTO CLINICA.Profesionales(prof_id,prof_matricula,prof_usuario)
 	SELECT DISTINCT Medico_Dni, NULL, (SELECT usua_id FROM CLINICA.Usuarios WHERE usua_nroDoc=Medico_Dni)
 	FROM gd_esquema.Maestra
@@ -287,6 +288,7 @@ INSERT INTO CLINICA.Especialidades(espe_id, espe_tipo, espe_nombre)
   WHERE Especialidad_Codigo IS NOT NULL
   ORDER BY Especialidad_Codigo  
 
+-- Horarios. Funciona
 INSERT INTO CLINICA.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional)
   SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni
   FROM gd_esquema.Maestra m
@@ -335,7 +337,7 @@ AS
 					UPDATE CLINICA.Usuarios SET usua_intentos = @intentos - 1 
 			END				
 		  ELSE
-			SET @cantidad = 2   --Todo bien! Contrasenia correcta!
+			SET @cantidad = 3   --Todo bien! Contrasenia correcta!
 
 	RETURN @cantidad
  END
