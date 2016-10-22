@@ -73,16 +73,6 @@ namespace ClinicaFrba
             this.frmLogin.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int funcionalidadSeleccionada = ((KeyValuePair<int, string>) this.listFuncionalidades.SelectedItem).Key;
-            if (!this.funcDisponibles.ContainsKey(funcionalidadSeleccionada)) //Control extra
-                return;
-
-            this.Hide();
-            this.funcDisponibles[funcionalidadSeleccionada]().Show();
-        }
-
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
         
@@ -91,6 +81,17 @@ namespace ClinicaFrba
         private void label1_Click(object sender, EventArgs e)
         {
         
+        }
+
+        private void botonSeleccionar_Click(object sender, EventArgs e)
+        {
+            int funcionalidadSeleccionada = ((KeyValuePair<int, string>)this.listFuncionalidades.SelectedItem).Key;
+
+            if (!this.funcDisponibles.ContainsKey(funcionalidadSeleccionada)) //Control extra
+                return;
+
+            this.Hide();
+            this.funcDisponibles[funcionalidadSeleccionada]().Show();
         }
     }
 }
