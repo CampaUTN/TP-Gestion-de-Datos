@@ -368,7 +368,7 @@ GO
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
-	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT, @rol 1
+	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT
 	
 	SET @intentos = (SELECT usua_intentos FROM CLINICA.Usuarios WHERE usua_username = @username)
     SET @hash = HASHBYTES('SHA2_256',@password); --La que ingreso
