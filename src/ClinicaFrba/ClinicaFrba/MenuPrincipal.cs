@@ -16,12 +16,14 @@ namespace ClinicaFrba
         Dictionary<int, Func<Form>> funcDisponibles;
         Form frmLogin;
         string userActivo;
+        int rolActivo;
 
         public MenuPrincipal(Form frmLogin, int rolActivo, string userActivo)
         {
             InitializeComponent();
             this.frmLogin=frmLogin;
             this.userActivo = userActivo;
+            this.rolActivo = rolActivo;
             this.inicializarDiccFuncionalidades();
             this.getFuncionalidadesAsignadas(rolActivo);
         }
@@ -59,7 +61,7 @@ namespace ClinicaFrba
             this.funcDisponibles.Add(4, () => new Abm_Profesional.AbmProfesional());
             this.funcDisponibles.Add(5, () => new AbmRol.AbmRol());
             this.funcDisponibles.Add(6, () => new Cancelar_Atencion.CancelarAtencion());
-            this.funcDisponibles.Add(7, () => new Compra_Bono.CompraBono());
+            this.funcDisponibles.Add(7, () => new Compra_Bono.CompraBono(this.userActivo,this.rolActivo));
             this.funcDisponibles.Add(8, () => new Listados.Listados());
             this.funcDisponibles.Add(9, () => new Pedir_Turno.PedirTurno());
             this.funcDisponibles.Add(10, () => new Registrar_Agenta_Medico.RegistarAgenda());

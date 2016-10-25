@@ -325,6 +325,11 @@ insert into CLINICA.RolXusuario values (0,1)
 insert into CLINICA.RolXusuario values (0,2)
 insert into CLINICA.RolXusuario values (0,3)
 
+insert into CLINICA.Afiliados values (0,555558,'Casado',3) --usuario, plan, estado civ, hijos
+insert into CLINICA.Administradores values (0)  --usario
+insert into CLINICA.Profesionales values (9999,0,null) --prof if, user, algo
+---
+
 
 insert into CLINICA.FUNCIONALIDADES values ('AbmAfiliado') --1
 insert into CLINICA.FUNCIONALIDADES values ('AbmEspMedicas') --2
@@ -387,7 +392,7 @@ IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
-	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT, @rol 1
+	DECLARE @intentos TINYINT, @hash VARBINARY(225), @pass VARBINARY(225), @cantidad INT 
 	
 	SET @intentos = (SELECT usua_intentos FROM CLINICA.Usuarios WHERE usua_username = @username)
     SET @hash = HASHBYTES('SHA2_256',@password); --La que ingreso
@@ -446,3 +451,5 @@ AS
 
  END
 GO
+
+

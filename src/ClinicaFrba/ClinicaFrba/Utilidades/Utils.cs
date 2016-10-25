@@ -48,5 +48,69 @@ namespace ClinicaFrba.Utilidades
             return query;
         }
 
-}
+
+
+        static public int getNumeroAfiliadoDesdeUsuario(string usuario)
+        {
+            var conexion = DBConnection.getConnection();
+
+            int userId;
+            Int32.TryParse(usuario, out userId);
+
+            SqlCommand comando = new SqlCommand("select afil_id From CLINICA.Afiliados Where afil_usuario = @user", conexion);
+
+            comando.Parameters.AddWithValue("@user", userId);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Convert.ToInt32(reader[0]); //afil_plan
+            }
+            return -1;
+        }
+
+
+        static public int buscarPlanDeAfiliado(int afiliado)
+        {
+            var conexion = DBConnection.getConnection();
+
+            //int afilId;
+            //Int32.TryParse(afiliado, out afilId);
+
+            SqlCommand comando = new SqlCommand("select afil_plan From CLINICA.Afiliados Where afil_id = @afiliado", conexion);
+
+            comando.Parameters.AddWithValue("@afiliado", afiliado);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Convert.ToInt32(reader[0]); //afil_plan
+            }
+            return -1;
+        }
+
+        static public int buscarPrecioPlan(int plan)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select plan_precioBono From CLINICA.Planes Where plan_id = @plan", conexion);
+            comando.Parameters.AddWithValue("@plan", plan);
+
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Convert.ToInt32(reader[0]);//plan_precioBono
+            }
+            return -1;
+        }
+
     }
+}
