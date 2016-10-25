@@ -62,13 +62,6 @@ IF OBJECT_ID('CLINICA.TipoEspecialidad','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
     DROP TABLE CLINICA.Usuarios;
 
-
-
-
-
-
-
-
     
 /* DROP FUNCTIONS! */
 
@@ -79,6 +72,12 @@ IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   
 IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
     DROP PROCEDURE CLINICA.Login_procedure 
+	
+IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
+    DROP PROCEDURE CLINICA.getRolesUsuario 
+	
+IF OBJECT_ID('CLINICA.getFuncionalidadXRol') IS NOT NULL
+    DROP PROCEDURE CLINICA.getFuncionalidadXRol
 
 /* DROP SCHEMA */
 
@@ -86,16 +85,10 @@ IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME
     DROP SCHEMA CLINICA
 GO
 
-
 /* Creación del esquema */
 
 CREATE SCHEMA CLINICA AUTHORIZATION gd
 GO
-
-
-
-
-
 
 
 /* Creación de las tablas */
@@ -367,21 +360,9 @@ insert into CLINICA.RolXfuncionalidad values (2,11)
 insert into CLINICA.RolXfuncionalidad values (2,12) 
 
 
-
-
-
-
-
-
 /* CREO STORE PROCEDURES */
 USE GD2C2016;
 GO
-
-
-
-IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
-    DROP PROCEDURE CLINICA.Login_procedure 
-
 
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
@@ -413,9 +394,10 @@ AS
 GO
 
 
-IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
-    DROP PROCEDURE CLINICA.getRolesUsuario 
+USE GD2C2016;
+GO
 
+--PROCEDURE QUE OBTIENE LOS ROLES DEL USUARIO
 CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15))
 AS
  BEGIN
@@ -432,10 +414,9 @@ AS
 GO
 
 
-IF OBJECT_ID('CLINICA.getFuncionalidadXRol') IS NOT NULL
-    DROP PROCEDURE CLINICA.getFuncionalidadXRol
-
-
+USE GD2C2016;
+GO
+--PROCEDURE QUE OBTIENE ROL X FUNCIONALIDAD
 CREATE PROCEDURE CLINICA.getFuncionalidadXRol (@role_id int) 
 AS
  BEGIN
