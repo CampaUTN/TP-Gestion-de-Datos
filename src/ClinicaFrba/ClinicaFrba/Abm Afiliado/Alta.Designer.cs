@@ -49,6 +49,10 @@
             this.labelSelecPlan = new System.Windows.Forms.Label();
             this.AceptarButton = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
+            this.comboBoxMes = new System.Windows.Forms.ComboBox();
+            this.labelFechaNac = new System.Windows.Forms.Label();
+            this.comboBoxAnio = new System.Windows.Forms.ComboBox();
+            this.comboBoxDia = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxNombre
@@ -71,7 +75,7 @@
             // labelApellido
             // 
             this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(143, 10);
+            this.labelApellido.Location = new System.Drawing.Point(164, 10);
             this.labelApellido.Name = "labelApellido";
             this.labelApellido.Size = new System.Drawing.Size(54, 13);
             this.labelApellido.TabIndex = 3;
@@ -80,7 +84,7 @@
             // 
             // textBoxApellido
             // 
-            this.textBoxApellido.Location = new System.Drawing.Point(146, 26);
+            this.textBoxApellido.Location = new System.Drawing.Point(167, 26);
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(106, 20);
             this.textBoxApellido.TabIndex = 2;
@@ -112,7 +116,7 @@
             // labelNroDoc
             // 
             this.labelNroDoc.AutoSize = true;
-            this.labelNroDoc.Location = new System.Drawing.Point(143, 61);
+            this.labelNroDoc.Location = new System.Drawing.Point(164, 61);
             this.labelNroDoc.Name = "labelNroDoc";
             this.labelNroDoc.Size = new System.Drawing.Size(102, 13);
             this.labelNroDoc.TabIndex = 7;
@@ -120,7 +124,7 @@
             // 
             // textBoxNroDoc
             // 
-            this.textBoxNroDoc.Location = new System.Drawing.Point(146, 77);
+            this.textBoxNroDoc.Location = new System.Drawing.Point(167, 77);
             this.textBoxNroDoc.Name = "textBoxNroDoc";
             this.textBoxNroDoc.Size = new System.Drawing.Size(106, 20);
             this.textBoxNroDoc.TabIndex = 6;
@@ -144,7 +148,7 @@
             // labelTel
             // 
             this.labelTel.AutoSize = true;
-            this.labelTel.Location = new System.Drawing.Point(143, 112);
+            this.labelTel.Location = new System.Drawing.Point(164, 112);
             this.labelTel.Name = "labelTel";
             this.labelTel.Size = new System.Drawing.Size(49, 13);
             this.labelTel.TabIndex = 11;
@@ -152,7 +156,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(146, 128);
+            this.textBox2.Location = new System.Drawing.Point(167, 128);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(106, 20);
             this.textBox2.TabIndex = 10;
@@ -176,6 +180,7 @@
             this.selecFem.TabStop = true;
             this.selecFem.Text = "Femenino";
             this.selecFem.UseVisualStyleBackColor = true;
+            this.selecFem.CheckedChanged += new System.EventHandler(this.selecFem_CheckedChanged);
             // 
             // selecMasc
             // 
@@ -187,6 +192,7 @@
             this.selecMasc.TabStop = true;
             this.selecMasc.Text = "Masculino";
             this.selecMasc.UseVisualStyleBackColor = true;
+            this.selecMasc.CheckedChanged += new System.EventHandler(this.selecMasc_CheckedChanged);
             // 
             // selecEstadoCivil
             // 
@@ -197,7 +203,7 @@
             "Viudo/a",
             "Concubinato",
             "Divorciado/a"});
-            this.selecEstadoCivil.Location = new System.Drawing.Point(22, 225);
+            this.selecEstadoCivil.Location = new System.Drawing.Point(22, 284);
             this.selecEstadoCivil.Name = "selecEstadoCivil";
             this.selecEstadoCivil.Size = new System.Drawing.Size(100, 21);
             this.selecEstadoCivil.TabIndex = 17;
@@ -205,7 +211,7 @@
             // labelEstadoCivil
             // 
             this.labelEstadoCivil.AutoSize = true;
-            this.labelEstadoCivil.Location = new System.Drawing.Point(19, 209);
+            this.labelEstadoCivil.Location = new System.Drawing.Point(19, 268);
             this.labelEstadoCivil.Name = "labelEstadoCivil";
             this.labelEstadoCivil.Size = new System.Drawing.Size(62, 13);
             this.labelEstadoCivil.TabIndex = 16;
@@ -216,7 +222,7 @@
             this.selecPlan.FormattingEnabled = true;
             this.selecPlan.Items.AddRange(new object[] {
             "DNI"});
-            this.selecPlan.Location = new System.Drawing.Point(22, 277);
+            this.selecPlan.Location = new System.Drawing.Point(22, 334);
             this.selecPlan.Name = "selecPlan";
             this.selecPlan.Size = new System.Drawing.Size(106, 21);
             this.selecPlan.TabIndex = 19;
@@ -225,7 +231,7 @@
             // labelSelecPlan
             // 
             this.labelSelecPlan.AutoSize = true;
-            this.labelSelecPlan.Location = new System.Drawing.Point(19, 261);
+            this.labelSelecPlan.Location = new System.Drawing.Point(19, 318);
             this.labelSelecPlan.Name = "labelSelecPlan";
             this.labelSelecPlan.Size = new System.Drawing.Size(87, 13);
             this.labelSelecPlan.TabIndex = 18;
@@ -233,7 +239,7 @@
             // 
             // AceptarButton
             // 
-            this.AceptarButton.Location = new System.Drawing.Point(177, 341);
+            this.AceptarButton.Location = new System.Drawing.Point(198, 376);
             this.AceptarButton.Name = "AceptarButton";
             this.AceptarButton.Size = new System.Drawing.Size(75, 23);
             this.AceptarButton.TabIndex = 20;
@@ -243,19 +249,72 @@
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(22, 341);
+            this.botonLimpiar.Location = new System.Drawing.Point(22, 376);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
             this.botonLimpiar.TabIndex = 21;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             // 
+            // comboBoxMes
+            // 
+            this.comboBoxMes.FormattingEnabled = true;
+            this.comboBoxMes.Items.AddRange(new object[] {
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"});
+            this.comboBoxMes.Location = new System.Drawing.Point(104, 230);
+            this.comboBoxMes.Name = "comboBoxMes";
+            this.comboBoxMes.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxMes.TabIndex = 22;
+            this.comboBoxMes.Text = "Mes";
+            // 
+            // labelFechaNac
+            // 
+            this.labelFechaNac.AutoSize = true;
+            this.labelFechaNac.Location = new System.Drawing.Point(22, 214);
+            this.labelFechaNac.Name = "labelFechaNac";
+            this.labelFechaNac.Size = new System.Drawing.Size(106, 13);
+            this.labelFechaNac.TabIndex = 23;
+            this.labelFechaNac.Text = "Fecha de nacimiento";
+            // 
+            // comboBoxAnio
+            // 
+            this.comboBoxAnio.FormattingEnabled = true;
+            this.comboBoxAnio.Location = new System.Drawing.Point(22, 230);
+            this.comboBoxAnio.Name = "comboBoxAnio";
+            this.comboBoxAnio.Size = new System.Drawing.Size(64, 21);
+            this.comboBoxAnio.TabIndex = 24;
+            this.comboBoxAnio.Text = "Año";
+            // 
+            // comboBoxDia
+            // 
+            this.comboBoxDia.FormattingEnabled = true;
+            this.comboBoxDia.Location = new System.Drawing.Point(202, 230);
+            this.comboBoxDia.Name = "comboBoxDia";
+            this.comboBoxDia.Size = new System.Drawing.Size(71, 21);
+            this.comboBoxDia.TabIndex = 25;
+            this.comboBoxDia.Text = "Dia";
+            // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(274, 376);
+            this.ClientSize = new System.Drawing.Size(292, 417);
+            this.Controls.Add(this.comboBoxDia);
+            this.Controls.Add(this.comboBoxAnio);
+            this.Controls.Add(this.labelFechaNac);
+            this.Controls.Add(this.comboBoxMes);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.AceptarButton);
             this.Controls.Add(this.selecPlan);
@@ -307,5 +366,9 @@
         private System.Windows.Forms.Label labelSelecPlan;
         private System.Windows.Forms.Button AceptarButton;
         private System.Windows.Forms.Button botonLimpiar;
+        private System.Windows.Forms.ComboBox comboBoxMes;
+        private System.Windows.Forms.Label labelFechaNac;
+        private System.Windows.Forms.ComboBox comboBoxAnio;
+        private System.Windows.Forms.ComboBox comboBoxDia;
     }
 }

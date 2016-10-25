@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class Alta : Form ,FormularioABM
+    public partial class Alta : Form, FormularioABM
     {
+        string sexo;
+
         public Alta()
         {
             InitializeComponent();
@@ -36,5 +38,16 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             //verificar que se hayan completado los datos
         }
+
+        private void selecFem_CheckedChanged(object sender, EventArgs e)
+        {
+            sexo = "F";
+        }
+
+        private void selecMasc_CheckedChanged(object sender, EventArgs e)
+        {
+            sexo = "M";
+        }
     }
+
 }
