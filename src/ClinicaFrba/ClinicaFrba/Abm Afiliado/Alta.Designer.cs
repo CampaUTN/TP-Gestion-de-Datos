@@ -220,13 +220,12 @@
             // selecPlan
             // 
             this.selecPlan.FormattingEnabled = true;
-            this.selecPlan.Items.AddRange(new object[] {
-            "DNI"});
             this.selecPlan.Location = new System.Drawing.Point(22, 334);
             this.selecPlan.Name = "selecPlan";
             this.selecPlan.Size = new System.Drawing.Size(106, 21);
             this.selecPlan.TabIndex = 19;
             this.selecPlan.Text = "Escoga un plan...";
+            this.selecPlan.SelectedIndexChanged += new System.EventHandler(this.selecPlan_SelectedIndexChanged);
             // 
             // labelSelecPlan
             // 

@@ -93,11 +93,6 @@ CREATE SCHEMA CLINICA AUTHORIZATION gd
 GO
 
 
-
-
-
-
-
 /* Creación de las tablas */
 
 CREATE TABLE CLINICA.Usuarios(
@@ -372,23 +367,17 @@ insert into CLINICA.RolXfuncionalidad values (2,11)
 insert into CLINICA.RolXfuncionalidad values (2,12) 
 
 
-
-
-
-
-
-
 /* CREO STORE PROCEDURES */
 USE GD2C2016;
 GO
-
-
 
 IF OBJECT_ID('CLINICA.Login_procedure ') IS NOT NULL
     DROP PROCEDURE CLINICA.Login_procedure 
 
 
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
+USE GD2C2016; --ESTO ES PARA QUE NO TE DIGA QUE EL PROCEDURE TIENE QUE SER LA UNICA INSTRUCCION Y BLAH...
+GO
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
@@ -420,7 +409,8 @@ GO
 
 IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
     DROP PROCEDURE CLINICA.getRolesUsuario 
-
+USE GD2C2016;
+GO
 CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15))
 AS
  BEGIN
@@ -440,7 +430,8 @@ GO
 IF OBJECT_ID('CLINICA.getFuncionalidadXRol') IS NOT NULL
     DROP PROCEDURE CLINICA.getFuncionalidadXRol
 
-
+USE GD2C2016;
+GO
 CREATE PROCEDURE CLINICA.getFuncionalidadXRol (@role_id int) 
 AS
  BEGIN
@@ -452,4 +443,16 @@ AS
  END
 GO
 
+IF OBJECT_ID('CLINICA.getPlanes') IS NOT NULL
+    DROP PROCEDURE CLINICA.getPlanes
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE CLINICA.getPlanes
+AS
+	BEGIN 
+		SELECT plan_id,plan_nombre
+		FROM CLINICA.Planes
+	END
+GO
 
