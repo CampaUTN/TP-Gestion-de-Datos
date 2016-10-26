@@ -17,6 +17,7 @@ namespace ClinicaFrba.Pedir_Turno
         private DataGridView grillaHorarios;
         private Label label1;
         private Button botonReservar;
+        private Button botonSalir;
         string profesional;
 
         public SeleccionarHorario(string userActivo, string profesional)
@@ -36,6 +37,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.grillaHorarios = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.botonReservar = new System.Windows.Forms.Button();
+            this.botonSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaHorarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,17 +62,28 @@ namespace ClinicaFrba.Pedir_Turno
             // 
             // botonReservar
             // 
-            this.botonReservar.Location = new System.Drawing.Point(398, 292);
+            this.botonReservar.Location = new System.Drawing.Point(230, 272);
             this.botonReservar.Name = "botonReservar";
-            this.botonReservar.Size = new System.Drawing.Size(75, 23);
+            this.botonReservar.Size = new System.Drawing.Size(80, 48);
             this.botonReservar.TabIndex = 2;
             this.botonReservar.Text = "Reservar";
             this.botonReservar.UseVisualStyleBackColor = true;
             this.botonReservar.Click += new System.EventHandler(this.botonReservar_Click);
             // 
+            // botonSalir
+            // 
+            this.botonSalir.Location = new System.Drawing.Point(447, 312);
+            this.botonSalir.Name = "botonSalir";
+            this.botonSalir.Size = new System.Drawing.Size(75, 23);
+            this.botonSalir.TabIndex = 3;
+            this.botonSalir.Text = "Salir";
+            this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
+            // 
             // SeleccionarHorario
             // 
             this.ClientSize = new System.Drawing.Size(557, 359);
+            this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.botonReservar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grillaHorarios);
@@ -89,6 +102,27 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void grillaHorarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //if (grillaHorarios.SelectedCells.Count > 0)
+            //{
+            //    int rowindex = grillaHorarios.CurrentCell.RowIndex;
+            //    string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString();
+            //    int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
+
+            //    SqlConnection conexion = DBConnection.getConnection();
+
+            //    string insert = "INSERT INTO CLINICA.Turnos values (0,@afiliado, @hora, 1)";
+            //    SqlCommand comando = new SqlCommand(insert, conexion);
+            //    comando.Parameters.AddWithValue("@afiliado", afiliado);
+            //    comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
+
+            //    conexion.Open();
+
+            //    comando.ExecuteNonQuery();
+            //}
+        }
+
+        private void botonReservar_Click(object sender, EventArgs e)
+        {
             if (grillaHorarios.SelectedCells.Count > 0)
             {
                 int rowindex = grillaHorarios.CurrentCell.RowIndex;
@@ -97,7 +131,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO CLINICA.Turnos values (@afiliado, @hora, 1)";
+                string insert = "INSERT INTO CLINICA.Turnos values (1,@afiliado, @hora, 1)";
                 SqlCommand comando = new SqlCommand(insert, conexion);
                 comando.Parameters.AddWithValue("@afiliado", afiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
@@ -105,31 +139,15 @@ namespace ClinicaFrba.Pedir_Turno
                 conexion.Open();
 
                 comando.ExecuteNonQuery();
+
+                MessageBox.Show("El turno se ha registrado correctamente");
+
             }
         }
 
-        private void botonReservar_Click(object sender, EventArgs e)
+        private void botonSalir_Click(object sender, EventArgs e)
         {
-            if (grillaHorarios.CurrentCell.ColumnIndex == 0)
-            {
-
-                string hora = grillaHorarios.CurrentCell.Value.ToString();
-                int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
-
-                SqlConnection conexion = DBConnection.getConnection();
-
-                string insert = "INSERT INTO CLINICA.Turnos values (@afiliado, @hora, 1)";
-                SqlCommand comando = new SqlCommand(insert, conexion);
-                comando.Parameters.AddWithValue("@afiliado", afiliado);
-                comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
-
-                conexion.Open();
-
-                comando.ExecuteNonQuery();
-            }
-            else{
-                 MessageBox.Show("Seleccione un Hora_Id");
-            }
+            this.Close();
         }
     }
 }

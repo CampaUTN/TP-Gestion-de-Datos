@@ -176,7 +176,7 @@ CREATE TABLE CLINICA.Afiliados(
   	afil_cantidadHijos INT DEFAULT 0);
 
 CREATE TABLE CLINICA.Turnos(
-	turn_id INT IDENTITY NOT NULL PRIMARY KEY,
+	turn_id INT NOT NULL PRIMARY KEY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
