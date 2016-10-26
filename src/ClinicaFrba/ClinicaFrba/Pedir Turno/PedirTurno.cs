@@ -18,22 +18,23 @@ namespace ClinicaFrba.Pedir_Turno
         {
             InitializeComponent();
             this.userActivo = userActivo;
+            this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
         }
 
         private void PedirTurno_Load(object sender, EventArgs e)
         {
-            this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
         }
 
         private void botonListar_Click(object sender, EventArgs e)
         {
-            this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesDeEspecialidad(this.textEspecialidad.Text);
+            if (this.textEspecialidad.Text != "")
+            {
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesDeEspecialidad(this.textEspecialidad.Text);
+            }
         }
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            new SeleccionarHorario(this.userActivo, this.grillaProfesionales.CurrentCell.Value.ToString()); //Id prof + que selecciono
-        
+        {        
             if (grillaProfesionales.SelectedCells.Count > 0)
             {    
                 int rowindex = grillaProfesionales.CurrentCell.RowIndex;

@@ -138,5 +138,19 @@ namespace ClinicaFrba.Utilidades
 
             return tabla;
         }
+
+        static public DataTable getHorariosDelProfesional(string profesional)
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from CLINICA.Horarios where hora_profesional = @profesional", conexion);
+            comando.Parameters.AddWithValue(@profesional, Int32.Parse(profesional));
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
     }
 }

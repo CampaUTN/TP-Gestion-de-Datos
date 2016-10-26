@@ -367,6 +367,11 @@ insert into CLINICA.RolXfuncionalidad values (2,10)
 insert into CLINICA.RolXfuncionalidad values (2,11) 
 insert into CLINICA.RolXfuncionalidad values (2,12) 
 
+insert into CLINICA.EspecialidadXProfesional values (10000,9999)
+insert into CLINICA.EspecialidadXProfesional values (10001,9999)
+insert into CLINICA.EspecialidadXProfesional values (10004,9999)
+insert into CLINICA.EspecialidadXProfesional values (10007,9999)
+insert into CLINICA.EspecialidadXProfesional values (10012,9999)
 
 /* CREO STORE PROCEDURES */
 
