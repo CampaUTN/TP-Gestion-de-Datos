@@ -129,7 +129,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
             SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre=@filtroEspe", conexion);
-            comando.Parameters.AddWithValue(@filtroEspe, filtroEspe);
+            comando.Parameters.AddWithValue("@filtroEspe", filtroEspe);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
@@ -143,7 +143,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
             SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from CLINICA.Horarios where hora_profesional = @profesional", conexion);
-            comando.Parameters.AddWithValue(@profesional, Int32.Parse(profesional));
+            comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);

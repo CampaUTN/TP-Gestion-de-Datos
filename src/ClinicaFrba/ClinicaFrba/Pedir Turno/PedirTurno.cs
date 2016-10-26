@@ -35,12 +35,24 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {        
+       
+        }
+
+        private void botonSeleccionar_Click(object sender, EventArgs e)
+        {
             if (grillaProfesionales.SelectedCells.Count > 0)
-            {    
+            {
                 int rowindex = grillaProfesionales.CurrentCell.RowIndex;
                 string profesional = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
-                new SeleccionarHorario(this.userActivo, profesional);
+                new SeleccionarHorario(this.userActivo, profesional).Show();
             }
+
+            
+        }
+
+        private void botonSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }

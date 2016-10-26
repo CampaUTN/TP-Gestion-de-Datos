@@ -25,6 +25,8 @@ namespace ClinicaFrba.Pedir_Turno
             this.userActivo = userActivo;
             this.profesional = profesional;
 
+            MessageBox.Show("Profesiona: " + profesional);
+
             this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
             
         }
@@ -64,6 +66,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.botonReservar.TabIndex = 2;
             this.botonReservar.Text = "Reservar";
             this.botonReservar.UseVisualStyleBackColor = true;
+            this.botonReservar.Click += new System.EventHandler(this.botonReservar_Click);
             // 
             // SeleccionarHorario
             // 
@@ -104,5 +107,30 @@ namespace ClinicaFrba.Pedir_Turno
                 comando.ExecuteNonQuery();
             }
         }
+
+        private void botonReservar_Click(object sender, EventArgs e)
+        {
+            if (grillaHorarios.CurrentCell.ColumnIndex == 0)
+            {
+
+                string hora = grillaHorarios.CurrentCell.Value.ToString();
+                int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
+
+                SqlConnection conexion = DBConnection.getConnection();
+
+                string insert = "INSERT INTO CLINICA.Turnos values (@afiliado, @hora, 1)";
+                SqlCommand comando = new SqlCommand(insert, conexion);
+                comando.Parameters.AddWithValue("@afiliado", afiliado);
+                comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
+
+                conexion.Open();
+
+                comando.ExecuteNonQuery();
+            }
+            else{
+                 MessageBox.Show("Seleccione un Hora_Id");
+            }
+        }
     }
 }
+

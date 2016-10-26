@@ -187,6 +187,9 @@
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\PedirTurno.resx">
+      <DependentUpon>PedirTurno.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\SeleccionarHorario.resx">
       <DependentUpon>SeleccionarHorario.cs</DependentUpon>
     </EmbeddedResource>

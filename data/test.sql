@@ -176,7 +176,7 @@ CREATE TABLE CLINICA.Afiliados(
   	afil_cantidadHijos INT DEFAULT 0);
 
 CREATE TABLE CLINICA.Turnos(
-	turn_id INT NOT NULL PRIMARY KEY,
+	turn_id INT IDENTITY NOT NULL PRIMARY KEY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
@@ -372,6 +372,10 @@ insert into CLINICA.EspecialidadXProfesional values (10001,9999)
 insert into CLINICA.EspecialidadXProfesional values (10004,9999)
 insert into CLINICA.EspecialidadXProfesional values (10007,9999)
 insert into CLINICA.EspecialidadXProfesional values (10012,9999)
+
+insert into CLINICA.Horarios values (9999,10032,'20151013','12:30:00.0000000')
+insert into CLINICA.Horarios values (9999,10032,'20151014','12:30:00.0000000')
+insert into CLINICA.Horarios values (9999,10032,'20151015','12:30:00.0000000')
 
 /* CREO STORE PROCEDURES */
 

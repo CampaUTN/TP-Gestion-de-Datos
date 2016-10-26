@@ -34,14 +34,21 @@
             this.botonListar = new System.Windows.Forms.Button();
             this.textEspecialidad = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.botonSeleccionar = new System.Windows.Forms.Button();
+            this.botonSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
             // grillaProfesionales
             // 
+            this.grillaProfesionales.AllowUserToAddRows = false;
+            this.grillaProfesionales.AllowUserToDeleteRows = false;
+            this.grillaProfesionales.AllowUserToResizeColumns = false;
+            this.grillaProfesionales.AllowUserToResizeRows = false;
             this.grillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaProfesionales.Location = new System.Drawing.Point(48, 149);
             this.grillaProfesionales.Name = "grillaProfesionales";
+            this.grillaProfesionales.ShowEditingIcon = false;
             this.grillaProfesionales.Size = new System.Drawing.Size(538, 188);
             this.grillaProfesionales.TabIndex = 0;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
@@ -93,11 +100,33 @@
             this.label3.Text = "Seleccione un profesional de la grilla para reservar turno. Puede filtrar los pro" +
     "fesionales por su especialidad";
             // 
+            // botonSeleccionar
+            // 
+            this.botonSeleccionar.Location = new System.Drawing.Point(274, 361);
+            this.botonSeleccionar.Name = "botonSeleccionar";
+            this.botonSeleccionar.Size = new System.Drawing.Size(88, 38);
+            this.botonSeleccionar.TabIndex = 6;
+            this.botonSeleccionar.Text = "Seleccionar";
+            this.botonSeleccionar.UseVisualStyleBackColor = true;
+            this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
+            // 
+            // botonSalir
+            // 
+            this.botonSalir.Location = new System.Drawing.Point(568, 401);
+            this.botonSalir.Name = "botonSalir";
+            this.botonSalir.Size = new System.Drawing.Size(75, 23);
+            this.botonSalir.TabIndex = 7;
+            this.botonSalir.Text = "Salir";
+            this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
+            // 
             // PedirTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 369);
+            this.ClientSize = new System.Drawing.Size(666, 450);
+            this.Controls.Add(this.botonSalir);
+            this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textEspecialidad);
             this.Controls.Add(this.botonListar);
@@ -121,5 +150,7 @@
         private System.Windows.Forms.Button botonListar;
         private System.Windows.Forms.TextBox textEspecialidad;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button botonSeleccionar;
+        private System.Windows.Forms.Button botonSalir;
     }
 }
