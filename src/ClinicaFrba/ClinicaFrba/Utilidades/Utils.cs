@@ -82,7 +82,7 @@ namespace ClinicaFrba.Utilidades
 
             SqlCommand comando = new SqlCommand("select afil_plan From CLINICA.Afiliados Where afil_id = @afiliado", conexion);
 
-            comando.Parameters.AddWithValue("@afiliado", afiliado);
+            comando.Parameters.AddWithValue("@afiliado", afiliado); //OJO, TIENEN QUE LLAMARSE IGUAL
 
             conexion.Open();
 
@@ -112,5 +112,31 @@ namespace ClinicaFrba.Utilidades
             return -1;
         }
 
+        static public DataTable getProfesionales() //Hecho para pedir turno, se puede tomar la forma y cambiar!
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
+        static public DataTable getProfesionalesDeEspecialidad(string filtroEspe) 
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre=@filtroEspe", conexion);
+            comando.Parameters.AddWithValue(@filtroEspe, filtroEspe);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
     }
 }
