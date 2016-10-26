@@ -38,6 +38,10 @@
             this.botonConfirmar = new System.Windows.Forms.Button();
             this.botonSalir = new System.Windows.Forms.Button();
             this.botonSeleccionar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textPlan = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textPrecioBono = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.contadorBonos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(283, 51);
+            this.label2.Location = new System.Drawing.Point(268, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 6;
@@ -95,7 +99,7 @@
             // 
             // textPrecioFinal
             // 
-            this.textPrecioFinal.Location = new System.Drawing.Point(286, 70);
+            this.textPrecioFinal.Location = new System.Drawing.Point(271, 135);
             this.textPrecioFinal.Name = "textPrecioFinal";
             this.textPrecioFinal.ReadOnly = true;
             this.textPrecioFinal.Size = new System.Drawing.Size(85, 20);
@@ -103,21 +107,23 @@
             // 
             // botonConfirmar
             // 
-            this.botonConfirmar.Location = new System.Drawing.Point(398, 67);
+            this.botonConfirmar.Location = new System.Drawing.Point(383, 132);
             this.botonConfirmar.Name = "botonConfirmar";
             this.botonConfirmar.Size = new System.Drawing.Size(75, 23);
             this.botonConfirmar.TabIndex = 8;
             this.botonConfirmar.Text = "Confirmar";
             this.botonConfirmar.UseVisualStyleBackColor = true;
+            this.botonConfirmar.Click += new System.EventHandler(this.botonConfirmar_Click);
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(383, 150);
+            this.botonSalir.Location = new System.Drawing.Point(460, 168);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
             this.botonSalir.TabIndex = 9;
             this.botonSalir.Text = "Salir";
             this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
             // 
             // botonSeleccionar
             // 
@@ -129,11 +135,49 @@
             this.botonSeleccionar.UseVisualStyleBackColor = true;
             this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(268, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(28, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Plan";
+            // 
+            // textPlan
+            // 
+            this.textPlan.Location = new System.Drawing.Point(271, 69);
+            this.textPlan.Name = "textPlan";
+            this.textPlan.ReadOnly = true;
+            this.textPlan.Size = new System.Drawing.Size(85, 20);
+            this.textPlan.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(383, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Precio Bono";
+            // 
+            // textPrecioBono
+            // 
+            this.textPrecioBono.Location = new System.Drawing.Point(386, 70);
+            this.textPrecioBono.Name = "textPrecioBono";
+            this.textPrecioBono.ReadOnly = true;
+            this.textPrecioBono.Size = new System.Drawing.Size(72, 20);
+            this.textPrecioBono.TabIndex = 14;
+            // 
             // CompraBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 185);
+            this.ClientSize = new System.Drawing.Size(547, 203);
+            this.Controls.Add(this.textPrecioBono);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textPlan);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.botonConfirmar);
@@ -165,5 +209,9 @@
         private System.Windows.Forms.Button botonConfirmar;
         private System.Windows.Forms.Button botonSalir;
         private System.Windows.Forms.Button botonSeleccionar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textPlan;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textPrecioBono;
     }
 }

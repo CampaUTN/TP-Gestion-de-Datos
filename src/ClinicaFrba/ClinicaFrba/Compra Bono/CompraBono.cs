@@ -37,8 +37,8 @@ namespace ClinicaFrba.Compra_Bono
 
                 this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
                 this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
-
-                MessageBox.Show("Plan: " + this.plan + " Precio: " + this.precioPlan);
+                this.textPlan.Text = this.plan.ToString();
+                this.textPrecioBono.Text = this.precioPlan.ToString();
             }
             else if (rolActivo == 2) //Administrativo
             {
@@ -67,6 +67,36 @@ namespace ClinicaFrba.Compra_Bono
             this.nroAfiliado = Int32.Parse(this.textAfiliado.Text);
             this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
             this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
+            this.textPlan.Text = this.plan.ToString();
+            this.textPrecioBono.Text = this.precioPlan.ToString();
+        }
+
+        private void botonConfirmar_Click(object sender, EventArgs e)
+        {
+            if (this.contadorBonos.Value > 0)
+            {
+                SqlConnection conexion = DBConnection.getConnection();
+
+                string insert = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal)";
+                SqlCommand comando = new SqlCommand(insert, conexion);
+                comando.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
+                comando.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
+                comando.Parameters.AddWithValue("@precioFinal", (int)this.contadorBonos.Value * this.precioPlan);
+
+                conexion.Open();
+
+                comando.ExecuteNonQuery();
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar la cantidad de bonos que desea comprar");
+            }
+
+        }
+
+        private void botonSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 
