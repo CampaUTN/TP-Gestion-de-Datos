@@ -16,7 +16,7 @@ namespace ClinicaFrba.Abm_Afiliado
         string sexo;
         private AbmAfiliado formulario;
         private List<TextBox> cajasTexto;
-
+        private Afiliado afiliado;
 
         public Alta()
         {
@@ -34,24 +34,19 @@ namespace ClinicaFrba.Abm_Afiliado
 
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void AceptarButton_Click(object sender, EventArgs e)
         {
+            if (!validarDatosIngresados())
+            {
+                new AltaUsuario().Show();
+            }
+            else
+            {
+                MessageBox.Show("Error de datos. Compruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
+            }
+
+
         }
 
         private void selecFem_CheckedChanged(object sender, EventArgs e)
@@ -85,12 +80,7 @@ namespace ClinicaFrba.Abm_Afiliado
             return planes;
         }
 
-        private void selecPlan_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonLimpiar_Click(object sender, EventArgs e)
+       private void botonLimpiar_Click(object sender, EventArgs e)
         {
             foreach(TextBox cajita in cajasTexto){
                 cajita.Clear();
@@ -99,10 +89,6 @@ namespace ClinicaFrba.Abm_Afiliado
             this.checkBoxHijos.CheckState = CheckState.Unchecked;
         }
 
-        private void Alta_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         private void selecEstadoCivil_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -116,7 +102,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.botonAgregarFamiliar.Enabled = false;
             }
 
-            /*
+            /*Me fijo si el valor seleccionado es 1 o 3
              * 0- Soltero/a
                1- Casado/a
                2- Viudo/a
@@ -169,6 +155,20 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 //aca agrego a los familiares a cargo
             }
+        }
+
+
+        private bool validarDatosIngresados() {
+            return false;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registrarUsuarioAfiliado(){
+        
         }
 
   

@@ -49,16 +49,14 @@
             this.labelSelecPlan = new System.Windows.Forms.Label();
             this.AceptarButton = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
-            this.comboBoxMes = new System.Windows.Forms.ComboBox();
             this.labelFechaNac = new System.Windows.Forms.Label();
-            this.comboBoxAnio = new System.Windows.Forms.ComboBox();
-            this.comboBoxDia = new System.Windows.Forms.ComboBox();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonAgregarFamiliar = new System.Windows.Forms.Button();
             this.checkBoxHijos = new System.Windows.Forms.CheckBox();
             this.labelCantHijos = new System.Windows.Forms.Label();
             this.textBoxCantHijos = new System.Windows.Forms.TextBox();
             this.botonAfiliarFamiliar = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // textBoxNombre
@@ -67,7 +65,6 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(117, 20);
             this.textBoxNombre.TabIndex = 0;
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelNombre
             // 
@@ -86,7 +83,6 @@
             this.labelApellido.Size = new System.Drawing.Size(54, 13);
             this.labelApellido.TabIndex = 3;
             this.labelApellido.Text = "Apellido/s";
-            this.labelApellido.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBoxApellido
             // 
@@ -94,7 +90,6 @@
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(117, 20);
             this.textBoxApellido.TabIndex = 2;
-            this.textBoxApellido.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // labelTipoDoc
             // 
@@ -209,7 +204,7 @@
             "Viudo/a",
             "Concubinato",
             "Divorciado/a"});
-            this.selecEstadoCivil.Location = new System.Drawing.Point(23, 274);
+            this.selecEstadoCivil.Location = new System.Drawing.Point(28, 245);
             this.selecEstadoCivil.Name = "selecEstadoCivil";
             this.selecEstadoCivil.Size = new System.Drawing.Size(106, 21);
             this.selecEstadoCivil.TabIndex = 17;
@@ -218,7 +213,7 @@
             // labelEstadoCivil
             // 
             this.labelEstadoCivil.AutoSize = true;
-            this.labelEstadoCivil.Location = new System.Drawing.Point(20, 258);
+            this.labelEstadoCivil.Location = new System.Drawing.Point(25, 229);
             this.labelEstadoCivil.Name = "labelEstadoCivil";
             this.labelEstadoCivil.Size = new System.Drawing.Size(62, 13);
             this.labelEstadoCivil.TabIndex = 16;
@@ -227,17 +222,16 @@
             // selecPlan
             // 
             this.selecPlan.FormattingEnabled = true;
-            this.selecPlan.Location = new System.Drawing.Point(23, 324);
+            this.selecPlan.Location = new System.Drawing.Point(28, 295);
             this.selecPlan.Name = "selecPlan";
             this.selecPlan.Size = new System.Drawing.Size(106, 21);
             this.selecPlan.TabIndex = 19;
             this.selecPlan.Text = "Escoga un plan...";
-            this.selecPlan.SelectedIndexChanged += new System.EventHandler(this.selecPlan_SelectedIndexChanged);
             // 
             // labelSelecPlan
             // 
             this.labelSelecPlan.AutoSize = true;
-            this.labelSelecPlan.Location = new System.Drawing.Point(20, 308);
+            this.labelSelecPlan.Location = new System.Drawing.Point(25, 279);
             this.labelSelecPlan.Name = "labelSelecPlan";
             this.labelSelecPlan.Size = new System.Drawing.Size(87, 13);
             this.labelSelecPlan.TabIndex = 18;
@@ -245,7 +239,7 @@
             // 
             // AceptarButton
             // 
-            this.AceptarButton.Location = new System.Drawing.Point(198, 434);
+            this.AceptarButton.Location = new System.Drawing.Point(198, 407);
             this.AceptarButton.Name = "AceptarButton";
             this.AceptarButton.Size = new System.Drawing.Size(75, 23);
             this.AceptarButton.TabIndex = 20;
@@ -255,35 +249,13 @@
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(110, 434);
+            this.botonLimpiar.Location = new System.Drawing.Point(110, 407);
             this.botonLimpiar.Name = "botonLimpiar";
-            this.botonLimpiar.Size = new System.Drawing.Size(81, 23);
+            this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
             this.botonLimpiar.TabIndex = 21;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
-            // 
-            // comboBoxMes
-            // 
-            this.comboBoxMes.FormattingEnabled = true;
-            this.comboBoxMes.Items.AddRange(new object[] {
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo",
-            "Junio",
-            "Julio",
-            "Agosto",
-            "Septiembre",
-            "Octubre",
-            "Noviembre",
-            "Diciembre"});
-            this.comboBoxMes.Location = new System.Drawing.Point(105, 220);
-            this.comboBoxMes.Name = "comboBoxMes";
-            this.comboBoxMes.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxMes.TabIndex = 22;
-            this.comboBoxMes.Text = "Mes";
             // 
             // labelFechaNac
             // 
@@ -294,27 +266,9 @@
             this.labelFechaNac.TabIndex = 23;
             this.labelFechaNac.Text = "Fecha de nacimiento";
             // 
-            // comboBoxAnio
-            // 
-            this.comboBoxAnio.FormattingEnabled = true;
-            this.comboBoxAnio.Location = new System.Drawing.Point(23, 220);
-            this.comboBoxAnio.Name = "comboBoxAnio";
-            this.comboBoxAnio.Size = new System.Drawing.Size(64, 21);
-            this.comboBoxAnio.TabIndex = 24;
-            this.comboBoxAnio.Text = "Año";
-            // 
-            // comboBoxDia
-            // 
-            this.comboBoxDia.FormattingEnabled = true;
-            this.comboBoxDia.Location = new System.Drawing.Point(203, 220);
-            this.comboBoxDia.Name = "comboBoxDia";
-            this.comboBoxDia.Size = new System.Drawing.Size(71, 21);
-            this.comboBoxDia.TabIndex = 25;
-            this.comboBoxDia.Text = "Dia";
-            // 
             // botonCancelar
             // 
-            this.botonCancelar.Location = new System.Drawing.Point(22, 434);
+            this.botonCancelar.Location = new System.Drawing.Point(22, 407);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
             this.botonCancelar.TabIndex = 26;
@@ -325,7 +279,7 @@
             // botonAgregarFamiliar
             // 
             this.botonAgregarFamiliar.Enabled = false;
-            this.botonAgregarFamiliar.Location = new System.Drawing.Point(162, 274);
+            this.botonAgregarFamiliar.Location = new System.Drawing.Point(161, 243);
             this.botonAgregarFamiliar.Name = "botonAgregarFamiliar";
             this.botonAgregarFamiliar.Size = new System.Drawing.Size(112, 23);
             this.botonAgregarFamiliar.TabIndex = 27;
@@ -336,7 +290,7 @@
             // checkBoxHijos
             // 
             this.checkBoxHijos.AutoSize = true;
-            this.checkBoxHijos.Location = new System.Drawing.Point(23, 364);
+            this.checkBoxHijos.Location = new System.Drawing.Point(28, 335);
             this.checkBoxHijos.Name = "checkBoxHijos";
             this.checkBoxHijos.Size = new System.Drawing.Size(117, 17);
             this.checkBoxHijos.TabIndex = 28;
@@ -347,7 +301,7 @@
             // labelCantHijos
             // 
             this.labelCantHijos.AutoSize = true;
-            this.labelCantHijos.Location = new System.Drawing.Point(153, 364);
+            this.labelCantHijos.Location = new System.Drawing.Point(158, 335);
             this.labelCantHijos.Name = "labelCantHijos";
             this.labelCantHijos.Size = new System.Drawing.Size(49, 13);
             this.labelCantHijos.TabIndex = 29;
@@ -356,7 +310,7 @@
             // textBoxCantHijos
             // 
             this.textBoxCantHijos.Enabled = false;
-            this.textBoxCantHijos.Location = new System.Drawing.Point(212, 361);
+            this.textBoxCantHijos.Location = new System.Drawing.Point(217, 332);
             this.textBoxCantHijos.Name = "textBoxCantHijos";
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
             this.textBoxCantHijos.TabIndex = 30;
@@ -364,7 +318,7 @@
             // botonAfiliarFamiliar
             // 
             this.botonAfiliarFamiliar.Enabled = false;
-            this.botonAfiliarFamiliar.Location = new System.Drawing.Point(22, 396);
+            this.botonAfiliarFamiliar.Location = new System.Drawing.Point(27, 367);
             this.botonAfiliarFamiliar.Name = "botonAfiliarFamiliar";
             this.botonAfiliarFamiliar.Size = new System.Drawing.Size(107, 23);
             this.botonAfiliarFamiliar.TabIndex = 31;
@@ -372,22 +326,39 @@
             this.botonAfiliarFamiliar.UseVisualStyleBackColor = true;
             this.botonAfiliarFamiliar.Click += new System.EventHandler(this.botonAfiliarFamiliar_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker1.Checked = false;
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.dateTimePicker1.Location = new System.Drawing.Point(137, 204);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.RightToLeftLayout = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(130, 20);
+            this.dateTimePicker1.TabIndex = 32;
+            this.dateTimePicker1.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(289, 469);
+            this.ClientSize = new System.Drawing.Size(291, 442);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.botonAfiliarFamiliar);
             this.Controls.Add(this.textBoxCantHijos);
             this.Controls.Add(this.labelCantHijos);
             this.Controls.Add(this.checkBoxHijos);
             this.Controls.Add(this.botonAgregarFamiliar);
             this.Controls.Add(this.botonCancelar);
-            this.Controls.Add(this.comboBoxDia);
-            this.Controls.Add(this.comboBoxAnio);
             this.Controls.Add(this.labelFechaNac);
-            this.Controls.Add(this.comboBoxMes);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.AceptarButton);
             this.Controls.Add(this.selecPlan);
@@ -409,9 +380,9 @@
             this.Controls.Add(this.textBoxApellido);
             this.Controls.Add(this.labelNombre);
             this.Controls.Add(this.textBoxNombre);
+            this.MaximizeBox = false;
             this.Name = "Alta";
             this.Text = "Alta";
-            this.Load += new System.EventHandler(this.Alta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,15 +411,13 @@
         private System.Windows.Forms.Label labelSelecPlan;
         private System.Windows.Forms.Button AceptarButton;
         private System.Windows.Forms.Button botonLimpiar;
-        private System.Windows.Forms.ComboBox comboBoxMes;
         private System.Windows.Forms.Label labelFechaNac;
-        private System.Windows.Forms.ComboBox comboBoxAnio;
-        private System.Windows.Forms.ComboBox comboBoxDia;
         private System.Windows.Forms.Button botonCancelar;
         private System.Windows.Forms.Button botonAgregarFamiliar;
         private System.Windows.Forms.CheckBox checkBoxHijos;
         private System.Windows.Forms.Label labelCantHijos;
         private System.Windows.Forms.TextBox textBoxCantHijos;
         private System.Windows.Forms.Button botonAfiliarFamiliar;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

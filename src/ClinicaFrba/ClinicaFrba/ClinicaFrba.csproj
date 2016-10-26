@@ -57,6 +57,13 @@
     <Compile Include="Abm Afiliado\Alta.Designer.cs">
       <DependentUpon>Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\Afiliado.cs" />
+    <Compile Include="Abm Afiliado\AltaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\AltaUsuario.Designer.cs">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Afiliado\FormularioABM.cs" />
     <Compile Include="Abm Especialidades Medicas\AbmEspMedicas.cs">
       <SubType>Form</SubType>
@@ -152,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\AltaUsuario.resx">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Especialidades Medicas\AbmEspMedicas.resx">
       <DependentUpon>AbmEspMedicas.cs</DependentUpon>
