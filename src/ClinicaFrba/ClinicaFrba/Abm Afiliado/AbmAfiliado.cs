@@ -13,9 +13,11 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class AbmAfiliado : Form
     {
         FormularioABM formulario;
+        int code;
 
         public AbmAfiliado()
         {
+            code = 0;
             InitializeComponent();
         }
 
