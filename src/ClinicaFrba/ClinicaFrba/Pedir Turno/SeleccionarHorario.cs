@@ -22,6 +22,19 @@ namespace ClinicaFrba.Pedir_Turno
             this.profesional = profesional;
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // SeleccionarHorario
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "SeleccionarHorario";
+            this.Load += new System.EventHandler(this.SeleccionarHorario_Load);
+            this.ResumeLayout(false);
+
+        }
+
         private void SeleccionarHorario_Load(object sender, EventArgs e)
         {
 
