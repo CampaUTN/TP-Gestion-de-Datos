@@ -12,9 +12,19 @@ namespace ClinicaFrba.Pedir_Turno
 {
     public partial class SeleccionarHorario : Form
     {
-        public SeleccionarHorario()
+        string userActivo;
+        string profesional;
+
+        public SeleccionarHorario(string userActivo, string profesional)
         {
             InitializeComponent();
+            this.userActivo = userActivo;
+            this.profesional = profesional;
+        }
+
+        private void SeleccionarHorario_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
