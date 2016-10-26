@@ -102,23 +102,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void grillaHorarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (grillaHorarios.SelectedCells.Count > 0)
-            //{
-            //    int rowindex = grillaHorarios.CurrentCell.RowIndex;
-            //    string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString();
-            //    int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
-
-            //    SqlConnection conexion = DBConnection.getConnection();
-
-            //    string insert = "INSERT INTO CLINICA.Turnos values (0,@afiliado, @hora, 1)";
-            //    SqlCommand comando = new SqlCommand(insert, conexion);
-            //    comando.Parameters.AddWithValue("@afiliado", afiliado);
-            //    comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
-
-            //    conexion.Open();
-
-            //    comando.ExecuteNonQuery();
-            //}
+            
         }
 
         private void botonReservar_Click(object sender, EventArgs e)
@@ -131,7 +115,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO CLINICA.Turnos values (1,@afiliado, @hora, 1)";
+                string insert = "INSERT INTO CLINICA.Turnos values (1,@afiliado, @hora, 1)"; ///VER QUE HACER CON TURN_ID!!!!!
                 SqlCommand comando = new SqlCommand(insert, conexion);
                 comando.Parameters.AddWithValue("@afiliado", afiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
