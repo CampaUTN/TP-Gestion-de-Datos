@@ -69,6 +69,11 @@ namespace ClinicaFrba.Compra_Bono
             this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
         }
 
+        private void botonConfirmar_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

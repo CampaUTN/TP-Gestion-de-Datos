@@ -109,6 +109,7 @@
             this.botonConfirmar.TabIndex = 8;
             this.botonConfirmar.Text = "Confirmar";
             this.botonConfirmar.UseVisualStyleBackColor = true;
+            this.botonConfirmar.Click += new System.EventHandler(this.botonConfirmar_Click);
             // 
             // botonSalir
             // 
