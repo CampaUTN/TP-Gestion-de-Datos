@@ -7,17 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.Abm_Afiliado;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class AltaUsuario : Form
     {
-       // public Afiliado afiliado;
+        private Afiliado afiliado = new Afiliado();
 
-        public AltaUsuario()
+        public AltaUsuario(Afiliado afliadoARegistrar)
         {
-            //this.afiliado = afiliado;
+            this.afiliado = afliadoARegistrar;
             InitializeComponent();
         }
+
+        private void botonConfirmar_Click(object sender, EventArgs e)
+        {
+            if (chequearPass())
+            {
+                MessageBox.Show("Mostrando usuario");
+            }
+            else
+            {
+                MessageBox.Show("Las contraseñas no coinciden. Verifique que ingreso la contraseña correcta e intentelo de nuevo");
+            }
+        }
+
+        private bool chequearPass() {
+            return this.textBoxPass.Text == this.textBoxPassConfirm.Text;
+        }
+
     }
+
+
+
+
+
 }

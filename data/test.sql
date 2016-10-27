@@ -451,3 +451,25 @@ AS
 	END
 GO
 
+--PROCEDURE QUE AGREGA UN USUARIO
+USE GD2C2016;
+GO
+
+CREATE PROCEDURE CLINICA.ingresarUsuario(@usua_id BIGINT,
+    @username VARCHAR(20),
+  	@password VARBINARY(500),
+    @nombre VARCHAR(255),
+    @apellido VARCHAR(255),
+  	@tipoDoc VARCHAR(20),
+    @nroDoc DECIMAL(8,0),
+  	@direccion VARCHAR(255),
+  	@telefono DECIMAL(18,0),
+  	@fechaNacimiento DATETIME,
+  	@sexo VARCHAR(15))
+AS
+BEGIN
+INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_apellido, usua_tipoDoc,
+			usua_direccion, usua_telefono,usua_fechaNacimiento,usua_sexo, usua_mail)
+	VALUES(@username,@password,@nombre,@apellido,@tipoDoc,@nroDoc,@direccion, @telefono,@fechaNacimiento, @sexo, NULL)
+
+END

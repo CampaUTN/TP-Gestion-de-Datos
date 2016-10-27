@@ -13,7 +13,7 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class Alta : Form, FormularioABM
     {
-        string sexo;
+        private string sexo;
         private AbmAfiliado formulario;
         private List<TextBox> cajasTexto;
         private Afiliado afiliado;
@@ -31,58 +31,44 @@ namespace ClinicaFrba.Abm_Afiliado
             this.cajasTexto.Add(textBoxNroDoc);
             this.cajasTexto.Add(textBoxDireccion);
             this.cajasTexto.Add(textBoxTelefono);
-
-
         }
         
+        #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
+        //metodo que se activa cuando hago click en aceptar
         private void AceptarButton_Click(object sender, EventArgs e)
         {
-            if (!validarDatosIngresados())
-            {
-                new AltaUsuario().Show();
-            }
-            else
-            {
-                MessageBox.Show("Error de datos. Compruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
-            }
+            //chequeo que todos los campos se hayan completado
+            if (!faltaCompletarDatos()){
 
-
+                //chequeo que los datos sean correctos
+                if (!validarDatosIngresados()){
+                    //abro el formulario de usuario
+                    this.cargarUsuario();
+                    new AltaUsuario(this.afiliado).Show();
+                }
+                else{
+                    MessageBox.Show("Error de datos. Compruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
+                }
+            }
+            else {
+                MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);
+      
+            }
         }
 
-        private void selecFem_CheckedChanged(object sender, EventArgs e)
-        {
+        //me baso en un string para la seleccion del genero
+        private void selecFem_CheckedChanged(object sender, EventArgs e){
             sexo = "F";
         }
 
-        private void selecMasc_CheckedChanged(object sender, EventArgs e)
-        {
+        private void selecMasc_CheckedChanged(object sender, EventArgs e){
             sexo = "M";
         }
 
-
-        private List<KeyValuePair<int, string>> getPlanes()
-        {
-            var conexion = DBConnection.getConnection();
-            List<KeyValuePair<int, string>> planes = new List<KeyValuePair<int, string>>();
-
-            SqlCommand comando = new SqlCommand("CLINICA.getPlanes", conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-
-            conexion.Open();
-
-            SqlDataReader reader = comando.ExecuteReader();
-            while (reader.Read())
+        //limpio los datos que el usuario completo
+        private void botonLimpiar_Click(object sender, EventArgs e){
+            foreach (TextBox cajita in cajasTexto)
             {
-                planes.Add(new KeyValuePair<int, string>(Int32.Parse(reader["plan_id"].ToString()),
-                                                                    reader["plan_nombre"].ToString()));
-            }
-
-            return planes;
-        }
-
-       private void botonLimpiar_Click(object sender, EventArgs e)
-        {
-            foreach(TextBox cajita in cajasTexto){
                 cajita.Clear();
             }
 
@@ -110,10 +96,10 @@ namespace ClinicaFrba.Abm_Afiliado
                4- Divorciado/a
              */
         }
-
+        
         private void botonCancelar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar",MessageBoxButtons.YesNo);
+            MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo);
         }
 
         private void checkBoxHijos_CheckedChanged(object sender, EventArgs e)
@@ -135,7 +121,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void botonAgregarFamiliar_Click(object sender, EventArgs e)
         {
-            if (cajasTexto.Any(cajita => cajita.Text.Length.Equals(0)))
+            if (faltaCompletarDatos())
             {
                 MessageBox.Show("Debe completar los datos del afiliado\nprincipal para poder continuar", "Aviso", MessageBoxButtons.OK);
             }
@@ -147,7 +133,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void botonAfiliarFamiliar_Click(object sender, EventArgs e)
         {
-            if (cajasTexto.Any(cajita => cajita.Text.Length.Equals(0)))
+            if (faltaCompletarDatos())
             {
                 MessageBox.Show("Debe completar los datos del afiliado\nprincipal para poder continuar", "Aviso", MessageBoxButtons.OK);
             }
@@ -157,6 +143,55 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
+#endregion
+
+        #region METODOS AUXILIARES
+
+        //agrego los datos en el objeto usuario
+        private void cargarUsuario()
+        {
+          
+            afiliado = new Afiliado(this.textBoxNombre.Text,
+                                    this.textBoxApellido.Text,
+                                    this.dateTimePicker1.Value.Date,
+                                    this.comboBoxTipoDoc.SelectedText,
+                                    this.textBoxNroDoc.Text,
+                                    this.textBoxDireccion.Text,
+                                    this.textBoxTelefono.Text,
+                                    this.sexo,
+                                    this.selecEstadoCivil.SelectedText,
+                                    this.selecPlan.Text);
+            MessageBox.Show("Cargue el objeto afiliado");
+
+        }
+
+     
+        //obtengo los planes de la base de datos mediante un store procedure
+        private List<KeyValuePair<int, string>> getPlanes()
+        {
+            var conexion = DBConnection.getConnection();
+            List<KeyValuePair<int, string>> planes = new List<KeyValuePair<int, string>>();
+
+            SqlCommand comando = new SqlCommand("CLINICA.getPlanes", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                planes.Add(new KeyValuePair<int, string>(Int32.Parse(reader["plan_id"].ToString()),
+                                                                    reader["plan_nombre"].ToString()));
+            }
+
+            return planes;
+        }
+
+
+
+        private bool faltaCompletarDatos() {
+            return cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
+        }
 
         private bool validarDatosIngresados() {
             return false;
@@ -171,7 +206,9 @@ namespace ClinicaFrba.Abm_Afiliado
         
         }
 
-  
+
     }
+
+#endregion
 
 }

@@ -31,7 +31,7 @@
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelNombreUsuario = new System.Windows.Forms.Label();
             this.labelPass = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.botonConfirmar = new System.Windows.Forms.Button();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.textBoxPassConfirm = new System.Windows.Forms.TextBox();
             this.labelPassConfirm = new System.Windows.Forms.Label();
@@ -62,14 +62,15 @@
             this.labelPass.TabIndex = 2;
             this.labelPass.Text = "Escriba la contraseña";
             // 
-            // button1
+            // botonConfirmar
             // 
-            this.button1.Location = new System.Drawing.Point(131, 168);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.botonConfirmar.Location = new System.Drawing.Point(131, 168);
+            this.botonConfirmar.Name = "botonConfirmar";
+            this.botonConfirmar.Size = new System.Drawing.Size(75, 23);
+            this.botonConfirmar.TabIndex = 3;
+            this.botonConfirmar.Text = "Confirmar";
+            this.botonConfirmar.UseVisualStyleBackColor = true;
+            this.botonConfirmar.Click += new System.EventHandler(this.botonConfirmar_Click);
             // 
             // textBoxPass
             // 
@@ -104,7 +105,7 @@
             this.Controls.Add(this.labelPassConfirm);
             this.Controls.Add(this.textBoxPassConfirm);
             this.Controls.Add(this.textBoxPass);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.botonConfirmar);
             this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelNombreUsuario);
             this.Controls.Add(this.textBoxUsername);
@@ -120,7 +121,7 @@
         private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.Label labelNombreUsuario;
         private System.Windows.Forms.Label labelPass;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button botonConfirmar;
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.TextBox textBoxPassConfirm;
         private System.Windows.Forms.Label labelPassConfirm;
