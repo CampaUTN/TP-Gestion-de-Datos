@@ -152,5 +152,21 @@ namespace ClinicaFrba.Utilidades
 
             return tabla;
         }
+
+        static public int getIdDesdePlan(string plan)
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("SELECT plan_id from CLINICA.Planes WHERE plan_nombre = @plan", conexion);
+            comando.Parameters.AddWithValue("@plan", plan);
+            comando.CommandType = CommandType.Text;
+
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                return Convert.ToInt32(reader[0]);
+            }
+            return -1;
+        }
     }
 }

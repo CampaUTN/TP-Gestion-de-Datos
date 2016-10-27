@@ -26,6 +26,7 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (chequearPass())
             {
+                this.agregarNuevosDatos();
                 MessageBox.Show("Registrando usuario");
                 registarUsuario(this.afiliado);
 
@@ -50,8 +51,8 @@ namespace ClinicaFrba.Abm_Afiliado
 
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@username", this.textBoxUsername.Text);
-            comando.Parameters.AddWithValue("@password", this.textBoxPassConfirm.Text);
+            comando.Parameters.AddWithValue("@username", afiliado.getUsername());
+            comando.Parameters.AddWithValue("@password", afiliado.getPassword());
             comando.Parameters.AddWithValue("@nombre", afiliado.getNombre());
             comando.Parameters.AddWithValue("@apellido", afiliado.getApellido());
             comando.Parameters.AddWithValue("@tipoDoc", afiliado.getTipoDoc());
@@ -60,12 +61,39 @@ namespace ClinicaFrba.Abm_Afiliado
             comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
             comando.Parameters.AddWithValue("@fechaNacimiento", afiliado.getFechaNac());
             comando.Parameters.AddWithValue("@sexo", afiliado.getSexo());
-            comando.Parameters.AddWithValue("@mail", this.textBoxMail.Text);
+            comando.Parameters.AddWithValue("@mail", afiliado.getMail());
 
             conexion.Open();
 
             SqlDataReader reader = comando.ExecuteReader();
         }
+
+        private void agregarNuevosDatos(){
+            afiliado.setUsername(this.textBoxUsername.Text);
+            afiliado.setPassword(this.textBoxPassConfirm.Text);
+            afiliado.setMail(this.textBoxMail.Text);
+        }
+
+        private void registrarAfiliado(Afiliado afiliado)
+        {
+            int codPlan;
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.ingresarAfiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            //TODO: Ver si lo puedo retornar desde el SP, cuando registro al usuario
+            codPlan = Utilidades.Utils.getIdDesdePlan(afiliado.getPlan());
+
+            comando.Parameters.AddWithValue("@plan", codPlan);
+            comando.Parameters.AddWithValue("@estado_civil", afiliado.getEstadoCivil());
+
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
+
 
     }
 }

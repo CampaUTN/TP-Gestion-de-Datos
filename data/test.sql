@@ -85,6 +85,10 @@ IF OBJECT_ID('CLINICA.getPlanes') IS NOT NULL
 IF OBJECT_ID('CLINICA.ingresarUsuario') IS NOT NULL
     DROP PROCEDURE CLINICA.ingresarUsuario
 
+IF OBJECT_ID('CLINICA.ingresarAfiliado') IS NOT NULL
+    DROP PROCEDURE CLINICA.ingresarAfiliado
+
+
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
@@ -479,4 +483,16 @@ BEGIN
 
 	VALUES(@nroDoc*100+1,@username,@pass,@nombre,@apellido,@tipoDoc,@nroDoc,@direccion, @telefono,@fechaNacimiento, @sexo, @mail)
 
+END
+GO
+
+--PROCEDURE QUE AGREGA UN AFILIADO
+USE GD2C2016;
+GO
+CREATE PROCEDURE CLINICA.ingresarAfiliado(@usuario BIGINT, @plan INT, @estado VARCHAR(20))
+AS
+BEGIN
+	INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_estadoCivil)
+
+	VALUES(@usuario, @plan, @estado)
 END

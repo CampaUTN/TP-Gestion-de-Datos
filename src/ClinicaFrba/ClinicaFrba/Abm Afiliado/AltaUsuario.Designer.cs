@@ -70,7 +70,7 @@
             this.botonConfirmar.Location = new System.Drawing.Point(131, 211);
             this.botonConfirmar.Name = "botonConfirmar";
             this.botonConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.botonConfirmar.TabIndex = 3;
+            this.botonConfirmar.TabIndex = 4;
             this.botonConfirmar.Text = "Confirmar";
             this.botonConfirmar.UseVisualStyleBackColor = true;
             this.botonConfirmar.Click += new System.EventHandler(this.botonConfirmar_Click);
@@ -80,7 +80,7 @@
             this.textBoxPass.Location = new System.Drawing.Point(12, 119);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(152, 20);
-            this.textBoxPass.TabIndex = 4;
+            this.textBoxPass.TabIndex = 2;
             this.textBoxPass.UseSystemPasswordChar = true;
             // 
             // textBoxPassConfirm
@@ -88,7 +88,7 @@
             this.textBoxPassConfirm.Location = new System.Drawing.Point(12, 174);
             this.textBoxPassConfirm.Name = "textBoxPassConfirm";
             this.textBoxPassConfirm.Size = new System.Drawing.Size(152, 20);
-            this.textBoxPassConfirm.TabIndex = 5;
+            this.textBoxPassConfirm.TabIndex = 3;
             this.textBoxPassConfirm.UseSystemPasswordChar = true;
             // 
             // labelPassConfirm
@@ -105,7 +105,7 @@
             this.textBoxMail.Location = new System.Drawing.Point(15, 74);
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(127, 20);
-            this.textBoxMail.TabIndex = 7;
+            this.textBoxMail.TabIndex = 1;
             // 
             // labelMail
             // 

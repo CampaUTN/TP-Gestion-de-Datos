@@ -19,6 +19,12 @@ namespace ClinicaFrba.Abm_Afiliado
         private string estadoCivil;
         private string plan;
 
+        //datos del afiliado como usuario
+        private string username;
+        private string password;
+        private string mail;
+
+
         public Afiliado( string nombre,string apellido,DateTime fechaNac, string tipoDoc,string numeroDoc,string direccion,string telefono,string sexo,string estadoCivil,string plan) {
 
             this.nombre = nombre;
@@ -72,6 +78,31 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public DateTime getFechaNac(){
             return fechaNac;
+        }
+
+        public string getUsername(){
+            return username;
+        }
+
+        public string getPassword()
+        {
+            return password;
+        }
+
+        public string getMail() {
+            return mail;
+        }
+
+        public void setUsername(string username){
+            this.username = username;
+        }
+
+        public void setPassword(string password){
+            this.password = password;
+        }
+
+        public void setMail(string mail){
+            this.mail = mail;
         }
     }
 }
