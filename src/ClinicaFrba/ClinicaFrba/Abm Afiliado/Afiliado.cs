@@ -23,7 +23,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
             this.nombre = nombre;
             this.apellido = apellido;
-            this.fechaNac = fechaNac;
+            this.fechaNac = fechaNac.Date;
             this.tipoDoc = tipoDoc;
             this.numeroDoc = int.Parse(numeroDoc);
             this.direccion = direccion;
@@ -37,30 +37,29 @@ namespace ClinicaFrba.Abm_Afiliado
         public Afiliado() { }
 
         public string getNombre() {
-            return this.nombre;
+            return nombre;
         }
 
         public string getApellido(){
-            return this.apellido;
+            return apellido;
         }
 
         public string getTipoDoc(){
-            return this.tipoDoc;
+            return tipoDoc;
         }
 
-        public int getNroDoc()
-        {
-            return this.numeroDoc;
+        public int getNroDoc(){
+            return numeroDoc;
         }
 
         public string getDireccion(){
-            return this.direccion;
+            return direccion;
         }
         public int getTelefono(){
-            return this.telefono;
+            return telefono;
         }
         public string getSexo(){
-            return this.sexo;
+            return sexo;
         }
 
         public string getEstadoCivil(){
@@ -71,6 +70,8 @@ namespace ClinicaFrba.Abm_Afiliado
             return plan;
         }
 
-
+        public DateTime getFechaNac(){
+            return fechaNac;
+        }
     }
 }

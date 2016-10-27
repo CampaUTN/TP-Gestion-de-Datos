@@ -82,6 +82,9 @@ IF OBJECT_ID('CLINICA.getRolesUsuario') IS NOT NULL
 IF OBJECT_ID('CLINICA.getPlanes') IS NOT NULL
     DROP PROCEDURE CLINICA.getPlanes
 
+IF OBJECT_ID('CLINICA.ingresarUsuario') IS NOT NULL
+    DROP PROCEDURE CLINICA.ingresarUsuario
+
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
@@ -100,7 +103,7 @@ CREATE TABLE CLINICA.Usuarios(
     usua_id BIGINT PRIMARY KEY,
     usua_username VARCHAR(20),
   	usua_password VARBINARY(500), --  255 TODO: inventar users y pass
-  	usua_intentos TINYINT DEFAULT 0,
+  	usua_intentos TINYINT DEFAULT 3,
     usua_nombre VARCHAR(255),
     usua_apellido VARCHAR(255),
   	usua_tipoDoc VARCHAR(20),
@@ -455,9 +458,9 @@ GO
 USE GD2C2016;
 GO
 
-CREATE PROCEDURE CLINICA.ingresarUsuario(@usua_id BIGINT,
+CREATE PROCEDURE CLINICA.ingresarUsuario(
     @username VARCHAR(20),
-  	@password VARBINARY(500),
+  	@password VARCHAR(10),
     @nombre VARCHAR(255),
     @apellido VARCHAR(255),
   	@tipoDoc VARCHAR(20),
@@ -465,11 +468,15 @@ CREATE PROCEDURE CLINICA.ingresarUsuario(@usua_id BIGINT,
   	@direccion VARCHAR(255),
   	@telefono DECIMAL(18,0),
   	@fechaNacimiento DATETIME,
-  	@sexo VARCHAR(15))
+  	@sexo VARCHAR(15),
+	@mail VARCHAR(255))
 AS
 BEGIN
-INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_apellido, usua_tipoDoc,
-			usua_direccion, usua_telefono,usua_fechaNacimiento,usua_sexo, usua_mail)
-	VALUES(@username,@password,@nombre,@apellido,@tipoDoc,@nroDoc,@direccion, @telefono,@fechaNacimiento, @sexo, NULL)
+    DECLARE @pass VARBINARY(225)
+	SET @pass = HASHBYTES('SHA2_256',@password) 
+	INSERT INTO CLINICA.Usuarios(usua_id, usua_username,usua_password, usua_nombre, usua_apellido, usua_tipoDoc, usua_nroDoc, usua_direccion,
+					usua_telefono,usua_fechaNacimiento, usua_sexo, usua_mail)
+
+	VALUES(@nroDoc*100+1,@username,@pass,@nombre,@apellido,@tipoDoc,@nroDoc,@direccion, @telefono,@fechaNacimiento, @sexo, @mail)
 
 END

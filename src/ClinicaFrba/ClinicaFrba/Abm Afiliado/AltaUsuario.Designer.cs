@@ -35,13 +35,16 @@
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.textBoxPassConfirm = new System.Windows.Forms.TextBox();
             this.labelPassConfirm = new System.Windows.Forms.Label();
+            this.textBoxMail = new System.Windows.Forms.TextBox();
+            this.labelMail = new System.Windows.Forms.Label();
+            this.botonCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxUsername
             // 
             this.textBoxUsername.Location = new System.Drawing.Point(12, 31);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(118, 20);
+            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 0;
             // 
             // labelNombreUsuario
@@ -56,7 +59,7 @@
             // labelPass
             // 
             this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(12, 64);
+            this.labelPass.Location = new System.Drawing.Point(12, 103);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(109, 13);
             this.labelPass.TabIndex = 2;
@@ -64,7 +67,7 @@
             // 
             // botonConfirmar
             // 
-            this.botonConfirmar.Location = new System.Drawing.Point(131, 168);
+            this.botonConfirmar.Location = new System.Drawing.Point(131, 211);
             this.botonConfirmar.Name = "botonConfirmar";
             this.botonConfirmar.Size = new System.Drawing.Size(75, 23);
             this.botonConfirmar.TabIndex = 3;
@@ -74,34 +77,62 @@
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(12, 81);
+            this.textBoxPass.Location = new System.Drawing.Point(12, 119);
             this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.Size = new System.Drawing.Size(118, 20);
+            this.textBoxPass.Size = new System.Drawing.Size(152, 20);
             this.textBoxPass.TabIndex = 4;
             this.textBoxPass.UseSystemPasswordChar = true;
             // 
             // textBoxPassConfirm
             // 
-            this.textBoxPassConfirm.Location = new System.Drawing.Point(12, 135);
+            this.textBoxPassConfirm.Location = new System.Drawing.Point(12, 174);
             this.textBoxPassConfirm.Name = "textBoxPassConfirm";
-            this.textBoxPassConfirm.Size = new System.Drawing.Size(118, 20);
+            this.textBoxPassConfirm.Size = new System.Drawing.Size(152, 20);
             this.textBoxPassConfirm.TabIndex = 5;
             this.textBoxPassConfirm.UseSystemPasswordChar = true;
             // 
             // labelPassConfirm
             // 
             this.labelPassConfirm.AutoSize = true;
-            this.labelPassConfirm.Location = new System.Drawing.Point(15, 116);
+            this.labelPassConfirm.Location = new System.Drawing.Point(15, 155);
             this.labelPassConfirm.Name = "labelPassConfirm";
             this.labelPassConfirm.Size = new System.Drawing.Size(115, 13);
             this.labelPassConfirm.TabIndex = 6;
             this.labelPassConfirm.Text = "Confirme la contraseña";
             // 
+            // textBoxMail
+            // 
+            this.textBoxMail.Location = new System.Drawing.Point(15, 74);
+            this.textBoxMail.Name = "textBoxMail";
+            this.textBoxMail.Size = new System.Drawing.Size(127, 20);
+            this.textBoxMail.TabIndex = 7;
+            // 
+            // labelMail
+            // 
+            this.labelMail.AutoSize = true;
+            this.labelMail.Location = new System.Drawing.Point(13, 58);
+            this.labelMail.Name = "labelMail";
+            this.labelMail.Size = new System.Drawing.Size(109, 13);
+            this.labelMail.TabIndex = 8;
+            this.labelMail.Text = "Igrese mail (opcional):";
+            // 
+            // botonCancelar
+            // 
+            this.botonCancelar.Location = new System.Drawing.Point(12, 211);
+            this.botonCancelar.Name = "botonCancelar";
+            this.botonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.botonCancelar.TabIndex = 9;
+            this.botonCancelar.Text = "Cancelar";
+            this.botonCancelar.UseVisualStyleBackColor = true;
+            // 
             // AltaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(218, 207);
+            this.ClientSize = new System.Drawing.Size(218, 249);
+            this.Controls.Add(this.botonCancelar);
+            this.Controls.Add(this.labelMail);
+            this.Controls.Add(this.textBoxMail);
             this.Controls.Add(this.labelPassConfirm);
             this.Controls.Add(this.textBoxPassConfirm);
             this.Controls.Add(this.textBoxPass);
@@ -109,6 +140,7 @@
             this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelNombreUsuario);
             this.Controls.Add(this.textBoxUsername);
+            this.MaximizeBox = false;
             this.Name = "AltaUsuario";
             this.Text = "Alta Usuario";
             this.ResumeLayout(false);
@@ -125,5 +157,8 @@
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.TextBox textBoxPassConfirm;
         private System.Windows.Forms.Label labelPassConfirm;
+        private System.Windows.Forms.TextBox textBoxMail;
+        private System.Windows.Forms.Label labelMail;
+        private System.Windows.Forms.Button botonCancelar;
     }
 }

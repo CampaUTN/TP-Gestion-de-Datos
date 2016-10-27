@@ -148,20 +148,18 @@ namespace ClinicaFrba.Abm_Afiliado
         #region METODOS AUXILIARES
 
         //agrego los datos en el objeto usuario
-        private void cargarUsuario()
-        {
-          
+        private void cargarUsuario(){
             afiliado = new Afiliado(this.textBoxNombre.Text,
                                     this.textBoxApellido.Text,
                                     this.dateTimePicker1.Value.Date,
-                                    this.comboBoxTipoDoc.SelectedText,
+                                    this.comboBoxTipoDoc.SelectedItem.ToString(),
                                     this.textBoxNroDoc.Text,
                                     this.textBoxDireccion.Text,
                                     this.textBoxTelefono.Text,
                                     this.sexo,
                                     this.selecEstadoCivil.SelectedText,
                                     this.selecPlan.Text);
-            MessageBox.Show("Cargue el objeto afiliado");
+            MessageBox.Show("Registrese como usuario antes de continuar");
 
         }
 
