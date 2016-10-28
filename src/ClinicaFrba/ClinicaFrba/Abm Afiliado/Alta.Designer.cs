@@ -177,7 +177,7 @@
             this.selecFem.Location = new System.Drawing.Point(23, 173);
             this.selecFem.Name = "selecFem";
             this.selecFem.Size = new System.Drawing.Size(71, 17);
-            this.selecFem.TabIndex = 14;
+            this.selecFem.TabIndex = 11;
             this.selecFem.TabStop = true;
             this.selecFem.Text = "Femenino";
             this.selecFem.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             this.selecMasc.Location = new System.Drawing.Point(120, 173);
             this.selecMasc.Name = "selecMasc";
             this.selecMasc.Size = new System.Drawing.Size(73, 17);
-            this.selecMasc.TabIndex = 15;
+            this.selecMasc.TabIndex = 12;
             this.selecMasc.TabStop = true;
             this.selecMasc.Text = "Masculino";
             this.selecMasc.UseVisualStyleBackColor = true;
@@ -207,7 +207,7 @@
             this.selecEstadoCivil.Location = new System.Drawing.Point(28, 245);
             this.selecEstadoCivil.Name = "selecEstadoCivil";
             this.selecEstadoCivil.Size = new System.Drawing.Size(106, 21);
-            this.selecEstadoCivil.TabIndex = 17;
+            this.selecEstadoCivil.TabIndex = 14;
             this.selecEstadoCivil.SelectedIndexChanged += new System.EventHandler(this.selecEstadoCivil_SelectedIndexChanged);
             // 
             // labelEstadoCivil
@@ -225,7 +225,7 @@
             this.selecPlan.Location = new System.Drawing.Point(28, 295);
             this.selecPlan.Name = "selecPlan";
             this.selecPlan.Size = new System.Drawing.Size(106, 21);
-            this.selecPlan.TabIndex = 19;
+            this.selecPlan.TabIndex = 15;
             this.selecPlan.Text = "Escoga un plan...";
             // 
             // labelSelecPlan
@@ -242,7 +242,7 @@
             this.AceptarButton.Location = new System.Drawing.Point(198, 407);
             this.AceptarButton.Name = "AceptarButton";
             this.AceptarButton.Size = new System.Drawing.Size(75, 23);
-            this.AceptarButton.TabIndex = 20;
+            this.AceptarButton.TabIndex = 19;
             this.AceptarButton.Text = "Aceptar";
             this.AceptarButton.UseVisualStyleBackColor = true;
             this.AceptarButton.Click += new System.EventHandler(this.AceptarButton_Click);
@@ -271,7 +271,7 @@
             this.botonCancelar.Location = new System.Drawing.Point(22, 407);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.botonCancelar.TabIndex = 26;
+            this.botonCancelar.TabIndex = 20;
             this.botonCancelar.Text = "Cancelar";
             this.botonCancelar.UseVisualStyleBackColor = true;
             this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
@@ -293,7 +293,7 @@
             this.checkBoxHijos.Location = new System.Drawing.Point(28, 335);
             this.checkBoxHijos.Name = "checkBoxHijos";
             this.checkBoxHijos.Size = new System.Drawing.Size(117, 17);
-            this.checkBoxHijos.TabIndex = 28;
+            this.checkBoxHijos.TabIndex = 16;
             this.checkBoxHijos.Text = "Familiares a cargo?";
             this.checkBoxHijos.UseVisualStyleBackColor = true;
             this.checkBoxHijos.CheckedChanged += new System.EventHandler(this.checkBoxHijos_CheckedChanged);
@@ -313,7 +313,8 @@
             this.textBoxCantHijos.Location = new System.Drawing.Point(217, 332);
             this.textBoxCantHijos.Name = "textBoxCantHijos";
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
-            this.textBoxCantHijos.TabIndex = 30;
+            this.textBoxCantHijos.TabIndex = 17;
+            this.textBoxCantHijos.TextChanged += new System.EventHandler(this.textBoxCantHijos_TextChanged);
             // 
             // botonAfiliarFamiliar
             // 
@@ -321,7 +322,7 @@
             this.botonAfiliarFamiliar.Location = new System.Drawing.Point(27, 367);
             this.botonAfiliarFamiliar.Name = "botonAfiliarFamiliar";
             this.botonAfiliarFamiliar.Size = new System.Drawing.Size(107, 23);
-            this.botonAfiliarFamiliar.TabIndex = 31;
+            this.botonAfiliarFamiliar.TabIndex = 18;
             this.botonAfiliarFamiliar.Text = "Afiliar familiares...";
             this.botonAfiliarFamiliar.UseVisualStyleBackColor = true;
             this.botonAfiliarFamiliar.Click += new System.EventHandler(this.botonAfiliarFamiliar_Click);
@@ -341,7 +342,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.RightToLeftLayout = true;
             this.dateTimePicker1.Size = new System.Drawing.Size(130, 20);
-            this.dateTimePicker1.TabIndex = 32;
+            this.dateTimePicker1.TabIndex = 13;
             this.dateTimePicker1.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
@@ -382,6 +383,7 @@
             this.Controls.Add(this.textBoxNombre);
             this.MaximizeBox = false;
             this.Name = "Alta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta";
             this.ResumeLayout(false);
             this.PerformLayout();

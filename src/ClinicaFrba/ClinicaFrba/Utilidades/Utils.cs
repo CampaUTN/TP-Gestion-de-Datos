@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using ClinicaFrba.Abm_Afiliado;
 
 namespace ClinicaFrba.Utilidades
 {
@@ -167,6 +168,73 @@ namespace ClinicaFrba.Utilidades
                 return Convert.ToInt32(reader[0]);
             }
             return -1;
+        }
+
+
+        static public long getIdDesdeUserName(string username)
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("SELECT usua_id FROM CLINICA.Usuarios WHERE usua_username = @username", conexion);
+            comando.Parameters.AddWithValue("@username", username);
+            comando.CommandType = CommandType.Text;
+
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                return Convert.ToInt64(reader[0]);
+            }
+            return -1;
+        }
+
+
+
+        //INGRESO VALORES A LA BD
+
+        static public void registarUsuario(Afiliado afiliado)
+        {
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.ingresarUsuario", conexion);
+
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@username", afiliado.getUsername());
+            comando.Parameters.AddWithValue("@password", afiliado.getPassword());
+            comando.Parameters.AddWithValue("@nombre", afiliado.getNombre());
+            comando.Parameters.AddWithValue("@apellido", afiliado.getApellido());
+            comando.Parameters.AddWithValue("@tipoDoc", afiliado.getTipoDoc());
+            comando.Parameters.AddWithValue("@nroDoc", afiliado.getNroDoc());
+            comando.Parameters.AddWithValue("@direccion", afiliado.getDireccion());
+            comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
+            comando.Parameters.AddWithValue("@fechaNacimiento", afiliado.getFechaNac());
+            comando.Parameters.AddWithValue("@sexo", afiliado.getSexo());
+            comando.Parameters.AddWithValue("@mail", afiliado.getMail());
+
+            conexion.Open();
+            comando.ExecuteReader();
+        }
+
+        static public void registrarAfiliado(Afiliado afiliado)
+        {
+            int codPlan = Utilidades.Utils.getIdDesdePlan(afiliado.getPlan());
+
+            long usuaId = Utilidades.Utils.getIdDesdeUserName(afiliado.getUsername());
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.ingresarAfiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            //TODO: Ver si lo puedo retornar desde el SP, cuando registro al usuario
+            comando.Parameters.AddWithValue("@usuario", usuaId);
+            comando.Parameters.AddWithValue("@plan", codPlan);
+            comando.Parameters.AddWithValue("@estado", afiliado.getEstadoCivil());
+            comando.Parameters.AddWithValue("@hijos", afiliado.getHijosACargo());
+
+            conexion.Open();
+            comando.ExecuteReader();
         }
     }
 }

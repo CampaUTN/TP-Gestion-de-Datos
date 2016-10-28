@@ -127,6 +127,7 @@
             // 
             // AltaUsuario
             // 
+            this.AcceptButton = this.botonConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(218, 249);
@@ -142,6 +143,7 @@
             this.Controls.Add(this.textBoxUsername);
             this.MaximizeBox = false;
             this.Name = "AltaUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta Usuario";
             this.ResumeLayout(false);
             this.PerformLayout();

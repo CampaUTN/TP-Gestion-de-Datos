@@ -489,10 +489,10 @@ GO
 --PROCEDURE QUE AGREGA UN AFILIADO
 USE GD2C2016;
 GO
-CREATE PROCEDURE CLINICA.ingresarAfiliado(@usuario BIGINT, @plan INT, @estado VARCHAR(20))
+CREATE PROCEDURE CLINICA.ingresarAfiliado(@usuario BIGINT, @plan INT, @estado VARCHAR(20), @hijos INT)
 AS
 BEGIN
-	INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_estadoCivil)
+	INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
 
-	VALUES(@usuario, @plan, @estado)
+	VALUES(@usuario, @plan, @estado, @hijos)
 END

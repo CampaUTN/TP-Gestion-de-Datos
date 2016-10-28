@@ -23,6 +23,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private string username;
         private string password;
         private string mail;
+        private int hijosACargo = 0;
 
 
         public Afiliado( string nombre,string apellido,DateTime fechaNac, string tipoDoc,string numeroDoc,string direccion,string telefono,string sexo,string estadoCivil,string plan) {
@@ -40,8 +41,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         }
 
-        public Afiliado() { }
-
+        #region GETTERS
         public string getNombre() {
             return nombre;
         }
@@ -93,6 +93,14 @@ namespace ClinicaFrba.Abm_Afiliado
             return mail;
         }
 
+        public int getHijosACargo()
+        {
+            return hijosACargo;
+        }
+
+        #endregion
+
+        #region SETTERS
         public void setUsername(string username){
             this.username = username;
         }
@@ -104,5 +112,11 @@ namespace ClinicaFrba.Abm_Afiliado
         public void setMail(string mail){
             this.mail = mail;
         }
+
+        public void setHijosACargo(int cant) {
+            this.hijosACargo = cant;
+        }
+
+        #endregion
     }
 }

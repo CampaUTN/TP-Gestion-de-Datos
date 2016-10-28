@@ -14,7 +14,6 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class Alta : Form, FormularioABM
     {
         private string sexo;
-        private AbmAfiliado formulario;
         private List<TextBox> cajasTexto;
         private Afiliado afiliado;
 
@@ -115,6 +114,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.botonAfiliarFamiliar.Enabled = false;
                 this.textBoxCantHijos.Enabled = false;
                 this.cajasTexto.Remove(textBoxCantHijos);
+                this.afiliado.setHijosACargo(0);
             }
 
         }
@@ -157,8 +157,10 @@ namespace ClinicaFrba.Abm_Afiliado
                                     this.textBoxDireccion.Text,
                                     this.textBoxTelefono.Text,
                                     this.sexo,
-                                    this.selecEstadoCivil.SelectedText,
+                                    this.selecEstadoCivil.SelectedItem.ToString(),
                                     this.selecPlan.Text);
+
+            setearCantidadHijos();
             MessageBox.Show("Registrese como usuario antes de continuar");
 
         }
@@ -204,6 +206,18 @@ namespace ClinicaFrba.Abm_Afiliado
         
         }
 
+        private void textBoxCantHijos_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void setearCantidadHijos() {
+            if (checkBoxHijos.Checked)
+            {
+                this.afiliado.setHijosACargo(int.Parse(textBoxCantHijos.Text));
+            }
+            
+        }
 
     }
 
