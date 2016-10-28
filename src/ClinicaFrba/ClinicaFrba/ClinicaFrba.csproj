@@ -51,17 +51,17 @@
     <Compile Include="Abm Afiliado\AbmAfiliado.Designer.cs">
       <DependentUpon>AbmAfiliado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Afiliado\Alta.cs">
+    <Compile Include="Abm Afiliado\Alta\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Afiliado\Alta.Designer.cs">
+    <Compile Include="Abm Afiliado\Alta\Alta.Designer.cs">
       <DependentUpon>Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\Afiliado.cs" />
-    <Compile Include="Abm Afiliado\AltaUsuario.cs">
+    <Compile Include="Abm Afiliado\Alta\AltaUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Afiliado\AltaUsuario.Designer.cs">
+    <Compile Include="Abm Afiliado\Alta\AltaUsuario.Designer.cs">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\FormularioABM.cs" />
@@ -153,6 +153,7 @@
     <Compile Include="Registro Resultado\RegistroResultado.Designer.cs">
       <DependentUpon>RegistroResultado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Utilidades\Encriptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,10 +161,10 @@
     <EmbeddedResource Include="Abm Afiliado\AbmAfiliado.resx">
       <DependentUpon>AbmAfiliado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Afiliado\Alta.resx">
+    <EmbeddedResource Include="Abm Afiliado\Alta\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Afiliado\AltaUsuario.resx">
+    <EmbeddedResource Include="Abm Afiliado\Alta\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Especialidades Medicas\AbmEspMedicas.resx">
@@ -215,7 +216,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Abm Afiliado\Modifiacion\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
