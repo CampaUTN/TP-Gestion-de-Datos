@@ -51,17 +51,15 @@
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.labelFechaNac = new System.Windows.Forms.Label();
             this.botonCancelar = new System.Windows.Forms.Button();
-            this.botonAgregarFamiliar = new System.Windows.Forms.Button();
             this.checkBoxHijos = new System.Windows.Forms.CheckBox();
             this.labelCantHijos = new System.Windows.Forms.Label();
             this.textBoxCantHijos = new System.Windows.Forms.TextBox();
-            this.botonAfiliarFamiliar = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(22, 26);
+            this.textBoxNombre.Location = new System.Drawing.Point(14, 26);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(117, 20);
             this.textBoxNombre.TabIndex = 0;
@@ -69,7 +67,7 @@
             // labelNombre
             // 
             this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(19, 10);
+            this.labelNombre.Location = new System.Drawing.Point(11, 10);
             this.labelNombre.Name = "labelNombre";
             this.labelNombre.Size = new System.Drawing.Size(54, 13);
             this.labelNombre.TabIndex = 1;
@@ -78,7 +76,7 @@
             // labelApellido
             // 
             this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(158, 9);
+            this.labelApellido.Location = new System.Drawing.Point(150, 9);
             this.labelApellido.Name = "labelApellido";
             this.labelApellido.Size = new System.Drawing.Size(54, 13);
             this.labelApellido.TabIndex = 3;
@@ -86,7 +84,7 @@
             // 
             // textBoxApellido
             // 
-            this.textBoxApellido.Location = new System.Drawing.Point(156, 26);
+            this.textBoxApellido.Location = new System.Drawing.Point(148, 26);
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(117, 20);
             this.textBoxApellido.TabIndex = 2;
@@ -94,7 +92,7 @@
             // labelTipoDoc
             // 
             this.labelTipoDoc.AutoSize = true;
-            this.labelTipoDoc.Location = new System.Drawing.Point(19, 60);
+            this.labelTipoDoc.Location = new System.Drawing.Point(11, 60);
             this.labelTipoDoc.Name = "labelTipoDoc";
             this.labelTipoDoc.Size = new System.Drawing.Size(99, 13);
             this.labelTipoDoc.TabIndex = 4;
@@ -108,7 +106,7 @@
             "CI",
             "LC",
             "LD"});
-            this.comboBoxTipoDoc.Location = new System.Drawing.Point(22, 76);
+            this.comboBoxTipoDoc.Location = new System.Drawing.Point(14, 76);
             this.comboBoxTipoDoc.Name = "comboBoxTipoDoc";
             this.comboBoxTipoDoc.Size = new System.Drawing.Size(117, 21);
             this.comboBoxTipoDoc.TabIndex = 5;
@@ -117,7 +115,7 @@
             // labelNroDoc
             // 
             this.labelNroDoc.AutoSize = true;
-            this.labelNroDoc.Location = new System.Drawing.Point(158, 60);
+            this.labelNroDoc.Location = new System.Drawing.Point(150, 60);
             this.labelNroDoc.Name = "labelNroDoc";
             this.labelNroDoc.Size = new System.Drawing.Size(102, 13);
             this.labelNroDoc.TabIndex = 7;
@@ -125,7 +123,7 @@
             // 
             // textBoxNroDoc
             // 
-            this.textBoxNroDoc.Location = new System.Drawing.Point(156, 77);
+            this.textBoxNroDoc.Location = new System.Drawing.Point(148, 77);
             this.textBoxNroDoc.Name = "textBoxNroDoc";
             this.textBoxNroDoc.Size = new System.Drawing.Size(117, 20);
             this.textBoxNroDoc.TabIndex = 6;
@@ -133,7 +131,7 @@
             // labelDireccion
             // 
             this.labelDireccion.AutoSize = true;
-            this.labelDireccion.Location = new System.Drawing.Point(19, 112);
+            this.labelDireccion.Location = new System.Drawing.Point(11, 112);
             this.labelDireccion.Name = "labelDireccion";
             this.labelDireccion.Size = new System.Drawing.Size(52, 13);
             this.labelDireccion.TabIndex = 9;
@@ -141,7 +139,7 @@
             // 
             // textBoxDireccion
             // 
-            this.textBoxDireccion.Location = new System.Drawing.Point(22, 128);
+            this.textBoxDireccion.Location = new System.Drawing.Point(14, 128);
             this.textBoxDireccion.Name = "textBoxDireccion";
             this.textBoxDireccion.Size = new System.Drawing.Size(117, 20);
             this.textBoxDireccion.TabIndex = 8;
@@ -149,7 +147,7 @@
             // labelTel
             // 
             this.labelTel.AutoSize = true;
-            this.labelTel.Location = new System.Drawing.Point(153, 112);
+            this.labelTel.Location = new System.Drawing.Point(145, 112);
             this.labelTel.Name = "labelTel";
             this.labelTel.Size = new System.Drawing.Size(49, 13);
             this.labelTel.TabIndex = 11;
@@ -157,7 +155,7 @@
             // 
             // textBoxTelefono
             // 
-            this.textBoxTelefono.Location = new System.Drawing.Point(156, 128);
+            this.textBoxTelefono.Location = new System.Drawing.Point(148, 128);
             this.textBoxTelefono.Name = "textBoxTelefono";
             this.textBoxTelefono.Size = new System.Drawing.Size(117, 20);
             this.textBoxTelefono.TabIndex = 10;
@@ -165,7 +163,7 @@
             // labelSexo
             // 
             this.labelSexo.AutoSize = true;
-            this.labelSexo.Location = new System.Drawing.Point(20, 156);
+            this.labelSexo.Location = new System.Drawing.Point(12, 156);
             this.labelSexo.Name = "labelSexo";
             this.labelSexo.Size = new System.Drawing.Size(31, 13);
             this.labelSexo.TabIndex = 13;
@@ -174,7 +172,7 @@
             // selecFem
             // 
             this.selecFem.AutoSize = true;
-            this.selecFem.Location = new System.Drawing.Point(23, 173);
+            this.selecFem.Location = new System.Drawing.Point(15, 173);
             this.selecFem.Name = "selecFem";
             this.selecFem.Size = new System.Drawing.Size(71, 17);
             this.selecFem.TabIndex = 11;
@@ -186,7 +184,7 @@
             // selecMasc
             // 
             this.selecMasc.AutoSize = true;
-            this.selecMasc.Location = new System.Drawing.Point(120, 173);
+            this.selecMasc.Location = new System.Drawing.Point(112, 173);
             this.selecMasc.Name = "selecMasc";
             this.selecMasc.Size = new System.Drawing.Size(73, 17);
             this.selecMasc.TabIndex = 12;
@@ -204,7 +202,7 @@
             "Viudo/a",
             "Concubinato",
             "Divorciado/a"});
-            this.selecEstadoCivil.Location = new System.Drawing.Point(28, 245);
+            this.selecEstadoCivil.Location = new System.Drawing.Point(20, 254);
             this.selecEstadoCivil.Name = "selecEstadoCivil";
             this.selecEstadoCivil.Size = new System.Drawing.Size(106, 21);
             this.selecEstadoCivil.TabIndex = 14;
@@ -213,7 +211,7 @@
             // labelEstadoCivil
             // 
             this.labelEstadoCivil.AutoSize = true;
-            this.labelEstadoCivil.Location = new System.Drawing.Point(25, 229);
+            this.labelEstadoCivil.Location = new System.Drawing.Point(17, 238);
             this.labelEstadoCivil.Name = "labelEstadoCivil";
             this.labelEstadoCivil.Size = new System.Drawing.Size(62, 13);
             this.labelEstadoCivil.TabIndex = 16;
@@ -222,16 +220,16 @@
             // selecPlan
             // 
             this.selecPlan.FormattingEnabled = true;
-            this.selecPlan.Location = new System.Drawing.Point(28, 295);
+            this.selecPlan.Location = new System.Drawing.Point(135, 254);
             this.selecPlan.Name = "selecPlan";
-            this.selecPlan.Size = new System.Drawing.Size(106, 21);
+            this.selecPlan.Size = new System.Drawing.Size(124, 21);
             this.selecPlan.TabIndex = 15;
             this.selecPlan.Text = "Escoga un plan...";
             // 
             // labelSelecPlan
             // 
             this.labelSelecPlan.AutoSize = true;
-            this.labelSelecPlan.Location = new System.Drawing.Point(25, 279);
+            this.labelSelecPlan.Location = new System.Drawing.Point(132, 238);
             this.labelSelecPlan.Name = "labelSelecPlan";
             this.labelSelecPlan.Size = new System.Drawing.Size(87, 13);
             this.labelSelecPlan.TabIndex = 18;
@@ -239,7 +237,7 @@
             // 
             // AceptarButton
             // 
-            this.AceptarButton.Location = new System.Drawing.Point(198, 407);
+            this.AceptarButton.Location = new System.Drawing.Point(186, 339);
             this.AceptarButton.Name = "AceptarButton";
             this.AceptarButton.Size = new System.Drawing.Size(75, 23);
             this.AceptarButton.TabIndex = 19;
@@ -249,7 +247,7 @@
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(110, 407);
+            this.botonLimpiar.Location = new System.Drawing.Point(98, 339);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
             this.botonLimpiar.TabIndex = 21;
@@ -260,7 +258,7 @@
             // labelFechaNac
             // 
             this.labelFechaNac.AutoSize = true;
-            this.labelFechaNac.Location = new System.Drawing.Point(23, 204);
+            this.labelFechaNac.Location = new System.Drawing.Point(15, 204);
             this.labelFechaNac.Name = "labelFechaNac";
             this.labelFechaNac.Size = new System.Drawing.Size(106, 13);
             this.labelFechaNac.TabIndex = 23;
@@ -268,7 +266,7 @@
             // 
             // botonCancelar
             // 
-            this.botonCancelar.Location = new System.Drawing.Point(22, 407);
+            this.botonCancelar.Location = new System.Drawing.Point(10, 339);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
             this.botonCancelar.TabIndex = 20;
@@ -276,21 +274,10 @@
             this.botonCancelar.UseVisualStyleBackColor = true;
             this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
-            // botonAgregarFamiliar
-            // 
-            this.botonAgregarFamiliar.Enabled = false;
-            this.botonAgregarFamiliar.Location = new System.Drawing.Point(161, 243);
-            this.botonAgregarFamiliar.Name = "botonAgregarFamiliar";
-            this.botonAgregarFamiliar.Size = new System.Drawing.Size(112, 23);
-            this.botonAgregarFamiliar.TabIndex = 27;
-            this.botonAgregarFamiliar.Text = "Agregar conyuge...";
-            this.botonAgregarFamiliar.UseVisualStyleBackColor = true;
-            this.botonAgregarFamiliar.Click += new System.EventHandler(this.botonAgregarFamiliar_Click);
-            // 
             // checkBoxHijos
             // 
             this.checkBoxHijos.AutoSize = true;
-            this.checkBoxHijos.Location = new System.Drawing.Point(28, 335);
+            this.checkBoxHijos.Location = new System.Drawing.Point(20, 297);
             this.checkBoxHijos.Name = "checkBoxHijos";
             this.checkBoxHijos.Size = new System.Drawing.Size(117, 17);
             this.checkBoxHijos.TabIndex = 16;
@@ -301,7 +288,7 @@
             // labelCantHijos
             // 
             this.labelCantHijos.AutoSize = true;
-            this.labelCantHijos.Location = new System.Drawing.Point(158, 335);
+            this.labelCantHijos.Location = new System.Drawing.Point(143, 298);
             this.labelCantHijos.Name = "labelCantHijos";
             this.labelCantHijos.Size = new System.Drawing.Size(49, 13);
             this.labelCantHijos.TabIndex = 29;
@@ -310,22 +297,11 @@
             // textBoxCantHijos
             // 
             this.textBoxCantHijos.Enabled = false;
-            this.textBoxCantHijos.Location = new System.Drawing.Point(217, 332);
+            this.textBoxCantHijos.Location = new System.Drawing.Point(202, 295);
             this.textBoxCantHijos.Name = "textBoxCantHijos";
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
             this.textBoxCantHijos.TabIndex = 17;
             this.textBoxCantHijos.TextChanged += new System.EventHandler(this.textBoxCantHijos_TextChanged);
-            // 
-            // botonAfiliarFamiliar
-            // 
-            this.botonAfiliarFamiliar.Enabled = false;
-            this.botonAfiliarFamiliar.Location = new System.Drawing.Point(27, 367);
-            this.botonAfiliarFamiliar.Name = "botonAfiliarFamiliar";
-            this.botonAfiliarFamiliar.Size = new System.Drawing.Size(107, 23);
-            this.botonAfiliarFamiliar.TabIndex = 18;
-            this.botonAfiliarFamiliar.Text = "Afiliar familiares...";
-            this.botonAfiliarFamiliar.UseVisualStyleBackColor = true;
-            this.botonAfiliarFamiliar.Click += new System.EventHandler(this.botonAfiliarFamiliar_Click);
             // 
             // dateTimePicker1
             // 
@@ -335,7 +311,7 @@
             this.dateTimePicker1.CustomFormat = "";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.dateTimePicker1.Location = new System.Drawing.Point(137, 204);
+            this.dateTimePicker1.Location = new System.Drawing.Point(135, 202);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
             this.dateTimePicker1.MaxDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -351,13 +327,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(291, 442);
+            this.ClientSize = new System.Drawing.Size(276, 378);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.botonAfiliarFamiliar);
             this.Controls.Add(this.textBoxCantHijos);
             this.Controls.Add(this.labelCantHijos);
             this.Controls.Add(this.checkBoxHijos);
-            this.Controls.Add(this.botonAgregarFamiliar);
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.labelFechaNac);
             this.Controls.Add(this.botonLimpiar);
@@ -385,6 +359,7 @@
             this.Name = "Alta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta";
+            this.Load += new System.EventHandler(this.Alta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,11 +390,9 @@
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Label labelFechaNac;
         private System.Windows.Forms.Button botonCancelar;
-        private System.Windows.Forms.Button botonAgregarFamiliar;
         private System.Windows.Forms.CheckBox checkBoxHijos;
         private System.Windows.Forms.Label labelCantHijos;
         private System.Windows.Forms.TextBox textBoxCantHijos;
-        private System.Windows.Forms.Button botonAfiliarFamiliar;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

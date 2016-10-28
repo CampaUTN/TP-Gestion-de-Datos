@@ -32,7 +32,9 @@ namespace ClinicaFrba.Abm_Afiliado
                 Utils.registarUsuario(this.afiliado);
 
                 Utils.registrarAfiliado(this.afiliado);
-                MessageBox.Show("Usted fue registrado con exito!");
+                
+                //Segun los datos, debo darle la opcion de agregar un afiliado mas
+                MessageBox.Show("Usted fue registrado con exito!","Alta", MessageBoxButtons.OK);
                 this.Close();
             }
             else

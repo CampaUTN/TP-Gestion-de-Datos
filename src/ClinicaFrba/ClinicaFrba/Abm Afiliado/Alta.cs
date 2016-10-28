@@ -44,6 +44,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     //abro el formulario de usuario
                     this.cargarUsuario();
                     new AltaUsuario(this.afiliado).Show();
+
                 }
                 else{
                     MessageBox.Show("Error de datos. Compruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
@@ -80,11 +81,11 @@ namespace ClinicaFrba.Abm_Afiliado
             int estado = selecEstadoCivil.SelectedIndex;
             if (estado.Equals(1) || estado.Equals(3))
             {
-                this.botonAgregarFamiliar.Enabled = true;
+                //this.botonAgregarFamiliar.Enabled = true;
             }
             else
             {
-                this.botonAgregarFamiliar.Enabled = false;
+                //this.botonAgregarFamiliar.Enabled = false;
             }
 
             /*Me fijo si el valor seleccionado es 1 o 3
@@ -105,13 +106,13 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (checkBoxHijos.Checked)
             {
-                this.botonAfiliarFamiliar.Enabled = true;
+                //this.botonAfiliarFamiliar.Enabled = true;
                 this.textBoxCantHijos.Enabled = true;
                 this.cajasTexto.Add(textBoxCantHijos);
             }
             else
             {
-                this.botonAfiliarFamiliar.Enabled = false;
+                //this.botonAfiliarFamiliar.Enabled = false;
                 this.textBoxCantHijos.Enabled = false;
                 this.cajasTexto.Remove(textBoxCantHijos);
                 this.afiliado.setHijosACargo(0);
@@ -217,6 +218,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.afiliado.setHijosACargo(int.Parse(textBoxCantHijos.Text));
             }
             
+        }
+
+        private void Alta_Load(object sender, EventArgs e)
+        {
+
         }
 
     }
