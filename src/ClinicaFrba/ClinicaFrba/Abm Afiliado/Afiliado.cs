@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections;
 namespace ClinicaFrba.Abm_Afiliado
 {
     public class Afiliado
@@ -23,7 +23,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private string username;
         private string password;
         private string mail;
-        private int hijosACargo = 0;
+        private int hijosACargo;
 
 
         public Afiliado( string nombre,string apellido,DateTime fechaNac, string tipoDoc,string numeroDoc,string direccion,string telefono,string sexo,string estadoCivil,string plan) {
@@ -116,7 +116,17 @@ namespace ClinicaFrba.Abm_Afiliado
         public void setHijosACargo(int cant) {
             this.hijosACargo = cant;
         }
+        #endregion
+
+        #region METODOS AUXILIARES
+
+        public bool puedeAfiliarAOtros()
+        {
+            return (estadoCivil.Equals("Soltero/a") || estadoCivil.Equals("Casado/a")) || (hijosACargo > 0);
+        }
+
 
         #endregion
+
     }
 }

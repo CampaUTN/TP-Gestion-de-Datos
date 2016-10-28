@@ -254,8 +254,8 @@ VALUES (0,'admin', @hash, 3);
 
 -- Usuarios desde Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
-INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-  SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni, 0,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
+INSERT INTO CLINICA.Usuarios(usua_id,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+  SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
   FROM gd_esquema.Maestra
   WHERE Paciente_Dni IS NOT NULL
 

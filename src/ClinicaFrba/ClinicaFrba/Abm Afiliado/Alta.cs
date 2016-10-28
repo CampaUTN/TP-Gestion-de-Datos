@@ -44,6 +44,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     //abro el formulario de usuario
                     this.cargarUsuario();
                     new AltaUsuario(this.afiliado).Show();
+                    this.limpiarCajitas();
 
                 }
                 else{
@@ -67,6 +68,11 @@ namespace ClinicaFrba.Abm_Afiliado
 
         //limpio los datos que el usuario completo
         private void botonLimpiar_Click(object sender, EventArgs e){
+            this.limpiarCajitas();
+        }
+
+        private void limpiarCajitas()
+        {
             foreach (TextBox cajita in cajasTexto)
             {
                 cajita.Clear();
@@ -115,7 +121,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 //this.botonAfiliarFamiliar.Enabled = false;
                 this.textBoxCantHijos.Enabled = false;
                 this.cajasTexto.Remove(textBoxCantHijos);
-                this.afiliado.setHijosACargo(0);
             }
 
         }
@@ -223,6 +228,10 @@ namespace ClinicaFrba.Abm_Afiliado
         private void Alta_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void inhabilitarAgregadoAfiliados() {
+            this.checkBoxHijos.Enabled = false;
         }
 
     }

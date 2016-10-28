@@ -34,7 +34,14 @@ namespace ClinicaFrba.Abm_Afiliado
                 Utils.registrarAfiliado(this.afiliado);
                 
                 //Segun los datos, debo darle la opcion de agregar un afiliado mas
-                MessageBox.Show("Usted fue registrado con exito!","Alta", MessageBoxButtons.OK);
+                if (this.afiliado.puedeAfiliarAOtros())
+                {
+                    brindarOpcionAgregar();
+                }
+                else {
+                    MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);                    
+                }
+
                 this.Close();
             }
             else
@@ -47,10 +54,24 @@ namespace ClinicaFrba.Abm_Afiliado
             return this.textBoxPass.Text == this.textBoxPassConfirm.Text;
         }
 
-        private void agregarNuevosDatos(){
+        private void agregarNuevosDatos()
+        {
             afiliado.setUsername(this.textBoxUsername.Text);
             afiliado.setPassword(this.textBoxPassConfirm.Text);
             afiliado.setMail(this.textBoxMail.Text);
+        }
+
+        private void brindarOpcionAgregar() {
+
+            if (MessageBox.Show("Usted fue registrado con exito! Desea agregar un nuevo afiliado", "Alta", MessageBoxButtons.YesNo) 
+                == DialogResult.Yes) 
+            {
+                Abm_Afiliado.Alta otroFormulario = new Alta();
+
+                otroFormulario.inhabilitarAgregadoAfiliados();
+                otroFormulario.Show();
+
+            } 
         }
 
     }
