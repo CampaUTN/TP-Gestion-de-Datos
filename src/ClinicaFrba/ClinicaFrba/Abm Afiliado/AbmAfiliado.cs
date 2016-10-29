@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicaFrba.Abm_Afiliado.Modifiacion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void botonSeguir_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             this.formulario.Show();
         }
 
@@ -44,7 +45,9 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void selecModif_CheckedChanged(object sender, EventArgs e)
         {
-            //formulario = new Modificacion();
+            //Lo uso para probar mientras
+            formulario = new Modificacion(new Afiliado(
+               "Emiliano", "Tolaba", DateTime.Parse("27/11/1995"), "DNI", "39372207", "Stranford 1857","46220932", "M", "Soltero/a","asdas"));
         }
     }
 }

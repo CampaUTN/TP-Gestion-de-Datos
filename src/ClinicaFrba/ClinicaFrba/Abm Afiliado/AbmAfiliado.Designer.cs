@@ -114,6 +114,7 @@
             this.Controls.Add(this.seleccionAlta);
             this.Controls.Add(this.label_seleccionar_op);
             this.Name = "AbmAfiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Afiliado";
             this.ResumeLayout(false);
             this.PerformLayout();

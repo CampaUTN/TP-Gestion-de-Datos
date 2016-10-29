@@ -13,9 +13,9 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class Alta : Form, FormularioABM
     {
-        private string sexo;
-        private List<TextBox> cajasTexto;
-        private Afiliado afiliado;
+        protected string sexo;
+        protected List<TextBox> cajasTexto;
+        protected Afiliado afiliado;
 
         public Alta()
         {
@@ -23,13 +23,9 @@ namespace ClinicaFrba.Abm_Afiliado
 
             InitializeComponent();
 
-            Utilidades.Utils.llenar(this.selecPlan, this.getPlanes());
-
-            this.cajasTexto.Add(textBoxNombre);
-            this.cajasTexto.Add(textBoxApellido);
-            this.cajasTexto.Add(textBoxNroDoc);
-            this.cajasTexto.Add(textBoxDireccion);
-            this.cajasTexto.Add(textBoxTelefono);
+            Utilidades.Utils.llenar(this.selecPlan, Utilidades.Utils.getPlanes());
+            cargarCajitas();
+   
         }
         
         #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
@@ -38,14 +34,10 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             //chequeo que todos los campos se hayan completado
             if (!faltaCompletarDatos()){
-
                 //chequeo que los datos sean correctos
                 if (!validarDatosIngresados()){
-                    //abro el formulario de usuario
-                    this.cargarUsuario();
-                    new AltaUsuario(this.afiliado).Show();
-                    this.limpiarCajitas();
-
+                    //metodo que sobreescribe Modificacion
+                    realizarOperacion();
                 }
                 else{
                     MessageBox.Show("Error de datos. Compruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
@@ -56,7 +48,7 @@ namespace ClinicaFrba.Abm_Afiliado
       
             }
         }
-
+        
         //me baso en un string para la seleccion del genero
         private void selecFem_CheckedChanged(object sender, EventArgs e){
             sexo = "F";
@@ -71,19 +63,15 @@ namespace ClinicaFrba.Abm_Afiliado
             this.limpiarCajitas();
         }
 
-        private void limpiarCajitas()
-        {
-            foreach (TextBox cajita in cajasTexto)
-            {
+        private void limpiarCajitas(){
+            foreach (TextBox cajita in cajasTexto){
                 cajita.Clear();
             }
-
             this.checkBoxHijos.CheckState = CheckState.Unchecked;
         }
 
 
-        private void selecEstadoCivil_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void selecEstadoCivil_SelectedIndexChanged(object sender, EventArgs e){
             int estado = selecEstadoCivil.SelectedIndex;
             if (estado.Equals(1) || estado.Equals(3))
             {
@@ -105,7 +93,10 @@ namespace ClinicaFrba.Abm_Afiliado
         
         private void botonCancelar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo);
+            if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void checkBoxHijos_CheckedChanged(object sender, EventArgs e)
@@ -152,6 +143,25 @@ namespace ClinicaFrba.Abm_Afiliado
 #endregion
 
         #region METODOS AUXILIARES
+        
+        //deberia ser privado, pero me tira error de compilacion
+        public virtual void realizarOperacion()
+        {
+
+            //abro el formulario de usuario
+            this.cargarUsuario();
+            new AltaUsuario(this.afiliado).Show();
+            this.limpiarCajitas();
+        }
+
+        private void cargarCajitas() {
+            this.cajasTexto.Add(textBoxNombre);
+            this.cajasTexto.Add(textBoxApellido);
+            this.cajasTexto.Add(textBoxNroDoc);
+            this.cajasTexto.Add(textBoxDireccion);
+            this.cajasTexto.Add(textBoxTelefono);
+        }
+
 
         //agrego los datos en el objeto usuario
         private void cargarUsuario(){
@@ -171,30 +181,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
         }
 
-     
-        //obtengo los planes de la base de datos mediante un store procedure
-        private List<KeyValuePair<int, string>> getPlanes()
-        {
-            var conexion = DBConnection.getConnection();
-            List<KeyValuePair<int, string>> planes = new List<KeyValuePair<int, string>>();
-
-            SqlCommand comando = new SqlCommand("CLINICA.getPlanes", conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-
-            conexion.Open();
-
-            SqlDataReader reader = comando.ExecuteReader();
-            while (reader.Read())
-            {
-                planes.Add(new KeyValuePair<int, string>(Int32.Parse(reader["plan_id"].ToString()),
-                                                                    reader["plan_nombre"].ToString()));
-            }
-
-            return planes;
-        }
-
-
-
         private bool faltaCompletarDatos() {
             return cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
         }
@@ -202,21 +188,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private bool validarDatosIngresados() {
             return false;
         }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void registrarUsuarioAfiliado(){
         
-        }
-
-        private void textBoxCantHijos_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void setearCantidadHijos() {
             if (checkBoxHijos.Checked)
             {
@@ -224,12 +196,7 @@ namespace ClinicaFrba.Abm_Afiliado
             }
             
         }
-
-        private void Alta_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
         public void inhabilitarAgregadoAfiliados() {
             this.checkBoxHijos.Enabled = false;
         }

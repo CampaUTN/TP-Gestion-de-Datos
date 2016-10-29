@@ -236,5 +236,30 @@ namespace ClinicaFrba.Utilidades
             conexion.Open();
             comando.ExecuteReader();
         }
+
+
+
+
+        static public List<KeyValuePair<int, string>> getPlanes()
+        {
+            var conexion = DBConnection.getConnection();
+            List<KeyValuePair<int, string>> planes = new List<KeyValuePair<int, string>>();
+
+            SqlCommand comando = new SqlCommand("CLINICA.getPlanes", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                planes.Add(new KeyValuePair<int, string>(Int32.Parse(reader["plan_id"].ToString()),
+                                                                    reader["plan_nombre"].ToString()));
+            }
+
+            return planes;
+        }
+
+
     }
 }

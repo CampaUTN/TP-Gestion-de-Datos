@@ -301,7 +301,6 @@
             this.textBoxCantHijos.Name = "textBoxCantHijos";
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
             this.textBoxCantHijos.TabIndex = 17;
-            this.textBoxCantHijos.TextChanged += new System.EventHandler(this.textBoxCantHijos_TextChanged);
             // 
             // dateTimePicker1
             // 
@@ -320,7 +319,6 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(130, 20);
             this.dateTimePicker1.TabIndex = 13;
             this.dateTimePicker1.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // Alta
             // 
@@ -359,7 +357,6 @@
             this.Name = "Alta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta";
-            this.Load += new System.EventHandler(this.Alta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,32 +364,32 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxNombre;
-        private System.Windows.Forms.Label labelNombre;
-        private System.Windows.Forms.Label labelApellido;
-        private System.Windows.Forms.TextBox textBoxApellido;
-        private System.Windows.Forms.Label labelTipoDoc;
-        private System.Windows.Forms.ComboBox comboBoxTipoDoc;
-        private System.Windows.Forms.Label labelNroDoc;
-        private System.Windows.Forms.TextBox textBoxNroDoc;
-        private System.Windows.Forms.Label labelDireccion;
-        private System.Windows.Forms.TextBox textBoxDireccion;
-        private System.Windows.Forms.Label labelTel;
-        private System.Windows.Forms.TextBox textBoxTelefono;
-        private System.Windows.Forms.Label labelSexo;
-        private System.Windows.Forms.RadioButton selecFem;
-        private System.Windows.Forms.RadioButton selecMasc;
-        private System.Windows.Forms.ComboBox selecEstadoCivil;
-        private System.Windows.Forms.Label labelEstadoCivil;
-        private System.Windows.Forms.ComboBox selecPlan;
-        private System.Windows.Forms.Label labelSelecPlan;
-        private System.Windows.Forms.Button AceptarButton;
-        private System.Windows.Forms.Button botonLimpiar;
-        private System.Windows.Forms.Label labelFechaNac;
-        private System.Windows.Forms.Button botonCancelar;
-        private System.Windows.Forms.CheckBox checkBoxHijos;
-        private System.Windows.Forms.Label labelCantHijos;
-        private System.Windows.Forms.TextBox textBoxCantHijos;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        protected System.Windows.Forms.TextBox textBoxNombre;
+        protected System.Windows.Forms.Label labelNombre;
+        protected System.Windows.Forms.Label labelApellido;
+        protected System.Windows.Forms.TextBox textBoxApellido;
+        protected System.Windows.Forms.Label labelTipoDoc;
+        protected System.Windows.Forms.ComboBox comboBoxTipoDoc;
+        protected System.Windows.Forms.Label labelNroDoc;
+        protected System.Windows.Forms.TextBox textBoxNroDoc;
+        protected System.Windows.Forms.Label labelDireccion;
+        protected System.Windows.Forms.TextBox textBoxDireccion;
+        protected System.Windows.Forms.Label labelTel;
+        protected System.Windows.Forms.TextBox textBoxTelefono;
+        protected System.Windows.Forms.Label labelSexo;
+        protected System.Windows.Forms.RadioButton selecFem;
+        protected System.Windows.Forms.RadioButton selecMasc;
+        protected System.Windows.Forms.ComboBox selecEstadoCivil;
+        protected System.Windows.Forms.Label labelEstadoCivil;
+        protected System.Windows.Forms.ComboBox selecPlan;
+        protected System.Windows.Forms.Label labelSelecPlan;
+        protected System.Windows.Forms.Button AceptarButton;
+        protected System.Windows.Forms.Button botonLimpiar;
+        protected System.Windows.Forms.Label labelFechaNac;
+        protected System.Windows.Forms.Button botonCancelar;
+        protected System.Windows.Forms.CheckBox checkBoxHijos;
+        protected System.Windows.Forms.Label labelCantHijos;
+        protected System.Windows.Forms.TextBox textBoxCantHijos;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

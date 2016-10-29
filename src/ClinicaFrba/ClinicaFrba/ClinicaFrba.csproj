@@ -65,6 +65,12 @@
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\FormularioABM.cs" />
+    <Compile Include="Abm Afiliado\Modifiacion\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\Modifiacion\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Especialidades Medicas\AbmEspMedicas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     <EmbeddedResource Include="Abm Afiliado\Alta\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\Modifiacion\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Especialidades Medicas\AbmEspMedicas.resx">
       <DependentUpon>AbmEspMedicas.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,9 +225,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abm Afiliado\Modifiacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
