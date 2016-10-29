@@ -160,6 +160,7 @@
       <DependentUpon>RegistroResultado.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Utilidades\Parser.cs" />
     <Compile Include="Utilidades\Encriptador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
