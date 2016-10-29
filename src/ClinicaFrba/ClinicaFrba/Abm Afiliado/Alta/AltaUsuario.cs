@@ -16,11 +16,12 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class AltaUsuario : Form
     {
         private Afiliado afiliado;
+        protected Logger logger;
 
-        public AltaUsuario(Afiliado afliadoARegistrar)
-        {
+        public AltaUsuario(Afiliado afliadoARegistrar){
             this.afiliado = afliadoARegistrar;
             InitializeComponent();
+            this.logger = new Logger();
         }
 
         private void botonConfirmar_Click(object sender, EventArgs e)
@@ -74,5 +75,18 @@ namespace ClinicaFrba.Abm_Afiliado
             } 
         }
 
+
+        public void verificarDatos() { 
+            if(!Parser.esEntero(this.textBoxPass)){
+                this.logger.agregarAlLog("La contraseña debe ser un numero entero");            
+            }
+
+            if (!chequearPass())
+            {
+                this.logger.agregarAlLog("Las contraseñas no coinciden");
+            }
+
+
+        }            
     }
 }

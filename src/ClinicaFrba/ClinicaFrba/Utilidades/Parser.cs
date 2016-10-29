@@ -9,7 +9,6 @@ namespace ClinicaFrba.Utilidades
 {
     class Parser
     {
-
         public static bool esEntero(TextBox textbox) {
             return esEntero(textbox.Text);        
         }
@@ -37,5 +36,39 @@ namespace ClinicaFrba.Utilidades
             int a;
             return texto.Any(caracter => esEntero(caracter));
         }
+
+    }
+
+
+    public class Logger { 
+    
+        private string log;
+
+        public Logger()
+        {
+            this.log = "";
+            
+        }        
+
+        public void agregarAlLog(string detalle)
+        {
+            this.log += "- " + detalle + "\n";
+        }
+
+        public bool huboErrores()
+        {
+            return log.Length > 0;
+        }
+
+        public void resetear()
+        {
+            this.log = "";
+        }
+
+        public string mostrarLog()
+        {
+            return log;
+        }
+    
     }
 }

@@ -17,7 +17,7 @@ namespace ClinicaFrba.Abm_Afiliado
         protected string sexo;
         protected List<TextBox> cajasTexto;
         protected Afiliado afiliado;
-        protected string logErrores;
+        protected Logger logErrores;
 
         public Alta(){
             this.cajasTexto = new List<TextBox>();
@@ -27,7 +27,7 @@ namespace ClinicaFrba.Abm_Afiliado
             Utils.llenar(this.selecPlan,Utils.getPlanes());
             cargarCajitas();
 
-            this.logErrores = "";   
+            this.logErrores = new Logger();
         }
         
         #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
@@ -37,13 +37,15 @@ namespace ClinicaFrba.Abm_Afiliado
             //chequeo que todos los campos se hayan completado
             if (!faltaCompletarDatos()){
                 //chequeo que los datos sean correctos
-                if (validarDatosIngresados()){
+                this.validarDatosIngresados();
+                if (!this.logErrores.huboErrores())
+                {
                     //metodo que sobreescribe Modificacion
-                    this.logErrores = "";  
+                    this.logErrores.resetear();
                     realizarOperacion();
                 }
                 else{
-                    MessageBox.Show("Error en el ingreso de datos:\n" + logErrores + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Error en el ingreso de datos:\n" + this.logErrores.mostrarLog() + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
                 }
             }
             else {
@@ -176,29 +178,27 @@ namespace ClinicaFrba.Abm_Afiliado
             return cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
         }
 
-        private bool validarDatosIngresados() {
+        private void validarDatosIngresados() {
 
             if (!Parser.esEntero(textBoxTelefono)){
-                this.agregarAlLog("El numero de telefono debe ser numerico");                
+                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");                
             }
 
             if (!Parser.esEntero(textBoxNroDoc)){
-                this.agregarAlLog("El numero de documento debe ser numerico");
+                this.logErrores.agregarAlLog("El numero de documento debe ser numerico");
             }
 
             if (textBoxCantHijos.Enabled && !Parser.esEntero(textBoxCantHijos)){
-                 this.agregarAlLog("La cantidad de familiares a cargo debe ser un numero entero");
+                this.logErrores.agregarAlLog("La cantidad de familiares a cargo debe ser un numero entero");
             }
 
             if (Parser.tieneNumeros(textBoxNombre)){
-                this.agregarAlLog("El nombre de afiliado no debe contener numeros enteros");            
+                this.logErrores.agregarAlLog("El nombre de afiliado no debe contener numeros enteros");            
             }
 
             if (Parser.tieneNumeros(textBoxApellido)){
-                this.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");              
+                this.logErrores.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");              
             }
-
-            return logErrores.Length.Equals(0);
         }
 
        private void setearCantidadHijos(){
@@ -209,10 +209,6 @@ namespace ClinicaFrba.Abm_Afiliado
         
         public void inhabilitarAgregadoAfiliados(){
             this.checkBoxHijos.Enabled = false;
-        }
-
-        public void agregarAlLog(string detalle){
-            this.logErrores += "- " + detalle + "\n";
         }
 
     }
