@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(151, 22);
+            this.label1.Location = new System.Drawing.Point(124, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // botonSeleccionar
             // 
-            this.botonSeleccionar.Location = new System.Drawing.Point(215, 156);
+            this.botonSeleccionar.Location = new System.Drawing.Point(199, 139);
             this.botonSeleccionar.Name = "botonSeleccionar";
             this.botonSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.botonSeleccionar.TabIndex = 2;
@@ -55,7 +55,7 @@
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(43, 156);
+            this.botonSalir.Location = new System.Drawing.Point(31, 139);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
             this.botonSalir.TabIndex = 3;
@@ -66,7 +66,7 @@
             // comboRolesPosibles
             // 
             this.comboRolesPosibles.FormattingEnabled = true;
-            this.comboRolesPosibles.Location = new System.Drawing.Point(120, 80);
+            this.comboRolesPosibles.Location = new System.Drawing.Point(92, 48);
             this.comboRolesPosibles.Name = "comboRolesPosibles";
             this.comboRolesPosibles.Size = new System.Drawing.Size(121, 21);
             this.comboRolesPosibles.TabIndex = 4;
@@ -76,12 +76,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(365, 251);
+            this.ClientSize = new System.Drawing.Size(306, 195);
             this.Controls.Add(this.comboRolesPosibles);
             this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "EleccionRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EleccionRol";
             this.Load += new System.EventHandler(this.EleccionRol_Load);
             this.ResumeLayout(false);
