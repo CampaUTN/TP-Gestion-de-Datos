@@ -41,12 +41,13 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (!this.logErrores.huboErrores())
                 {
                     //metodo que sobreescribe Modificacion
-                    this.logErrores.resetear();
                     realizarOperacion();
                 }
                 else{
                     MessageBox.Show("Error en el ingreso de datos:\n" + this.logErrores.mostrarLog() + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
+                   
                 }
+                this.logErrores.resetear();
             }
             else {
                 MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);
@@ -143,7 +144,7 @@ namespace ClinicaFrba.Abm_Afiliado
             this.limpiarCajitas();
         }
 
-        private void cargarCajitas() {
+        protected void cargarCajitas() {
             this.cajasTexto.Add(textBoxNombre);
             this.cajasTexto.Add(textBoxApellido);
             this.cajasTexto.Add(textBoxNroDoc);
@@ -153,10 +154,10 @@ namespace ClinicaFrba.Abm_Afiliado
 
 
         //agrego los datos en el objeto usuario
-        private void cargarUsuario(){
+        public virtual void cargarUsuario(){
             afiliado = new Afiliado(this.textBoxNombre.Text,
                                     this.textBoxApellido.Text,
-                                    this.dateTimePicker1.Value.Date,
+                                    this.selectorFecha.Value.Date,
                                     this.comboBoxTipoDoc.SelectedItem.ToString(),
                                     this.textBoxNroDoc.Text,
                                     this.textBoxDireccion.Text,
@@ -181,23 +182,28 @@ namespace ClinicaFrba.Abm_Afiliado
         private void validarDatosIngresados() {
 
             if (!Parser.esEntero(textBoxTelefono)){
-                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");                
+                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");
+                textBoxTelefono.Clear();
             }
 
             if (!Parser.esEntero(textBoxNroDoc)){
                 this.logErrores.agregarAlLog("El numero de documento debe ser numerico");
+                textBoxNroDoc.Clear();
             }
 
             if (textBoxCantHijos.Enabled && !Parser.esEntero(textBoxCantHijos)){
                 this.logErrores.agregarAlLog("La cantidad de familiares a cargo debe ser un numero entero");
+                textBoxCantHijos.Clear(); 
             }
 
             if (Parser.tieneNumeros(textBoxNombre)){
-                this.logErrores.agregarAlLog("El nombre de afiliado no debe contener numeros enteros");            
+                this.logErrores.agregarAlLog("El nombre de afiliado no debe contener numeros enteros");
+                textBoxNombre.Clear();
             }
 
             if (Parser.tieneNumeros(textBoxApellido)){
-                this.logErrores.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");              
+                this.logErrores.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");   
+                textBoxApellido.Clear();
             }
         }
 

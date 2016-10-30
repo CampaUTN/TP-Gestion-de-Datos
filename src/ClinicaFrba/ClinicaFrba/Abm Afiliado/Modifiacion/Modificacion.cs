@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,33 +7,56 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 {
-    public partial class Modificacion : Alta
+    class ModificacionUsuario :Alta
     {
-        public Modificacion(Afiliado afiliado)
+        public ModificacionUsuario(Afiliado afiliado) : base()
         {
-            InitializeComponent();
+            this.afiliado = afiliado;
+            cargarDatosAfiliado();
+            deshabilitarCajitas();
+            vaciar();
+        }
 
-            this.Text = "Modificacion";
+        //deberia ser privado, pero me tira error de compilacion
+        public override void realizarOperacion(){
+                        
+            MessageBox.Show("Modificando datos!");
+        }
+
+        private void cargarDatosAfiliado(){
 
             this.textBoxNombre.Text = afiliado.getNombre();
             this.textBoxApellido.Text = afiliado.getApellido();
             this.textBoxNroDoc.Text = Convert.ToString(afiliado.getNroDoc());
             this.comboBoxTipoDoc.Text = afiliado.getTipoDoc();
+            this.selectorFecha.Value = afiliado.getFechaNac();
+        }
+
+        private void deshabilitarCajitas()
+        {
 
             this.textBoxNombre.Enabled = false;
             this.textBoxApellido.Enabled = false;
             this.textBoxNroDoc.Enabled = false;
             this.selecFem.Enabled = false;
             this.selecMasc.Enabled = false;
-            this.dateTimePicker1.Enabled = false;
+            this.selectorFecha.Enabled = false;
             this.comboBoxTipoDoc.Enabled = false;
+
         }
 
-        //deberia ser privado, pero me tira error de compilacion
-        public override void realizarOperacion()
+        public override void cargarUsuario()
         {
-            MessageBox.Show("Modificando datos!");
-            
+
         }
+
+        private void vaciar()
+        {
+            textBoxTelefono.Clear();
+            textBoxCantHijos.Clear();
+
+        }
+
+
     }
 }

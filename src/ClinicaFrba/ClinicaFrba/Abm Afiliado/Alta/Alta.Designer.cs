@@ -5,7 +5,7 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        protected System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -54,7 +54,7 @@
             this.checkBoxHijos = new System.Windows.Forms.CheckBox();
             this.labelCantHijos = new System.Windows.Forms.Label();
             this.textBoxCantHijos = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.selectorFecha = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // textBoxNombre
@@ -302,23 +302,23 @@
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
             this.textBoxCantHijos.TabIndex = 17;
             // 
-            // dateTimePicker1
+            // selectorFecha
             // 
-            this.dateTimePicker1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Checked = false;
-            this.dateTimePicker1.CustomFormat = "";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.dateTimePicker1.Location = new System.Drawing.Point(135, 202);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.RightToLeftLayout = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(130, 20);
-            this.dateTimePicker1.TabIndex = 13;
-            this.dateTimePicker1.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.selectorFecha.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.selectorFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.selectorFecha.Checked = false;
+            this.selectorFecha.CustomFormat = "";
+            this.selectorFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.selectorFecha.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.selectorFecha.Location = new System.Drawing.Point(135, 202);
+            this.selectorFecha.Margin = new System.Windows.Forms.Padding(5);
+            this.selectorFecha.MaxDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.selectorFecha.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.selectorFecha.Name = "selectorFecha";
+            this.selectorFecha.RightToLeftLayout = true;
+            this.selectorFecha.Size = new System.Drawing.Size(130, 20);
+            this.selectorFecha.TabIndex = 13;
+            this.selectorFecha.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             // 
             // Alta
             // 
@@ -326,7 +326,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(276, 378);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.selectorFecha);
             this.Controls.Add(this.textBoxCantHijos);
             this.Controls.Add(this.labelCantHijos);
             this.Controls.Add(this.checkBoxHijos);
@@ -390,6 +390,6 @@
         protected System.Windows.Forms.CheckBox checkBoxHijos;
         protected System.Windows.Forms.Label labelCantHijos;
         protected System.Windows.Forms.TextBox textBoxCantHijos;
-        protected System.Windows.Forms.DateTimePicker dateTimePicker1;
+        protected System.Windows.Forms.DateTimePicker selectorFecha;
     }
 }

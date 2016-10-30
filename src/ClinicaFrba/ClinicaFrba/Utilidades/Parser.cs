@@ -18,23 +18,24 @@ namespace ClinicaFrba.Utilidades
             return int.TryParse(texto, out a);
         }
 
-        public static bool esEntero(char car)
-        {
+        public static bool esEntero(char car){
             int a;
             string caracter = "" + car;
             return int.TryParse(caracter, out a);
         }
 
 
-        public static bool tieneNumeros(TextBox textbox)
-        {
+        public static bool tieneNumeros(TextBox textbox){
             return tieneNumeros(textbox.Text);
         }
 
-        public static bool tieneNumeros(string texto)
-        {
+        public static bool tieneNumeros(string texto){
             int a;
             return texto.Any(caracter => esEntero(caracter));
+        }
+
+        public static bool estaVacio(TextBox textbox){
+            return textbox.Text.Length.Equals(0);
         }
 
     }
@@ -62,7 +63,7 @@ namespace ClinicaFrba.Utilidades
 
         public void resetear()
         {
-            this.log = "";
+           log = "";
         }
 
         public string mostrarLog()

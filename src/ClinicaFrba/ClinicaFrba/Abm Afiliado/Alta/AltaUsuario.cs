@@ -26,28 +26,41 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void botonConfirmar_Click(object sender, EventArgs e)
         {
-            if (chequearPass())
+            //verifico que el usuario haya completado los datos
+            if (!faltaCompletarDatos())
             {
                 this.agregarNuevosDatos();
-                MessageBox.Show("Registrando en la base de datos...");
-                Utils.registarUsuario(this.afiliado);
+                this.verificarDatos();
 
-                Utils.registrarAfiliado(this.afiliado);
-                
-                //Segun los datos, debo darle la opcion de agregar un afiliado mas
-                if (this.afiliado.puedeAfiliarAOtros())
+                //verifico que los datos se hayan ingresado de forma correcta
+                if (!logger.huboErrores())
                 {
-                    brindarOpcionAgregar();
-                }
-                else {
-                    MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);                    
-                }
+                    MessageBox.Show("Registrando en la base de datos...");
+                    Utils.registarUsuario(this.afiliado);
 
-                this.Close();
+                    Utils.registrarAfiliado(this.afiliado);
+
+                    //Segun los datos, debo darle la opcion de agregar un afiliado mas
+                    if (this.afiliado.puedeAfiliarAOtros())
+                    {
+                        brindarOpcionAgregar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);
+                    }
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error en el ingreso de datos:\n" + this.logger.mostrarLog() + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
+             
+                }
             }
             else
             {
-                MessageBox.Show("Las contraseñas no coinciden. Verifique que ingreso la contraseña correcta e intentelo de nuevo");
+                MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);          
             }
         }
 
@@ -76,17 +89,19 @@ namespace ClinicaFrba.Abm_Afiliado
         }
 
 
-        public void verificarDatos() { 
+        public void verificarDatos(){
+
             if(!Parser.esEntero(this.textBoxPass)){
                 this.logger.agregarAlLog("La contraseña debe ser un numero entero");            
             }
 
-            if (!chequearPass())
-            {
+            if (!chequearPass()){
                 this.logger.agregarAlLog("Las contraseñas no coinciden");
             }
+        }
 
-
-        }            
+        public bool faltaCompletarDatos() {
+            return Parser.estaVacio(textBoxUsername) || Parser.estaVacio(textBoxPass) || Parser.estaVacio(textBoxPassConfirm);        
+        }
     }
 }
