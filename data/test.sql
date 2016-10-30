@@ -512,3 +512,11 @@ BEGIN
 
 	VALUES(@usuario, @plan, @estado, @hijos)
 END
+
+
+
+
+
+
+/* CREO TRIGGERS */
+--TRIGGER DE LA AGENDA PROFESIONAL
