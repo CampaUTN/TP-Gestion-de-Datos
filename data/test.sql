@@ -1,5 +1,8 @@
 USE GD2C2016;
 GO
+
+
+
 /* Eliminación de los objetos preexistentes */
 
 IF OBJECT_ID('CLINICA.RolXfuncionalidad','U') IS NOT NULL
@@ -63,10 +66,15 @@ IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
     DROP TABLE CLINICA.Usuarios;
 
     
+
+
 /* DROP FUNCTIONS! */
 
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
+
+
+
 
 /* DROP PROCEDURES! */
   
@@ -89,16 +97,21 @@ IF OBJECT_ID('CLINICA.ingresarAfiliado') IS NOT NULL
     DROP PROCEDURE CLINICA.ingresarAfiliado
 
 
+
+
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
     DROP SCHEMA CLINICA
 GO
 
+
+
 /* Creación del esquema */
 
 CREATE SCHEMA CLINICA AUTHORIZATION gd
 GO
+
 
 
 /* Creación de las tablas */
@@ -223,7 +236,6 @@ CREATE TABLE CLINICA.ComprasBonos(
   	comp_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     comp_cantidad INT NOT NULL ,
 	comp_precioFinal DECIMAL(12,2) NOT NULL);
-
 
 /* Migración de datos desde la tabla maestra */
 
@@ -384,11 +396,15 @@ insert into CLINICA.Horarios values (9999,10032,'20151013','12:30:00.0000000')
 insert into CLINICA.Horarios values (9999,10032,'20151014','12:30:00.0000000')
 insert into CLINICA.Horarios values (9999,10032,'20151015','12:30:00.0000000')
 
+
+
+
 /* CREO STORE PROCEDURES */
 
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
 USE GD2C2016; --ESTO ES PARA QUE NO TE DIGA QUE EL PROCEDURE TIENE QUE SER LA UNICA INSTRUCCION Y BLAH...
 GO
+
 CREATE PROCEDURE CLINICA.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
 AS
  BEGIN
