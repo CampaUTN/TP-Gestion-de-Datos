@@ -47,7 +47,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                  String hora = fechaHora.ToString("HH:mm");
                  if (fechaHora.DayOfWeek.Equals(6)) { //sabado
                      return String.Compare(hora,"10:00") >= 0 && String.Compare(hora,"15:00") <= 0; 
-                }else{
+                }else{ // lunes a viernes
                      return String.Compare(hora,"´07:00") >= 0 && String.Compare(hora,"20:00") <= 0; 
                 }
             }
