@@ -324,7 +324,6 @@ namespace ClinicaFrba.Utilidades
 
             return rolesAsignados;
         }
-
-
+        
     }
 }

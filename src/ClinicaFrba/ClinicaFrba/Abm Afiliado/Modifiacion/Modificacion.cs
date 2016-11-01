@@ -12,6 +12,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
     {
         public ModificacionUsuario(Afiliado afiliado) : base()
         {
+            this.Text = "Modificación";
             this.afiliado = afiliado;
             cargarDatosAfiliado();
             deshabilitarCajitas();

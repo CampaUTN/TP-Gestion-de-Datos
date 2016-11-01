@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Windows.Forms;
+using System.Data;
 
 namespace ClinicaFrba
 {
@@ -19,6 +21,28 @@ namespace ClinicaFrba
             connection.ConnectionString = "SERVER=" + server + "\\SQLSERVER2012; DATABASE = GD2C2016;UID=" + user + ";PASSWORD=" + password + ";";
             return connection;
         }
+
+        public static void cargarPlanilla(DataGridView dataGridView, string consulta) {
+            DataTable dataTable;
+            SqlDataAdapter dataAdapter;
+
+            SqlConnection connection = DBConnection.getConnection();
+            connection.Open();
+
+            try
+            {
+                dataAdapter = new SqlDataAdapter(consulta, connection);
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                dataGridView.DataSource = dataTable;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se pudo realizar la consulta: \n" + e.Message);
+
+            }
+        }
+
 
     }
 }
