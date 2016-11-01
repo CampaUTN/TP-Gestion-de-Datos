@@ -31,6 +31,7 @@
             this.listFuncionalidades = new System.Windows.Forms.ListBox();
             this.botonSeleccionar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listFuncionalidades
@@ -43,7 +44,7 @@
             // 
             // botonSeleccionar
             // 
-            this.botonSeleccionar.Location = new System.Drawing.Point(368, 209);
+            this.botonSeleccionar.Location = new System.Drawing.Point(381, 209);
             this.botonSeleccionar.Name = "botonSeleccionar";
             this.botonSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.botonSeleccionar.TabIndex = 1;
@@ -61,12 +62,23 @@
             this.label1.Text = "Elija una funcionalidad";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // buttonVolver
+            // 
+            this.buttonVolver.Location = new System.Drawing.Point(51, 209);
+            this.buttonVolver.Name = "buttonVolver";
+            this.buttonVolver.Size = new System.Drawing.Size(75, 23);
+            this.buttonVolver.TabIndex = 3;
+            this.buttonVolver.Text = "Volver";
+            this.buttonVolver.UseVisualStyleBackColor = true;
+            this.buttonVolver.Click += new System.EventHandler(this.buttonVolver_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(512, 262);
+            this.Controls.Add(this.buttonVolver);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.listFuncionalidades);
@@ -85,5 +97,6 @@
         private System.Windows.Forms.ListBox listFuncionalidades;
         private System.Windows.Forms.Button botonSeleccionar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonVolver;
     }
 }

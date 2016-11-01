@@ -14,14 +14,13 @@ namespace ClinicaFrba
     public partial class MenuPrincipal : Form
     {
         Dictionary<int, Func<Form>> funcDisponibles;
-        Form frmLogin;
+        //Form frmLogin;
         string userActivo;
         int rolActivo;
 
-        public MenuPrincipal(Form frmLogin, int rolActivo, string userActivo)
+        public MenuPrincipal(int rolActivo, string userActivo)
         {
             InitializeComponent();
-            this.frmLogin=frmLogin;
             this.userActivo = userActivo;
             this.rolActivo = rolActivo;
             this.inicializarDiccFuncionalidades();
@@ -69,12 +68,6 @@ namespace ClinicaFrba
             this.funcDisponibles.Add(12, () => new Registro_Resultado.RegistroResultado());
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            this.frmLogin.Show();
-        }
-
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
         
@@ -92,8 +85,16 @@ namespace ClinicaFrba
             if (!this.funcDisponibles.ContainsKey(funcionalidadSeleccionada)) //Control extra
                 return;
 
-            this.Hide();
             this.funcDisponibles[funcionalidadSeleccionada]().Show();
+            //this.Close();
+        }
+
+        private void buttonVolver_Click(object sender, EventArgs e) {
+            if (Utilidades.Utils.getRoles(userActivo).Count > 1)
+                new EleccionRol(userActivo, Utilidades.Utils.getRoles(userActivo)).Show();
+            else
+                Program.loginForm.Show();
+            this.Close();
         }
     }
 }

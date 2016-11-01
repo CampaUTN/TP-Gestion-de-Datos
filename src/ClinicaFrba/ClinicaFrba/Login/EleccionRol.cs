@@ -12,34 +12,31 @@ namespace ClinicaFrba
 {
     public partial class EleccionRol : Form
     {
-        Form frmLogin;
         string userActivo;
 
-        public EleccionRol(Form frmLogin, string userActivo, List<KeyValuePair<int, string>> rolesAsignados)
+        public EleccionRol(string userActivo, List<KeyValuePair<int, string>> rolesAsignados)
         {
             InitializeComponent();
-            this.frmLogin = frmLogin;
+
             this.userActivo = userActivo;
             Utilidades.Utils.llenar(this.comboRolesPosibles, rolesAsignados);
-           
         }
 
-        private void EleccionRol_Load(object sender, EventArgs e)
-        {
-
+        private void EleccionRol_Load(object sender, EventArgs e) {
         }
 
         private void botonSeleccionar_Click(object sender, EventArgs e)
         {
             int rolSeleccionado = ((KeyValuePair<int, string>)this.comboRolesPosibles.SelectedItem).Key;
-            new MenuPrincipal(this.frmLogin, rolSeleccionado, this.userActivo).Show();
+            new MenuPrincipal(rolSeleccionado, this.userActivo).Show();
             this.Close();
         }
 
         private void botonSalir_Click(object sender, EventArgs e)
         {
+            Program.loginForm.Show();
             this.Close();
-            new Login().Show();
+            
         }
     }
 }

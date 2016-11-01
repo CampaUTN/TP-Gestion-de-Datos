@@ -292,6 +292,24 @@ namespace ClinicaFrba.Utilidades
             return planes;
         }
 
+        static public List<KeyValuePair<int, string>> getRoles(string usuario) {
+            var conexion = DBConnection.getConnection();
+
+            List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
+            SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@user", usuario);
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read()) {
+                rolesAsignados.Add(new KeyValuePair<int, string>(Int32.Parse(reader["role_id"].ToString()),
+                                                                    reader["role_nombre"].ToString()));
+            }
+
+            return rolesAsignados;
+        }
+
 
     }
 }

@@ -9,6 +9,7 @@ namespace ClinicaFrba
 {
     static class Program
     {
+        public static Form loginForm;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -17,7 +18,7 @@ namespace ClinicaFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           Application.Run(new Login());
+            Application.Run(loginForm = new Login());
            // Application.Run(new AbmAfiliado());
            // Application.Run(new Alta());
         }

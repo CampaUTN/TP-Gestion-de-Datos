@@ -13,6 +13,7 @@ namespace ClinicaFrba
 {
     public partial class Login : Form
     {
+
         public Login()
         {
             InitializeComponent();
@@ -59,36 +60,20 @@ namespace ClinicaFrba
         //le muestro al usuario la ventanita segun los roles
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
         {
-            if (rolesAsignados.Count > 0)
-                this.Hide();
             if (rolesAsignados.Count == 1)
-                (new MenuPrincipal(this, Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).Show();
+                (new MenuPrincipal(Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).Show();
+            else
             if (rolesAsignados.Count > 1)
-                (new EleccionRol(this, this.textUsuario.Text, rolesAsignados)).Show();
+                (new EleccionRol(this.textUsuario.Text, rolesAsignados)).Show();
+            this.Hide();
+            
         }
 
         private bool faltaCompletar(){
             return this.textContrasenia.Text.Length == 0 || this.textUsuario.Text.Length == 0;
         }
 
-        private List<KeyValuePair<int, string>> getRoles(string usuario)
-        {
-            var conexion = DBConnection.getConnection();
 
-            List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
-            SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("@user", usuario);
-            conexion.Open();
-
-            SqlDataReader reader = comando.ExecuteReader();
-            while(reader.Read()){
-                rolesAsignados.Add(new KeyValuePair<int,string> (Int32.Parse(reader["role_id"].ToString()),
-                                                                    reader["role_nombre"].ToString()));
-            }
-
-            return rolesAsignados;
-        }
 
         private void conectar() {
 
@@ -134,15 +119,12 @@ namespace ClinicaFrba
                   break;
               case 4:
                   MessageBox.Show("Bienvenido!");
-                  rolesAsignados = this.getRoles(usuario);
+                  rolesAsignados = Utilidades.Utils.getRoles(usuario);
                   this.dividir(rolesAsignados);
-
                   break;
           }
             reader.Close();
             conexion.Close();
-
-            this.dividir(rolesAsignados);
             this.textContrasenia.Clear();
             
         }
