@@ -8,8 +8,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 {
     public partial class RegistarAgenda : Form
     {
-        protected int profesional_id;
-        protected int especialidad_id;
+        protected string profesional_id;
+        protected string especialidad_id;
         protected DateTime fechaHora;
         protected Horario horario;
 
@@ -39,7 +39,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
 
         public virtual void cargarHorario(){
-            horario = new Horario(profesional_id, especialidad_id, fechaHora);
+            horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fechaHora);
         }
 
         private bool horarioValido() {
@@ -59,11 +59,34 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
+            if (grillaProfesionales.SelectedCells.Count == 1) {
+                int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                profesional_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
+            }else{
+                MessageBox.Show("Seleccione solo un profesional a la vez.", "Error", MessageBoxButtons.OK);
+            }
         }
+
 
         private void botonListar_Click(object sender, EventArgs e) {
             this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
+        }
+
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void grillaEspecialidades_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (grillaProfesionales.SelectedCells.Count == 1) {
+                int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                especialidad_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
+            } else {
+                MessageBox.Show("Seleccione solo una especialidad a la vez.", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.grillaEspecialidades.DataSource = Utilidades.Utils.getEspecialidades();
         }
     }
 }
