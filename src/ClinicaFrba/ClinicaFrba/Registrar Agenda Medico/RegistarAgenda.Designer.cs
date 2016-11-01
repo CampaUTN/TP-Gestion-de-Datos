@@ -30,7 +30,6 @@
         {
             this.desde = new System.Windows.Forms.DateTimePicker();
             this.botonCancelar = new System.Windows.Forms.Button();
-            this.AceptarButton = new System.Windows.Forms.Button();
             this.botonListar = new System.Windows.Forms.Button();
             this.grillaProfesionales = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEspecialidades)).BeginInit();
             this.SuspendLayout();
@@ -70,23 +70,13 @@
             // 
             // botonCancelar
             // 
-            this.botonCancelar.Location = new System.Drawing.Point(506, 469);
+            this.botonCancelar.Location = new System.Drawing.Point(12, 540);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
             this.botonCancelar.TabIndex = 21;
-            this.botonCancelar.Text = "Cancelar";
+            this.botonCancelar.Text = "Salir";
             this.botonCancelar.UseVisualStyleBackColor = true;
             this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
-            // 
-            // AceptarButton
-            // 
-            this.AceptarButton.Location = new System.Drawing.Point(598, 469);
-            this.AceptarButton.Name = "AceptarButton";
-            this.AceptarButton.Size = new System.Drawing.Size(75, 23);
-            this.AceptarButton.TabIndex = 22;
-            this.AceptarButton.Text = "Aceptar";
-            this.AceptarButton.UseVisualStyleBackColor = true;
-            this.AceptarButton.Click += new System.EventHandler(this.AceptarButton_Click);
             // 
             // botonListar
             // 
@@ -278,11 +268,22 @@
             this.label7.TabIndex = 38;
             this.label7.Text = "Hasta";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(233, 465);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(224, 47);
+            this.button2.TabIndex = 39;
+            this.button2.Text = "Agregar Horario";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // RegistarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 504);
+            this.ClientSize = new System.Drawing.Size(685, 575);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -298,7 +299,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grillaProfesionales);
             this.Controls.Add(this.botonListar);
-            this.Controls.Add(this.AceptarButton);
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.desde);
             this.Name = "RegistarAgenda";
@@ -315,7 +315,6 @@
 
         protected System.Windows.Forms.DateTimePicker desde;
         protected System.Windows.Forms.Button botonCancelar;
-        protected System.Windows.Forms.Button AceptarButton;
         private System.Windows.Forms.Button botonListar;
         private System.Windows.Forms.DataGridView grillaProfesionales;
         private System.Windows.Forms.Label label1;
@@ -331,5 +330,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button2;
     }
 }

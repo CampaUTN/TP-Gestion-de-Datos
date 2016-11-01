@@ -29,15 +29,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
 
-        private void AceptarButton_Click(object sender, EventArgs e) {
-                if(horarioValido()){
-                    cargarHorario();
-                }else{
-                    MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados. Los profesionales no pueden atender los domingos.", "Error", MessageBoxButtons.OK);
-                }
-        }
-
-
         public virtual void cargarHorario(){
             horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fechaHora);
         }
@@ -99,6 +90,24 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         private void label4_Click(object sender, EventArgs e) {
 
+        }
+
+        //agregar horario
+        private void button2_Click(object sender, EventArgs e) {
+            if (horarioValido()) {
+                if (superaLimiteSemanal()) {
+                    cargarHorario();
+                    } else {
+                         MessageBox.Show("Si se agrega el horario actual, se superarian las 48 horas semanales.", "Error", MessageBoxButtons.OK);
+                    }
+            } else {
+                MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        // todo
+        private bool superaLimiteSemanal(){
+            return false;
         }
     }
 }
