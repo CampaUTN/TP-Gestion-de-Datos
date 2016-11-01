@@ -204,8 +204,7 @@ namespace ClinicaFrba.Utilidades
 
         //INGRESO VALORES A LA BD
 
-        static public void registarUsuario(Afiliado afiliado)
-        {
+        static public void registarUsuario(Afiliado afiliado){
 
             var conexion = DBConnection.getConnection();
 
@@ -227,6 +226,7 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
+         
         }
 
         static public void registrarAfiliado(Afiliado afiliado)
@@ -248,6 +248,7 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
+          
         }
 
 

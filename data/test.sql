@@ -96,8 +96,9 @@ IF OBJECT_ID('CLINICA.ingresarUsuario') IS NOT NULL
 IF OBJECT_ID('CLINICA.ingresarAfiliado') IS NOT NULL
     DROP PROCEDURE CLINICA.ingresarAfiliado
 
-
-
+/* DROP TRIGGERS */
+IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
+  DROP FUNCTION CLINICA.verificarUsuario
 
 /* DROP SCHEMA */
 
@@ -512,11 +513,22 @@ BEGIN
 
 	VALUES(@usuario, @plan, @estado, @hijos)
 END
-
-
-
-
-
+GO
 
 /* CREO TRIGGERS */
+--TRIGGER QUE VERIFICA EL USUARIO
+USE GD2C2016;
+GO
+
+CREATE TRIGGER CLINICA.verificarUsuario ON CLINICA.Usuarios INSTEAD OF INSERT 
+AS
+	BEGIN
+		IF EXISTS (SELECT* FROM CLINICA.Usuarios u, inserted i WHERE u.usua_username = i.usua_username)		 
+			RAISERROR('El usuario ya esta ocupado.\nEscriba otro nombre de usuario y vuelva a intentarlo',16,2)
+		ELSE		 
+			INSERT INTO CLINICA.Usuarios 
+			SELECT * FROM inserted
+	END 
+GO
+
 --TRIGGER DE LA AGENDA PROFESIONAL

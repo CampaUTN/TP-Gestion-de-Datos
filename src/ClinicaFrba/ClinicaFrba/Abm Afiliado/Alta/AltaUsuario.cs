@@ -36,21 +36,9 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (!logger.huboErrores())
                 {
                     MessageBox.Show("Registrando en la base de datos...");
-                    Utils.registarUsuario(this.afiliado);
 
-                    Utils.registrarAfiliado(this.afiliado);
-
-                    //Segun los datos, debo darle la opcion de agregar un afiliado mas
-                    if (this.afiliado.puedeAfiliarAOtros())
-                    {
-                        brindarOpcionAgregar();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);
-                    }
-
-                    this.Close();
+                    //pruebo si puedo agregar al usuario o no.
+                    this.realizarOP();           
                 }
                 else
                 {
@@ -92,16 +80,58 @@ namespace ClinicaFrba.Abm_Afiliado
         public void verificarDatos(){
 
             if(!Parser.esEntero(this.textBoxPass)){
-                this.logger.agregarAlLog("La contraseña debe ser un numero entero");            
+                logger.agregarAlLog("La contraseña debe ser un numero entero");            
             }
 
             if (!chequearPass()){
-                this.logger.agregarAlLog("Las contraseñas no coinciden");
+                logger.agregarAlLog("Las contraseñas no coinciden");
+            }
+
+            if (!verificarDisponibilidadDelNombre()) {
+                logger.agregarAlLog("El nombre de usuario no esta disponible");
+                
             }
         }
 
         public bool faltaCompletarDatos() {
             return Parser.estaVacio(textBoxUsername) || Parser.estaVacio(textBoxPass) || Parser.estaVacio(textBoxPassConfirm);        
         }
+
+        public bool verificarDisponibilidadDelNombre() {
+            return true;
+        }
+
+
+        public void realizarOP() {
+            try
+            {
+                Utils.registarUsuario(this.afiliado);
+                Utils.registrarAfiliado(this.afiliado);   
+
+                validarSiPuedeAfiliar();
+                this.Close();
+     
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message+ ".\nEscriba otro nombre de usuario y vuelva a intentarlo");
+            }
+        }
+
+
+
+        public void validarSiPuedeAfiliar()
+        {
+            //Segun los datos, debo darle la opcion de agregar un afiliado mas
+            if (this.afiliado.puedeAfiliarAOtros())
+            {
+                brindarOpcionAgregar();
+            }
+            else
+            {
+                MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);
+            }
+        }
+
     }
 }
