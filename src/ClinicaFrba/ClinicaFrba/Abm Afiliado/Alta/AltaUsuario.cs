@@ -114,7 +114,7 @@ namespace ClinicaFrba.Abm_Afiliado
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message+ ".\nEscriba otro nombre de usuario y vuelva a intentarlo");
+                MessageBox.Show(e.Message);
             }
         }
 

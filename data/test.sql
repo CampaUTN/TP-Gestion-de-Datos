@@ -96,6 +96,9 @@ IF OBJECT_ID('CLINICA.ingresarUsuario') IS NOT NULL
 IF OBJECT_ID('CLINICA.ingresarAfiliado') IS NOT NULL
     DROP PROCEDURE CLINICA.ingresarAfiliado
 
+IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
+ DROP PROCEDURE CLINICA.agregarFamiliar
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -190,7 +193,7 @@ CREATE TABLE CLINICA.Planes(
   	plan_precioBono DECIMAL(12,2) NOT NULL);   
 
 CREATE TABLE CLINICA.Afiliados(
-    afil_id INT IDENTITY PRIMARY KEY,
+    afil_id INT IDENTITY(101,100) PRIMARY KEY,
     afil_usuario BIGINT FOREIGN KEY REFERENCES CLINICA.Usuarios(usua_id),
     afil_plan INT FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
   	afil_estadoCivil VARCHAR(20),
@@ -232,11 +235,15 @@ CREATE TABLE CLINICA.Bonos(
   	bono_plan INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Planes(plan_id),
   	bono_afilUsado INT FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id));
   
-CREATE TABLE CLINICA.ComprasBonos(
+CREATE TABLE CLINICA.ComprasBonos( 
 	comp_id INT NOT NULL IDENTITY PRIMARY KEY,
   	comp_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     comp_cantidad INT NOT NULL ,
 	comp_precioFinal DECIMAL(12,2) NOT NULL);
+
+
+USE GD2C2016;
+GO
 
 /* Migración de datos desde la tabla maestra */
 
@@ -253,6 +260,8 @@ CREATE INDEX I_Publicacion ON CLINICA.Publicacion (cod_rubro, descripcion);
 
 */ /* TODO: PONER NUESTROS INDICES SEGUN Q USEMOS MAS */
 
+USE GD2C2016;
+GO
 INSERT INTO CLINICA.Roles
 VALUES ('Afiliado', 1),
        ('Administrativo', 1),
@@ -512,6 +521,22 @@ BEGIN
 	INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
 
 	VALUES(@usuario, @plan, @estado, @hijos)
+END
+GO
+
+USE GD2C2016;
+GO
+--PROCEDURE QUE AGREGA UN FAMILIAR DEL AFILIADO
+CREATE PROCEDURE CLINICA.agregarFamiliar(@afiliado_raiz INT, @usuario BIGINT, @plan INT, @estado VARCHAR(20), @hijos INT)
+AS
+BEGIN
+	SET IDENTITY_INSERT CLINICA.Afiliados ON
+
+	INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
+	VALUES(@afiliado_raiz+1, @usuario, @estado,@hijos )
+
+	SET IDENTITY_INSERT CLINICA.Afiliados OFF
+
 END
 GO
 
