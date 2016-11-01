@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -91,6 +93,36 @@
     </Compile>
     <Compile Include="Abm Rol\AbmRol.Designer.cs">
       <DependentUpon>AbmRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Modif\RolModifSeleccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Modif\RolModifSeleccion.Designer.cs">
+      <DependentUpon>RolModifSeleccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Modif\RolModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Modif\RolModif.Designer.cs">
+      <DependentUpon>RolModif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\RolAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\RolAlta.Designer.cs">
+      <DependentUpon>RolAlta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\RolBaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\RolBaja.Designer.cs">
+      <DependentUpon>RolBaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\RolUserModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\RolUserModif.Designer.cs">
+      <DependentUpon>RolUserModif.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Atencion\CancelarAtencion.cs">
       <SubType>Form</SubType>
@@ -175,6 +207,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\AbmRol.resx">
       <DependentUpon>AbmRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Modif\RolModifSeleccion.resx">
+      <DependentUpon>RolModifSeleccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Modif\RolModif.resx">
+      <DependentUpon>RolModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\RolAlta.resx">
+      <DependentUpon>RolAlta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\RolBaja.resx">
+      <DependentUpon>RolBaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\RolUserModif.resx">
+      <DependentUpon>RolUserModif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Atencion\CancelarAtencion.resx">
       <DependentUpon>CancelarAtencion.cs</DependentUpon>
