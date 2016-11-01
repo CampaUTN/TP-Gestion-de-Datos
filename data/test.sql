@@ -533,7 +533,7 @@ BEGIN
 	SET IDENTITY_INSERT CLINICA.Afiliados ON
 
 	INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
-	VALUES(@afiliado_raiz+1, @usuario, @estado,@hijos )
+	VALUES(@afiliado_raiz+1, @usuario, @plan,@estado,@hijos )
 
 	SET IDENTITY_INSERT CLINICA.Afiliados OFF
 
