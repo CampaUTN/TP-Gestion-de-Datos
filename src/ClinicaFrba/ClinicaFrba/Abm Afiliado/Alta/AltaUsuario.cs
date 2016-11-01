@@ -29,12 +29,12 @@ namespace ClinicaFrba.Abm_Afiliado
             //verifico que el usuario haya completado los datos
             if (!faltaCompletarDatos())
             {
-                this.agregarNuevosDatos();
                 this.verificarDatos();
 
                 //verifico que los datos se hayan ingresado de forma correcta
                 if (!logger.huboErrores())
                 {
+                    this.agregarNuevosDatos();
                     MessageBox.Show("Registrando en la base de datos...");
 
                     //pruebo si puedo agregar al usuario o no.
@@ -65,10 +65,10 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void brindarOpcionAgregar() {
 
-            if (MessageBox.Show("Usted fue registrado con exito! Desea agregar un nuevo afiliado", "Alta", MessageBoxButtons.YesNo) 
+            if (MessageBox.Show("Usted fue registrado con exito! Desea agregar un nuevo afiliado?", "Alta", MessageBoxButtons.YesNo) 
                 == DialogResult.Yes) 
             {
-                Abm_Afiliado.Alta otroFormulario = new Alta();
+                Abm_Afiliado.AgregadoFamiliar otroFormulario = new AgregadoFamiliar(afiliado.getCodigoAfiliado());
 
                 otroFormulario.inhabilitarAgregadoAfiliados();
                 otroFormulario.Show();
@@ -103,12 +103,22 @@ namespace ClinicaFrba.Abm_Afiliado
 
 
         public void realizarOP() {
+
             try
             {
                 Utils.registarUsuario(this.afiliado);
-                Utils.registrarAfiliado(this.afiliado);   
+                if (afiliado.esAfiliadoRaiz())
+                {
+                    Utils.registrarAfiliado(this.afiliado);
+                    afiliado.setCodigo(Utils.obtenerNumeroAfiliadoRecienRegistrado());
 
-                validarSiPuedeAfiliar();
+                    validarSiPuedeAfiliar();
+                }
+                else
+                {
+                    Utils.registrarFamiliarAfiliado(this.afiliado);
+                }
+                
                 this.Close();
      
             }

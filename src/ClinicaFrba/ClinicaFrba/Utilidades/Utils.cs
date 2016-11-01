@@ -248,7 +248,6 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
-          
         }
 
 
@@ -262,7 +261,7 @@ namespace ClinicaFrba.Utilidades
             SqlCommand comando = new SqlCommand("CLINICA.agregarFamiliar", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@afiliado_raiz", usuaId);
+            comando.Parameters.AddWithValue("@afiliado_raiz", afiliado.getCodigoAfiliado());
             comando.Parameters.AddWithValue("@usuario", usuaId);
             comando.Parameters.AddWithValue("@plan", codPlan);
             comando.Parameters.AddWithValue("@estado", afiliado.getEstadoCivil());
@@ -270,6 +269,22 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
+        }
+
+        static public int obtenerNumeroAfiliadoRecienRegistrado()
+        {
+            int afil_id = 0;
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("SELECT MAX(afil_id) FROM CLINICA.Afiliados ", conexion);
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                afil_id = Convert.ToInt32(reader[0]);
+            }
+
+            return afil_id;
         }
 
         static public List<KeyValuePair<int, string>> getPlanes()

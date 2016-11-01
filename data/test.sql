@@ -520,7 +520,9 @@ AS
 BEGIN
 	INSERT INTO CLINICA.Afiliados(afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
 
-	VALUES(@usuario, @plan, @estado, @hijos)
+	VALUES(@usuario, @plan, @estado, @hijos)	
+
+	--RETURN (SELECT MAX(afil_id) FROM CLINICA.Afiliados)
 END
 GO
 
@@ -530,13 +532,19 @@ GO
 CREATE PROCEDURE CLINICA.agregarFamiliar(@afiliado_raiz INT, @usuario BIGINT, @plan INT, @estado VARCHAR(20), @hijos INT)
 AS
 BEGIN
+	DECLARE @numero_nuevo_afiliado INT
+	SET @numero_nuevo_afiliado = (SELECT MAX(CONVERT(INT, RIGHT(STR(afil_id),2)))
+								  FROM CLINICA.Afiliados
+								  WHERE afil_id = @afiliado_raiz)
+
+	--SET @numero_nuevo_afiliado = CONVERT(INT, RIGHT(STR(@afiliado_raiz),2))
+
 	SET IDENTITY_INSERT CLINICA.Afiliados ON
 
 	INSERT INTO CLINICA.Afiliados(afil_id, afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
-	VALUES(@afiliado_raiz+1, @usuario, @plan,@estado,@hijos )
+	VALUES(@afiliado_raiz+ @numero_nuevo_afiliado, @usuario, @plan,@estado,@hijos )
 
 	SET IDENTITY_INSERT CLINICA.Afiliados OFF
-
 END
 GO
 
@@ -549,7 +557,7 @@ CREATE TRIGGER CLINICA.verificarUsuario ON CLINICA.Usuarios INSTEAD OF INSERT
 AS
 	BEGIN
 		IF EXISTS (SELECT* FROM CLINICA.Usuarios u, inserted i WHERE u.usua_username = i.usua_username)		 
-			RAISERROR('El usuario ya esta ocupado.\nEscriba otro nombre de usuario y vuelva a intentarlo',16,2)
+			RAISERROR('El usuario ya esta ocupado. Escriba otro nombre de usuario y vuelva a intentarlo',16,2)
 		ELSE		 
 			INSERT INTO CLINICA.Usuarios 
 			SELECT * FROM inserted

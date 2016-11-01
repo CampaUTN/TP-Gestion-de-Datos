@@ -8,7 +8,8 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public class Afiliado
     {
-        private int afiliadoRaiz;
+        private int idAfiliadoRaiz = 0;
+        private bool afiliadoRaiz = true;
         private string nombre;
         private string apellido;
         private DateTime fechaNac;
@@ -99,9 +100,14 @@ namespace ClinicaFrba.Abm_Afiliado
             return hijosACargo;
         }
 
+        public void setAfiliadoRaiz(bool valor)
+        {
+            this.afiliadoRaiz = valor;
+        }
+
         public int getCodigoAfiliado()
         {
-            return afiliadoRaiz;
+            return idAfiliadoRaiz;
         }
 
         #endregion
@@ -126,18 +132,21 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public void setCodigo(int cod)
         {
-            this.afiliadoRaiz = cod;
+            this.idAfiliadoRaiz = cod;
         }
+
+        public bool esAfiliadoRaiz() {
+            return this.afiliadoRaiz;
+        }
+
         #endregion
 
         #region METODOS AUXILIARES
 
         public bool puedeAfiliarAOtros()
         {
-            return (estadoCivil.Equals("Soltero/a") || estadoCivil.Equals("Casado/a")) || (hijosACargo > 0);
+            return (estadoCivil.Equals("Concubinato") || estadoCivil.Equals("Casado/a")) || (hijosACargo > 0) && esAfiliadoRaiz();
         }
-
-
         #endregion
 
     }

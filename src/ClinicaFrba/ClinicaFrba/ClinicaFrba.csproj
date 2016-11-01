@@ -53,6 +53,9 @@
     <Compile Include="Abm Afiliado\AbmAfiliado.Designer.cs">
       <DependentUpon>AbmAfiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\Alta\AgregadoFamiliar.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Abm Afiliado\Alta\Alta.cs">
       <SubType>Form</SubType>
     </Compile>

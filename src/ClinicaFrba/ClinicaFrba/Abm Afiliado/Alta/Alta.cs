@@ -14,6 +14,7 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class Alta : Form, FormularioABM
     {
+        protected bool esDeAfiliadoPrincipal;
         protected string sexo;
         protected List<TextBox> cajasTexto;
         protected Afiliado afiliado;
@@ -29,6 +30,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
             this.logErrores = new Logger();
         }
+
         
         #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
         //metodo que se activa cuando hago click en aceptar
@@ -135,9 +137,8 @@ namespace ClinicaFrba.Abm_Afiliado
         #region METODOS AUXILIARES
         
         //deberia ser privado, pero me tira error de compilacion
-        public virtual void realizarOperacion()
+        public virtual void  realizarOperacion()
         {
-
             //abro el formulario de usuario
             this.cargarUsuario();
             new AltaUsuario(this.afiliado).Show();
@@ -215,6 +216,8 @@ namespace ClinicaFrba.Abm_Afiliado
         
         public void inhabilitarAgregadoAfiliados(){
             this.checkBoxHijos.Enabled = false;
+
+            //his.afiliado.setAfiliadoRaiz(false);
         }
 
     }
