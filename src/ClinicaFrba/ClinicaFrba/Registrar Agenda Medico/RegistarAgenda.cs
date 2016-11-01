@@ -57,5 +57,13 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private void RegistarAgenda_Load(object sender, EventArgs e) {
 
         }
+
+        private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        private void botonListar_Click(object sender, EventArgs e) {
+            this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
+        }
     }
 }
