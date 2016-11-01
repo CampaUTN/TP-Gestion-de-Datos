@@ -37,6 +37,7 @@
             this.grillaEspecialidades = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEspecialidades)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +46,7 @@
             // 
             this.selectorFecha.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.selectorFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectorFecha.CustomFormat = "\"MM dd yyyy hh mm ss\"";
+            this.selectorFecha.CustomFormat = "";
             this.selectorFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.selectorFecha.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
             this.selectorFecha.Location = new System.Drawing.Point(12, 398);
@@ -54,7 +55,7 @@
             this.selectorFecha.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.selectorFecha.Name = "selectorFecha";
             this.selectorFecha.RightToLeftLayout = true;
-            this.selectorFecha.Size = new System.Drawing.Size(130, 20);
+            this.selectorFecha.Size = new System.Drawing.Size(95, 20);
             this.selectorFecha.TabIndex = 14;
             this.selectorFecha.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.selectorFecha.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
@@ -148,11 +149,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.dateTimePicker1.Location = new System.Drawing.Point(117, 398);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
+            this.dateTimePicker1.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.RightToLeftLayout = true;
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(65, 20);
+            this.dateTimePicker1.TabIndex = 30;
+            this.dateTimePicker1.Value = new System.DateTime(2016, 11, 1, 10, 0, 0, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
             // RegistarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 430);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.grillaEspecialidades);
@@ -183,5 +204,6 @@
         private System.Windows.Forms.DataGridView grillaEspecialidades;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

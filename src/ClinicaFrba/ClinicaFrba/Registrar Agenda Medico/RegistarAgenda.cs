@@ -88,5 +88,9 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private void button1_Click(object sender, EventArgs e) {
             this.grillaEspecialidades.DataSource = Utilidades.Utils.getEspecialidades();
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
+
+        }
     }
 }
