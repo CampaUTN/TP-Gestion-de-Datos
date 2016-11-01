@@ -33,7 +33,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 if(horarioValido()){
                     cargarHorario();
                 }else{
-                    MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados. Los profesionales no pueden atender los domingos.", "Error", MessageBoxButtons.OK);
                 }
         }
 
@@ -52,6 +52,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 }
             }
             return false;
+        }
+
+        private void RegistarAgenda_Load(object sender, EventArgs e) {
+
         }
     }
 }

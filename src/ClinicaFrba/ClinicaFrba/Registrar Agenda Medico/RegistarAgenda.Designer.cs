@@ -82,6 +82,7 @@
             this.Controls.Add(this.selectorFecha);
             this.Name = "RegistarAgenda";
             this.Text = "Alta Agenda Profesional";
+            this.Load += new System.EventHandler(this.RegistarAgenda_Load);
             this.ResumeLayout(false);
 
         }
