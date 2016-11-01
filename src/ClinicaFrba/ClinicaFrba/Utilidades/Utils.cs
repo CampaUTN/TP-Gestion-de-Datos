@@ -126,6 +126,19 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
+        static public DataTable getEspecialidades()
+{
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select e.espe_id as Especialidad, e.espe_nombre from CLINICA.Especialidades e", conexion);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
         static public DataTable getProfesionalesDeEspecialidad(string filtroEspe) 
         {
             var conexion = DBConnection.getConnection();
