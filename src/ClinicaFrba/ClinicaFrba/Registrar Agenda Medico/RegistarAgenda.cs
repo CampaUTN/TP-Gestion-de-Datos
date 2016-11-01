@@ -43,7 +43,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
         private bool horarioValido() {
-            if(fechaHora.DayOfWeek.Equals(0){ //domingo
+            if(fechaHora.DayOfWeek.Equals(0)){ //domingo
                  String hora = fechaHora.ToString("HH:mm");
                  if (fechaHora.DayOfWeek.Equals(6)) { //sabado
                      return String.Compare(hora,"10:00") >= 0 && String.Compare(hora,"15:00") <= 0; 

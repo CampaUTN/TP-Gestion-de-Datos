@@ -30,7 +30,6 @@ namespace ClinicaFrba.Utilidades
         }
 
         public static bool tieneNumeros(string texto){
-            int a;
             return texto.Any(caracter => esEntero(caracter));
         }
 
