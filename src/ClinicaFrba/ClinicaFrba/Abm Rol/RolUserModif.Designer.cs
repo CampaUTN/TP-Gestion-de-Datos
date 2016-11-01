@@ -53,6 +53,7 @@
             this.buttonGuardar.TabIndex = 19;
             this.buttonGuardar.Text = "Guardar";
             this.buttonGuardar.UseVisualStyleBackColor = true;
+            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
             // 
             // listAsignados
             // 

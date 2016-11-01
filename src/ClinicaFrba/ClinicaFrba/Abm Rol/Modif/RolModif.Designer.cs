@@ -51,7 +51,7 @@
             this.listFuncionalidades.Name = "listFuncionalidades";
             this.listFuncionalidades.Size = new System.Drawing.Size(120, 212);
             this.listFuncionalidades.TabIndex = 1;
-            this.listFuncionalidades.Click += new System.EventHandler(this.listFuncionalidades_Click);
+            this.listFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.listFuncionalidades_SelectedIndexChanged);
             // 
             // listAsignadas
             // 
@@ -60,7 +60,7 @@
             this.listAsignadas.Name = "listAsignadas";
             this.listAsignadas.Size = new System.Drawing.Size(120, 212);
             this.listAsignadas.TabIndex = 2;
-            this.listAsignadas.Click += new System.EventHandler(this.listAsignadas_Click);
+            this.listAsignadas.SelectedIndexChanged += new System.EventHandler(this.listAsignadas_SelectedIndexChanged);
             // 
             // buttonAgregar
             // 

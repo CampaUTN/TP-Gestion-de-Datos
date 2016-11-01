@@ -27,6 +27,9 @@ namespace ClinicaFrba.AbmRol {
         }
 
         private void RolUserModif_Load(object sender, EventArgs e) {
+            buttonAgregar.Enabled = false;
+            buttonQuitar.Enabled = false;
+
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
                 SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
@@ -59,17 +62,7 @@ namespace ClinicaFrba.AbmRol {
             this.Close();
         }
 
-        private void buttonAgregar_Click(object sender, EventArgs e) {
-            if (listRoles.Items.Count > 0) {
-                listAsignados.Items.Add(listRoles.SelectedItem);
-                int index = listRoles.SelectedIndex;
-                listRoles.Items.Remove(listRoles.SelectedItem);
-                if (listRoles.Items.Count > index)
-                    listRoles.SelectedIndex = index;
-                else
-                    listRoles.SelectedIndex = index - 1;
-            }
-        }
+
 
         private void listAsignados_SelectedIndexChanged(object sender, EventArgs e) {
             if (listAsignados.SelectedItems.Count > 0) {
@@ -86,16 +79,59 @@ namespace ClinicaFrba.AbmRol {
             } else
                 buttonAgregar.Enabled = false;
         }
-
+        private void buttonAgregar_Click(object sender, EventArgs e) {
+            if (listRoles.Items.Count > 0) {
+                listAsignados.Items.Add(listRoles.SelectedItem);
+                int index = listRoles.SelectedIndex;
+                listRoles.Items.Remove(listRoles.SelectedItem);
+                if (listRoles.Items.Count > index)
+                    listRoles.SelectedIndex = index;
+                else
+                    listRoles.SelectedIndex = index - 1;
+            }
+        }
         private void buttonQuitar_Click(object sender, EventArgs e) {
             if (listAsignados.Items.Count > 0 && listAsignados.SelectedItems.Count > 0) {
-                listRoles.Items.Add(listRoles.SelectedItem);
+                listRoles.Items.Add(listAsignados.SelectedItem);
                 int index = listAsignados.SelectedIndex;
                 listAsignados.Items.Remove(listAsignados.SelectedItem);
                 if (listAsignados.Items.Count > index)
                     listAsignados.SelectedIndex = index;
                 else
                     listAsignados.SelectedIndex = index - 1;
+            }
+        }
+
+        private void buttonGuardar_Click(object sender, EventArgs e) {
+            using (SqlConnection conexion = DBConnection.getConnection()) {
+                conexion.Open();
+
+                long userId = Utilidades.Utils.getIdDesdeUserName(username);
+
+                try {
+                    foreach (KeyValuePair<int, string> item in listAsignados.Items) {
+                        if (!asignados.Contains(item)) {
+                            // (SQL) INSERT QUERY
+                            SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO CLINICA.RolXUsuario(usua_id, role_id) VALUES(" + userId + "," + item.Key + ")", conexion);
+                            queryInsertFunc.ExecuteNonQuery();
+                        }
+
+                    }
+
+                    foreach (KeyValuePair<int, string> item in asignados) {
+                        if (!listAsignados.Items.Contains(item)) {
+                            // (SQL) DELETE QUERY
+                            SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM CLINICA.RolXUsuario WHERE usua_id=" + userId + " AND role_id=" + item.Key, conexion);
+                            queryDeleteFunc.ExecuteNonQuery();
+                        }
+                    }
+
+                    new AbmRol().Show();
+                    this.Close();
+
+                } catch (Exception) {
+                    throw;
+                }
             }
         }
     }

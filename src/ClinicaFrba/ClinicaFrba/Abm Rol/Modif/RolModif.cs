@@ -27,17 +27,18 @@ namespace ClinicaFrba.AbmRol
         public RolModif(int rolId) {
             InitializeComponent();
             buttonGuardar.Enabled = false;
-            buttonAgregar.Enabled = false;
-            buttonQuitar.Enabled = false;
+
             labelNombreValidacion.Visible = false;
             buttonGuardar.Enabled = false;
             this.rolId = rolId;
         }
 
         private void RolModif_Load(object sender, EventArgs e) {
+            buttonAgregar.Enabled = false;
+            buttonQuitar.Enabled = false;
+
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 conexion.Open();
-
 
                 SqlCommand queryObtenerModificable = new SqlCommand("SELECT * FROM CLINICA.roles WHERE role_id="+rolId, conexion);
                 SqlDataReader readerDatos = queryObtenerModificable.ExecuteReader();
@@ -73,16 +74,14 @@ namespace ClinicaFrba.AbmRol
             }
             Utilidades.Utils.llenar(this.listFuncionalidades, funcionalidades);
             Utilidades.Utils.llenar(this.listAsignadas, asignadas);
-            buttonAgregar.Enabled = true;
             if (listFuncionalidades.Items.Count>0)
                 listFuncionalidades.SelectedIndex = 0;
-            listAsignadas.SelectedIndex = -1;
+            else if (listAsignadas.Items.Count > 0)
+                listAsignadas.SelectedIndex = 0;
+            
         }
 
         private void buttonAgregar_Click(object sender, EventArgs e) {
-            if (listFuncionalidades.SelectedIndex == -1)
-                buttonAgregar.Enabled = false;
-            else
             if (listFuncionalidades.Items.Count > 0) {
                 listAsignadas.Items.Add(listFuncionalidades.SelectedItem);
                 int index = listFuncionalidades.SelectedIndex;
@@ -96,9 +95,6 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonQuitar_Click(object sender, EventArgs e) {
-            if (listAsignadas.SelectedIndex == -1)
-                buttonQuitar.Enabled = false;
-            else
             if (listAsignadas.Items.Count > 0) {
                 listFuncionalidades.Items.Add(listAsignadas.SelectedItem);
                 int index = listAsignadas.SelectedIndex;
@@ -126,20 +122,6 @@ namespace ClinicaFrba.AbmRol
                     labelNombreValidacion.Text = "Nombre válido";
                     buttonGuardar.Enabled = true;
                 }
-        }
-
-        private void listFuncionalidades_Click(object sender, EventArgs e) {
-            if (listFuncionalidades.SelectedIndex != -1)
-                buttonAgregar.Enabled = true;
-            buttonQuitar.Enabled = false;
-            listAsignadas.ClearSelected();
-        }
-
-        private void listAsignadas_Click(object sender, EventArgs e) {
-            if (listAsignadas.SelectedIndex != -1)
-                buttonQuitar.Enabled = true;
-            buttonAgregar.Enabled = false;
-            listFuncionalidades.ClearSelected();
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e) {
@@ -173,13 +155,27 @@ namespace ClinicaFrba.AbmRol
 
                 new RolModifSeleccion().Show();
                 this.Close();
-
-
             }
         }
 
         private void groupBoxFuncionalidades_Enter(object sender, EventArgs e) {
 
+        }
+
+        private void listAsignadas_SelectedIndexChanged(object sender, EventArgs e) {
+            if (listAsignadas.SelectedItems.Count > 0 && listAsignadas.SelectedItems.Count > 0) {
+                buttonQuitar.Enabled = true;
+                listFuncionalidades.ClearSelected();
+            } else
+                buttonQuitar.Enabled = false;
+        }
+
+        private void listFuncionalidades_SelectedIndexChanged(object sender, EventArgs e) {
+            if (listFuncionalidades.SelectedItems.Count > 0 && listFuncionalidades.SelectedItems.Count > 0) {
+                buttonAgregar.Enabled = true;
+                listAsignadas.ClearSelected();
+            } else
+                buttonAgregar.Enabled = false;
         }
     }
 }
