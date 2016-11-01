@@ -126,6 +126,19 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
+        static public DataTable getEspecialidades()
+{
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select e.espe_id as Especialidad, e.espe_nombre from CLINICA.Especialidades e", conexion);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
         static public DataTable getProfesionalesDeEspecialidad(string filtroEspe) 
         {
             var conexion = DBConnection.getConnection();
@@ -191,8 +204,7 @@ namespace ClinicaFrba.Utilidades
 
         //INGRESO VALORES A LA BD
 
-        static public void registarUsuario(Afiliado afiliado)
-        {
+        static public void registarUsuario(Afiliado afiliado){
 
             var conexion = DBConnection.getConnection();
 
@@ -214,6 +226,7 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
+         
         }
 
         static public void registrarAfiliado(Afiliado afiliado)
@@ -235,10 +248,29 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
             comando.ExecuteReader();
+          
         }
 
 
+        static public void registrarFamiliarAfiliado(Afiliado afiliado)
+        {
+            int codPlan = Utilidades.Utils.getIdDesdePlan(afiliado.getPlan());
+            long usuaId = Utilidades.Utils.getIdDesdeUserName(afiliado.getUsername());
 
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.agregarFamiliar", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@afiliado_raiz", usuaId);
+            comando.Parameters.AddWithValue("@usuario", usuaId);
+            comando.Parameters.AddWithValue("@plan", codPlan);
+            comando.Parameters.AddWithValue("@estado", afiliado.getEstadoCivil());
+            comando.Parameters.AddWithValue("@hijos", afiliado.getHijosACargo());
+
+            conexion.Open();
+            comando.ExecuteReader();
+        }
 
         static public List<KeyValuePair<int, string>> getPlanes()
         {

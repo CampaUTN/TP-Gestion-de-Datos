@@ -8,6 +8,7 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public class Afiliado
     {
+        private int afiliadoRaiz;
         private string nombre;
         private string apellido;
         private DateTime fechaNac;
@@ -98,6 +99,11 @@ namespace ClinicaFrba.Abm_Afiliado
             return hijosACargo;
         }
 
+        public int getCodigoAfiliado()
+        {
+            return afiliadoRaiz;
+        }
+
         #endregion
 
         #region SETTERS
@@ -115,6 +121,12 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public void setHijosACargo(int cant) {
             this.hijosACargo = cant;
+        }
+
+
+        public void setCodigo(int cod)
+        {
+            this.afiliadoRaiz = cod;
         }
         #endregion
 

@@ -170,6 +170,7 @@
     <Compile Include="Pedir Turno\SeleccionarHorario.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Registrar Agenda Medico\Horario.cs" />
     <Compile Include="Registrar Agenda Medico\RegistarAgenda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +254,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registrar Agenda Medico\RegistarAgenda.resx">
+      <DependentUpon>RegistarAgenda.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
