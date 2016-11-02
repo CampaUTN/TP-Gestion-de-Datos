@@ -56,7 +56,7 @@
             this.desde.Location = new System.Drawing.Point(129, 252);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.desde.MinDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
@@ -159,6 +159,7 @@
             // 
             // dia
             // 
+            this.dia.Cursor = System.Windows.Forms.Cursors.Default;
             this.dia.FormattingEnabled = true;
             this.dia.Items.AddRange(new object[] {
             "Lunes",
