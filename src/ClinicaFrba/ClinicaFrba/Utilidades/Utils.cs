@@ -74,6 +74,26 @@ namespace ClinicaFrba.Utilidades
         }
 
 
+        static public int superaLimiteSemanal(int profesional) {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select top 1 count(*)/2 from Clinica.horarios where hora_profesional = @profesional group by hora_profesional, datepart(WEEK,hora_fecha) order by count(*)/2 DESC", conexion);
+            // divido por dos porque tiene 2 horarios por hora, porque cada uno dura media hora.
+            // la cosa de la fecha del final agrupa las cosas si tienen igual profesional e igual semana.
+
+            comando.Parameters.AddWithValue("@profesional", profesional);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read()) {
+                return Convert.ToInt32(reader[0]);
+            }
+            return -1;
+        }
+
+
         static public int buscarPlanDeAfiliado(int afiliado)
         {
             var conexion = DBConnection.getConnection();
