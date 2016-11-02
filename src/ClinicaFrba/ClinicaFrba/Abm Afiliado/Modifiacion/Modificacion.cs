@@ -36,6 +36,9 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void deshabilitarCajitas()
         {
+            this.cajasTexto.Remove(textBoxNombre);
+            this.cajasTexto.Remove(textBoxApellido);
+            this.cajasTexto.Remove(textBoxNroDoc);
 
             this.textBoxNombre.Enabled = false;
             this.textBoxApellido.Enabled = false;

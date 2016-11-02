@@ -153,9 +153,11 @@
             this.planillaResultados.EnableHeadersVisualStyles = false;
             this.planillaResultados.Location = new System.Drawing.Point(12, 142);
             this.planillaResultados.Name = "planillaResultados";
+            this.planillaResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.planillaResultados.Size = new System.Drawing.Size(460, 264);
             this.planillaResultados.TabIndex = 7;
             this.planillaResultados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
+            this.planillaResultados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellContentClick);
             // 
             // botonBuscar
             // 

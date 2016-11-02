@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -72,8 +73,16 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         private void planillaResultados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             botonModificar.Enabled = true;
+            this.AcceptButton = botonModificar;
         }
 
+
+
+        private void planillaResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            botonModificar.Enabled = true;
+
+        }
 
         private void botonModificar_Click(object sender, EventArgs e)
         {
@@ -98,16 +107,55 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         }
 
         private void cargarAlAfiliado()
-        {            string nombre = Convert.ToString(planillaResultados.SelectedCells[2].Value);
-            string apellido = Convert.ToString(planillaResultados.SelectedCells[1].Value);
-            string dni = Convert.ToString(planillaResultados.SelectedCells[3].Value);
-           
-            Afiliado afil = new Afiliado(nombre, apellido,
-             DateTime.Parse("27/11/1995 00:00:00"), "DNI", dni, "Strangford 1857", "46220932", "M", "Soltero/a", "asdas");
+        {  
+            Afiliado afil = this.completarDatosDeAfiliado() ;
             ModificacionUsuario modif = new ModificacionUsuario(afil);
 
-
             modif.Show();
+        }
+
+        private Afiliado completarDatosDeAfiliado()
+        {
+            string direccion;
+            string tipoDoc;
+            string telefono;
+            string mail;
+            string genero;
+            string plan;
+            string estado;
+            int cantidadHijos;
+            DateTime fechaNac;
+
+            long cod_usuario = Convert.ToInt64(planillaResultados.SelectedCells[0].Value);
+
+            string apellido = Convert.ToString(planillaResultados.SelectedCells[1].Value);
+            string nombre = Convert.ToString(planillaResultados.SelectedCells[2].Value);
+            string dni = Convert.ToString(planillaResultados.SelectedCells[3].Value);
+
+
+            SqlDataReader reader = Utils.obtenerAfiliadoDesdeUsername(cod_usuario);
+
+            reader.Read();
+                plan = Convert.ToString(reader[2]);
+                estado = Convert.ToString(reader[3]);
+                cantidadHijos = Convert.ToInt32(reader[4]);
+          
+
+           reader = Utils.obtenerUsuarioDesdeUsername(cod_usuario);
+
+           reader.Read();
+                direccion = Convert.ToString(reader[0]);
+                tipoDoc = Convert.ToString(reader[1]);
+                telefono = Convert.ToString(reader[2]);
+                //fechaNac = Convert.ToDateTime(reader[3]);
+                fechaNac = DateTime.Today;
+
+                mail = Convert.ToString(reader[4]);
+                genero = Convert.ToString(reader[5]);
+           
+            return new Afiliado(nombre, apellido, fechaNac, tipoDoc, dni, direccion, telefono, genero, estado, plan);
+
+
         }
 
 

@@ -312,7 +312,7 @@
             this.selectorFecha.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
             this.selectorFecha.Location = new System.Drawing.Point(135, 202);
             this.selectorFecha.Margin = new System.Windows.Forms.Padding(5);
-            this.selectorFecha.MaxDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.selectorFecha.MaxDate = new System.DateTime(2016, 11, 2, 0, 0, 0, 0);
             this.selectorFecha.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.selectorFecha.Name = "selectorFecha";
             this.selectorFecha.RightToLeftLayout = true;

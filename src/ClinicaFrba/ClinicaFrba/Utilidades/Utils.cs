@@ -344,6 +344,36 @@ namespace ClinicaFrba.Utilidades
 
             return rolesAsignados;
         }
-        
+
+
+        static public SqlDataReader obtenerAfiliadoDesdeUsername(long cod_usuario)
+        {
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select * From CLINICA.Afiliados Where afil_usuario = @user", conexion);
+            comando.Parameters.AddWithValue("@user", cod_usuario);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            return reader;
+        }
+
+        static public SqlDataReader obtenerUsuarioDesdeUsername(long cod_usuario)
+        {
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select usua_direccion,usua_tipoDoc, usua_telefono, usua_fechaNacimiento, usua_mail, usua_sexo from CLINICA.Usuarios WHERE usua_id = @user", conexion);
+            comando.Parameters.AddWithValue("@user", cod_usuario);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            return reader;
+        }
     }
 }

@@ -43,10 +43,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void selecModif_CheckedChanged(object sender, EventArgs e)
         {
-            //Lo uso para probar mientras
             formulario = new ListadoAfiliados();
-         //   formulario = new ModificacionUsuario(new Afiliado(
-           //    "Emiliano", "Tolaba", DateTime.Parse("27/11/1995 00:00:00"), "DNI", "39372207", "Strangford 1857","46220932", "M", "Soltero/a","asdas"));
         }
     }
 }
