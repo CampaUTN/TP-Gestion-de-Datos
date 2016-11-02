@@ -173,6 +173,7 @@
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.groupBoxFuncionalidades);
             this.Name = "RolAlta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta de Rol";
             this.Load += new System.EventHandler(this.AbmRol_Load);
             this.groupBoxFuncionalidades.ResumeLayout(false);

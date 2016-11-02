@@ -77,6 +77,7 @@
             this.Controls.Add(this.buttonEliminar);
             this.Controls.Add(this.listRoles);
             this.Name = "RolBaja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Baja de Rol";
             this.Load += new System.EventHandler(this.RolBaja_Load);
             this.ResumeLayout(false);

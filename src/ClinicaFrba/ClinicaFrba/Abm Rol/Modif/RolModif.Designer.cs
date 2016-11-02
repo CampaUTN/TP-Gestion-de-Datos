@@ -185,6 +185,7 @@
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.groupBoxFuncionalidades);
             this.Name = "RolModif";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación de Rol";
             this.Load += new System.EventHandler(this.RolModif_Load);
             this.groupBoxFuncionalidades.ResumeLayout(false);
