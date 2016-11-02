@@ -198,6 +198,7 @@
     <Compile Include="Registro Resultado\RegistroResultado.Designer.cs">
       <DependentUpon>RegistroResultado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilidades\Parametro.cs" />
     <Compile Include="Utilidades\Parser.cs" />
     <Compile Include="Utilidades\Encriptador.cs" />
     <Compile Include="Program.cs" />

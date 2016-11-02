@@ -37,6 +37,63 @@ namespace ClinicaFrba.Utilidades
             return textbox.Text.Length.Equals(0);
         }
 
+        /// <summary>
+        /// Arma la consulta en SQL segun los parametros que recibe
+        /// Dentro de Parametro deben incluirse TextBox como nombre de variable
+        /// la columna que quiero consultar
+        /// </summary>
+        /// <param name="tabla"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static string armarConsulta(string tabla, params Parametro [] values)
+        {
+            int longitud = values.Length;
+
+            //nombres de las columnas que quiero mostrar
+            string parametros = "*";
+
+            //condiciones de filtro
+            string criterio = "";
+
+            //string resultado sobre la cual se hace el SELECT
+            string consulta;
+
+            if (tabla == "Usuarios")
+            {
+                parametros = "usua_id AS ID, usua_apellido AS Apellido, usua_nombre AS Nombre, usua_nroDoc AS Documento ";
+         
+            }
+
+            criterio = criterio + " \nWHERE ";
+
+            foreach (Parametro parametro in values){
+                    //si el campo esta vacio, lo omito
+                    if (parametro.getSize() != 0){
+
+                        criterio = criterio + parametro.pasateAWhere() + " AND ";
+                    }
+            }
+            criterio = sacarAND(criterio);
+
+            consulta = "SELECT " + parametros + " \nFROM CLINICA." + tabla + criterio;
+
+            //TODO borrar
+            MessageBox.Show(consulta);
+            return consulta;
+        }
+
+
+        public static string sacarAND(string cadena)
+        {
+           string aux= cadena.Substring(cadena.Length - 4, 3);
+
+           if (aux == "AND")
+           {
+               return cadena.Substring(0, cadena.Length - 4);
+           }else{
+               return cadena;}
+        }
+
     }
 
 

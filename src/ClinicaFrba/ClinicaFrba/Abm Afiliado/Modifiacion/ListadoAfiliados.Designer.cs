@@ -28,47 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxNombre = new System.Windows.Forms.TextBox();
-            this.textBoxApellido = new System.Windows.Forms.TextBox();
-            this.textBoxNroDoc = new System.Windows.Forms.TextBox();
+            this.usua_nombre = new System.Windows.Forms.TextBox();
+            this.usua_apellido = new System.Windows.Forms.TextBox();
+            this.usua_nroDoc = new System.Windows.Forms.TextBox();
             this.labelSeleccionNombre = new System.Windows.Forms.Label();
             this.labelSeleccionApellido = new System.Windows.Forms.Label();
             this.labelNroDoc = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.planillaResultados = new System.Windows.Forms.DataGridView();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonModificar = new System.Windows.Forms.Button();
+            this.checkBoxNombre = new System.Windows.Forms.CheckBox();
+            this.checkBoxApellido = new System.Windows.Forms.CheckBox();
+            this.checkBoxDoc = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBoxNombre
+            // usua_nombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(26, 47);
-            this.textBoxNombre.Name = "textBoxNombre";
-            this.textBoxNombre.Size = new System.Drawing.Size(100, 20);
-            this.textBoxNombre.TabIndex = 0;
+            this.usua_nombre.Location = new System.Drawing.Point(11, 33);
+            this.usua_nombre.Name = "usua_nombre";
+            this.usua_nombre.Size = new System.Drawing.Size(125, 20);
+            this.usua_nombre.TabIndex = 0;
             // 
-            // textBoxApellido
+            // usua_apellido
             // 
-            this.textBoxApellido.Location = new System.Drawing.Point(153, 47);
-            this.textBoxApellido.Name = "textBoxApellido";
-            this.textBoxApellido.Size = new System.Drawing.Size(100, 20);
-            this.textBoxApellido.TabIndex = 1;
+            this.usua_apellido.Location = new System.Drawing.Point(157, 33);
+            this.usua_apellido.Name = "usua_apellido";
+            this.usua_apellido.Size = new System.Drawing.Size(140, 20);
+            this.usua_apellido.TabIndex = 1;
             // 
-            // textBoxNroDoc
+            // usua_nroDoc
             // 
-            this.textBoxNroDoc.Location = new System.Drawing.Point(279, 47);
-            this.textBoxNroDoc.Name = "textBoxNroDoc";
-            this.textBoxNroDoc.Size = new System.Drawing.Size(100, 20);
-            this.textBoxNroDoc.TabIndex = 2;
+            this.usua_nroDoc.Location = new System.Drawing.Point(309, 33);
+            this.usua_nroDoc.Name = "usua_nroDoc";
+            this.usua_nroDoc.Size = new System.Drawing.Size(132, 20);
+            this.usua_nroDoc.TabIndex = 2;
             // 
             // labelSeleccionNombre
             // 
             this.labelSeleccionNombre.AutoSize = true;
-            this.labelSeleccionNombre.Location = new System.Drawing.Point(11, 19);
+            this.labelSeleccionNombre.Location = new System.Drawing.Point(9, 19);
             this.labelSeleccionNombre.Name = "labelSeleccionNombre";
             this.labelSeleccionNombre.Size = new System.Drawing.Size(54, 13);
             this.labelSeleccionNombre.TabIndex = 3;
@@ -77,7 +80,7 @@
             // labelSeleccionApellido
             // 
             this.labelSeleccionApellido.AutoSize = true;
-            this.labelSeleccionApellido.Location = new System.Drawing.Point(138, 19);
+            this.labelSeleccionApellido.Location = new System.Drawing.Point(157, 20);
             this.labelSeleccionApellido.Name = "labelSeleccionApellido";
             this.labelSeleccionApellido.Size = new System.Drawing.Size(54, 13);
             this.labelSeleccionApellido.TabIndex = 4;
@@ -86,7 +89,7 @@
             // labelNroDoc
             // 
             this.labelNroDoc.AutoSize = true;
-            this.labelNroDoc.Location = new System.Drawing.Point(267, 19);
+            this.labelNroDoc.Location = new System.Drawing.Point(308, 19);
             this.labelNroDoc.Name = "labelNroDoc";
             this.labelNroDoc.Size = new System.Drawing.Size(100, 13);
             this.labelNroDoc.TabIndex = 5;
@@ -94,29 +97,39 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxDoc);
+            this.groupBox1.Controls.Add(this.checkBoxApellido);
+            this.groupBox1.Controls.Add(this.checkBoxNombre);
             this.groupBox1.Controls.Add(this.labelSeleccionApellido);
             this.groupBox1.Controls.Add(this.labelNroDoc);
             this.groupBox1.Controls.Add(this.labelSeleccionNombre);
+            this.groupBox1.Controls.Add(this.usua_nroDoc);
+            this.groupBox1.Controls.Add(this.usua_nombre);
+            this.groupBox1.Controls.Add(this.usua_apellido);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(386, 84);
+            this.groupBox1.Size = new System.Drawing.Size(460, 84);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Busqueda";
             // 
-            // dataGridView1
+            // planillaResultados
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 142);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(386, 264);
-            this.dataGridView1.TabIndex = 7;
+            this.planillaResultados.AllowUserToAddRows = false;
+            this.planillaResultados.AllowUserToDeleteRows = false;
+            this.planillaResultados.AllowUserToResizeColumns = false;
+            this.planillaResultados.AllowUserToResizeRows = false;
+            this.planillaResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.planillaResultados.Location = new System.Drawing.Point(12, 142);
+            this.planillaResultados.Name = "planillaResultados";
+            this.planillaResultados.Size = new System.Drawing.Size(460, 264);
+            this.planillaResultados.TabIndex = 7;
+            this.planillaResultados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
+            
             // 
             // botonBuscar
             // 
-            this.botonBuscar.Location = new System.Drawing.Point(304, 102);
+            this.botonBuscar.Location = new System.Drawing.Point(388, 102);
             this.botonBuscar.Name = "botonBuscar";
             this.botonBuscar.Size = new System.Drawing.Size(75, 23);
             this.botonBuscar.TabIndex = 8;
@@ -126,7 +139,7 @@
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(26, 102);
+            this.botonLimpiar.Location = new System.Drawing.Point(290, 102);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
             this.botonLimpiar.TabIndex = 9;
@@ -143,16 +156,47 @@
             this.botonCancelar.TabIndex = 10;
             this.botonCancelar.Text = "Cancelar";
             this.botonCancelar.UseVisualStyleBackColor = true;
+            this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
             // botonModificar
             // 
             this.botonModificar.Enabled = false;
-            this.botonModificar.Location = new System.Drawing.Point(296, 420);
+            this.botonModificar.Location = new System.Drawing.Point(380, 419);
             this.botonModificar.Name = "botonModificar";
             this.botonModificar.Size = new System.Drawing.Size(83, 23);
             this.botonModificar.TabIndex = 11;
             this.botonModificar.Text = "Modificar...";
             this.botonModificar.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNombre
+            // 
+            this.checkBoxNombre.AutoSize = true;
+            this.checkBoxNombre.Location = new System.Drawing.Point(18, 54);
+            this.checkBoxNombre.Name = "checkBoxNombre";
+            this.checkBoxNombre.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxNombre.TabIndex = 6;
+            this.checkBoxNombre.Text = "Busqueda exacta";
+            this.checkBoxNombre.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxApellido
+            // 
+            this.checkBoxApellido.AutoSize = true;
+            this.checkBoxApellido.Location = new System.Drawing.Point(169, 55);
+            this.checkBoxApellido.Name = "checkBoxApellido";
+            this.checkBoxApellido.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxApellido.TabIndex = 7;
+            this.checkBoxApellido.Text = "Busqueda exacta";
+            this.checkBoxApellido.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDoc
+            // 
+            this.checkBoxDoc.AutoSize = true;
+            this.checkBoxDoc.Location = new System.Drawing.Point(317, 56);
+            this.checkBoxDoc.Name = "checkBoxDoc";
+            this.checkBoxDoc.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxDoc.TabIndex = 8;
+            this.checkBoxDoc.Text = "Busqueda exacta";
+            this.checkBoxDoc.UseVisualStyleBackColor = true;
             // 
             // ListadoAfiliados
             // 
@@ -161,15 +205,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonCancelar;
-            this.ClientSize = new System.Drawing.Size(411, 454);
+            this.ClientSize = new System.Drawing.Size(484, 454);
             this.Controls.Add(this.botonModificar);
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonBuscar);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBoxNroDoc);
-            this.Controls.Add(this.textBoxApellido);
-            this.Controls.Add(this.textBoxNombre);
+            this.Controls.Add(this.planillaResultados);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.Name = "ListadoAfiliados";
@@ -177,25 +218,27 @@
             this.Text = "Seleccione afiliado...";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxNombre;
-        private System.Windows.Forms.TextBox textBoxApellido;
-        private System.Windows.Forms.TextBox textBoxNroDoc;
+        private System.Windows.Forms.TextBox usua_nombre;
+        private System.Windows.Forms.TextBox usua_apellido;
+        private System.Windows.Forms.TextBox usua_nroDoc;
         private System.Windows.Forms.Label labelSeleccionNombre;
         private System.Windows.Forms.Label labelSeleccionApellido;
         private System.Windows.Forms.Label labelNroDoc;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView planillaResultados;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonCancelar;
         private System.Windows.Forms.Button botonModificar;
+        private System.Windows.Forms.CheckBox checkBoxNombre;
+        private System.Windows.Forms.CheckBox checkBoxDoc;
+        private System.Windows.Forms.CheckBox checkBoxApellido;
     }
 }
