@@ -24,17 +24,18 @@ namespace ClinicaFrba.Abm_Afiliado
             this.logger = new Logger();
         }
 
+        #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
         private void botonConfirmar_Click(object sender, EventArgs e)
         {
             //verifico que el usuario haya completado los datos
             if (!faltaCompletarDatos())
             {
-                this.agregarNuevosDatos();
                 this.verificarDatos();
 
                 //verifico que los datos se hayan ingresado de forma correcta
                 if (!logger.huboErrores())
                 {
+                    this.agregarNuevosDatos();
                     MessageBox.Show("Registrando en la base de datos...");
 
                     //pruebo si puedo agregar al usuario o no.
@@ -52,6 +53,10 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
+
+        #endregion
+
+        #region VALIDACIONES
         private bool chequearPass() {
             return this.textBoxPass.Text == this.textBoxPassConfirm.Text;
         }
@@ -63,18 +68,6 @@ namespace ClinicaFrba.Abm_Afiliado
             afiliado.setMail(this.textBoxMail.Text);
         }
 
-        private void brindarOpcionAgregar() {
-
-            if (MessageBox.Show("Usted fue registrado con exito! Desea agregar un nuevo afiliado", "Alta", MessageBoxButtons.YesNo) 
-                == DialogResult.Yes) 
-            {
-                Abm_Afiliado.Alta otroFormulario = new Alta();
-
-                otroFormulario.inhabilitarAgregadoAfiliados();
-                otroFormulario.Show();
-
-            } 
-        }
 
 
         public void verificarDatos(){
@@ -100,36 +93,50 @@ namespace ClinicaFrba.Abm_Afiliado
         public bool verificarDisponibilidadDelNombre() {
             return true;
         }
+#endregion
 
+        public void realizarOP(){
 
-        public void realizarOP() {
-            try
-            {
+            try{
                 Utils.registarUsuario(this.afiliado);
-                Utils.registrarAfiliado(this.afiliado);   
+                if (afiliado.esAfiliadoRaiz()){
+                    Utils.registrarAfiliado(this.afiliado);
+                    afiliado.setCodigo(Utils.obtenerNumeroAfiliadoRecienRegistrado());
 
-                validarSiPuedeAfiliar();
+                    validarSiPuedeAfiliar();
+                }
+                else{
+                    Utils.registrarFamiliarAfiliado(this.afiliado);
+                }
+                
                 this.Close();
      
-            }
-            catch (SqlException e)
-            {
+            }catch (SqlException e){
                 MessageBox.Show(e.Message);
             }
         }
 
-
-
-        public void validarSiPuedeAfiliar()
-        {
+        
+        public void validarSiPuedeAfiliar(){
             //Segun los datos, debo darle la opcion de agregar un afiliado mas
-            if (this.afiliado.puedeAfiliarAOtros())
-            {
-                brindarOpcionAgregar();
+            if (this.afiliado.puedeAfiliarAOtros()){
+                this.brindarOpcionAgregar();
             }
-            else
-            {
+            else{
                 MessageBox.Show("Usted fue registrado con exito!", "Alta", MessageBoxButtons.OK);
+            }
+        }
+
+
+        private void brindarOpcionAgregar(){
+
+            if (MessageBox.Show("Usted fue registrado con exito! Desea agregar un nuevo afiliado?", "Alta", MessageBoxButtons.YesNo)
+                == DialogResult.Yes) {
+                Abm_Afiliado.AgregadoFamiliar otroFormulario = new AgregadoFamiliar(afiliado.getCodigoAfiliado());
+
+                otroFormulario.inhabilitarAgregadoAfiliados();
+                otroFormulario.Show();
+
             }
         }
 

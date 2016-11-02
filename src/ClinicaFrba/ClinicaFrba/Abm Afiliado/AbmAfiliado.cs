@@ -11,14 +11,12 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class AbmAfiliado : Form
+    public partial class AbmAfiliado : Form, FormularioABM
     {
         FormularioABM formulario;
-        int code;
 
         public AbmAfiliado()
         {
-            code = 0;
             InitializeComponent();
         }
 
@@ -46,8 +44,9 @@ namespace ClinicaFrba.Abm_Afiliado
         private void selecModif_CheckedChanged(object sender, EventArgs e)
         {
             //Lo uso para probar mientras
-            formulario = new ModificacionUsuario(new Afiliado(
-               "Emiliano", "Tolaba", DateTime.Parse("27/11/1995 00:00:00"), "DNI", "39372207", "Strangford 1857","46220932", "M", "Soltero/a","asdas"));
+            formulario = new ListadoAfiliados();
+         //   formulario = new ModificacionUsuario(new Afiliado(
+           //    "Emiliano", "Tolaba", DateTime.Parse("27/11/1995 00:00:00"), "DNI", "39372207", "Strangford 1857","46220932", "M", "Soltero/a","asdas"));
         }
     }
 }

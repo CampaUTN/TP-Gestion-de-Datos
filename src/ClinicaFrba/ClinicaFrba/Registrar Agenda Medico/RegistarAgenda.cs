@@ -22,12 +22,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {}
 
-        private void botonCancelar_Click(object sender, EventArgs e) {
-            if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                this.Close();
-            }
-        }
-
 
         public virtual void cargarHorario(){
             horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fechaHora);
@@ -53,6 +47,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             if (grillaProfesionales.SelectedCells.Count == 1) {
                 int rowindex = grillaProfesionales.CurrentCell.RowIndex;
                 profesional_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
+                especialidad_id = grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString();
             }else{
                 MessageBox.Show("Seleccione solo un profesional a la vez.", "Error", MessageBoxButtons.OK);
             }
@@ -63,34 +58,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
         }
 
-        private void label1_Click(object sender, EventArgs e) {
-
-        }
-
-        private void grillaEspecialidades_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (grillaProfesionales.SelectedCells.Count == 1) {
-                int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                especialidad_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
-            } else {
-                MessageBox.Show("Seleccione solo una especialidad a la vez.", "Error", MessageBoxButtons.OK);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            this.grillaEspecialidades.DataSource = Utilidades.Utils.getEspecialidades();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e) {
-
-        }
 
         //agregar horario
         private void button2_Click(object sender, EventArgs e) {
@@ -108,6 +75,15 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         // todo
         private bool superaLimiteSemanal(){
             return false;
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        // ir atras.
+        private void botonAtras_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

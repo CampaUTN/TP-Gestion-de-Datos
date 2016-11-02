@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClinicaFrba.Abm_Afiliado;
 
 namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 {
@@ -11,6 +12,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
     {
         public ModificacionUsuario(Afiliado afiliado) : base()
         {
+            this.Text = "Modificación";
             this.afiliado = afiliado;
             cargarDatosAfiliado();
             deshabilitarCajitas();

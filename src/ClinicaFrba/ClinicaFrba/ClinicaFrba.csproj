@@ -53,6 +53,9 @@
     <Compile Include="Abm Afiliado\AbmAfiliado.Designer.cs">
       <DependentUpon>AbmAfiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\Alta\AgregadoFamiliar.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Abm Afiliado\Alta\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +70,12 @@
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Afiliado\FormularioABM.cs" />
+    <Compile Include="Abm Afiliado\Modifiacion\ListadoAfiliados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\Modifiacion\ListadoAfiliados.Designer.cs">
+      <DependentUpon>ListadoAfiliados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Afiliado\Modifiacion\Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +198,7 @@
     <Compile Include="Registro Resultado\RegistroResultado.Designer.cs">
       <DependentUpon>RegistroResultado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilidades\Parametro.cs" />
     <Compile Include="Utilidades\Parser.cs" />
     <Compile Include="Utilidades\Encriptador.cs" />
     <Compile Include="Program.cs" />
@@ -202,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\Alta\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\Modifiacion\ListadoAfiliados.resx">
+      <DependentUpon>ListadoAfiliados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Especialidades Medicas\AbmEspMedicas.resx">
       <DependentUpon>AbmEspMedicas.cs</DependentUpon>
