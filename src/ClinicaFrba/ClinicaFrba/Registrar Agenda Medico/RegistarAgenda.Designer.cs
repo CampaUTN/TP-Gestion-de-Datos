@@ -33,9 +33,6 @@
             this.botonListar = new System.Windows.Forms.Button();
             this.grillaProfesionales = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.grillaEspecialidades = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.inicio = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.fin = new System.Windows.Forms.DateTimePicker();
@@ -47,7 +44,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grillaEspecialidades)).BeginInit();
             this.SuspendLayout();
             // 
             // desde
@@ -57,7 +53,7 @@
             this.desde.CustomFormat = "";
             this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.desde.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.desde.Location = new System.Drawing.Point(130, 389);
+            this.desde.Location = new System.Drawing.Point(129, 252);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.desde.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -70,7 +66,7 @@
             // 
             // botonCancelar
             // 
-            this.botonCancelar.Location = new System.Drawing.Point(12, 540);
+            this.botonCancelar.Location = new System.Drawing.Point(11, 387);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
             this.botonCancelar.TabIndex = 21;
@@ -80,11 +76,11 @@
             // 
             // botonListar
             // 
-            this.botonListar.Location = new System.Drawing.Point(585, 32);
+            this.botonListar.Location = new System.Drawing.Point(585, 52);
             this.botonListar.Name = "botonListar";
-            this.botonListar.Size = new System.Drawing.Size(88, 47);
+            this.botonListar.Size = new System.Drawing.Size(88, 71);
             this.botonListar.TabIndex = 24;
-            this.botonListar.Text = "Listar Profesionales";
+            this.botonListar.Text = "Listar Profesionales con especialidades";
             this.botonListar.UseVisualStyleBackColor = true;
             this.botonListar.Click += new System.EventHandler(this.botonListar_Click);
             // 
@@ -95,7 +91,7 @@
             this.grillaProfesionales.AllowUserToResizeColumns = false;
             this.grillaProfesionales.AllowUserToResizeRows = false;
             this.grillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaProfesionales.Location = new System.Drawing.Point(12, 32);
+            this.grillaProfesionales.Location = new System.Drawing.Point(12, 52);
             this.grillaProfesionales.Name = "grillaProfesionales";
             this.grillaProfesionales.ShowEditingIcon = false;
             this.grillaProfesionales.Size = new System.Drawing.Size(557, 131);
@@ -106,46 +102,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(8, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 20);
+            this.label1.Size = new System.Drawing.Size(192, 40);
             this.label1.TabIndex = 26;
-            this.label1.Text = "Seleccion de profesional\r\n";
+            this.label1.Text = "Seleccion de profesional\r\n y especialidad";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // grillaEspecialidades
-            // 
-            this.grillaEspecialidades.AllowUserToAddRows = false;
-            this.grillaEspecialidades.AllowUserToDeleteRows = false;
-            this.grillaEspecialidades.AllowUserToResizeColumns = false;
-            this.grillaEspecialidades.AllowUserToResizeRows = false;
-            this.grillaEspecialidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaEspecialidades.Location = new System.Drawing.Point(12, 211);
-            this.grillaEspecialidades.Name = "grillaEspecialidades";
-            this.grillaEspecialidades.ShowEditingIcon = false;
-            this.grillaEspecialidades.Size = new System.Drawing.Size(557, 125);
-            this.grillaEspecialidades.TabIndex = 27;
-            this.grillaEspecialidades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaEspecialidades_CellContentClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label2.Location = new System.Drawing.Point(12, 188);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(203, 20);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Seleccion de especialidad";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(585, 211);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 47);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Listar Especialidades";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // inicio
             // 
@@ -154,7 +116,7 @@
             this.inicio.CustomFormat = "";
             this.inicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.inicio.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.inicio.Location = new System.Drawing.Point(233, 355);
+            this.inicio.Location = new System.Drawing.Point(232, 218);
             this.inicio.Margin = new System.Windows.Forms.Padding(5);
             this.inicio.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.inicio.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -170,7 +132,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(9, 355);
+            this.label3.Location = new System.Drawing.Point(8, 218);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 20);
             this.label3.TabIndex = 31;
@@ -184,7 +146,7 @@
             this.fin.CustomFormat = "";
             this.fin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.fin.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.fin.Location = new System.Drawing.Point(392, 355);
+            this.fin.Location = new System.Drawing.Point(391, 218);
             this.fin.Margin = new System.Windows.Forms.Padding(5);
             this.fin.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.fin.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -205,7 +167,7 @@
             "Jueves",
             "Viernes",
             "Sabado"});
-            this.dia.Location = new System.Drawing.Point(50, 355);
+            this.dia.Location = new System.Drawing.Point(49, 218);
             this.dia.Name = "dia";
             this.dia.Size = new System.Drawing.Size(106, 21);
             this.dia.TabIndex = 33;
@@ -214,7 +176,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(12, 419);
+            this.label4.Location = new System.Drawing.Point(11, 282);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 20);
             this.label4.TabIndex = 34;
@@ -228,7 +190,7 @@
             this.hasta.CustomFormat = "";
             this.hasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.hasta.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.hasta.Location = new System.Drawing.Point(130, 419);
+            this.hasta.Location = new System.Drawing.Point(129, 282);
             this.hasta.Margin = new System.Windows.Forms.Padding(5);
             this.hasta.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.hasta.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -242,7 +204,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label5.Location = new System.Drawing.Point(12, 389);
+            this.label5.Location = new System.Drawing.Point(11, 252);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 20);
             this.label5.TabIndex = 36;
@@ -252,7 +214,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label6.Location = new System.Drawing.Point(167, 355);
+            this.label6.Location = new System.Drawing.Point(166, 218);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 20);
             this.label6.TabIndex = 37;
@@ -262,7 +224,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label7.Location = new System.Drawing.Point(330, 353);
+            this.label7.Location = new System.Drawing.Point(329, 216);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 20);
             this.label7.TabIndex = 38;
@@ -270,7 +232,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(233, 465);
+            this.button2.Location = new System.Drawing.Point(232, 318);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 39;
@@ -282,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 575);
+            this.ClientSize = new System.Drawing.Size(685, 421);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -293,9 +255,6 @@
             this.Controls.Add(this.fin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.inicio);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.grillaEspecialidades);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grillaProfesionales);
             this.Controls.Add(this.botonListar);
@@ -305,7 +264,6 @@
             this.Text = "Alta Agenda Profesional";
             this.Load += new System.EventHandler(this.RegistarAgenda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grillaEspecialidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,9 +276,6 @@
         private System.Windows.Forms.Button botonListar;
         private System.Windows.Forms.DataGridView grillaProfesionales;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView grillaEspecialidades;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
         protected System.Windows.Forms.DateTimePicker inicio;
         private System.Windows.Forms.Label label3;
         protected System.Windows.Forms.DateTimePicker fin;
