@@ -145,6 +145,7 @@
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonGuardar);
             this.Name = "RolUserModif";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RolUserModif";
             this.Load += new System.EventHandler(this.RolUserModif_Load);
             this.ResumeLayout(false);

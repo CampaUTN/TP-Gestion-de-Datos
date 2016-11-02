@@ -77,6 +77,7 @@
             this.Controls.Add(this.buttonModif);
             this.Controls.Add(this.listRoles);
             this.Name = "RolModifSeleccion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación de Rol";
             this.Load += new System.EventHandler(this.RolBaja_Load);
             this.ResumeLayout(false);
