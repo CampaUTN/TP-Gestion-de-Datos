@@ -35,14 +35,14 @@
             this.labelSeleccionApellido = new System.Windows.Forms.Label();
             this.labelNroDoc = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxDoc = new System.Windows.Forms.CheckBox();
+            this.checkBoxApellido = new System.Windows.Forms.CheckBox();
+            this.checkBoxNombre = new System.Windows.Forms.CheckBox();
             this.planillaResultados = new System.Windows.Forms.DataGridView();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonModificar = new System.Windows.Forms.Button();
-            this.checkBoxNombre = new System.Windows.Forms.CheckBox();
-            this.checkBoxApellido = new System.Windows.Forms.CheckBox();
-            this.checkBoxDoc = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).BeginInit();
             this.SuspendLayout();
@@ -113,6 +113,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Busqueda";
             // 
+            // checkBoxDoc
+            // 
+            this.checkBoxDoc.AutoSize = true;
+            this.checkBoxDoc.Location = new System.Drawing.Point(317, 56);
+            this.checkBoxDoc.Name = "checkBoxDoc";
+            this.checkBoxDoc.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxDoc.TabIndex = 8;
+            this.checkBoxDoc.Text = "Busqueda exacta";
+            this.checkBoxDoc.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxApellido
+            // 
+            this.checkBoxApellido.AutoSize = true;
+            this.checkBoxApellido.Location = new System.Drawing.Point(169, 55);
+            this.checkBoxApellido.Name = "checkBoxApellido";
+            this.checkBoxApellido.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxApellido.TabIndex = 7;
+            this.checkBoxApellido.Text = "Busqueda exacta";
+            this.checkBoxApellido.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNombre
+            // 
+            this.checkBoxNombre.AutoSize = true;
+            this.checkBoxNombre.Location = new System.Drawing.Point(18, 54);
+            this.checkBoxNombre.Name = "checkBoxNombre";
+            this.checkBoxNombre.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxNombre.TabIndex = 6;
+            this.checkBoxNombre.Text = "Busqueda exacta";
+            this.checkBoxNombre.UseVisualStyleBackColor = true;
+            // 
             // planillaResultados
             // 
             this.planillaResultados.AllowUserToAddRows = false;
@@ -120,12 +150,12 @@
             this.planillaResultados.AllowUserToResizeColumns = false;
             this.planillaResultados.AllowUserToResizeRows = false;
             this.planillaResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.planillaResultados.EnableHeadersVisualStyles = false;
             this.planillaResultados.Location = new System.Drawing.Point(12, 142);
             this.planillaResultados.Name = "planillaResultados";
             this.planillaResultados.Size = new System.Drawing.Size(460, 264);
             this.planillaResultados.TabIndex = 7;
             this.planillaResultados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
-            
             // 
             // botonBuscar
             // 
@@ -167,36 +197,7 @@
             this.botonModificar.TabIndex = 11;
             this.botonModificar.Text = "Modificar...";
             this.botonModificar.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxNombre
-            // 
-            this.checkBoxNombre.AutoSize = true;
-            this.checkBoxNombre.Location = new System.Drawing.Point(18, 54);
-            this.checkBoxNombre.Name = "checkBoxNombre";
-            this.checkBoxNombre.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxNombre.TabIndex = 6;
-            this.checkBoxNombre.Text = "Busqueda exacta";
-            this.checkBoxNombre.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxApellido
-            // 
-            this.checkBoxApellido.AutoSize = true;
-            this.checkBoxApellido.Location = new System.Drawing.Point(169, 55);
-            this.checkBoxApellido.Name = "checkBoxApellido";
-            this.checkBoxApellido.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxApellido.TabIndex = 7;
-            this.checkBoxApellido.Text = "Busqueda exacta";
-            this.checkBoxApellido.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDoc
-            // 
-            this.checkBoxDoc.AutoSize = true;
-            this.checkBoxDoc.Location = new System.Drawing.Point(317, 56);
-            this.checkBoxDoc.Name = "checkBoxDoc";
-            this.checkBoxDoc.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxDoc.TabIndex = 8;
-            this.checkBoxDoc.Text = "Busqueda exacta";
-            this.checkBoxDoc.UseVisualStyleBackColor = true;
+            this.botonModificar.Click += new System.EventHandler(this.botonModificar_Click);
             // 
             // ListadoAfiliados
             // 
