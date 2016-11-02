@@ -18,7 +18,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             InitializeComponent();
            // conexion = new Connection();
         }
-
+        
+      #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             usua_nombre.Clear();
@@ -60,15 +61,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             DBConnection.cargarPlanilla(planillaResultados, consulta);  
         }
 
-        private void agregarALista(Parametro[] parametros, TextBox textbox)
-        {
-            int longitud = parametros.Length;
-            if (textbox.Text.Length != 0)
-            {
-            }
-        }
-
-
         private void botonCancelar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -77,14 +69,50 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             }
         }
 
+        private void planillaResultados_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            botonModificar.Enabled = true;
+        }
+
+
+        private void botonModificar_Click(object sender, EventArgs e)
+        {
+            this.cargarAlAfiliado();
+        }
+
+        #endregion
+
+
+        #region METODOS AUXILIARES
+        private void agregarALista(Parametro[] parametros, TextBox textbox)
+        {
+            int longitud = parametros.Length;
+            if (textbox.Text.Length != 0)
+            {
+            }
+        }
+
         private bool camposVacios()
         {
             return Parser.estaVacio(usua_nombre) && Parser.estaVacio(usua_nroDoc) && Parser.estaVacio(usua_apellido);
         }
 
-        private void planillaResultados_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            botonModificar.Enabled = true;
+        private void cargarAlAfiliado()
+        {            string nombre = Convert.ToString(planillaResultados.SelectedCells[2].Value);
+            string apellido = Convert.ToString(planillaResultados.SelectedCells[1].Value);
+            string dni = Convert.ToString(planillaResultados.SelectedCells[3].Value);
+           
+            Afiliado afil = new Afiliado(nombre, apellido,
+             DateTime.Parse("27/11/1995 00:00:00"), "DNI", dni, "Strangford 1857", "46220932", "M", "Soltero/a", "asdas");
+            ModificacionUsuario modif = new ModificacionUsuario(afil);
+
+
+            modif.Show();
         }
+
+
+        #endregion
+
+       
     }
 }
