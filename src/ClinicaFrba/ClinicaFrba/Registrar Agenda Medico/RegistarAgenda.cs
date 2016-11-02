@@ -76,5 +76,14 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private bool superaLimiteSemanal(){
             return false;
         }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        // ir atras.
+        private void botonAtras_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

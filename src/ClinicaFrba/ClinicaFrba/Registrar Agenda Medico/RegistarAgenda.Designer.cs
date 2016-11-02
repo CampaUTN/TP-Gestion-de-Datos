@@ -42,6 +42,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.botonAtras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +66,13 @@
             this.desde.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.desde.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
+            // botonCancelar
+            // 
+            this.botonCancelar.Location = new System.Drawing.Point(0, 0);
+            this.botonCancelar.Name = "botonCancelar";
+            this.botonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.botonCancelar.TabIndex = 42;
+            // 
             // botonListar
             // 
             this.botonListar.Location = new System.Drawing.Point(585, 52);
@@ -80,12 +90,19 @@
             this.grillaProfesionales.AllowUserToResizeColumns = false;
             this.grillaProfesionales.AllowUserToResizeRows = false;
             this.grillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaProfesionales.Location = new System.Drawing.Point(12, 52);
+            this.grillaProfesionales.Location = new System.Drawing.Point(15, 42);
             this.grillaProfesionales.Name = "grillaProfesionales";
             this.grillaProfesionales.ShowEditingIcon = false;
             this.grillaProfesionales.Size = new System.Drawing.Size(557, 131);
             this.grillaProfesionales.TabIndex = 25;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 41;
             // 
             // inicio
             // 
@@ -94,11 +111,12 @@
             this.inicio.CustomFormat = "";
             this.inicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.inicio.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.inicio.Location = new System.Drawing.Point(232, 218);
+            this.inicio.Location = new System.Drawing.Point(249, 216);
             this.inicio.Margin = new System.Windows.Forms.Padding(5);
             this.inicio.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.inicio.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.inicio.Name = "inicio";
+            this.inicio.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.inicio.RightToLeftLayout = true;
             this.inicio.ShowUpDown = true;
             this.inicio.Size = new System.Drawing.Size(65, 20);
@@ -134,10 +152,17 @@
             "Jueves",
             "Viernes",
             "Sabado"});
-            this.dia.Location = new System.Drawing.Point(49, 218);
+            this.dia.Location = new System.Drawing.Point(54, 218);
             this.dia.Name = "dia";
             this.dia.Size = new System.Drawing.Size(106, 21);
             this.dia.TabIndex = 33;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 23);
+            this.label4.TabIndex = 40;
             // 
             // hasta
             // 
@@ -170,7 +195,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label6.Location = new System.Drawing.Point(166, 218);
+            this.label6.Location = new System.Drawing.Point(183, 216);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 20);
             this.label6.TabIndex = 37;
@@ -196,11 +221,45 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label2.Location = new System.Drawing.Point(11, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(303, 20);
+            this.label2.TabIndex = 43;
+            this.label2.Text = "Seleccion de profesional y especialidad";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label3.Location = new System.Drawing.Point(11, 216);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 20);
+            this.label3.TabIndex = 44;
+            this.label3.Text = "Dia";
+            // 
+            // botonAtras
+            // 
+            this.botonAtras.Location = new System.Drawing.Point(12, 386);
+            this.botonAtras.Name = "botonAtras";
+            this.botonAtras.Size = new System.Drawing.Size(70, 23);
+            this.botonAtras.TabIndex = 45;
+            this.botonAtras.Text = "<- Atrás";
+            this.botonAtras.UseVisualStyleBackColor = true;
+            this.botonAtras.Click += new System.EventHandler(this.botonAtras_Click);
+            // 
             // RegistarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 421);
+            this.Controls.Add(this.botonAtras);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -240,5 +299,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button botonAtras;
     }
 }
