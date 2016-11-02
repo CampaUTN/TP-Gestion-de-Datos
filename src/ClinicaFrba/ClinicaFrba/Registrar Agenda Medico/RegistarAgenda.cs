@@ -72,10 +72,19 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             }
         }
 
-        // todo
+
+
+
+        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
+        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
+        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
         private bool superaLimiteSemanal(){
-            return false;
+            return false; //usar superaLimiteSemanal(nroProfesional), considerando que tengo que tomar tambien
+            //el dia que se quiere agregar
         }
+
+
+
 
         private void label2_Click(object sender, EventArgs e) {
 
