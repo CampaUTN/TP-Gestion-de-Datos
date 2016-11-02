@@ -34,7 +34,6 @@
             this.grillaProfesionales = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.inicio = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
             this.fin = new System.Windows.Forms.DateTimePicker();
             this.dia = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,16 +63,6 @@
             this.desde.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.desde.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
-            // botonCancelar
-            // 
-            this.botonCancelar.Location = new System.Drawing.Point(11, 387);
-            this.botonCancelar.Name = "botonCancelar";
-            this.botonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.botonCancelar.TabIndex = 21;
-            this.botonCancelar.Text = "Salir";
-            this.botonCancelar.UseVisualStyleBackColor = true;
-            this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
-            // 
             // botonListar
             // 
             this.botonListar.Location = new System.Drawing.Point(585, 52);
@@ -98,17 +87,6 @@
             this.grillaProfesionales.TabIndex = 25;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(8, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 40);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Seleccion de profesional\r\n y especialidad";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // inicio
             // 
             this.inicio.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -126,18 +104,6 @@
             this.inicio.Size = new System.Drawing.Size(65, 20);
             this.inicio.TabIndex = 30;
             this.inicio.Value = new System.DateTime(2016, 11, 1, 10, 0, 0, 0);
-            this.inicio.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(8, 218);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 20);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "Dia";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // fin
             // 
@@ -172,17 +138,6 @@
             this.dia.Name = "dia";
             this.dia.Size = new System.Drawing.Size(106, 21);
             this.dia.TabIndex = 33;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(11, 282);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 20);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Valido hasta:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // hasta
             // 
@@ -254,7 +209,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dia);
             this.Controls.Add(this.fin);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.inicio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grillaProfesionales);
@@ -278,7 +232,6 @@
         private System.Windows.Forms.DataGridView grillaProfesionales;
         private System.Windows.Forms.Label label1;
         protected System.Windows.Forms.DateTimePicker inicio;
-        private System.Windows.Forms.Label label3;
         protected System.Windows.Forms.DateTimePicker fin;
         protected System.Windows.Forms.ComboBox dia;
         private System.Windows.Forms.Label label4;
