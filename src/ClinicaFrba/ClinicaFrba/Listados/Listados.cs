@@ -71,15 +71,16 @@ namespace ClinicaFrba.Listados
         private string generarQueryListado1() {
             string where = "";
             if (comboBoxListado1Filtro.SelectedText == "Afiliados")
-                where = "WHERE canc_tipo = 0";
+                where = "canc_tipo = 0 AND ";
             else if (comboBoxListado1Filtro.SelectedText == "Profesionales")
-                where = "WHERE canc_tipo = 1";
+                where = "canc_tipo = 1 AND ";
             string queryListado = "SELECT TOP 5  COUNT(DISTINCT canc_id) AS 'Cancelaciones' , espe_nombre AS 'Especialidad'  " +
                                     "FROM CLINICA.CancelacionesTurnos " +
                                     "JOIN CLINICA.Turnos ON Turnos.turn_id = CancelacionesTurnos.canc_turno " +
                                     "JOIN CLINICA.Horarios ON Horarios.hora_id = Turnos.turn_hora " +
                                     "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
-                                    where +
+                                    "WHERE " + where +
+                                    "hora_fecha BETWEEN '" + dateParaSql(generarFechaDesde()) + "' AND '" + dateParaSql(generarFechaHasta()) + "' " + 
                                     "GROUP BY Horarios.hora_especialidad, espe_nombre " +
                                     "ORDER BY COUNT(DISTINCT canc_id), espe_nombre DESC ";
             return queryListado;
@@ -95,6 +96,7 @@ namespace ClinicaFrba.Listados
                                     "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
                                     "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
                                     "WHERE bono_plan = " + ((KeyValuePair<int,string>) comboBoxListado2Filtro.SelectedItem).Key + " " +
+                                    "AND cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, espe_id, espe_nombre, usua_nombre, usua_apellido " +
                                     "ORDER BY COUNT(DISTINCT cons_id)";
             return queryListado;
@@ -104,9 +106,9 @@ namespace ClinicaFrba.Listados
             string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario' " +
                                     "FROM CLINICA.Horarios " +
                                     "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
-                                    "JOIN CLINICA.Usuarios ON usua_id = prof_id " +
+                                    "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
                                     "WHERE hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " "+
-                                    "AND hora_fecha BETWEEN '" + dateTimeParaSql(generarFechaDesde()) + "' AND '" + dateTimeParaSql(generarFechaHasta()) + "' " + 
+                                    "AND hora_fecha BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, usua_nombre, usua_apellido " +
                                     "ORDER BY COUNT(hora_id)";
             return queryListado;
@@ -123,11 +125,12 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado5() {
-            string queryListado = "SELECT COUNT(cons_id) AS 'Bonos utilizados' , espe_nombre AS 'Especialidad' " +
+            string queryListado = "SELECT TOP 5 COUNT(cons_id) AS 'Bonos utilizados' , espe_nombre AS 'Especialidad' " +
                                     "FROM CLINICA.Consultas " +
                                     "JOIN CLINICA.Turnos ON turn_id = cons_turno " +
                                     "JOIN CLINICA.Horarios ON hora_id = turn_hora " +
                                     "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
+                                    "AND cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY espe_id, espe_nombre " +
                                     "ORDER BY COUNT(cons_id) DESC";
             return queryListado;
@@ -159,6 +162,10 @@ namespace ClinicaFrba.Listados
         
         private String dateTimeParaSql(DateTime dt) {
             return dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+        }
+
+        private String dateParaSql(DateTime dt) {
+            return dt.ToString("yyyy-MM-dd");
         }
 
         private DateTime generarFechaDesde() {

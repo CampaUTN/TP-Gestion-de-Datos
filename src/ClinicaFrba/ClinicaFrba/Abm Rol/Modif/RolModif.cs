@@ -44,7 +44,7 @@ namespace ClinicaFrba.AbmRol
                 SqlDataReader readerDatos = queryObtenerModificable.ExecuteReader();
                 if (readerDatos.Read()) {
                     textBoxNombre.Text = Convert.ToString(readerDatos["role_nombre"]);
-                    checkBoxHabilitado.Checked = Convert.ToBoolean(readerDatos["role_habilitato"]);
+                    checkBoxHabilitado.Checked = Convert.ToBoolean(readerDatos["role_habilitado"]);
                     rolNombre = textBoxNombre.Text;
                 }
                 readerDatos.Close();
@@ -133,7 +133,7 @@ namespace ClinicaFrba.AbmRol
             using (SqlConnection conexion = DBConnection.getConnection()) {                
                 conexion.Open();
 
-                SqlCommand queryUpdate = new SqlCommand("UPDATE CLINICA.Roles SET role_nombre='" + textBoxNombre.Text + "', role_habilitato=" + Convert.ToInt32(checkBoxHabilitado.Checked).ToString() + " WHERE role_id=" + rolId, conexion);
+                SqlCommand queryUpdate = new SqlCommand("UPDATE CLINICA.Roles SET role_nombre='" + textBoxNombre.Text + "', role_habilitado=" + Convert.ToInt32(checkBoxHabilitado.Checked).ToString() + " WHERE role_id=" + rolId, conexion);
                 queryUpdate.ExecuteNonQuery();
 
                 foreach (KeyValuePair<int, string> item in listAsignadas.Items) {

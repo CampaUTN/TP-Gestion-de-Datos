@@ -31,11 +31,11 @@ namespace ClinicaFrba.AbmRol {
             roles.Clear();
             listRoles.Items.Clear();
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre, role_habilitato FROM CLINICA.roles", conexion);
+                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre, role_habilitado FROM CLINICA.roles", conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()) {
-                    if (Convert.ToBoolean(reader["role_habilitato"]))
+                    if (Convert.ToBoolean(reader["role_habilitado"]))
                         roles.Add(new KeyValuePair<int, string>(Int32.Parse(reader["role_id"].ToString()), reader["role_nombre"].ToString()));
                     else
                         roles.Add(new KeyValuePair<int, string>(Int32.Parse(reader["role_id"].ToString()), reader["role_nombre"].ToString() +" (Inhabilitado)"));

@@ -103,7 +103,7 @@ namespace ClinicaFrba.AbmRol
 
         private void buttonGuardar_Click(object sender, EventArgs e) {
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("INSERT INTO CLINICA.Roles(role_nombre, role_habilitato) VALUES('" + textBoxNombre.Text + "', 1)", conexion);
+                SqlCommand query = new SqlCommand("INSERT INTO CLINICA.Roles(role_nombre, role_habilitado) VALUES('" + textBoxNombre.Text + "', 1)", conexion);
                 conexion.Open();
                 try {
                     query.ExecuteNonQuery();

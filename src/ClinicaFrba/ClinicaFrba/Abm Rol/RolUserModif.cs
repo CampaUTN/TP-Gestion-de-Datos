@@ -44,7 +44,7 @@ namespace ClinicaFrba.AbmRol {
                 Utilidades.Utils.llenar(listAsignados, asignados);
                 reader.Close();
 
-                SqlCommand queryRoles = new SqlCommand("SELECT role_id, role_nombre FROM CLINICA.Roles WHERE role_habilitato=1", conexion);
+                SqlCommand queryRoles = new SqlCommand("SELECT role_id, role_nombre FROM CLINICA.Roles WHERE role_habilitado=1", conexion);
                 SqlDataReader readerRoles = queryRoles.ExecuteReader();
                 while (readerRoles.Read()) {
                     KeyValuePair<int, string> item = new KeyValuePair<int, string>(Int32.Parse(readerRoles["role_id"].ToString()), readerRoles["role_nombre"].ToString());

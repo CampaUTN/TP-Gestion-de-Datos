@@ -106,6 +106,9 @@ IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
  IF (OBJECT_ID ('CLINICA.LimiteHoras') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
 
+ IF (OBJECT_ID ('CLINICA.tieneFamilia') IS NOT NULL)
+  DROP FUNCTION CLINICA.tieneFamilia
+
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
@@ -141,7 +144,7 @@ CREATE TABLE CLINICA.Usuarios(
 CREATE TABLE CLINICA.Roles(
     role_id INT IDENTITY NOT NULL,
     role_nombre VARCHAR(225),
-  	role_habilitato TINYINT,
+  	role_habilitado TINYINT,
     PRIMARY KEY (role_id));
 
 
@@ -224,7 +227,7 @@ CREATE TABLE CLINICA.HistorialAfiliado(
     hist_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id));
 
 CREATE TABLE CLINICA.Consultas(
-	cons_id INT PRIMARY KEY NOT NULL,
+	cons_id INT PRIMARY KEY IDENTITY NOT NULL,
   	cons_turno INT FOREIGN KEY REFERENCES CLINICA.Turnos(turn_id), -- nullable
     cons_fechaHoraConsulta DATETIME, -- nullable
     cons_fueConcretada TINYINT, -- nullable
@@ -342,11 +345,13 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
   ORDER BY m.Turno_Numero
   
   	-- Consultas. NO Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
-INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, cons_diagnostico)
-	SELECT DISTINCT m.Turno_Numero, m.Bono_Consulta_Numero, m.Bono_Consulta_Fecha_Impresion, 1, m.Consulta_Sintomas, m.Consulta_Enfermedades
-	FROM gd_esquema.Maestra m
-	WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
-  ORDER BY m.Turno_Numero
+INSERT INTO CLINICA.Consultas(cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, 
+cons_diagnostico)
+
+SELECT DISTINCT m.Turno_Numero, m.Bono_Consulta_Fecha_Impresion, 1, m.Consulta_Sintomas, m.Consulta_Enfermedades
+FROM gd_esquema.Maestra m
+WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
+ORDER BY m.Turno_Numero
 
   -- Para que el admin tenga todos los roles y poder testear
 insert into CLINICA.RolXusuario values (0,1)
@@ -458,7 +463,7 @@ AS
 
 	SELECT rxu.role_id, r.role_nombre 
 	FROM CLINICA.RolXusuario rxu, CLINICA.Roles r 
-	WHERE rxu.usua_id=@userId AND rxu.role_id=r.role_id AND role_habilitato=1
+	WHERE rxu.usua_id=@userId AND rxu.role_id=r.role_id AND role_habilitado=1
 
  END
 GO
@@ -566,6 +571,7 @@ BEGIN
 	RETURN 'NO'
 END
 
+GO
 /* CREO TRIGGERS */
 --TRIGGER QUE VERIFICA EL USUARIO
 USE GD2C2016;
