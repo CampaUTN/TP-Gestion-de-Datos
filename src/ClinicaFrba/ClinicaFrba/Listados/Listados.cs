@@ -103,7 +103,7 @@ namespace ClinicaFrba.Listados
                 queryListado +=     "bono_plan = " + ((KeyValuePair<int,string>) comboBoxListado2Filtro.SelectedItem).Key + " AND ";
                 queryListado +=     "cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, espe_id, espe_nombre, usua_nombre, usua_apellido " +
-                                    "ORDER BY COUNT(DISTINCT cons_id)";
+                                    "ORDER BY COUNT(DISTINCT cons_id) DESC";
             return queryListado;
         }
 
@@ -117,7 +117,7 @@ namespace ClinicaFrba.Listados
                 queryListado +=     "hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " AND ";        
                 queryListado +=     "hora_fecha BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, usua_nombre, usua_apellido " +
-                                    "ORDER BY COUNT(hora_id)";
+                                    "ORDER BY COUNT(hora_id) DESC";
 
             return queryListado;
         }
