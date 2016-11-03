@@ -73,10 +73,10 @@ namespace ClinicaFrba.Listados
 
         private string generarQueryListado1() {
             string where = "";
-            if (comboBoxListado1Filtro.SelectedText == "Afiliados")
-                where = "canc_tipo = 0 AND ";
-            else if (comboBoxListado1Filtro.SelectedText == "Profesionales")
+            if (comboBoxListado1Filtro.SelectedIndex == 0)
                 where = "canc_tipo = 1 AND ";
+            else if (comboBoxListado1Filtro.SelectedIndex == 1)
+                where = "canc_tipo = 2 AND ";
             string queryListado = "SELECT TOP 5  COUNT(DISTINCT canc_id) AS 'Cancelaciones' , espe_nombre AS 'Especialidad'  " +
                                     "FROM CLINICA.CancelacionesTurnos " +
                                     "JOIN CLINICA.Turnos ON Turnos.turn_id = CancelacionesTurnos.canc_turno " +

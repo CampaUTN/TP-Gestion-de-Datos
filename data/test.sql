@@ -369,6 +369,15 @@ SELECT
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL
 
+insert into CLINICA.TipoCancelacion values ('Cancelación Afiliado')
+insert into CLINICA.TipoCancelacion values ('Cancelación Médico')
+
+	-- Cancelaciones. Funciona -- Si un usuario no gasto el bono pero la fecha del turno paso => cancelo el turno
+INSERT INTO CLINICA.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
+SELECT m.Turno_Numero, 'Migración', 1
+FROM gd_esquema.Maestra m
+WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE() -- TODO: Cambiar a la fecha del sistema
+
   -- Para que el admin tenga todos los roles y poder testear
 insert into CLINICA.RolXusuario values (0,1)
 insert into CLINICA.RolXusuario values (0,2)
@@ -429,8 +438,6 @@ insert into CLINICA.EspecialidadXProfesional values (10012,9999)
 insert into CLINICA.Horarios values (9999,10032,'20151013','12:30:00.0000000')
 insert into CLINICA.Horarios values (9999,10032,'20151014','12:30:00.0000000')
 insert into CLINICA.Horarios values (9999,10032,'20151015','12:30:00.0000000')
-
-
 
 
 /* CREO STORE PROCEDURES */
