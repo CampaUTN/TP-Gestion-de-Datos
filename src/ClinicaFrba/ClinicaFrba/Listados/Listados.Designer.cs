@@ -28,81 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dateTimePickerAnio = new System.Windows.Forms.DateTimePicker();
+            this.buttonConsultar = new System.Windows.Forms.Button();
+            this.buttonVolver = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.comboBoxListado2Filtro = new System.Windows.Forms.ComboBox();
-            this.dataGridViewListado2 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dataGridViewListado2 = new System.Windows.Forms.DataGridView();
+            this.comboBoxListado2Filtro = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.comboBoxListado3Filtro = new System.Windows.Forms.ComboBox();
-            this.dataGridViewListado3 = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridViewListado1 = new System.Windows.Forms.DataGridView();
-            this.comboBoxListado1Filtro = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewListado5 = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dataGridViewListado4 = new System.Windows.Forms.DataGridView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dataGridViewListado3 = new System.Windows.Forms.DataGridView();
+            this.comboBoxListado3Filtro = new System.Windows.Forms.ComboBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxListado1Filtro = new System.Windows.Forms.ComboBox();
+            this.dataGridViewListado1 = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.dateTimePickerMesDesde = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerMesHasta = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxSemestre = new System.Windows.Forms.ComboBox();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado2)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado5)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado4)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado3)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado1)).BeginInit();
             this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // dateTimePickerAnio
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(118, 15);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePickerAnio.Location = new System.Drawing.Point(59, 18);
+            this.dateTimePickerAnio.Name = "dateTimePickerAnio";
+            this.dateTimePickerAnio.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePickerAnio.TabIndex = 1;
+            this.dateTimePickerAnio.Value = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
             // 
-            // button1
+            // buttonConsultar
             // 
-            this.button1.Location = new System.Drawing.Point(324, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonConsultar.Location = new System.Drawing.Point(353, 46);
+            this.buttonConsultar.Name = "buttonConsultar";
+            this.buttonConsultar.Size = new System.Drawing.Size(75, 23);
+            this.buttonConsultar.TabIndex = 3;
+            this.buttonConsultar.Text = "Actualizar";
+            this.buttonConsultar.UseVisualStyleBackColor = true;
+            this.buttonConsultar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonVolver
             // 
-            this.button2.Location = new System.Drawing.Point(16, 465);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Volver";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonVolver.Location = new System.Drawing.Point(12, 484);
+            this.buttonVolver.Name = "buttonVolver";
+            this.buttonVolver.Size = new System.Drawing.Size(75, 23);
+            this.buttonVolver.TabIndex = 5;
+            this.buttonVolver.Text = "Volver";
+            this.buttonVolver.UseVisualStyleBackColor = true;
+            this.buttonVolver.Click += new System.EventHandler(this.buttonVolver_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 17);
+            this.label2.Location = new System.Drawing.Point(14, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Ingresar semestre:";
+            this.label2.Text = "Año:";
             // 
             // tabPage2
             // 
@@ -118,34 +124,6 @@
             this.tabPage2.Text = "Listado 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // comboBoxListado2Filtro
-            // 
-            this.comboBoxListado2Filtro.FormattingEnabled = true;
-            this.comboBoxListado2Filtro.Location = new System.Drawing.Point(45, 66);
-            this.comboBoxListado2Filtro.Name = "comboBoxListado2Filtro";
-            this.comboBoxListado2Filtro.Size = new System.Drawing.Size(172, 21);
-            this.comboBoxListado2Filtro.TabIndex = 7;
-            this.comboBoxListado2Filtro.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // dataGridViewListado2
-            // 
-            this.dataGridViewListado2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewListado2.Location = new System.Drawing.Point(6, 106);
-            this.dataGridViewListado2.Name = "dataGridViewListado2";
-            this.dataGridViewListado2.Size = new System.Drawing.Size(406, 259);
-            this.dataGridViewListado2.TabIndex = 6;
-            this.dataGridViewListado2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Filtro:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -158,12 +136,37 @@
             this.textBox2.TabIndex = 9;
             this.textBox2.Text = "Top 5 de los profesionales más consultados por Plan, detallando también bajo\r\nque" +
     " Especialidad.\r\n";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Filtro:";
+            // 
+            // dataGridViewListado2
+            // 
+            this.dataGridViewListado2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListado2.Location = new System.Drawing.Point(6, 106);
+            this.dataGridViewListado2.Name = "dataGridViewListado2";
+            this.dataGridViewListado2.Size = new System.Drawing.Size(406, 259);
+            this.dataGridViewListado2.TabIndex = 6;
+            // 
+            // comboBoxListado2Filtro
+            // 
+            this.comboBoxListado2Filtro.FormattingEnabled = true;
+            this.comboBoxListado2Filtro.Location = new System.Drawing.Point(45, 66);
+            this.comboBoxListado2Filtro.Name = "comboBoxListado2Filtro";
+            this.comboBoxListado2Filtro.Size = new System.Drawing.Size(172, 21);
+            this.comboBoxListado2Filtro.TabIndex = 7;
+            this.comboBoxListado2Filtro.SelectedIndexChanged += new System.EventHandler(this.comboBoxListado2Filtro_SelectedIndexChanged);
             // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.textBox5);
-            this.tabPage5.Controls.Add(this.dataGridView4);
+            this.tabPage5.Controls.Add(this.dataGridViewListado5);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -172,10 +175,30 @@
             this.tabPage5.Text = "Listado 5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // textBox5
+            // 
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox5.Location = new System.Drawing.Point(10, 8);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(5);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(402, 37);
+            this.textBox5.TabIndex = 7;
+            this.textBox5.Text = "Top 5 de las especialidades de médicos con más bonos de consultas\r\nutilizados.";
+            // 
+            // dataGridViewListado5
+            // 
+            this.dataGridViewListado5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListado5.Location = new System.Drawing.Point(6, 106);
+            this.dataGridViewListado5.Name = "dataGridViewListado5";
+            this.dataGridViewListado5.Size = new System.Drawing.Size(406, 259);
+            this.dataGridViewListado5.TabIndex = 6;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.textBox4);
-            this.tabPage4.Controls.Add(this.dataGridView3);
+            this.tabPage4.Controls.Add(this.dataGridViewListado4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -183,6 +206,27 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Listado 4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Location = new System.Drawing.Point(10, 8);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(5);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(402, 37);
+            this.textBox4.TabIndex = 7;
+            this.textBox4.Text = "Top 5 de los afiliados con mayor cantidad de bonos comprados, detallando si\r\npert" +
+    "enece a un grupo familiar.";
+            // 
+            // dataGridViewListado4
+            // 
+            this.dataGridViewListado4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListado4.Location = new System.Drawing.Point(6, 106);
+            this.dataGridViewListado4.Name = "dataGridViewListado4";
+            this.dataGridViewListado4.Size = new System.Drawing.Size(406, 259);
+            this.dataGridViewListado4.TabIndex = 6;
             // 
             // tabPage3
             // 
@@ -198,31 +242,6 @@
             this.tabPage3.Text = "Listado 3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // comboBoxListado3Filtro
-            // 
-            this.comboBoxListado3Filtro.FormattingEnabled = true;
-            this.comboBoxListado3Filtro.Location = new System.Drawing.Point(45, 66);
-            this.comboBoxListado3Filtro.Name = "comboBoxListado3Filtro";
-            this.comboBoxListado3Filtro.Size = new System.Drawing.Size(172, 21);
-            this.comboBoxListado3Filtro.TabIndex = 11;
-            // 
-            // dataGridViewListado3
-            // 
-            this.dataGridViewListado3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewListado3.Location = new System.Drawing.Point(6, 106);
-            this.dataGridViewListado3.Name = "dataGridViewListado3";
-            this.dataGridViewListado3.Size = new System.Drawing.Size(406, 259);
-            this.dataGridViewListado3.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 69);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Filtro:";
-            // 
             // textBox3
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -235,7 +254,32 @@
             this.textBox3.TabIndex = 13;
             this.textBox3.Text = "Top 5 de los profesionales con menos horas trabajadas filtrando por Plan y\r\nEspec" +
     "ialidad. (Aclararon solo especialidad por el google groups)";
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Filtro:";
+            // 
+            // dataGridViewListado3
+            // 
+            this.dataGridViewListado3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListado3.Location = new System.Drawing.Point(6, 106);
+            this.dataGridViewListado3.Name = "dataGridViewListado3";
+            this.dataGridViewListado3.Size = new System.Drawing.Size(406, 259);
+            this.dataGridViewListado3.TabIndex = 10;
+            // 
+            // comboBoxListado3Filtro
+            // 
+            this.comboBoxListado3Filtro.FormattingEnabled = true;
+            this.comboBoxListado3Filtro.Location = new System.Drawing.Point(45, 66);
+            this.comboBoxListado3Filtro.Name = "comboBoxListado3Filtro";
+            this.comboBoxListado3Filtro.Size = new System.Drawing.Size(172, 21);
+            this.comboBoxListado3Filtro.TabIndex = 11;
+            this.comboBoxListado3Filtro.SelectedIndexChanged += new System.EventHandler(this.comboBoxListado3Filtro_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -250,15 +294,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listado 1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // dataGridViewListado1
+            // textBox1
             // 
-            this.dataGridViewListado1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewListado1.Location = new System.Drawing.Point(6, 106);
-            this.dataGridViewListado1.Name = "dataGridViewListado1";
-            this.dataGridViewListado1.Size = new System.Drawing.Size(406, 259);
-            this.dataGridViewListado1.TabIndex = 2;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(10, 8);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(402, 37);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Text = "Top 5 de las especialidades que más se registraron cancelaciones, tanto de afilia" +
+    "dos como de profesionales.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Filtro:";
             // 
             // comboBoxListado1Filtro
             // 
@@ -273,28 +330,13 @@
             this.comboBoxListado1Filtro.TabIndex = 3;
             this.comboBoxListado1Filtro.SelectedIndexChanged += new System.EventHandler(this.comboBoxListado1Filtro_SelectedIndexChanged);
             // 
-            // label1
+            // dataGridViewListado1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Filtro:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(10, 8);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(402, 37);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Top 5 de las especialidades que más se registraron cancelaciones, tanto de afilia" +
-    "dos como de profesionales.";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.dataGridViewListado1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListado1.Location = new System.Drawing.Point(6, 106);
+            this.dataGridViewListado1.Name = "dataGridViewListado1";
+            this.dataGridViewListado1.Size = new System.Drawing.Size(406, 259);
+            this.dataGridViewListado1.TabIndex = 2;
             // 
             // tabControl1
             // 
@@ -303,75 +345,95 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(11, 54);
+            this.tabControl1.Location = new System.Drawing.Point(12, 81);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(428, 397);
             this.tabControl1.TabIndex = 4;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // textBox4
+            // dateTimePickerMesDesde
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.Location = new System.Drawing.Point(10, 8);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(5);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(402, 37);
-            this.textBox4.TabIndex = 7;
-            this.textBox4.Text = "Top 5 de los afiliados con mayor cantidad de bonos comprados, detallando si\r\npert" +
-    "enece a un grupo familiar.";
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.dateTimePickerMesDesde.Location = new System.Drawing.Point(59, 51);
+            this.dateTimePickerMesDesde.Name = "dateTimePickerMesDesde";
+            this.dateTimePickerMesDesde.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePickerMesDesde.TabIndex = 7;
+            this.dateTimePickerMesDesde.ValueChanged += new System.EventHandler(this.dateTimePickerMesDesde_ValueChanged);
             // 
-            // dataGridView3
+            // dateTimePickerMesHasta
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 106);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(406, 259);
-            this.dataGridView3.TabIndex = 6;
+            this.dateTimePickerMesHasta.Location = new System.Drawing.Point(203, 51);
+            this.dateTimePickerMesHasta.Name = "dateTimePickerMesHasta";
+            this.dateTimePickerMesHasta.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePickerMesHasta.TabIndex = 8;
+            this.dateTimePickerMesHasta.ValueChanged += new System.EventHandler(this.dateTimePickerMesHasta_ValueChanged);
             // 
-            // textBox5
+            // label5
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.Location = new System.Drawing.Point(10, 8);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(5);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(402, 37);
-            this.textBox5.TabIndex = 7;
-            this.textBox5.Text = "Top 5 de las especialidades de médicos con más bonos de consultas\r\nutilizados.";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Desde:";
             // 
-            // dataGridView4
+            // label6
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(6, 106);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(406, 259);
-            this.dataGridView4.TabIndex = 6;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(160, 51);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Hasta:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(159, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Semestre:";
+            // 
+            // comboBoxSemestre
+            // 
+            this.comboBoxSemestre.FormattingEnabled = true;
+            this.comboBoxSemestre.Items.AddRange(new object[] {
+            "1º",
+            "2º"});
+            this.comboBoxSemestre.Location = new System.Drawing.Point(220, 17);
+            this.comboBoxSemestre.Name = "comboBoxSemestre";
+            this.comboBoxSemestre.Size = new System.Drawing.Size(35, 21);
+            this.comboBoxSemestre.TabIndex = 12;
+            this.comboBoxSemestre.SelectedIndexChanged += new System.EventHandler(this.comboBoxSemestre_SelectedIndexChanged);
             // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 500);
+            this.ClientSize = new System.Drawing.Size(452, 513);
+            this.Controls.Add(this.comboBoxSemestre);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dateTimePickerMesHasta);
+            this.Controls.Add(this.dateTimePickerMesDesde);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonVolver);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.buttonConsultar);
+            this.Controls.Add(this.dateTimePickerAnio);
             this.Name = "Listados";
-            this.Text = "Form1";
+            this.Text = "Listado Estadístico";
             this.Load += new System.EventHandler(this.Listados_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado2)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado5)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado4)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado3)).EndInit();
@@ -379,8 +441,6 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListado1)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,9 +448,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DateTimePicker dateTimePickerAnio;
+        private System.Windows.Forms.Button buttonConsultar;
+        private System.Windows.Forms.Button buttonVolver;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBox2;
@@ -411,8 +471,14 @@
         private System.Windows.Forms.DataGridView dataGridViewListado1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridViewListado5;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dataGridViewListado4;
+        private System.Windows.Forms.DateTimePicker dateTimePickerMesDesde;
+        private System.Windows.Forms.DateTimePicker dateTimePickerMesHasta;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBoxSemestre;
     }
 }
