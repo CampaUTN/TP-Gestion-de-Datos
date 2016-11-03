@@ -39,6 +39,7 @@ namespace ClinicaFrba.Listados
 
             /* LISTADO 2 */
             List<KeyValuePair<int, string>> planes = Utilidades.Utils.getPlanes();
+            planes.Insert(0, new KeyValuePair<int, string>(-1, "Todos"));
             Utilidades.Utils.llenar(comboBoxListado2Filtro, planes);
             comboBoxListado2Filtro.SelectedIndex=0;
 
@@ -48,7 +49,9 @@ namespace ClinicaFrba.Listados
             foreach (DataRow especialidad in especialdidades.Rows) {
                 listaEspecialidades.Add(new KeyValuePair<int, string>(Convert.ToInt32(especialidad["Especialidad"]), Convert.ToString(especialidad["espe_nombre"])));
             }
+            listaEspecialidades.Insert(0, new KeyValuePair<int, string>(-1, "Todas"));
             Utilidades.Utils.llenar(comboBoxListado3Filtro, listaEspecialidades);
+            
             comboBoxListado3Filtro.SelectedIndex = 0;
 
             /* LISTADO 4 */
@@ -95,22 +98,27 @@ namespace ClinicaFrba.Listados
                                     "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
                                     "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
                                     "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
-                                    "WHERE bono_plan = " + ((KeyValuePair<int,string>) comboBoxListado2Filtro.SelectedItem).Key + " " +
-                                    "AND cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
+                                    "WHERE ";
+            if (comboBoxListado2Filtro.SelectedIndex !=0)
+                queryListado +=     "bono_plan = " + ((KeyValuePair<int,string>) comboBoxListado2Filtro.SelectedItem).Key + " AND ";
+                queryListado +=     "cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, espe_id, espe_nombre, usua_nombre, usua_apellido " +
                                     "ORDER BY COUNT(DISTINCT cons_id)";
             return queryListado;
         }
 
-        private string generarQueryListado3() {
+        private string generarQueryListado3(){
             string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario' " +
                                     "FROM CLINICA.Horarios " +
                                     "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
                                     "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
-                                    "WHERE hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " "+
-                                    "AND hora_fecha BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
+                                    "WHERE ";
+            if (comboBoxListado3Filtro.SelectedIndex !=0)
+                queryListado +=     "hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " AND ";        
+                queryListado +=     "hora_fecha BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY prof_id, usua_nombre, usua_apellido " +
                                     "ORDER BY COUNT(hora_id)";
+
             return queryListado;
         }
 

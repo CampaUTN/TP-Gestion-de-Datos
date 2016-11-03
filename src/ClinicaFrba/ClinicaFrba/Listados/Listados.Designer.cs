@@ -142,9 +142,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(7, 69);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Filtro:";
+            this.label3.Text = "Plan:";
             // 
             // dataGridViewListado2
             // 
@@ -260,9 +260,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Filtro:";
+            this.label4.Text = "Especialidad:";
             // 
             // dataGridViewListado3
             // 
@@ -275,7 +275,7 @@
             // comboBoxListado3Filtro
             // 
             this.comboBoxListado3Filtro.FormattingEnabled = true;
-            this.comboBoxListado3Filtro.Location = new System.Drawing.Point(45, 66);
+            this.comboBoxListado3Filtro.Location = new System.Drawing.Point(83, 66);
             this.comboBoxListado3Filtro.Name = "comboBoxListado3Filtro";
             this.comboBoxListado3Filtro.Size = new System.Drawing.Size(172, 21);
             this.comboBoxListado3Filtro.TabIndex = 11;
@@ -313,9 +313,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Filtro:";
+            this.label1.Text = "Tipo de usuario:";
             // 
             // comboBoxListado1Filtro
             // 
@@ -324,7 +324,7 @@
             "Afiliados",
             "Profesionales",
             "Ambos"});
-            this.comboBoxListado1Filtro.Location = new System.Drawing.Point(45, 66);
+            this.comboBoxListado1Filtro.Location = new System.Drawing.Point(96, 66);
             this.comboBoxListado1Filtro.Name = "comboBoxListado1Filtro";
             this.comboBoxListado1Filtro.Size = new System.Drawing.Size(172, 21);
             this.comboBoxListado1Filtro.TabIndex = 3;
