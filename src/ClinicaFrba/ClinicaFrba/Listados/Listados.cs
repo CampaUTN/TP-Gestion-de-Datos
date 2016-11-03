@@ -19,21 +19,28 @@ namespace ClinicaFrba.Listados
         }
 
         private void Listados_Load(object sender, EventArgs e) {
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "MMMM/yyyy";
-            dateTimePicker1.ShowUpDown = true;
-            dateTimePicker1.MaxDate = DateTime.Today;
+            dateTimePickerAnio.Format = DateTimePickerFormat.Custom;
+            dateTimePickerAnio.CustomFormat = "yyyy";
+            dateTimePickerAnio.ShowUpDown = true;
+            dateTimePickerAnio.MaxDate = DateTime.Today;
+
+            dateTimePickerMesDesde.Format = DateTimePickerFormat.Custom;
+            dateTimePickerMesDesde.CustomFormat = "MMMM";
+            dateTimePickerMesDesde.ShowUpDown = true;
+
+            dateTimePickerMesHasta.Format = DateTimePickerFormat.Custom;
+            dateTimePickerMesHasta.CustomFormat = "MMMM";
+            dateTimePickerMesHasta.ShowUpDown = true;
+
+            comboBoxSemestre.SelectedIndex = 0;
 
             /* LISTADO 1*/
-                
-            //llenarDataGridView(dataGridViewListado1, generarQueryListado1());
             comboBoxListado1Filtro.SelectedIndex = 0;
 
             /* LISTADO 2 */
             List<KeyValuePair<int, string>> planes = Utilidades.Utils.getPlanes();
             Utilidades.Utils.llenar(comboBoxListado2Filtro, planes);
             comboBoxListado2Filtro.SelectedIndex=0;
-            //llenarDataGridView(dataGridViewListado2, generarQueryListado2());
 
             /* LISTADO 3 */
             DataTable especialdidades = Utilidades.Utils.getEspecialidades();
@@ -43,11 +50,23 @@ namespace ClinicaFrba.Listados
             }
             Utilidades.Utils.llenar(comboBoxListado3Filtro, listaEspecialidades);
             comboBoxListado3Filtro.SelectedIndex = 0;
-            //llenarDataGridView(dataGridViewListado3, generarQueryListado3());
-            
 
+            /* LISTADO 4 */
+            llenarDataGridView(dataGridViewListado4, generarQueryListado4());
+
+            /* LISTADO 5 */
+            llenarDataGridView(dataGridViewListado5, generarQueryListado5());
+
+            // Los listados con combobox se rellenan solos
         }
 
+        private void llenarListados(){
+            llenarDataGridView(dataGridViewListado1, generarQueryListado1());
+            llenarDataGridView(dataGridViewListado2, generarQueryListado2());
+            llenarDataGridView(dataGridViewListado3, generarQueryListado3());
+            llenarDataGridView(dataGridViewListado4, generarQueryListado4());
+            llenarDataGridView(dataGridViewListado5, generarQueryListado5());
+        }
 
         private string generarQueryListado1() {
             string where = "";
@@ -67,7 +86,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado2() {
-            string queryListado = "SELECT TOP 5 COUNT(DISTINCT cons_id) AS 'Consultas', usua_nombre AS 'Nombre', usua_apellido AS 'Apellido', espe_nombre AS 'Especialidad' " +
+            string queryListado = "SELECT TOP 5 COUNT(DISTINCT cons_id) AS 'Consultas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', espe_nombre AS 'Especialidad' " +
                                     "FROM CLINICA.Bonos " +
                                     "JOIN CLINICA.Consultas ON cons_id = bono_nroConsulta " +
                                     "JOIN CLINICA.Turnos ON turn_id = cons_turno " +
@@ -82,13 +101,35 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado3() {
-            string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', usua_nombre AS 'Nombre', usua_apellido AS 'Apellido' " +
+            string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario' " +
                                     "FROM CLINICA.Horarios " +
                                     "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
                                     "JOIN CLINICA.Usuarios ON usua_id = prof_id " +
                                     "WHERE hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " "+
+                                    "AND hora_fecha BETWEEN '" + dateTimeParaSql(generarFechaDesde()) + "' AND '" + dateTimeParaSql(generarFechaHasta()) + "' " + 
                                     "GROUP BY prof_id, usua_nombre, usua_apellido " +
                                     "ORDER BY COUNT(hora_id)";
+            return queryListado;
+        }
+
+        private string generarQueryListado4() {
+            string queryListado = "SELECT TOP 5 SUM(comp_cantidad) AS 'Bonos comprados', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', CLINICA.tieneFamilia(usua_id) AS 'Tiene familia' " +
+                                    "FROM CLINICA.ComprasBonos " +
+                                    "JOIN CLINICA.Afiliados afil ON afil_id = comp_afil " +
+                                    "JOIN CLINICA.Usuarios ON usua_id = afil_usuario " +
+                                    "GROUP BY comp_afil, usua_nombre, usua_apellido, usua_id " +
+                                    "ORDER BY SUM(comp_cantidad) DESC";
+            return queryListado;
+        }
+
+        private string generarQueryListado5() {
+            string queryListado = "SELECT COUNT(cons_id) AS 'Bonos utilizados' , espe_nombre AS 'Especialidad' " +
+                                    "FROM CLINICA.Consultas " +
+                                    "JOIN CLINICA.Turnos ON turn_id = cons_turno " +
+                                    "JOIN CLINICA.Horarios ON hora_id = turn_hora " +
+                                    "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
+                                    "GROUP BY espe_id, espe_nombre " +
+                                    "ORDER BY COUNT(cons_id) DESC";
             return queryListado;
         }
 
@@ -105,66 +146,61 @@ namespace ClinicaFrba.Listados
         private void comboBoxListado1Filtro_SelectedIndexChanged(object sender, EventArgs e) {
             if (comboBoxListado1Filtro.Items.Contains(comboBoxListado1Filtro.Text)){
                 llenarDataGridView(dataGridViewListado1, generarQueryListado1());
-                MessageBox.Show("ACTUALIZANDO DATAGRIDVIEW");
             }
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e) {
-
+        private void comboBoxListado2Filtro_SelectedIndexChanged(object sender, EventArgs e) {
+            llenarDataGridView(dataGridViewListado2, generarQueryListado2());
         }
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e) {
-
+        private void comboBoxListado3Filtro_SelectedIndexChanged(object sender, EventArgs e) {
+            llenarDataGridView(dataGridViewListado3, generarQueryListado3());
+        }
+        
+        private String dateTimeParaSql(DateTime dt) {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) {
-
+        private DateTime generarFechaDesde() {
+            return new DateTime(dateTimePickerAnio.Value.Year, dateTimePickerMesDesde.Value.Month, dateTimePickerMesDesde.Value.Day);
         }
 
-        private void tabPage1_Click(object sender, EventArgs e) {
-
+        private DateTime generarFechaHasta() {
+            return new DateTime(dateTimePickerAnio.Value.Year, dateTimePickerMesHasta.Value.Month, DateTime.DaysInMonth(dateTimePickerAnio.Value.Year, dateTimePickerMesHasta.Value.Month), 23, 59, 59);
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
+        private void comboBoxSemestre_SelectedIndexChanged(object sender, EventArgs e) {
+            if (comboBoxSemestre.SelectedIndex == 0) {
+                dateTimePickerMesDesde.MinDate = new DateTime(DateTime.Now.Year, 1, 1);
+                dateTimePickerMesDesde.MaxDate = new DateTime(DateTime.Now.Year, 6, 1);
+                dateTimePickerMesHasta.MinDate = new DateTime(DateTime.Now.Year, 1, 1);
+                dateTimePickerMesHasta.MaxDate = new DateTime(DateTime.Now.Year, 6, 1);
+            } else {
+                dateTimePickerMesDesde.MaxDate = new DateTime(DateTime.Now.Year, 12, 1);
+                dateTimePickerMesDesde.MinDate = new DateTime(DateTime.Now.Year, 7, 1);
+                dateTimePickerMesHasta.MaxDate = new DateTime(DateTime.Now.Year, 12, 1);
+                dateTimePickerMesHasta.MinDate = new DateTime(DateTime.Now.Year, 7, 1);
+            }
+            dateTimePickerMesDesde.Value = dateTimePickerMesDesde.MinDate;
+            dateTimePickerMesHasta.Value = dateTimePickerMesHasta.MaxDate;
+        }
 
+        private void dateTimePickerMesDesde_ValueChanged(object sender, EventArgs e) {
+            if (dateTimePickerMesHasta.Value < dateTimePickerMesDesde.Value && dateTimePickerMesDesde.Value > dateTimePickerMesHasta.MinDate && dateTimePickerMesDesde.Value < dateTimePickerMesHasta.MaxDate)
+                dateTimePickerMesHasta.Value = dateTimePickerMesDesde.Value;
+        }
+
+        private void dateTimePickerMesHasta_ValueChanged(object sender, EventArgs e) {
+            if (dateTimePickerMesHasta.Value < dateTimePickerMesDesde.Value && dateTimePickerMesHasta.Value > dateTimePickerMesDesde.MinDate && dateTimePickerMesHasta.Value < dateTimePickerMesDesde.MaxDate)
+                dateTimePickerMesDesde.Value = dateTimePickerMesHasta.Value;
+        }
+
+        private void buttonVolver_Click(object sender, EventArgs e) {
+            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e) {
-
+            llenarListados();
         }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e) {
-
-        }
-
-
     }
 }
