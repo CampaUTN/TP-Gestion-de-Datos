@@ -291,6 +291,32 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
+
+        static public void actualizarAfiliado(Afiliado afiliado)
+        {
+            int codPlan = Utilidades.Utils.getIdDesdePlan(afiliado.getPlan());
+            //long usuaId = Utilidades.Utils.getIdDesdeUserName(afiliado.getUsername());
+
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.modificarAfiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@username", afiliado.getUsuaId());
+            comando.Parameters.AddWithValue("@direccion", afiliado.getDireccion());
+            comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
+            comando.Parameters.AddWithValue("@plan", codPlan);
+            comando.Parameters.AddWithValue("@estado", afiliado.getEstadoCivil());
+            comando.Parameters.AddWithValue("@hijos", afiliado.getHijosACargo());
+
+            conexion.Open();
+            comando.ExecuteReader();
+        }
+
+
+
+
+
         static public int obtenerNumeroAfiliadoRecienRegistrado()
         {
             int afil_id = 0;

@@ -206,7 +206,7 @@
             this.selecEstadoCivil.Name = "selecEstadoCivil";
             this.selecEstadoCivil.Size = new System.Drawing.Size(106, 21);
             this.selecEstadoCivil.TabIndex = 14;
-            this.selecEstadoCivil.SelectedIndexChanged += new System.EventHandler(this.selecEstadoCivil_SelectedIndexChanged);
+            this.selecEstadoCivil.SelectedIndexChanged += new System.EventHandler(this.selecEstadoCivil_SelectedIndexChanged_1);
             // 
             // labelEstadoCivil
             // 

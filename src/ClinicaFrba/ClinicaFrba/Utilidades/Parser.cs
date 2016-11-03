@@ -10,7 +10,7 @@ namespace ClinicaFrba.Utilidades
     class Parser
     {
         public static bool esEntero(TextBox textbox) {
-            return esEntero(textbox.Text);        
+            return esEntero(textbox.Text) && textbox.Text != "" ;        
         }
 
         public static bool esEntero(string texto){

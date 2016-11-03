@@ -22,6 +22,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private string plan;
 
         //datos del afiliado como usuario
+        private long usua_id;
         private string username;
         private string password;
         private string mail;
@@ -110,6 +111,12 @@ namespace ClinicaFrba.Abm_Afiliado
             return idAfiliadoRaiz;
         }
 
+
+        public long getUsuaId()
+        {
+            return usua_id;
+        }
+
         #endregion
 
         #region SETTERS
@@ -121,6 +128,16 @@ namespace ClinicaFrba.Abm_Afiliado
             this.password = password;
         }
 
+        public void setDireccion(string direccion)
+        {
+            this.direccion = direccion;
+        }
+
+        public void setTelefono(int telefono)
+        {
+            this.telefono = telefono;
+        }
+
         public void setMail(string mail){
             this.mail = mail;
         }
@@ -129,6 +146,10 @@ namespace ClinicaFrba.Abm_Afiliado
             this.hijosACargo = cant;
         }
 
+        public void setEstadoCivil(string estado)
+        {
+            this.estadoCivil = estado;
+        }
 
         public void setCodigo(int cod)
         {
@@ -138,6 +159,13 @@ namespace ClinicaFrba.Abm_Afiliado
         public bool esAfiliadoRaiz() {
             return this.afiliadoRaiz;
         }
+
+        public void setUsuaId(long usua_id)
+        {
+            this.usua_id = usua_id;
+        }
+
+
 
         #endregion
 

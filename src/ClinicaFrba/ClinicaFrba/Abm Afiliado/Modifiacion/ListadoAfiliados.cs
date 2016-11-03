@@ -153,9 +153,13 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 mail = Convert.ToString(reader[4]);
                 genero = Convert.ToString(reader[5]);
            
-            return new Afiliado(nombre, apellido, fechaNac, tipoDoc, dni, direccion, telefono, genero, estado, plan);
+           Afiliado afiliado = new Afiliado(nombre, apellido, fechaNac, tipoDoc, dni, direccion, telefono, genero, estado, plan);
 
-
+           afiliado.setUsuaId(cod_usuario);
+            
+            
+            
+            return afiliado;
         }
 
 

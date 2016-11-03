@@ -26,8 +26,9 @@ namespace ClinicaFrba.Abm_Afiliado
             InitializeComponent();
 
             Utils.llenar(this.selecPlan,Utils.getPlanes());
-            cargarCajitas();
 
+            cargarCajitas();
+            this.selectorFecha.MaxDate = DateTime.Today;
             this.logErrores = new Logger();
         }
 
@@ -38,10 +39,13 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             //chequeo que todos los campos se hayan completado
             if (!faltaCompletarDatos()){
+                MessageBox.Show("se completaron todos los datos necesarios");
                 //chequeo que los datos sean correctos
                 this.validarDatosIngresados();
                 if (!this.logErrores.huboErrores())
                 {
+
+                    MessageBox.Show("no hubo error");
                     //metodo que sobreescribe Modificacion
                     realizarOperacion();
                 }
@@ -49,14 +53,14 @@ namespace ClinicaFrba.Abm_Afiliado
                     MessageBox.Show("Error en el ingreso de datos:\n" + this.logErrores.mostrarLog() + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
                    
                 }
-                this.logErrores.resetear();
             }
             else {
                 MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);
       
             }
+            this.logErrores.resetear();
         }
-        
+                
         //me baso en un string para la seleccion del genero
         private void selecFem_CheckedChanged(object sender, EventArgs e){
             sexo = "F";
@@ -69,6 +73,8 @@ namespace ClinicaFrba.Abm_Afiliado
         //limpio los datos que el usuario completo
         private void botonLimpiar_Click(object sender, EventArgs e){
             this.limpiarCajitas();
+          //  this.selecEstadoCivil.ResetText();
+           // this.selecPlan.ResetText();
         }
 
         private void limpiarCajitas(){
@@ -150,7 +156,9 @@ namespace ClinicaFrba.Abm_Afiliado
             this.cajasTexto.Add(textBoxApellido);
             this.cajasTexto.Add(textBoxNroDoc);
             this.cajasTexto.Add(textBoxDireccion);
-            this.cajasTexto.Add(textBoxTelefono);
+
+            this.selecPlan.ResetText();
+            //this.cajasTexto.Add(textBoxTelefono);
         }
 
 
@@ -176,17 +184,14 @@ namespace ClinicaFrba.Abm_Afiliado
 
         #region VALIDACION DE LOS DATOS
 
-        private bool faltaCompletarDatos() {
+        public virtual bool faltaCompletarDatos() {
             return cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
         }
 
-        private void validarDatosIngresados() {
+        public virtual void validarDatosIngresados() {
 
-            if (!Parser.esEntero(textBoxTelefono)){
-                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");
-                textBoxTelefono.Clear();
-            }
 
+            MessageBox.Show("Pase por aca");
             if (!Parser.esEntero(textBoxNroDoc)){
                 this.logErrores.agregarAlLog("El numero de documento debe ser numerico");
                 textBoxNroDoc.Clear();
@@ -206,8 +211,16 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.logErrores.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");   
                 textBoxApellido.Clear();
             }
+
+            if (!Parser.esEntero(textBoxTelefono))
+            {
+                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");
+
+                textBoxTelefono.Clear();
+            }
         }
 
+        
        private void setearCantidadHijos(){
             if (checkBoxHijos.Checked){
                 this.afiliado.setHijosACargo(int.Parse(textBoxCantHijos.Text));
@@ -217,7 +230,11 @@ namespace ClinicaFrba.Abm_Afiliado
         public void inhabilitarAgregadoAfiliados(){
             this.checkBoxHijos.Enabled = false;
 
-            //his.afiliado.setAfiliadoRaiz(false);
+        }
+
+        private void selecEstadoCivil_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
 
     }
