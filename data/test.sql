@@ -344,14 +344,22 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	WHERE m.Turno_Numero IS NOT NULL 
   ORDER BY m.Turno_Numero
   
-  	-- Consultas. NO Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
+  	-- Consultas. Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
 INSERT INTO CLINICA.Consultas(cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, 
 cons_diagnostico)
-
 SELECT DISTINCT m.Turno_Numero, m.Bono_Consulta_Fecha_Impresion, 1, m.Consulta_Sintomas, m.Consulta_Enfermedades
 FROM gd_esquema.Maestra m
 WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
 ORDER BY m.Turno_Numero
+
+	-- Compra bonos. Funciona
+INSERT INTO CLINICA.ComprasBonos(comp_afil,comp_cantidad,comp_precioFinal)
+SELECT 
+	(SELECT afil_id FROM CLINICA.Usuarios JOIN CLINICA.Afiliados 
+	ON usua_id = afil_usuario WHERE m.Paciente_Dni = usua_nroDoc), 1, 0  -- No sabemos el precio del bono en ese momento
+FROM gd_esquema.Maestra m
+WHERE m.Compra_Bono_Fecha IS NOT NULL
+
 
   -- Para que el admin tenga todos los roles y poder testear
 insert into CLINICA.RolXusuario values (0,1)
