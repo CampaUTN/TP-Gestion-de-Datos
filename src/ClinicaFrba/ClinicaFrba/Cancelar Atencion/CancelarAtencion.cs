@@ -16,5 +16,20 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             InitializeComponent();
         }
+
+        // Boton de borrar
+        private void button2_Click(object sender, EventArgs e) {
+            // borrar lo seleccionado
+            this.listar();
+        }
+
+        private void botonListar_Click(object sender, EventArgs e) {
+            this.listar();
+        }
+
+        private void listar() {
+            // todo: lista las atenciones si es un afiliado. si es un medico lista la agenda ordenada
+            // por fecha o da la opcion de q el usuario ingrese 2 fechas y cancelar todo lo q este entre esas fechas.
+        }
     }
 }

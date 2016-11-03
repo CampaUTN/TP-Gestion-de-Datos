@@ -36,7 +36,6 @@
             this.inicio = new System.Windows.Forms.DateTimePicker();
             this.fin = new System.Windows.Forms.DateTimePicker();
             this.dia = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.hasta = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -157,13 +156,6 @@
             this.dia.Size = new System.Drawing.Size(106, 21);
             this.dia.TabIndex = 33;
             // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 23);
-            this.label4.TabIndex = 40;
-            // 
             // hasta
             // 
             this.hasta.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -265,7 +257,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.hasta);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.dia);
             this.Controls.Add(this.fin);
             this.Controls.Add(this.inicio);
@@ -293,7 +284,6 @@
         protected System.Windows.Forms.DateTimePicker inicio;
         protected System.Windows.Forms.DateTimePicker fin;
         protected System.Windows.Forms.ComboBox dia;
-        private System.Windows.Forms.Label label4;
         protected System.Windows.Forms.DateTimePicker hasta;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
