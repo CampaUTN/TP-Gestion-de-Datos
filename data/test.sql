@@ -103,6 +103,9 @@ IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
 
+ IF (OBJECT_ID ('CLINICA.LimiteHoras') IS NOT NULL)
+  DROP FUNCTION CLINICA.verificarUsuario
+
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'CLINICA')
@@ -580,3 +583,31 @@ AS
 GO
 
 --TRIGGER DE LA AGENDA PROFESIONAL
+CREATE TRIGGER LimiteHoras ON CLINICA.Horarios INSTEAD OF INSERT
+AS
+BEGIN
+
+	DECLARE @prof_id INT = (select hora_profesional from inserted)
+
+
+	IF (select top 1 count(*)/2
+	from Clinica.horarios
+	where hora_profesional = @prof_id
+	UNION
+	select top 1 count(*)/2
+	from Clinica.horarios
+	where hora_profesional = @prof_id
+	group by hora_profesional, datepart(WEEK,hora_fecha)
+	order by count(*)/2 DESC) > 48
+		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,2)
+	ELSE
+		BEGIN
+		IF(select isnull(count(*),0)
+		from CLINICA.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio)
+		where H.hora_profesional = @prof_id) > 0
+			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,2)
+		ELSE
+			INSERT INTO Horarios select * from inserted
+		END
+END
+GO
