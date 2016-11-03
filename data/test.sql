@@ -99,6 +99,10 @@ IF OBJECT_ID('CLINICA.ingresarAfiliado') IS NOT NULL
 IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
  DROP PROCEDURE CLINICA.agregarFamiliar
 
+IF OBJECT_ID('CLINICA.modificarAfiliado') IS NOT NULL
+ DROP PROCEDURE CLINICA.modificarAfiliado
+
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -577,6 +581,28 @@ BEGIN
 
 	SET IDENTITY_INSERT CLINICA.Afiliados OFF
 END
+GO
+
+
+
+USE GD2C2016;
+GO
+--PROCEDURE PARA MODIFICAR AL AFILIADO
+CREATE PROCEDURE CLINICA.modificarAfiliado(@username BIGINT,@direccion VARCHAR(255), @telefono DECIMAL(18,0),@plan INT, @estado VARCHAR(20), @hijos INT)
+AS 
+	BEGIN
+		DECLARE @afil INT
+		SET @afil = (SELECT afil_id FROM CLINICA.Afiliados WHERE afil_usuario = @username)
+
+		UPDATE CLINICA.Usuarios set usua_direccion = @direccion WHERE usua_id =@username  AND usua_direccion != @direccion
+		--UPDATE CLINICA.Afiliados set afil_estadoCivil = @estado WHERE afil_id = @afil AND @estado != afil_estadoCivil
+
+		UPDATE CLINICA.Usuarios set usua_telefono = @telefono WHERE usua_id =@username  AND usua_telefono != @telefono
+		
+		UPDATE CLINICA.Afiliados set afil_estadoCivil = @estado WHERE afil_usuario = @username  AND afil_estadoCivil != @estado
+				OR afil_estadoCivil IS NULL
+
+	END
 GO
 
 USE GD2C2016;
