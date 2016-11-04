@@ -101,6 +101,9 @@ IF OBJECT_ID('CLINICA.modificarAfiliado') IS NOT NULL
 IF OBJECT_ID('CLINICA.darDeBaja') IS NOT NULL
  DROP PROCEDURE CLINICA.darDeBaja 
 
+IF OBJECT_ID('CLINICA.eliminarAfiliado') IS NOT NULL
+ DROP PROCEDURE CLINICA.eliminarAfiliado
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -108,8 +111,14 @@ IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
  IF (OBJECT_ID ('CLINICA.LimiteHoras') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
 
- IF (OBJECT_ID ('CLINICA.tieneFamilia') IS NOT NULL)
+IF (OBJECT_ID ('CLINICA.tieneFamilia') IS NOT NULL)
   DROP FUNCTION CLINICA.tieneFamilia
+
+IF OBJECT_ID('CLINICA.triggerElimTurnos') IS NOT NULL
+	DROP TRIGGER CLINICA.triggerElimTurnos
+
+IF OBJECT_ID('CLINICA.triggerElimUsua') IS NOT NULL
+	DROP TRIGGER CLINICA.triggerEliminarUser
 
 /* DROP SCHEMA */
 
@@ -640,6 +649,34 @@ GO
 
 USE GD2C2016;
 GO
+CREATE PROCEDURE CLINICA.eliminarAfiliado(@user BIGINT)
+AS
+BEGIN 
+	DECLARE @afil INT
+
+	SET @afil = (SELECT afil_id FROM CLINICA.Afiliados WHERE afil_usuario = @user)
+	DELETE FROM CLINICA.ComprasBonos
+			WHERE comp_afil = @afil
+
+	DELETE FROM CLINICA.Bonos
+			WHERE bono_afilCompra = @afil
+				OR bono_afilUsado = @afil
+		
+	DELETE FROM CLINICA.Turnos
+			WHERE turn_afiliado = @afil
+	--TODO PASAR A UN TRIGGER 
+	DELETE FROM CLINICA.Afiliados
+			WHERE afil_id = @afil
+
+	DELETE FROM CLINICA.Usuarios
+			WHERE usua_id = @user
+		
+	END
+GO
+
+USE GD2C2016;
+GO
+
 --FUNCION QUE DEVUELVE SI UN USUARIO TIENE FAMILIA
 CREATE FUNCTION CLINICA.tieneFamilia(@usuario_id BIGINT)
 RETURNS CHAR(2)
@@ -699,4 +736,36 @@ BEGIN
 			INSERT INTO Horarios select * from inserted
 		END
 END
+GO
+
+
+CREATE TRIGGER CLINICA.triggerElimTurnos ON CLINICA.Turnos INSTEAD OF DELETE
+AS
+	BEGIN 
+		DELETE FROM CLINICA.CancelacionesTurnos
+			WHERE canc_turno IN (SELECT d.turn_id FROM deleted d)
+
+		DELETE FROM CLINICA.Consultas
+			WHERE cons_turno IN (SELECT d.turn_id FROM deleted d)
+
+		DELETE FROM CLINICA.Turnos
+			WHERE turn_id IN (SELECT d.turn_id FROM deleted d)
+
+	END	
+GO
+
+
+USE GD2C2016;
+GO
+CREATE TRIGGER CLINICA.triggerEliminarUser ON CLINICA.Usuarios INSTEAD OF DELETE
+AS
+	BEGIN
+		
+		DELETE FROM CLINICA.RolXusuario
+			WHERE usua_id IN (SELECT d.usua_id FROM deleted d)
+
+		DELETE FROM CLINICA.Usuarios
+			WHERE usua_id IN (SELECT d.usua_id FROM deleted d)
+	
+	END
 GO

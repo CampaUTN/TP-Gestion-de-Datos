@@ -1,4 +1,5 @@
-﻿using ClinicaFrba.Utilidades;
+﻿using ClinicaFrba.Abm_Afiliado.Baja;
+using ClinicaFrba.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,16 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         {
             InitializeComponent();
            // conexion = new Connection();
+        }
+
+        public static ListadoAfiliados ListadoBaja()
+        {
+            ListadoAfiliados listado = new ListadoAfiliados();
+            listado.botonEliminar.Visible = true;
+            listado.botonEliminar.Enabled = true;
+            listado.botonModificar.Enabled = false;
+
+            return listado;
         }
         
       #region METODOS QUE SE ACTIVAN CUANDO SE ACCIONA UN BOTON O CAMBIA UN VALOR
@@ -170,12 +181,26 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void botonDesactivar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea dar de baja logica a este usuario?","Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Desea dar de baja logica a este afiliado?","Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Afiliado afil = this.completarDatosDeAfiliado();
 
                 Utilidades.Utils.bajaLogicaA(afil);
                 MessageBox.Show("Usuario dado de baja");
+            }
+        }
+
+        private void botonEliminar_Click(object sender, EventArgs e)
+        {
+            BajaAfiliado baja;
+
+            if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                baja = new BajaAfiliado();
+                Afiliado afil = this.completarDatosDeAfiliado();
+
+                baja.eliminarAfiliado(afil);
+                MessageBox.Show("Usuario eliminado");
             }
         }
 

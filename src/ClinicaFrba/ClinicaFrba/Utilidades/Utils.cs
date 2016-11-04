@@ -428,7 +428,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.darDeBajaA", conexion);
+            SqlCommand comando = new SqlCommand("CLINICA.darDeBaja", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@user", afiliado.getUsuaId());

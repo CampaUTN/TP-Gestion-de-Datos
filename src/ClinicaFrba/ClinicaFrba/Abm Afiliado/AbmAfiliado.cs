@@ -38,7 +38,9 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void selecBaja_CheckedChanged(object sender, EventArgs e)
         {
-            //formulario = new Baja();
+            formulario = ListadoAfiliados.ListadoBaja();
+
+            
         }
 
         private void selecModif_CheckedChanged(object sender, EventArgs e)
