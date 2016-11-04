@@ -256,8 +256,8 @@ CREATE TABLE CLINICA.ComprasBonos(
 	comp_id INT NOT NULL IDENTITY PRIMARY KEY,
   	comp_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     comp_cantidad INT NOT NULL ,
-	comp_precioFinal DECIMAL(12,2) NOT NULL),
-	comp_fechaCompra DATETIME;
+	comp_precioFinal DECIMAL(12,2) NOT NULL,
+	comp_fechaCompra DATETIME);
 
 
 USE GD2C2016;
@@ -390,10 +390,10 @@ FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL 
 
 	-- Compra bonos. Funciona
-INSERT INTO CLINICA.ComprasBonos(comp_afil,comp_cantidad,comp_precioFinal)
+INSERT INTO CLINICA.ComprasBonos(comp_afil,comp_cantidad,comp_precioFinal,comp_fechaCompra)
 SELECT 
 	(SELECT afil_id FROM CLINICA.Usuarios JOIN CLINICA.Afiliados 
-	ON usua_id = afil_usuario WHERE m.Paciente_Dni = usua_nroDoc), 1, m.Plan_Med_Precio_Bono_Consulta  -- No sabemos el precio del bono en ese momento
+	ON usua_id = afil_usuario WHERE m.Paciente_Dni = usua_nroDoc), 1, m.Plan_Med_Precio_Bono_Consulta , m.Compra_Bono_Fecha -- No sabemos el precio del bono en ese momento
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL
 
