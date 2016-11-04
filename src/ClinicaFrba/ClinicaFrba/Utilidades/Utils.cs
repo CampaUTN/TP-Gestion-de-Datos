@@ -19,8 +19,8 @@ namespace ClinicaFrba.Utilidades
 
             items.ForEach(item => combo.Items.Add(item));
 
-            if (combo.Items.Count > 0)
-                combo.SelectedItem = combo.Items[0];
+            //if (combo.Items.Count > 0)
+              //  combo.SelectedItem = combo.Items[0];
         }
 
         static public void llenar(ListBox list, List<KeyValuePair<int,string>> items)
@@ -30,8 +30,8 @@ namespace ClinicaFrba.Utilidades
 
             items.ForEach(item => list.Items.Add(item));
 
-            if (list.Items.Count > 0)
-                list.SelectedItem = list.Items[0];
+            //if (list.Items.Count > 0)
+              //  list.SelectedItem = list.Items[0];
         }
 
         static public SqlCommand crearSp(string nombreSp, List<KeyValuePair<string, object>> parametros, SqlConnection conexion)
@@ -292,9 +292,9 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
-
         static public void actualizarAfiliado(Afiliado afiliado)
         {
+
             int codPlan = Utilidades.Utils.getIdDesdePlan(afiliado.getPlan());
             //long usuaId = Utilidades.Utils.getIdDesdeUserName(afiliado.getUsername());
 
@@ -303,6 +303,7 @@ namespace ClinicaFrba.Utilidades
             SqlCommand comando = new SqlCommand("CLINICA.modificarAfiliado", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
+            MessageBox.Show(afiliado.getPlan());
             comando.Parameters.AddWithValue("@username", afiliado.getUsuaId());
             comando.Parameters.AddWithValue("@direccion", afiliado.getDireccion());
             comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
@@ -313,7 +314,6 @@ namespace ClinicaFrba.Utilidades
             conexion.Open();
             comando.ExecuteReader();
         }
-
 
 
 
@@ -402,5 +402,41 @@ namespace ClinicaFrba.Utilidades
 
             return reader;
         }
+
+
+        static public string getNombrePlan(int plan)
+        {
+            string nombre = "";
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("SELECT plan_nombre FROM CLINICA.Planes WHERE plan_id = @id", conexion);
+            comando.Parameters.AddWithValue("@id", plan);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                nombre = Convert.ToString(reader[0]);
+            }
+
+            return nombre;
+        }
+
+        static public void bajaLogicaA(Afiliado afiliado)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.darDeBajaA", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@user", afiliado.getUsuaId());
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
+
     }
 }

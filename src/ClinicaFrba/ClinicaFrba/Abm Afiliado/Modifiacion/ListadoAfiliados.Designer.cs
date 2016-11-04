@@ -43,6 +43,8 @@
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonModificar = new System.Windows.Forms.Button();
+            this.botonDesactivar = new System.Windows.Forms.Button();
+            this.botonEliminar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).BeginInit();
             this.SuspendLayout();
@@ -201,6 +203,27 @@
             this.botonModificar.UseVisualStyleBackColor = true;
             this.botonModificar.Click += new System.EventHandler(this.botonModificar_Click);
             // 
+            // botonDesactivar
+            // 
+            this.botonDesactivar.Enabled = false;
+            this.botonDesactivar.Location = new System.Drawing.Point(290, 419);
+            this.botonDesactivar.Name = "botonDesactivar";
+            this.botonDesactivar.Size = new System.Drawing.Size(75, 23);
+            this.botonDesactivar.TabIndex = 12;
+            this.botonDesactivar.Text = "Desactivar";
+            this.botonDesactivar.UseVisualStyleBackColor = true;
+            this.botonDesactivar.Click += new System.EventHandler(this.botonDesactivar_Click);
+            // 
+            // botonEliminar
+            // 
+            this.botonEliminar.Location = new System.Drawing.Point(198, 419);
+            this.botonEliminar.Name = "botonEliminar";
+            this.botonEliminar.Size = new System.Drawing.Size(75, 23);
+            this.botonEliminar.TabIndex = 13;
+            this.botonEliminar.Text = "Eliminar";
+            this.botonEliminar.UseVisualStyleBackColor = true;
+            this.botonEliminar.Visible = false;
+            // 
             // ListadoAfiliados
             // 
             this.AcceptButton = this.botonBuscar;
@@ -209,6 +232,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonCancelar;
             this.ClientSize = new System.Drawing.Size(484, 454);
+            this.Controls.Add(this.botonEliminar);
+            this.Controls.Add(this.botonDesactivar);
             this.Controls.Add(this.botonModificar);
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.botonLimpiar);
@@ -243,5 +268,7 @@
         private System.Windows.Forms.CheckBox checkBoxNombre;
         private System.Windows.Forms.CheckBox checkBoxDoc;
         private System.Windows.Forms.CheckBox checkBoxApellido;
+        private System.Windows.Forms.Button botonDesactivar;
+        private System.Windows.Forms.Button botonEliminar;
     }
 }

@@ -165,7 +165,9 @@ namespace ClinicaFrba.Abm_Afiliado
             this.usua_id = usua_id;
         }
 
-
+        public void setPlan(string plan) {
+            this.plan = plan;
+        }
 
         #endregion
 

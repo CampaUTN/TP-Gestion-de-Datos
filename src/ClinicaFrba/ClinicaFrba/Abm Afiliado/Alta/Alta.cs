@@ -39,13 +39,10 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             //chequeo que todos los campos se hayan completado
             if (!faltaCompletarDatos()){
-                MessageBox.Show("se completaron todos los datos necesarios");
                 //chequeo que los datos sean correctos
                 this.validarDatosIngresados();
                 if (!this.logErrores.huboErrores())
                 {
-
-                    MessageBox.Show("no hubo error");
                     //metodo que sobreescribe Modificacion
                     realizarOperacion();
                 }
@@ -73,34 +70,24 @@ namespace ClinicaFrba.Abm_Afiliado
         //limpio los datos que el usuario completo
         private void botonLimpiar_Click(object sender, EventArgs e){
             this.limpiarCajitas();
+            selecPlan.ResetText();
+            selecEstadoCivil.ResetText();
+
+            selecPlan.SelectedItem = null;
+            selecEstadoCivil.SelectedItem = null;
           //  this.selecEstadoCivil.ResetText();
-           // this.selecPlan.ResetText();
         }
 
         private void limpiarCajitas(){
             foreach (TextBox cajita in cajasTexto){
                 cajita.Clear();
             }
+
+            this.selecPlan.ResetText();
+            this.selecEstadoCivil.ResetText();
             this.checkBoxHijos.CheckState = CheckState.Unchecked;
         }
 
-
-        private void selecEstadoCivil_SelectedIndexChanged(object sender, EventArgs e){
-            int estado = selecEstadoCivil.SelectedIndex;
-            if (estado.Equals(1) || estado.Equals(3)){
-                //this.botonAgregarFamiliar.Enabled = true;
-            }
-            else{
-                //this.botonAgregarFamiliar.Enabled = false;
-            }
-
-            /*Me fijo si el valor seleccionado es 1 o 3
-             * 0- Soltero/a  1- Casado/a
-               2- Viudo/a    3- Concubinato
-               4- Divorciado/a
-             */
-        }
-        
         private void botonCancelar_Click(object sender, EventArgs e){
             if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes){
                 this.Close();
@@ -185,7 +172,12 @@ namespace ClinicaFrba.Abm_Afiliado
         #region VALIDACION DE LOS DATOS
 
         public virtual bool faltaCompletarDatos() {
-            return cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
+
+            bool seEligioUnPlan = selecPlan.SelectedItem != null;
+            bool seEligioEstadoCivil = selecEstadoCivil.SelectedItem != null;
+            bool cajasVacias = cajasTexto.Any(cajita => cajita.Text.Length.Equals(0));
+
+            return !seEligioUnPlan || !seEligioEstadoCivil || cajasVacias;
         }
 
         public virtual void validarDatosIngresados() {
@@ -218,6 +210,8 @@ namespace ClinicaFrba.Abm_Afiliado
 
                 textBoxTelefono.Clear();
             }
+
+            
         }
 
         
