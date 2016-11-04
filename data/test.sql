@@ -256,7 +256,8 @@ CREATE TABLE CLINICA.ComprasBonos(
 	comp_id INT NOT NULL IDENTITY PRIMARY KEY,
   	comp_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     comp_cantidad INT NOT NULL ,
-	comp_precioFinal DECIMAL(12,2) NOT NULL);
+	comp_precioFinal DECIMAL(12,2) NOT NULL),
+	comp_fechaCompra DATETIME;
 
 
 USE GD2C2016;

@@ -77,15 +77,18 @@ namespace ClinicaFrba.Compra_Bono
             {
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal)";
+                string insert = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
                 SqlCommand comando = new SqlCommand(insert, conexion);
                 comando.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                 comando.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
                 comando.Parameters.AddWithValue("@precioFinal", (int)this.contadorBonos.Value * this.precioPlan);
+                comando.Parameters.AddWithValue("@fechaCompra", DateTime.Now);
 
                 conexion.Open();
 
                 comando.ExecuteNonQuery();
+
+                MessageBox.Show("Compra realizada con exito");
             }
             else
             {
