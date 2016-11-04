@@ -26,7 +26,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.userActivo = userActivo;
             this.profesional = profesional;
 
-            MessageBox.Show("Profesiona: " + profesional);
+            //MessageBox.Show("Profesiona: " + profesional); Lo use para verificar el tema de que se puede seleccionar cualquier campo de la fila
 
             this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
             

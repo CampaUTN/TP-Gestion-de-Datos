@@ -367,6 +367,8 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	FROM gd_esquema.Maestra m
 	WHERE m.Turno_Numero IS NOT NULL 
   ORDER BY m.Turno_Numero
+  SET IDENTITY_INSERT CLINICA.Turnos OFF 
+  GO
 
 
   	-- Consultas. Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
@@ -411,6 +413,8 @@ insert into CLINICA.RolXusuario values (0,3)
 insert into CLINICA.Afiliados values (0,555558,'Casado',3) --usuario, plan, estado civ, hijos
 insert into CLINICA.Administradores values (0)  --usario
 insert into CLINICA.Profesionales values (9999,0,null) --prof if, user, algo
+update CLINICA.Usuarios set usua_nombre= 'NombreAdmin' where usua_id=0
+update CLINICA.Usuarios set usua_apellido= 'ApellidoAdmin' where usua_id=0
 ---
 
 
