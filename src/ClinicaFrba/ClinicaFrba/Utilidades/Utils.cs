@@ -162,8 +162,9 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getProfesionalesDeEspecialidad(string filtroEspe) 
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre=@filtroEspe", conexion);
-            comando.Parameters.AddWithValue("@filtroEspe", filtroEspe);
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre like @filtroEspe", conexion); // en vez de LIKE, =
+            //comando.Parameters.AddWithValue("@filtroEspe", filtroEspe);
+            comando.Parameters.AddWithValue("@filtroEspe", "%" + filtroEspe + "%");
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);

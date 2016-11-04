@@ -115,7 +115,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO CLINICA.Turnos values (@afiliado, @hora, 1)"; ///VER QUE HACER CON TURN_ID!!!!!
+                string insert = "INSERT INTO CLINICA.Turnos values (@afiliado, @hora, 1)"; 
                 SqlCommand comando = new SqlCommand(insert, conexion);
                 comando.Parameters.AddWithValue("@afiliado", afiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
