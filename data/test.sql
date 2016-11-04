@@ -1,8 +1,6 @@
 USE GD2C2016;
 GO
 
-
-
 /* Eliminación de los objetos preexistentes */
 
 IF OBJECT_ID('CLINICA.RolXfuncionalidad','U') IS NOT NULL
@@ -65,11 +63,12 @@ IF OBJECT_ID('CLINICA.TipoEspecialidad','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
     DROP TABLE CLINICA.Usuarios;
 
-/* DROP FUNCTIONS! 
+    
 
+
+/* DROP FUNCTIONS! 
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
-
   */
 
 
@@ -98,10 +97,9 @@ IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
 
 IF OBJECT_ID('CLINICA.modificarAfiliado') IS NOT NULL
  DROP PROCEDURE CLINICA.modificarAfiliado
- 
-IF OBJECT_ID('CLINICA.darDeBajaA','U') IS NOT NULL
-    DROP PROCEDURE CLINICA.darDeBajaA;   
 
+IF OBJECT_ID('CLINICA.darDeBaja') IS NOT NULL
+ DROP PROCEDURE CLINICA.darDeBaja 
 
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
@@ -269,13 +267,9 @@ GO
 
  /*
 CREATE INDEX CLINICA ON CLINICA.Contacto (mail);
-
 CREATE INDEX I_Cliente ON CLINICA.Cliente (cli_nombre, cli_apellido);
-
 CREATE UNIQUE INDEX I_Empresa ON CLINICA.Empresa (emp_razon_soc, emp_cuit);
-
 CREATE INDEX I_Publicacion ON CLINICA.Publicacion (cod_rubro, descripcion);
-
 */ /* TODO: PONER NUESTROS INDICES SEGUN Q USEMOS MAS */
 
 USE GD2C2016;
@@ -632,10 +626,10 @@ AS
 GO
 
 
---PROCEDURE QUE DA DE BAJA!
 USE GD2C2016;
 GO
-CREATE PROCEDURE CLINICA.darDeBajaA(@user BIGINT)
+--PROCEDURE QUE DA DE BAJA!
+CREATE PROCEDURE CLINICA.darDeBaja(@user BIGINT)
 AS
 BEGIN
 	UPDATE CLINICA.Usuarios
@@ -675,6 +669,8 @@ AS
 	END 
 GO
 
+USE GD2C2016;
+GO
 --TRIGGER DE LA AGENDA PROFESIONAL
 CREATE TRIGGER LimiteHoras ON CLINICA.Horarios INSTEAD OF INSERT
 AS
