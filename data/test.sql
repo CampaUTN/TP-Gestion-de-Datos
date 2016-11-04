@@ -68,12 +68,12 @@ IF OBJECT_ID('CLINICA.Usuarios','U') IS NOT NULL
     
 
 
-/* DROP FUNCTIONS! */
+/* DROP FUNCTIONS! 
 
 IF (OBJECT_ID ('CLINICA._algo_') IS NOT NULL)
   DROP FUNCTION CLINICA._algo_
 
-
+  */
 
 
 /* DROP PROCEDURES! */
@@ -209,12 +209,19 @@ CREATE TABLE CLINICA.Afiliados(
   	afil_estadoCivil VARCHAR(20),
   	afil_cantidadHijos INT DEFAULT 0);
 
+/*
 CREATE TABLE CLINICA.Turnos(
 	turn_id INT NOT NULL PRIMARY KEY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
     turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
-  
+ */
+ CREATE TABLE CLINICA.Turnos(
+	turn_id INT NOT NULL PRIMARY KEY IDENTITY,
+  	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id), 
+    turn_hora INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Horarios(hora_id), 
+    turn_activo TINYINT NOT NULL);
+
 CREATE TABLE CLINICA.TipoCancelacion(
 	tipo_id INT PRIMARY KEY IDENTITY,
   	tipo_detalle VARCHAR(256));
@@ -339,6 +346,7 @@ INSERT INTO CLINICA.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_pr
   GROUP BY Turno_Numero, Turno_Fecha, Especialidad_Codigo, Medico_Dni
   
     -- Turnos. Funciona
+	/* 
 INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
                                    FROM CLINICA.Afiliados
@@ -347,7 +355,20 @@ INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	FROM gd_esquema.Maestra m
 	WHERE m.Turno_Numero IS NOT NULL 
   ORDER BY m.Turno_Numero
-  
+  */
+  -- PRUEBO ALGO
+
+  SET IDENTITY_INSERT CLINICA.Turnos ON 
+  INSERT INTO CLINICA.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
+	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
+                                   FROM CLINICA.Afiliados
+                                   			join CLINICA.Usuarios on (afil_usuario = usua_id)
+                                   WHERE usua_nroDoc = m.Paciente_Dni AND usua_nroDoc IS NOT NULL), (SELECT hora_id FROM CLINICA.Horarios WHERE hora_fecha=CONVERT(DATE,Turno_Fecha) AND hora_inicio=CONVERT(TIME,Turno_Fecha) AND Medico_Dni=hora_profesional), 1 -- asumimos que todos los turnos de la base estan activos (no cancelados).
+	FROM gd_esquema.Maestra m
+	WHERE m.Turno_Numero IS NOT NULL 
+  ORDER BY m.Turno_Numero
+
+
   	-- Consultas. Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
 SET IDENTITY_INSERT CLINICA.Consultas ON
 INSERT INTO CLINICA.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, 
