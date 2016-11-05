@@ -107,6 +107,9 @@ IF OBJECT_ID('CLINICA.eliminarAfiliado') IS NOT NULL
 IF OBJECT_ID('CLINICA.registrarConsulta') IS NOT NULL
     DROP PROCEDURE CLINICA.registrarConsulta
 
+IF OBJECT_ID('CLINICA.registrarResultadoConsulta ') IS NOT NULL
+    DROP PROCEDURE CLINICA.registrarResultadoConsulta 
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -126,6 +129,7 @@ IF OBJECT_ID('CLINICA.triggerElimUsua') IS NOT NULL
 IF OBJECT_ID('CLINICA.LimiteHoras') IS NOT NULL
 	DROP TRIGGER CLINICA.LimiteHoras
 	
+
 
 /* DROP SCHEMA */
 
@@ -710,6 +714,18 @@ AS
 
 
 	END
+GO
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE CLINICA.registrarResultadoConsulta(@consulta INT, @concretada TINYINT , @sintomas VARCHAR(256), @diagnostico VARCHAR(512))
+AS 
+BEGIN
+	UPDATE CLINICA.Consultas
+		SET cons_fueConcretada = @concretada, cons_sintomas = @sintomas , cons_diagnostico = @diagnostico
+		WHERE cons_id = @consulta
+END
+
 GO
 
 USE GD2C2016;

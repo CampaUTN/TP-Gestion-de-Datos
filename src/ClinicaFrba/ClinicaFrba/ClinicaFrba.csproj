@@ -286,6 +286,9 @@
     <EmbeddedResource Include="Registro Llegada\RegistroLlegada.resx">
       <DependentUpon>RegistroLlegada.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado\RegistroResultado.resx">
+      <DependentUpon>RegistroResultado.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
