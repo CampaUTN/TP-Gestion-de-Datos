@@ -10,8 +10,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 {
     public partial class RegistarAgenda : Form
     {
-        private string profesional_id;
-        private string especialidad_id;
         private DateTime horaInicio, horaFin;
         private int numeroDia;
         private Logger logErrores;
@@ -28,10 +26,13 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         public RegistarAgenda() {
             InitializeComponent();
             this.logErrores = new Logger();
+            horaInicio = inicio.Value;
+            horaFin = fin.Value;
         }
 
         //todo ver si pasa de mes al pasar el limite de 30/31 dias.
         public virtual void cargarHorario(){
+            int rowindex = grillaProfesionales.CurrentCell.RowIndex;
             List<Horario> horarios = new List<Horario>();
             Horario horario;
             DateTime hora;
@@ -42,7 +43,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             while (fecha <= hasta.Value) {
                 hora = horaInicio;
                 while (hora.AddMinutes(30) <= horaFin) {
-                    horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fecha.Add(hora.TimeOfDay));
+                    horario = new Horario(Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].ToString()), Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString()), fecha.Add(hora.TimeOfDay));
                     horarios.Add(horario);
                     hora = hora.AddMinutes(30);
                 }
@@ -91,8 +92,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (grillaProfesionales.SelectedCells.Count > 0) {
                 int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                profesional_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
-                especialidad_id = grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString();
             }else{
                 MessageBox.Show("Seleccione un profesional.", "Error", MessageBoxButtons.OK);
             }
@@ -111,8 +110,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 return;
             }
             int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-            profesional_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
-            especialidad_id = grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString();
             if (horarioValido(horaInicio) && horarioValido(horaFin)) {
                 try{
                 cargarHorario();
