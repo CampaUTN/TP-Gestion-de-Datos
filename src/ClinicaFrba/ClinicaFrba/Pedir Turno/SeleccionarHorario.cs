@@ -126,6 +126,8 @@ namespace ClinicaFrba.Pedir_Turno
 
                 MessageBox.Show("El turno se ha registrado correctamente");
 
+                this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
+
             }
         }
 
