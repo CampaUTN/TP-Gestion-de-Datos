@@ -60,6 +60,7 @@
             this.textAfiliado.Name = "textAfiliado";
             this.textAfiliado.Size = new System.Drawing.Size(123, 20);
             this.textAfiliado.TabIndex = 1;
+            this.textAfiliado.TextChanged += new System.EventHandler(this.textAfiliado_TextChanged);
             // 
             // labelAfiliado
             // 
