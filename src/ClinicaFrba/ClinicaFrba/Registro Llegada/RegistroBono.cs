@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicaFrba.Utilidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +15,16 @@ namespace ClinicaFrba.Registro_Llegada
     {
         string consulta = "SELECT* FROM CLINICA.Bonos WHERE bono_afilUsado IS NULL AND bono_afilCompra =";
 
-        public RegistroBono(string id)
+        int nroAfiliado;
+        int nroTurno;
+
+        public RegistroBono(string id, int turno)
         {
             InitializeComponent();
+
+            this.nroTurno = turno;
+
+            int.TryParse(id, out nroAfiliado);
 
             consulta = consulta + id;
             DBConnection.cargarPlanilla(listaBonos,
@@ -31,6 +39,18 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void verAfil_Click(object sender, EventArgs e)
         {
-               }
+
+            int nroBono = Convert.ToInt32(listaBonos.SelectedCells[0].Value);
+
+            Utils.registrarConsulta(nroTurno, nroBono, nroAfiliado);
+            MessageBox.Show("Llegada a la consulta efectuada");
+
+
+        }
+
+        private void listaBonos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            botonSelecBono.Enabled = true;
+        }
     }
 }

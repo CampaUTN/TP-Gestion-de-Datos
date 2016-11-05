@@ -438,5 +438,22 @@ namespace ClinicaFrba.Utilidades
             SqlDataReader reader = comando.ExecuteReader();
         }
 
+
+
+        static public void registrarConsulta(int turno, int bono, int afiliado)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.registrarConsulta", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@turno", turno);
+            comando.Parameters.AddWithValue("@bono", bono);
+            comando.Parameters.AddWithValue("@afil", afiliado);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
+
     }
 }

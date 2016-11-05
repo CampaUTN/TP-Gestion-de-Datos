@@ -44,7 +44,7 @@
             // 
             // espe_nombre
             // 
-            this.espe_nombre.Location = new System.Drawing.Point(24, 44);
+            this.espe_nombre.Location = new System.Drawing.Point(24, 40);
             this.espe_nombre.Name = "espe_nombre";
             this.espe_nombre.Size = new System.Drawing.Size(175, 20);
             this.espe_nombre.TabIndex = 0;
@@ -52,7 +52,7 @@
             // labelFiltroEspecialidad
             // 
             this.labelFiltroEspecialidad.AutoSize = true;
-            this.labelFiltroEspecialidad.Location = new System.Drawing.Point(22, 28);
+            this.labelFiltroEspecialidad.Location = new System.Drawing.Point(22, 26);
             this.labelFiltroEspecialidad.Name = "labelFiltroEspecialidad";
             this.labelFiltroEspecialidad.Size = new System.Drawing.Size(112, 13);
             this.labelFiltroEspecialidad.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // botonListarProfesionales
             // 
-            this.botonListarProfesionales.Location = new System.Drawing.Point(208, 42);
+            this.botonListarProfesionales.Location = new System.Drawing.Point(208, 39);
             this.botonListarProfesionales.Name = "botonListarProfesionales";
             this.botonListarProfesionales.Size = new System.Drawing.Size(75, 23);
             this.botonListarProfesionales.TabIndex = 2;
@@ -75,18 +75,18 @@
             this.planillaProfesionales.AllowUserToResizeColumns = false;
             this.planillaProfesionales.AllowUserToResizeRows = false;
             this.planillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.planillaProfesionales.Location = new System.Drawing.Point(21, 63);
+            this.planillaProfesionales.Location = new System.Drawing.Point(9, 58);
             this.planillaProfesionales.Name = "planillaProfesionales";
             this.planillaProfesionales.RowHeadersVisible = false;
             this.planillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.planillaProfesionales.Size = new System.Drawing.Size(424, 223);
+            this.planillaProfesionales.Size = new System.Drawing.Size(436, 238);
             this.planillaProfesionales.TabIndex = 3;
             this.planillaProfesionales.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
             // 
             // botonVerTurnos
             // 
             this.botonVerTurnos.Enabled = false;
-            this.botonVerTurnos.Location = new System.Drawing.Point(24, 307);
+            this.botonVerTurnos.Location = new System.Drawing.Point(24, 316);
             this.botonVerTurnos.Name = "botonVerTurnos";
             this.botonVerTurnos.Size = new System.Drawing.Size(93, 25);
             this.botonVerTurnos.TabIndex = 4;
@@ -97,7 +97,7 @@
             // botonAtras
             // 
             this.botonAtras.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.botonAtras.Location = new System.Drawing.Point(24, 502);
+            this.botonAtras.Location = new System.Drawing.Point(25, 606);
             this.botonAtras.Name = "botonAtras";
             this.botonAtras.Size = new System.Drawing.Size(77, 27);
             this.botonAtras.TabIndex = 5;
@@ -111,7 +111,7 @@
             this.groupProfesionales.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupProfesionales.Location = new System.Drawing.Point(3, 8);
             this.groupProfesionales.Name = "groupProfesionales";
-            this.groupProfesionales.Size = new System.Drawing.Size(451, 293);
+            this.groupProfesionales.Size = new System.Drawing.Size(451, 302);
             this.groupProfesionales.TabIndex = 6;
             this.groupProfesionales.TabStop = false;
             this.groupProfesionales.Text = "Seleccione un Profesional";
@@ -119,18 +119,18 @@
             // listadoTurnos
             // 
             this.listadoTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listadoTurnos.Location = new System.Drawing.Point(24, 338);
+            this.listadoTurnos.Location = new System.Drawing.Point(12, 344);
             this.listadoTurnos.Name = "listadoTurnos";
             this.listadoTurnos.RowHeadersVisible = false;
             this.listadoTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listadoTurnos.Size = new System.Drawing.Size(424, 158);
+            this.listadoTurnos.Size = new System.Drawing.Size(436, 251);
             this.listadoTurnos.TabIndex = 7;
             this.listadoTurnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoTurnos_CellClick);
             // 
             // botonSelecAfil
             // 
             this.botonSelecAfil.Enabled = false;
-            this.botonSelecAfil.Location = new System.Drawing.Point(318, 502);
+            this.botonSelecAfil.Location = new System.Drawing.Point(318, 606);
             this.botonSelecAfil.Name = "botonSelecAfil";
             this.botonSelecAfil.Size = new System.Drawing.Size(130, 27);
             this.botonSelecAfil.TabIndex = 8;
@@ -145,7 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonAtras;
-            this.ClientSize = new System.Drawing.Size(469, 541);
+            this.ClientSize = new System.Drawing.Size(466, 647);
             this.Controls.Add(this.botonSelecAfil);
             this.Controls.Add(this.botonVerTurnos);
             this.Controls.Add(this.listadoTurnos);
