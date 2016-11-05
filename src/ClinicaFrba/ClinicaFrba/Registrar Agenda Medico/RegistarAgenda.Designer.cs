@@ -44,6 +44,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.botonAtras = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +122,7 @@
             this.inicio.Size = new System.Drawing.Size(65, 20);
             this.inicio.TabIndex = 30;
             this.inicio.Value = new System.DateTime(2016, 11, 1, 10, 0, 0, 0);
+            this.inicio.ValueChanged += new System.EventHandler(this.inicio_ValueChanged);
             // 
             // fin
             // 
@@ -139,6 +141,7 @@
             this.fin.Size = new System.Drawing.Size(65, 20);
             this.fin.TabIndex = 32;
             this.fin.Value = new System.DateTime(2016, 11, 1, 20, 0, 0, 0);
+            this.fin.ValueChanged += new System.EventHandler(this.fin_ValueChanged);
             // 
             // dia
             // 
@@ -172,6 +175,7 @@
             this.hasta.Size = new System.Drawing.Size(95, 20);
             this.hasta.TabIndex = 35;
             this.hasta.Value = new System.DateTime(2017, 5, 20, 0, 0, 0, 0);
+            this.hasta.ValueChanged += new System.EventHandler(this.hasta_ValueChanged);
             // 
             // label5
             // 
@@ -244,11 +248,23 @@
             this.botonAtras.UseVisualStyleBackColor = true;
             this.botonAtras.Click += new System.EventHandler(this.botonAtras_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label4.Location = new System.Drawing.Point(12, 282);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 20);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "Valido hasta:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // RegistarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 421);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.botonAtras);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -292,5 +308,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button botonAtras;
+        private System.Windows.Forms.Label label4;
     }
 }

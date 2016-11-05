@@ -11,7 +11,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
     {
         protected string profesional_id;
         protected string especialidad_id;
-        protected DateTime fechaHora;
+        protected DateTime fechaInicio, fechaFin;
+        protected DateTime horaInicio, horaFin;
         protected Horario horario;
 
         protected Logger logErrores;
@@ -20,9 +21,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             InitializeComponent();
             this.logErrores = new Logger();
         }
-
-        private void selectorFecha_ValueChanged(object sender, EventArgs e) {}
-
 
         public virtual void cargarHorario(){
             horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fechaHora);
@@ -69,9 +67,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 catch (SqlException e){
                     if(e.Errors[0].Number == -10) {
                         //todo: no se deberia hacer if savepoint!=null, savepoint.rollback?
-                        MessageBox.Show("Si se agrega el horario actual, se superarian las 48 horas semanales.", "Error", MessageBoxButtons.OK);
+                        MessageBox.Show("No se permite agregar estos horarios: El profesional ya atiende en alguno de los horarios indicados, o se superaria el limite de 48 horas semanales de agregar estos horarios.", "Error", MessageBoxButtons.OK);
                     }
-
                 }
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
@@ -86,6 +83,28 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         // ir atras.
         private void botonAtras_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void inicio_ValueChanged(object sender, EventArgs e) {
+            horaInicio = inicio.Value;
+        }
+
+        private void fin_ValueChanged(object sender, EventArgs e) {
+            horaFin = fin.Value;
+        }
+
+
+        //desde
+        private void selectorFecha_ValueChanged(object sender, EventArgs e) {
+            fechaInicio = desde.Value;
+        }
+
+        private void hasta_ValueChanged(object sender, EventArgs e) {
+            fechaFin = hasta.Value;
+        }
+
+        private void label4_Click(object sender, EventArgs e) {
+
         }
     }
 }
