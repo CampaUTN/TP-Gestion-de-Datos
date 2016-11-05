@@ -177,7 +177,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getHorariosDelProfesional(string profesional)
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from CLINICA.Horarios where hora_profesional = @profesional", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from CLINICA.Horarios where hora_profesional = @profesional and hora_id NOT IN (select turn_hora from CLINICA.Turnos)", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.CommandType = CommandType.Text;
 

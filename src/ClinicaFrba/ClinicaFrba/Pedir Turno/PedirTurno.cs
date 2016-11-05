@@ -31,6 +31,11 @@ namespace ClinicaFrba.Pedir_Turno
             {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesDeEspecialidad(this.textEspecialidad.Text);
             }
+            else
+            {
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
+
+            }
         }
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e)
