@@ -1,6 +1,7 @@
 ﻿using ClinicaFrba.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -62,28 +63,20 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         //agregar horario
         private void button2_Click(object sender, EventArgs e) {
             if (horarioValido()) {
-                if (superaLimiteSemanal()) {
-                    cargarHorario();
-                    } else {
-                         MessageBox.Show("Si se agrega el horario actual, se superarian las 48 horas semanales.", "Error", MessageBoxButtons.OK);
+                try{
+                cargarHorario();
+                }
+                catch (SqlException e){
+                    if(e.Errors[0].Number == -10) {
+                        //todo: no se deberia hacer if savepoint!=null, savepoint.rollback?
+                        MessageBox.Show("Si se agrega el horario actual, se superarian las 48 horas semanales.", "Error", MessageBoxButtons.OK);
                     }
+
+                }
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
             }
         }
-
-
-
-
-        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
-        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
-        // TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO// TODO
-        private bool superaLimiteSemanal(){
-            return false; //usar superaLimiteSemanal(nroProfesional), considerando que tengo que tomar tambien
-            //el dia que se quiere agregar
-        }
-
-
 
 
         private void label2_Click(object sender, EventArgs e) {
