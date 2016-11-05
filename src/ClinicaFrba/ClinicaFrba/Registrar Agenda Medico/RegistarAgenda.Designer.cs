@@ -170,7 +170,7 @@
             this.hasta.Location = new System.Drawing.Point(129, 282);
             this.hasta.Margin = new System.Windows.Forms.Padding(5);
             this.hasta.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.hasta.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.hasta.MinDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.hasta.Name = "hasta";
             this.hasta.RightToLeftLayout = true;
             this.hasta.Size = new System.Drawing.Size(95, 20);

@@ -12,7 +12,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
     {
         private string profesional_id;
         private string especialidad_id;
-        private DateTime fechaInicio, fechaFin;
         private DateTime horaInicio, horaFin;
         private int numeroDia;
         private Logger logErrores;
@@ -20,11 +19,9 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
-            fechaInicio = desde.Value;
         }
 
         private void hasta_ValueChanged(object sender, EventArgs e) {
-            fechaFin = hasta.Value;
         }
 
 
@@ -38,10 +35,11 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             List<Horario> horarios = new List<Horario>();
             Horario horario;
             DateTime hora;
-            double diferencia = (int)fechaInicio.DayOfWeek - numeroDia;
+            double diferencia = (int)desde.Value.DayOfWeek - numeroDia;
             double correccionDia = diferencia >= 0 ? diferencia : 7+diferencia; //7+differencia<7, pues diferencia <0.
-            DateTime fecha = fechaInicio.AddDays(Math.Abs((int)fechaInicio.DayOfWeek-numeroDia));
-            while(fecha<=fechaFin){
+            DateTime fecha = desde.Value.AddDays(Math.Abs((int)desde.Value.DayOfWeek-numeroDia));
+           // MessageBox.Show(desde.Value.ToString()+"         "+fecha.ToString()+"      "+hasta.Value.ToString());
+            while (fecha <= hasta.Value) {
                 hora = horaInicio;
                 while (hora.AddMinutes(30) <= horaFin) {
                     horario = new Horario(Int32.Parse(profesional_id), Int32.Parse(especialidad_id), fecha.Add(hora.TimeOfDay));
@@ -70,7 +68,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 comandoInsertarHorarios.Parameters[2].Value = h.fechaHora.Date;
                 comandoInsertarHorarios.Parameters[3].Value = h.fechaHora.TimeOfDay;
                 comandoInsertarHorarios.ExecuteNonQuery();
-                MessageBox.Show("asdasdasdasdsadasd realizada con exito.");
             }
 
             //conexion.Close();
