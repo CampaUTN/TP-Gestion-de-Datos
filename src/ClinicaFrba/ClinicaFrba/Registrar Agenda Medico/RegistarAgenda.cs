@@ -1,6 +1,7 @@
 ﻿using ClinicaFrba.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,7 +15,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private DateTime fechaInicio, fechaFin;
         private DateTime horaInicio, horaFin;
         private int numeroDia;
-        private List<Horario> horarios = new List<Horario>();
         private Logger logErrores;
 
 
@@ -35,6 +35,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         //todo ver si pasa de mes al pasar el limite de 30/31 dias.
         public virtual void cargarHorario(){
+            List<Horario> horarios = new List<Horario>();
             Horario horario;
             DateTime hora;
             double diferencia = Double.Parse(fechaInicio.DayOfWeek.ToString()) - numeroDia;
@@ -49,7 +50,31 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 }
                 fecha = fecha.AddDays(7);
             }
-            // TODO: GUARDAR LA LISTA 'HORARIOS' TODA JUNTA EN UNA QUERY. no de a un elemento xq seria lento.
+
+            SqlConnection conexion = DBConnection.getConnection();
+
+            string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
+            SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
+            comandoInsertarHorarios.CommandType = CommandType.Text;
+            comandoInsertarHorarios.Connection = conexion;
+            comandoInsertarHorarios.Parameters.AddWithValue("@profesional", DbType.Int32);
+            comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", DbType.Int32);
+            comandoInsertarHorarios.Parameters.AddWithValue("@fecha", DbType.Date);
+            comandoInsertarHorarios.Parameters.AddWithValue("@inicio", DbType.Time);
+
+            conexion.Open();
+
+            foreach (Horario h in horarios) {
+                comandoInsertarHorarios.Parameters[0].Value = h.profesional_id;
+                comandoInsertarHorarios.Parameters[1].Value = h.especialidad_id;
+                comandoInsertarHorarios.Parameters[2].Value = h.fechaHora.Date;
+                comandoInsertarHorarios.Parameters[3].Value = h.fechaHora.TimeOfDay;
+                comandoInsertarHorarios.ExecuteNonQuery();
+            }
+
+            conexion.Close();
+
+            MessageBox.Show("Compra realizada con exito");
         }
 
         private bool horarioValido(DateTime fechaHora) {
