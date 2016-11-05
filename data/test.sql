@@ -104,6 +104,9 @@ IF OBJECT_ID('CLINICA.darDeBaja') IS NOT NULL
 IF OBJECT_ID('CLINICA.eliminarAfiliado') IS NOT NULL
  DROP PROCEDURE CLINICA.eliminarAfiliado
 
+IF OBJECT_ID('CLINICA.registrarConsulta') IS NOT NULL
+    DROP PROCEDURE CLINICA.registrarConsulta
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -673,6 +676,27 @@ BEGIN
 	DELETE FROM CLINICA.Usuarios
 			WHERE usua_id = @user
 		
+	END
+GO
+
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE CLINICA.registrarConsulta(@turno INT, @bono INT, @afil INT)
+AS
+	BEGIN 
+		DECLARE @consulta INT
+
+		INSERT INTO CLINICA.Consultas(cons_turno,cons_fechaHoraConsulta)
+		VALUES(@turno, GETDATE());
+
+		SET @consulta = (SELECT TOP 1 cons_id FROM CLINICA.Consultas WHERE cons_turno = @turno)
+
+		UPDATE CLINICA.Bonos
+			SET bono_afilUsado = @afil, bono_nroConsulta = @consulta
+			WHERE bono_id = @bono
+
+
 	END
 GO
 

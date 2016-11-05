@@ -48,6 +48,7 @@
             this.listaBonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listaBonos.Size = new System.Drawing.Size(492, 213);
             this.listaBonos.TabIndex = 0;
+            this.listaBonos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaBonos_CellClick);
             // 
             // botonSelecBono
             // 
@@ -72,6 +73,7 @@
             // botonCancelar
             // 
             this.botonCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.botonCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.botonCancelar.Location = new System.Drawing.Point(23, 249);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
