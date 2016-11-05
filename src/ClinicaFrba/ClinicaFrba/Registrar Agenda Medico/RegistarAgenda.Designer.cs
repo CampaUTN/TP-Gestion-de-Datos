@@ -158,6 +158,7 @@
             this.dia.Name = "dia";
             this.dia.Size = new System.Drawing.Size(106, 21);
             this.dia.TabIndex = 33;
+            this.dia.SelectedIndexChanged += new System.EventHandler(this.dia_SelectedIndexChanged);
             // 
             // hasta
             // 

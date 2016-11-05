@@ -5,7 +5,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
     {
         private int profesional_id;
         private int especialidad_id;
-        private DateTime fechaHora;
+        protected DateTime fechaHora;
 
         public Horario(int profesional_id, int especialidad_id, DateTime fechaHora) {
             this.profesional_id = profesional_id;
