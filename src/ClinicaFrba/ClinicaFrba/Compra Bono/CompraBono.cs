@@ -84,16 +84,25 @@ namespace ClinicaFrba.Compra_Bono
                 {
                     SqlConnection conexion = DBConnection.getConnection();
 
-                    string insert = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
-                    SqlCommand comando = new SqlCommand(insert, conexion);
-                    comando.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
-                    comando.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
-                    comando.Parameters.AddWithValue("@precioFinal", (int)this.contadorBonos.Value * this.precioPlan);
-                    comando.Parameters.AddWithValue("@fechaCompra", DateTime.Now);
+                    string insertComprasBonos = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
+                    SqlCommand comandoComprasBonos = new SqlCommand(insertComprasBonos, conexion);
+                    comandoComprasBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
+                    comandoComprasBonos.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
+                    comandoComprasBonos.Parameters.AddWithValue("@precioFinal", (int)this.contadorBonos.Value * this.precioPlan);
+                    comandoComprasBonos.Parameters.AddWithValue("@fechaCompra", DateTime.Now);
 
                     conexion.Open();
 
-                    comando.ExecuteNonQuery();
+                    for (int i = 0; i < (int)this.contadorBonos.Value; i++)
+                    {
+                        string insertBonos = "INSERT INTO CLINICA.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
+                        SqlCommand comandoBonos = new SqlCommand(insertBonos, conexion);
+                        comandoBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
+                        comandoBonos.Parameters.AddWithValue("@plan", this.plan);
+                        comandoBonos.ExecuteNonQuery();
+                    }
+
+                    comandoComprasBonos.ExecuteNonQuery();
 
                     MessageBox.Show("Compra realizada con exito");
                 }
