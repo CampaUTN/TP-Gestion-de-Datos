@@ -16,42 +16,14 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private int numeroDia;
         private List<Horario> horarios = new List<Horario>();
         private Logger logErrores;
-        private DateTime _prevDate1, _prevDate2;
-        private bool initialValue1 = false, initialValue2 = false;
+
+
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
-            if (initialValue1) {
-                initialValue1 = false;
-                return;
-            }
-
-            DateTime dt = desde.Value;
-            TimeSpan diff = dt - _prevDate1;
-
-            if (diff.Ticks < 0)
-                desde.Value = _prevDate1.AddMinutes(-30);
-            else
-                desde.Value = _prevDate1.AddMinutes(30);
-
-            _prevDate1 = desde.Value;
-            horaInicio = desde.Value;
+            fechaInicio = desde.Value;
         }
 
         private void hasta_ValueChanged(object sender, EventArgs e) {
-            if (initialValue2) {
-                initialValue2 = false;
-                return;
-            }
-
-            DateTime dt = hasta.Value;
-            TimeSpan diff = dt - _prevDate2;
-
-            if (diff.Ticks < 0)
-                hasta.Value = _prevDate2.AddMinutes(-30);
-            else
-                hasta.Value = _prevDate2.AddMinutes(30);
-
-            _prevDate2 = hasta.Value; 
             fechaFin = hasta.Value;
         }
 
@@ -137,10 +109,26 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
         private void inicio_ValueChanged(object sender, EventArgs e) {
+            if (this.inicio.Value.Minute % 30 != 0) {
+
+                if (this.inicio.Value.Minute % 30 == 1)
+                    this.inicio.Value = this.inicio.Value.AddMinutes(29);
+
+                if (this.inicio.Value.Minute % 30 == 29)
+                    this.inicio.Value = this.inicio.Value.AddMinutes(-29);
+            }
             horaInicio = inicio.Value;
         }
 
         private void fin_ValueChanged(object sender, EventArgs e) {
+            if (this.fin.Value.Minute % 30 != 0){
+
+                 if (this.fin.Value.Minute % 30 == 1)
+                      this.fin.Value = this.fin.Value.AddMinutes(29);
+
+                 if (this.fin.Value.Minute % 30 == 29)
+                     this.fin.Value = this.fin.Value.AddMinutes(-29);
+            }
             horaFin = fin.Value;
         }
 
@@ -149,7 +137,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
         private void dia_SelectedIndexChanged(object sender, EventArgs e) {
-            numeroDia = Int32.Parse(dia.Text);
+            numeroDia = dia.SelectedIndex+1;
         }
     }
 }

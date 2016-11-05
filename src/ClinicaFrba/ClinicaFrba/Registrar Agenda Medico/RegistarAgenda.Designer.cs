@@ -108,8 +108,8 @@
             // 
             this.inicio.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.inicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.inicio.CustomFormat = "";
-            this.inicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.inicio.CustomFormat = "HH:mm";
+            this.inicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.inicio.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
             this.inicio.Location = new System.Drawing.Point(249, 216);
             this.inicio.Margin = new System.Windows.Forms.Padding(5);
@@ -128,8 +128,8 @@
             // 
             this.fin.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.fin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.fin.CustomFormat = "";
-            this.fin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.fin.CustomFormat = "HH:mm";
+            this.fin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fin.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
             this.fin.Location = new System.Drawing.Point(391, 218);
             this.fin.Margin = new System.Windows.Forms.Padding(5);
