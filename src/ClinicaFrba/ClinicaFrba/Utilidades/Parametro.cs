@@ -20,16 +20,16 @@ namespace ClinicaFrba.Utilidades
             {
                 if (Parser.esEntero(nombreColumna))
                 {
-                    ret = nombreColumna + "=" + valorAComparar + " ";
+                    ret = ret + nombreColumna + "=" + valorAComparar + " ";
                 }
                 else
                 {
-                    ret = nombreColumna + "='" + valorAComparar + "' ";
+                    ret = ret + nombreColumna + "='" + valorAComparar + "' ";
                 }
             }
             else
             {
-                ret = nombreColumna + " LIKE '%" + valorAComparar + "%'";
+                ret = ret + nombreColumna + " LIKE '%" + valorAComparar + "%'";
             }
 
             return ret;
@@ -37,7 +37,13 @@ namespace ClinicaFrba.Utilidades
 
         public Parametro(TextBox textbox, bool esExacta)
         {
+            if (textbox.Name == "espe_nombre")
+            {
+                //this.nombreColumna = "e." + textbox.Name;
+            }
+            else{
             this.nombreColumna = textbox.Name;
+            }
             this.valorAComparar = textbox.Text;
             this.exacto = esExacta;
             

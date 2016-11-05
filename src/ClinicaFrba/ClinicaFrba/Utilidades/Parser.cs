@@ -55,19 +55,29 @@ namespace ClinicaFrba.Utilidades
             //condiciones de filtro
             string criterio = "";
 
+            string tablaUsuarios= ",CLINICA.Usuarios" ;
+
             //string resultado sobre la cual se hace el SELECT
             string consulta;
 
-            if (tabla == "Usuarios")
+            if (tabla == "Afiliados")
             {
                 parametros = "usua_id AS ID, usua_apellido AS Apellido, usua_nombre AS Nombre, usua_nroDoc AS Documento ";
-         
+                criterio = "\n WHERE usua_id = afil_usuario AND ";
+ 
             }
 
-            criterio = criterio + " \nWHERE ";
+            if (tabla == "Profesionales")
+            {
+                tabla = tabla + " p";
+                parametros = "p.prof_id AS Id, usua_apellido AS Apellido, usua_nombre AS Nombre, e.espe_nombre as Especialidad ";
+               tablaUsuarios = tablaUsuarios + ",CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e";
+               criterio = "\n WHERE usua_id = p.prof_usuario AND p.prof_id = espe.prof_id AND espe.espe_id = e.espe_id AND ";
+            }
 
             foreach (Parametro parametro in values){
                     //si el campo esta vacio, lo omito
+                //if (Parser.estaVacio(parametro)) ;
                     if (parametro.getSize() != 0){
 
                         criterio = criterio + parametro.pasateAWhere() + " AND ";
@@ -75,19 +85,17 @@ namespace ClinicaFrba.Utilidades
             }
             criterio = sacarAND(criterio);
 
-            consulta = "SELECT " + parametros + " \nFROM CLINICA." + tabla + criterio;
+            consulta = "SELECT " + parametros + " \nFROM CLINICA." + tabla + tablaUsuarios + criterio;
 
-            //TODO borrar
-            MessageBox.Show(consulta);
             return consulta;
         }
 
 
         public static string sacarAND(string cadena)
         {
-           string aux= cadena.Substring(cadena.Length - 4, 3);
+           string aux= cadena.Substring(cadena.Length - 4, 4);
 
-           if (aux == "AND")
+           if (aux.Contains("AND"))
            {
                return cadena.Substring(0, cadena.Length - 4);
            }else{

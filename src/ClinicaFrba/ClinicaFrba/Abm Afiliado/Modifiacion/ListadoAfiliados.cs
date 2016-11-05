@@ -68,7 +68,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                 parametros.SetValue(new Parametro(usua_nroDoc, esExacta), 2);
 
-                consulta = Parser.armarConsulta("Usuarios", parametros); 
+                consulta = Parser.armarConsulta("Afiliados", parametros); 
 
             }
 
