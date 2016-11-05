@@ -391,6 +391,7 @@ FROM gd_esquema.Maestra m
 WHERE m.Turno_Numero IS NOT NULL AND m.Bono_Consulta_Fecha_Impresion IS NOT NULL AND m.Bono_Consulta_Numero IS NOT NULL
 ORDER BY m.Turno_Numero
 GO
+SET IDENTITY_INSERT CLINICA.Consultas OFF
 
 INSERT INTO CLINICA.Bonos(bono_afilCompra, bono_plan, bono_nroConsulta, bono_afilUsado)
 SELECT (SELECT afil_id FROM CLINICA.Usuarios JOIN CLINICA.Afiliados 
@@ -398,7 +399,7 @@ SELECT (SELECT afil_id FROM CLINICA.Usuarios JOIN CLINICA.Afiliados
 	ON usua_id = afil_usuario WHERE m.Paciente_Dni = usua_nroDoc) -- Como los de la tabla maestra no tienen familia si o si lo usaron ellos mismo al bono
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL 
-
+ 
 	-- Compra bonos. Funciona
 INSERT INTO CLINICA.ComprasBonos(comp_afil,comp_cantidad,comp_precioFinal,comp_fechaCompra)
 SELECT 
