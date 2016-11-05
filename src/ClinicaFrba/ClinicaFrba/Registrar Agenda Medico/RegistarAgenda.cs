@@ -83,6 +83,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         //agregar horario
         private void button2_Click(object sender, EventArgs e) {
+            if (grillaProfesionales.SelectedRows.Count != 1 || this.profesional_id == null || this.especialidad_id == null) {
+                MessageBox.Show("Seleccione un profesional y especialidad en la grilla.", "Error", MessageBoxButtons.OK);
+                return;
+            }
             if (horarioValido(horaInicio) && horarioValido(horaFin)) {
                 try{
                 cargarHorario();
@@ -93,6 +97,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                         MessageBox.Show("No se permite agregar estos horarios: El profesional ya atiende en alguno de los horarios indicados, o se superaria el limite de 48 horas semanales de agregar estos horarios.", "Error", MessageBoxButtons.OK);
                     }
                 }
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
             }
