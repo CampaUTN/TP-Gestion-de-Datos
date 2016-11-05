@@ -22,6 +22,7 @@ namespace ClinicaFrba.Listados
             dateTimePickerAnio.Format = DateTimePickerFormat.Custom;
             dateTimePickerAnio.CustomFormat = "yyyy";
             dateTimePickerAnio.ShowUpDown = true;
+            dateTimePickerAnio.Value = new DateTime(2015, 12, 1);
             dateTimePickerAnio.MaxDate = DateTime.Today;
 
             dateTimePickerMesDesde.Format = DateTimePickerFormat.Custom;
@@ -32,7 +33,7 @@ namespace ClinicaFrba.Listados
             dateTimePickerMesHasta.CustomFormat = "MMMM";
             dateTimePickerMesHasta.ShowUpDown = true;
 
-            comboBoxSemestre.SelectedIndex = 0;
+            comboBoxSemestre.SelectedIndex = 1;
 
             /* LISTADO 1*/
             comboBoxListado1Filtro.SelectedIndex = 0;
@@ -127,6 +128,7 @@ namespace ClinicaFrba.Listados
                                     "FROM CLINICA.ComprasBonos " +
                                     "JOIN CLINICA.Afiliados afil ON afil_id = comp_afil " +
                                     "JOIN CLINICA.Usuarios ON usua_id = afil_usuario " +
+                                    "WHERE comp_fechaCompra BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY comp_afil, usua_nombre, usua_apellido, usua_id " +
                                     "ORDER BY SUM(comp_cantidad) DESC";
             return queryListado;
