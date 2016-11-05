@@ -74,7 +74,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
             conexion.Close();
 
-            MessageBox.Show("Compra realizada con exito");
+            MessageBox.Show("Carga realizada con exito.");
         }
 
         private bool horarioValido(DateTime fechaHora) {
@@ -108,10 +108,13 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         //agregar horario
         private void button2_Click(object sender, EventArgs e) {
-            if (grillaProfesionales.SelectedRows.Count != 1 || this.profesional_id == null || this.especialidad_id == null) {
+            if (grillaProfesionales.SelectedRows.Count != 1) {
                 MessageBox.Show("Seleccione un profesional y especialidad en la grilla.", "Error", MessageBoxButtons.OK);
                 return;
             }
+            int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+            profesional_id = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
+            especialidad_id = grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString();
             if (horarioValido(horaInicio) && horarioValido(horaFin)) {
                 try{
                 cargarHorario();
