@@ -727,13 +727,13 @@ BEGIN
 	where hora_profesional = @prof_id
 	group by hora_profesional, datepart(WEEK,hora_fecha)
 	order by count(*)/2 DESC) > 48
-		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,2)
+		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		BEGIN
 		IF(select isnull(count(*),0)
 		from CLINICA.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio)
 		where H.hora_profesional = @prof_id) > 0
-			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,2)
+			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,1)
 		ELSE
 			INSERT INTO Horarios select * from inserted
 		END
