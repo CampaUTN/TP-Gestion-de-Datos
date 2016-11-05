@@ -9,13 +9,52 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 {
     public partial class RegistarAgenda : Form
     {
-        protected string profesional_id;
-        protected string especialidad_id;
-        protected DateTime fechaInicio, fechaFin;
-        protected DateTime horaInicio, horaFin;
-        protected int numeroDia;
-        protected List<Horario> horarios = new List<Horario>();
-        protected Logger logErrores;
+        private string profesional_id;
+        private string especialidad_id;
+        private DateTime fechaInicio, fechaFin;
+        private DateTime horaInicio, horaFin;
+        private int numeroDia;
+        private List<Horario> horarios = new List<Horario>();
+        private Logger logErrores;
+        private DateTime _prevDate1, _prevDate2;
+        private bool initialValue1 = false, initialValue2 = false;
+
+        private void selectorFecha_ValueChanged(object sender, EventArgs e) {
+            if (initialValue1) {
+                initialValue1 = false;
+                return;
+            }
+
+            DateTime dt = desde.Value;
+            TimeSpan diff = dt - _prevDate1;
+
+            if (diff.Ticks < 0)
+                desde.Value = _prevDate1.AddMinutes(-30);
+            else
+                desde.Value = _prevDate1.AddMinutes(30);
+
+            _prevDate1 = desde.Value;
+            horaInicio = desde.Value;
+        }
+
+        private void hasta_ValueChanged(object sender, EventArgs e) {
+            if (initialValue2) {
+                initialValue2 = false;
+                return;
+            }
+
+            DateTime dt = hasta.Value;
+            TimeSpan diff = dt - _prevDate2;
+
+            if (diff.Ticks < 0)
+                hasta.Value = _prevDate2.AddMinutes(-30);
+            else
+                hasta.Value = _prevDate2.AddMinutes(30);
+
+            _prevDate2 = hasta.Value; 
+            fechaFin = hasta.Value;
+        }
+
 
         public RegistarAgenda() {
             InitializeComponent();
@@ -103,16 +142,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         private void fin_ValueChanged(object sender, EventArgs e) {
             horaFin = fin.Value;
-        }
-
-
-        //desde
-        private void selectorFecha_ValueChanged(object sender, EventArgs e) {
-            fechaInicio = desde.Value;
-        }
-
-        private void hasta_ValueChanged(object sender, EventArgs e) {
-            fechaFin = hasta.Value;
         }
 
         private void label4_Click(object sender, EventArgs e) {
