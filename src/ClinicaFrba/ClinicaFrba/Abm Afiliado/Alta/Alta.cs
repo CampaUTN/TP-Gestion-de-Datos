@@ -134,8 +134,18 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             //abro el formulario de usuario
             this.cargarUsuario();
-            new AltaUsuario(this.afiliado).Show();
-            this.limpiarCajitas();
+            (new AltaUsuario(this.afiliado)).ShowDialog();
+
+            if (MessageBox.Show("Agregar otro afiliado?", "Alta", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.limpiarCajitas();
+            }
+            else
+            {
+                this.Close();
+            }
+
+
         }
 
         protected void cargarCajitas() {
