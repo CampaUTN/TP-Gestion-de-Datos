@@ -97,6 +97,8 @@ IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
 
 IF OBJECT_ID('CLINICA.modificarAfiliado') IS NOT NULL
  DROP PROCEDURE CLINICA.modificarAfiliado
+ IF OBJECT_ID('CLINICA.registrarMotivo') IS NOT NULL
+DROP PROCEDURE CLINICA.registrarMotivo
 
 IF OBJECT_ID('CLINICA.darDeBaja') IS NOT NULL
  DROP PROCEDURE CLINICA.darDeBaja 
@@ -258,8 +260,9 @@ CREATE TABLE CLINICA.CancelacionesTurnos(
   
 CREATE TABLE CLINICA.HistorialAfiliado(
 	hist_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	hist_profesional INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Profesionales(prof_id), 
-    hist_especialidad INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Especialidades(espe_id));
+	hist_afil INT NOT NULL FOREIGN KEY REFERENCES CLINICA.Afiliados(afil_id),
+  	hist_motivo VARCHAR(225),
+	hist_fecha DATE NOT NULL);
 
 CREATE TABLE CLINICA.Consultas(
 	cons_id INT PRIMARY KEY IDENTITY NOT NULL,
@@ -751,6 +754,8 @@ AS
  END
 GO
 
+
+
 USE GD2C2016;
 GO
 CREATE PROCEDURE CLINICA.cancelar_turno_afiliado(@usuario INT, @turno INT)
@@ -762,6 +767,19 @@ AS
 	where turn_id = @turno and turn_afiliado = @afiliado
  END
 GO
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE CLINICA.registrarMotivo(@afil INT, @motivo VARCHAR(255))
+AS
+	BEGIN 
+
+	INSERT INTO CLINICA.HistorialAfiliado(hist_afil, hist_motivo, hist_fecha)
+	VALUES (@afil,@motivo, CONVERT(DATE, SYSDATETIME()) );
+
+	END
+GO
+
 
 USE GD2C2016;
 GO

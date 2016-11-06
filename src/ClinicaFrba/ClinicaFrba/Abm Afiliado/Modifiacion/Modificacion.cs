@@ -37,10 +37,9 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                 Utils.actualizarAfiliado(this.afiliado);
 
-                if (MessageBox.Show("Modificacion Realizada con exito!:\n", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    this.Close();
-                }
+                MessageBox.Show("Modificacion Realizada con exito!");
+                   this.Close();
+                
             }
             else
             {
@@ -50,8 +49,9 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 selecPlan.SelectedItem = null;
                 selecEstadoCivil.SelectedItem = null;
 
-                camposModificados = "";
-            }    
+            }
+
+            camposModificados = "";
 
         }
 
@@ -90,6 +90,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             if (textBoxDireccion.Text.Length > 0)
             {
                 afiliado.setDireccion(textBoxDireccion.Text);
+                MessageBox.Show(afiliado.getDireccion());
             }
 
 
@@ -112,9 +113,16 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 plan.Value.ToString();
                 if (plan.Value.ToString() != afiliado.getPlan())
                 {
+                    MessageBox.Show("INDIQUE EL MOTIVO POR EL QUE DESEA CAMBIAR EL PLAN Desde " + afiliado.getPlan() + " a " + plan.Value.ToString());
 
-                    MessageBox.Show("plan nuewo: " + plan.Value.ToString());
+
+                    MotivoCambioPlan formulario = new MotivoCambioPlan(afiliado.getCodigoAfiliado());
+                    formulario.ShowDialog();
+
+                    MessageBox.Show(Convert.ToString(afiliado.getCodigoAfiliado()));
                     afiliado.setPlan(plan.Value.ToString());
+                    
+
                 }
 
             }
@@ -133,17 +141,22 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         {
             bool cajasVacias = cajasTexto.FindAll(cajita => cajita.Text.Length.Equals(0)).Count().Equals(cajasTexto.Count());
 
-            if (cajasVacias) { 
-                MessageBox.Show("cajitas vacias");
+            bool noSeEligioUnPlan = selecPlan.SelectedItem == null;
+
+
+            if (textBoxDireccion.Text.Length > 0)
+            {
+                camposModificados = camposModificados + "- Direccion\n";
             }
 
-
-            bool noSeEligioUnPlan = selecPlan.SelectedItem == null;
+            if (textBoxTelefono.Text.Length > 0)
+            {
+                camposModificados = camposModificados + "- Teléfono\n";
+            }
 
             if (!noSeEligioUnPlan)
             {
                 camposModificados = camposModificados + "- Plan\n";
-            //MessageBox.Show(selecPlan.SelectedItem.ToString());
             }
 
             bool noSeEligioEstadoCivil = selecEstadoCivil.SelectedItem == null;
@@ -151,7 +164,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             if (!noSeEligioEstadoCivil)
             {
                 camposModificados = camposModificados + "- Estado Civil\n";
-                //MessageBox.Show(selecPlan.SelectedItem.ToString());
             }
 
             return noSeEligioUnPlan && noSeEligioEstadoCivil && cajasVacias;
@@ -165,6 +177,21 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                 textBoxTelefono.Clear();
                 this.cajasTexto.Remove(textBoxTelefono);
+            }
+
+
+            if (selecPlan.SelectedItem != null)
+            {
+                KeyValuePair<int, string> plan = (KeyValuePair<int, string>)selecPlan.SelectedItem;
+                plan.Value.ToString();
+                if (plan.Value.ToString() == afiliado.getPlan())
+                {
+                    logErrores.agregarAlLog("El afiliado ya dispone del plan escogido");
+                    this.selecPlan.ResetText();
+
+                    camposModificados = "";
+                }
+
             }
         }
     }

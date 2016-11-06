@@ -41,6 +41,7 @@ namespace ClinicaFrba.Abm_Afiliado
             if (!faltaCompletarDatos()){
                 //chequeo que los datos sean correctos
                 this.validarDatosIngresados();
+                
                 if (!this.logErrores.huboErrores())
                 {
                     //metodo que sobreescribe Modificacion
@@ -48,7 +49,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
                 else{
                     MessageBox.Show("Error en el ingreso de datos:\n" + this.logErrores.mostrarLog() + "\nCompruebe que haya ingresado los datos en forma correcta y vuelva a intentarlo.", "Error", MessageBoxButtons.OK);
-                   
                 }
             }
             else {
@@ -75,7 +75,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
             selecPlan.SelectedItem = null;
             selecEstadoCivil.SelectedItem = null;
-          //  this.selecEstadoCivil.ResetText();
         }
 
         private void botonCancelar_Click(object sender, EventArgs e){
@@ -105,10 +104,6 @@ namespace ClinicaFrba.Abm_Afiliado
             this.selecEstadoCivil.ResetText();
             this.checkBoxHijos.CheckState = CheckState.Unchecked;
         }
-
-        
-
-        
 
         #endregion
 

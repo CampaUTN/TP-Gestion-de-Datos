@@ -52,7 +52,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                consulta = "SELECT usua_id, usua_apellido, usua_nombre, usua_nroDoc FROM CLINICA.Usuarios";
+                consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM CLINICA.Usuarios, CLINICA.Afiliados WHERE afil_usuario = usua_id";
             }
             else
             {
@@ -140,6 +140,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             int cantidadHijos;
             DateTime fechaNac;
 
+            int afilId = Convert.ToInt32(planillaResultados.SelectedCells[0].Value);
             long cod_usuario = Convert.ToInt64(planillaResultados.SelectedCells[0].Value);
 
             string apellido = Convert.ToString(planillaResultados.SelectedCells[1].Value);
@@ -147,13 +148,13 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             string dni = Convert.ToString(planillaResultados.SelectedCells[3].Value);
 
 
-            SqlDataReader reader = Utils.obtenerAfiliadoDesdeUsername(cod_usuario);
+            SqlDataReader reader = Utils.getDatosAdicionalesAfiliado(afilId);
 
             reader.Read();
-                plan_id = Convert.ToInt32(reader[2]);
-                estado = Convert.ToString(reader[3]);
-                cantidadHijos = Convert.ToInt32(reader[4]);
-          
+                plan_id = Convert.ToInt32(reader[0]);
+                estado = Convert.ToString(reader[1]);
+                cantidadHijos = Convert.ToInt32(reader[2]);
+                cod_usuario = Convert.ToInt32(reader[3]);
 
            reader = Utils.obtenerUsuarioDesdeUsername(cod_usuario);
 
@@ -171,6 +172,10 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
            Afiliado afiliado = new Afiliado(nombre, apellido, fechaNac, tipoDoc, dni, direccion, telefono, genero, estado, plan);
 
+
+           MessageBox.Show("Afiliado: " + Convert.ToString(afilId));
+
+           afiliado.setCodigo(afilId);
            afiliado.setUsuaId(cod_usuario);            
             
             return afiliado;
