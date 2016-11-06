@@ -592,5 +592,20 @@ namespace ClinicaFrba.Utilidades
 
             SqlDataReader reader = comando.ExecuteReader();
         }
+
+
+        static public void darDeBajaAfiliado(long idUsuario)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.eliminarAfiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@user", idUsuario);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
     }
 }

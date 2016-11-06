@@ -25,8 +25,14 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         {
             ListadoAfiliados listado = new ListadoAfiliados();
             listado.botonEliminar.Visible = true;
-            listado.botonEliminar.Enabled = true;
+            listado.botonEliminar.Enabled = false;
             listado.botonModificar.Enabled = false;
+
+            listado.AcceptButton = listado.botonEliminar;
+       
+            
+            listado.botonModificar.Visible = false;
+            listado.botonEliminar.Location = listado.botonModificar.Location;
 
             return listado;
         }
@@ -87,6 +93,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         {
             botonModificar.Enabled = true;
             botonDesactivar.Enabled = true;
+            botonEliminar.Enabled = true;
             this.AcceptButton = botonModificar;
         }
 
@@ -122,10 +129,16 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                baja = new BajaAfiliado();
+               // baja = new BajaAfiliado();
+
+                //completo los datos del afiliado
                 Afiliado afil = this.completarDatosDeAfiliado();
 
-                baja.eliminarAfiliado(afil);
+                //elimino al afiliado del sistema
+                Utilidades.Utils.darDeBajaAfiliado(afil.getUsuaId());
+
+
+               // baja.eliminarAfiliado(afil);
                 MessageBox.Show("Usuario eliminado");
             }
         }

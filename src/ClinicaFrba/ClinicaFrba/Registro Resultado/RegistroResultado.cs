@@ -30,7 +30,6 @@ namespace ClinicaFrba.Registro_Resultado
 
             int user = Utils.obtenerProfesionalDesdeUsername(userActivo);
 
-            MessageBox.Show(Convert.ToString(user));
             where = where + (Convert.ToString(user));
             this.cargarPlanilla();
         }
