@@ -52,7 +52,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                consulta = "SELECT usua_id, usua_apellido, usua_nombre, usua_nroDoc FROM CLINICA.Usuarios";
+                consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM CLINICA.Usuarios, CLINICA.Afiliados WHERE afil_usuario = usua_id";
             }
             else
             {
@@ -103,6 +103,33 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             this.cargarAlAfiliado();
         }
 
+
+        private void botonDesactivar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea dar de baja logica a este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //lleno los datos del afiliado
+                Afiliado afil = this.completarDatosDeAfiliado();
+
+                Utilidades.Utils.bajaLogicaA(afil);
+                MessageBox.Show("Usuario dado de baja");
+            }
+        }
+
+        private void botonEliminar_Click(object sender, EventArgs e)
+        {
+            BajaAfiliado baja;
+
+            if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                baja = new BajaAfiliado();
+                Afiliado afil = this.completarDatosDeAfiliado();
+
+                baja.eliminarAfiliado(afil);
+                MessageBox.Show("Usuario eliminado");
+            }
+        }
+
         #endregion
 
 
@@ -140,6 +167,9 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             int cantidadHijos;
             DateTime fechaNac;
 
+            // obtengo los datos asociados al afiliado como usuario
+            
+            int afilId = Convert.ToInt32(planillaResultados.SelectedCells[0].Value);
             long cod_usuario = Convert.ToInt64(planillaResultados.SelectedCells[0].Value);
 
             string apellido = Convert.ToString(planillaResultados.SelectedCells[1].Value);
@@ -147,14 +177,16 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             string dni = Convert.ToString(planillaResultados.SelectedCells[3].Value);
 
 
-            SqlDataReader reader = Utils.obtenerAfiliadoDesdeUsername(cod_usuario);
+            SqlDataReader reader = Utils.getDatosAdicionalesAfiliado(afilId);
 
+            // obtengo datos de afiliado: plan, estado, hijos, y su numero de usuario
             reader.Read();
-                plan_id = Convert.ToInt32(reader[2]);
-                estado = Convert.ToString(reader[3]);
-                cantidadHijos = Convert.ToInt32(reader[4]);
-          
+                plan_id = Convert.ToInt32(reader[0]);
+                estado = Convert.ToString(reader[1]);
+                cantidadHijos = Convert.ToInt32(reader[2]);
+                cod_usuario = Convert.ToInt32(reader[3]);
 
+            //obtengo los datos de direccion, tipo de documento, etc...
            reader = Utils.obtenerUsuarioDesdeUsername(cod_usuario);
 
            reader.Read();
@@ -167,43 +199,18 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 mail = Convert.ToString(reader[4]);
                 genero = Convert.ToString(reader[5]);
 
+            //obtengo el nombre del plan
            string plan = Utils.getNombrePlan(plan_id);
 
            Afiliado afiliado = new Afiliado(nombre, apellido, fechaNac, tipoDoc, dni, direccion, telefono, genero, estado, plan);
 
+           afiliado.setCodigo(afilId);
            afiliado.setUsuaId(cod_usuario);            
             
             return afiliado;
         }
 
 
-        #endregion
-
-        private void botonDesactivar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Desea dar de baja logica a este afiliado?","Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                Afiliado afil = this.completarDatosDeAfiliado();
-
-                Utilidades.Utils.bajaLogicaA(afil);
-                MessageBox.Show("Usuario dado de baja");
-            }
-        }
-
-        private void botonEliminar_Click(object sender, EventArgs e)
-        {
-            BajaAfiliado baja;
-
-            if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                baja = new BajaAfiliado();
-                Afiliado afil = this.completarDatosDeAfiliado();
-
-                baja.eliminarAfiliado(afil);
-                MessageBox.Show("Usuario eliminado");
-            }
-        }
-
-       
+        #endregion       
     }
 }

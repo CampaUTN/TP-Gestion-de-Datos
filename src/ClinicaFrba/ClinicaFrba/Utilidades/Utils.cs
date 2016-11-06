@@ -73,6 +73,21 @@ namespace ClinicaFrba.Utilidades
             return -1;
         }
 
+        static public SqlDataReader getDatosAdicionalesAfiliado(int afil)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("SELECT afil_plan, afil_estadoCivil, afil_cantidadHijos, afil_usuario FROM CLINICA.Afiliados WHERE afil_id = @id", conexion);
+
+            comando.Parameters.AddWithValue("@id", afil);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            return reader;
+        }
+
 
         static public int superaLimiteSemanal(int profesional) {
             var conexion = DBConnection.getConnection();
@@ -559,6 +574,20 @@ namespace ClinicaFrba.Utilidades
             comando.Parameters.AddWithValue("@sintomas", sintomas);
             comando.Parameters.AddWithValue("@diagnostico", diagnostico);
 
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
+
+
+        static public void registrarMotivoModificacion(int afiliado, string motivo)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.registrarMotivo", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@afil", afiliado);
+            comando.Parameters.AddWithValue("@motivo", motivo);
             conexion.Open();
 
             SqlDataReader reader = comando.ExecuteReader();

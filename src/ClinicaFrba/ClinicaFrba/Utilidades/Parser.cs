@@ -62,7 +62,7 @@ namespace ClinicaFrba.Utilidades
 
             if (tabla == "Afiliados")
             {
-                parametros = "usua_id AS ID, usua_apellido AS Apellido, usua_nombre AS Nombre, usua_nroDoc AS Documento ";
+                parametros = "afil_id AS ID, usua_apellido AS Apellido, usua_nombre AS Nombre, usua_nroDoc AS Documento ";
                 criterio = "\n WHERE usua_id = afil_usuario AND ";
  
             }

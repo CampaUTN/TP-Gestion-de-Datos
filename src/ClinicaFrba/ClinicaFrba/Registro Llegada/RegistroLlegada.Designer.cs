@@ -79,16 +79,16 @@
             this.planillaProfesionales.Name = "planillaProfesionales";
             this.planillaProfesionales.RowHeadersVisible = false;
             this.planillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.planillaProfesionales.Size = new System.Drawing.Size(436, 238);
+            this.planillaProfesionales.Size = new System.Drawing.Size(455, 238);
             this.planillaProfesionales.TabIndex = 3;
             this.planillaProfesionales.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
             // 
             // botonVerTurnos
             // 
             this.botonVerTurnos.Enabled = false;
-            this.botonVerTurnos.Location = new System.Drawing.Point(24, 316);
+            this.botonVerTurnos.Location = new System.Drawing.Point(190, 321);
             this.botonVerTurnos.Name = "botonVerTurnos";
-            this.botonVerTurnos.Size = new System.Drawing.Size(93, 25);
+            this.botonVerTurnos.Size = new System.Drawing.Size(113, 25);
             this.botonVerTurnos.TabIndex = 4;
             this.botonVerTurnos.Text = "Ver Turnos...";
             this.botonVerTurnos.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             // botonAtras
             // 
             this.botonAtras.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.botonAtras.Location = new System.Drawing.Point(25, 606);
+            this.botonAtras.Location = new System.Drawing.Point(12, 631);
             this.botonAtras.Name = "botonAtras";
             this.botonAtras.Size = new System.Drawing.Size(77, 27);
             this.botonAtras.TabIndex = 5;
@@ -111,7 +111,7 @@
             this.groupProfesionales.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupProfesionales.Location = new System.Drawing.Point(3, 8);
             this.groupProfesionales.Name = "groupProfesionales";
-            this.groupProfesionales.Size = new System.Drawing.Size(451, 302);
+            this.groupProfesionales.Size = new System.Drawing.Size(475, 307);
             this.groupProfesionales.TabIndex = 6;
             this.groupProfesionales.TabStop = false;
             this.groupProfesionales.Text = "Seleccione un Profesional";
@@ -119,18 +119,18 @@
             // listadoTurnos
             // 
             this.listadoTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listadoTurnos.Location = new System.Drawing.Point(12, 344);
+            this.listadoTurnos.Location = new System.Drawing.Point(12, 352);
             this.listadoTurnos.Name = "listadoTurnos";
             this.listadoTurnos.RowHeadersVisible = false;
             this.listadoTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listadoTurnos.Size = new System.Drawing.Size(436, 251);
+            this.listadoTurnos.Size = new System.Drawing.Size(455, 273);
             this.listadoTurnos.TabIndex = 7;
             this.listadoTurnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoTurnos_CellClick);
             // 
             // botonSelecAfil
             // 
             this.botonSelecAfil.Enabled = false;
-            this.botonSelecAfil.Location = new System.Drawing.Point(318, 606);
+            this.botonSelecAfil.Location = new System.Drawing.Point(337, 631);
             this.botonSelecAfil.Name = "botonSelecAfil";
             this.botonSelecAfil.Size = new System.Drawing.Size(130, 27);
             this.botonSelecAfil.TabIndex = 8;
@@ -145,7 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonAtras;
-            this.ClientSize = new System.Drawing.Size(466, 647);
+            this.ClientSize = new System.Drawing.Size(488, 666);
             this.Controls.Add(this.botonSelecAfil);
             this.Controls.Add(this.botonVerTurnos);
             this.Controls.Add(this.listadoTurnos);

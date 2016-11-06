@@ -52,5 +52,10 @@ namespace ClinicaFrba.Registro_Llegada
         {
             botonSelecBono.Enabled = true;
         }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

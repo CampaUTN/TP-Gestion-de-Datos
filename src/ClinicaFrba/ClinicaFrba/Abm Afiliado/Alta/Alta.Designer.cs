@@ -160,7 +160,7 @@
             // textBoxTelefono
             // 
             this.textBoxTelefono.Location = new System.Drawing.Point(148, 128);
-            this.textBoxTelefono.MaxLength = 255;
+            this.textBoxTelefono.MaxLength = 18;
             this.textBoxTelefono.Name = "textBoxTelefono";
             this.textBoxTelefono.Size = new System.Drawing.Size(117, 20);
             this.textBoxTelefono.TabIndex = 10;
