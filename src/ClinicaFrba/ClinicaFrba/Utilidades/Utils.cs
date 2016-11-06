@@ -489,13 +489,13 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public void bajaDia(int usuario, DateTime fecha) {
+        static public void bajaDia(int profesional, DateTime fecha) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("CLINICA.cancelar_dia_agenda", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.Parameters.AddWithValue("@profesional", profesional);
             comando.Parameters.AddWithValue("@fecha", fecha);
 
             conexion.Open();

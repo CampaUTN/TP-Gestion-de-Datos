@@ -10,9 +10,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
     public partial class RegistarAgenda : Form
     {
         private DateTime horaInicio, horaFin;
-        private int numeroDia;
+        private int numeroDia = 99;
         private Logger logErrores;
-
 
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
@@ -36,7 +35,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
         //todo ver si pasa de mes al pasar el limite de 30/31 dias.
-        public virtual void cargarHorario(){
+        public virtual void cargarHorario(SqlConnection conexion) {
             int rowindex = grillaProfesionales.CurrentCell.RowIndex;
             List<Horario> horarios = new List<Horario>();
             Horario horario;
@@ -55,8 +54,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 fecha = fecha.AddDays(7);
             }
 
-            SqlConnection conexion = DBConnection.getConnection();
-            conexion.Open();
             // debug: MessageBox.Show(horarios.Count.ToString());
             foreach (Horario h in horarios) {
                 string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
@@ -78,7 +75,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
         private bool horarioValido(DateTime fechaHora) {
             String hora = fechaHora.ToString("HH:mm");
-            if (fechaHora.DayOfWeek.Equals(6)) { //sabado
+            if (numeroDia == 99) {
+                return false;
+            }
+            if (numeroDia == 6) { //sabado
                 return String.Compare(hora,"10:00") >= 0 && String.Compare(hora,"15:00") <= 0; 
             }else{ // lunes a viernes
                 return String.Compare(hora,"´07:00") >= 0 && String.Compare(hora,"20:00") <= 0; 
@@ -112,13 +112,12 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             int rowindex = grillaProfesionales.CurrentCell.RowIndex;
             if (horarioValido(horaInicio) && horarioValido(horaFin)) {
                 try{
-                cargarHorario();
+                    SqlConnection conexion = DBConnection.getConnection();
+                    conexion.Open();
+                    cargarHorario(conexion);
                 }
                 catch (SqlException ex){
-                    if(ex.Errors[0].Number == -10) {
-                        //todo: no se deberia hacer if savepoint!=null, savepoint.rollback?
-                        MessageBox.Show("No se permite agregar estos horarios: El profesional ya atiende en alguno de los horarios indicados, o se superaria el limite de 48 horas semanales de agregar estos horarios.", "Error", MessageBoxButtons.OK);
-                    }
+                       MessageBox.Show("No se permite agregar estos horarios: se superaria el limite de 48 horas semanales de agregarlos. Se han insertado todos los horarios posibles hasta alcanzar dicho limite.", "Error", MessageBoxButtons.OK);
                 }
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);

@@ -851,9 +851,9 @@ BEGIN
 			where E.hora_profesional = @prof_id
 			)
 		) AS tabla
-		group by tabla.hora_profesional, datepart(WEEK,tabla.hora_fecha)
-		order by 1 DESC
-	) > 48
+		group by datepart(WEEK,tabla.hora_fecha)
+		order by count(*) DESC
+	) >= 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		BEGIN
