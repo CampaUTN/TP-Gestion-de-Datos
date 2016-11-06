@@ -488,6 +488,20 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
+        static public void bajaTurnoAfiliado(int usuario, int turno_id) {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("CLINICA.cancelar_turno_afiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.Parameters.AddWithValue("@turno", turno_id);
+
+            conexion.Open();
+
+            comando.ExecuteReader();
+        }
+
 
         static public void registrarConsulta(int turno, int bono, int afiliado) {
             var conexion = DBConnection.getConnection();
@@ -507,7 +521,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getTurnos(int usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select turn_id numero, turn_hora hora from CLINICA.Turnos where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
+            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from CLINICA.Turnos join CLINICA.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.CommandType = CommandType.Text;
 

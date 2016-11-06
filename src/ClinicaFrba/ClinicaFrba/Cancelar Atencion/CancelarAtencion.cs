@@ -37,7 +37,8 @@ namespace ClinicaFrba.Cancelar_Atencion
         // Boton de borrar
         private void button2_Click(object sender, EventArgs e) {
             if (esAfiliado()) {
-                
+                int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value));
             } else {
                 if(diaUnico) {
                     Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
@@ -56,7 +57,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void listar() {
-            //getTurnos
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {

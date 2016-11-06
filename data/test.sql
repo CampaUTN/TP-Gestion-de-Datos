@@ -113,6 +113,9 @@ IF OBJECT_ID('CLINICA.registrarResultadoConsulta') IS NOT NULL
 IF OBJECT_ID('CLINICA.cancelar_dia_agenda') IS NOT NULL
     DROP PROCEDURE CLINICA.cancelar_dia_agenda 
 
+IF OBJECT_ID('CLINICA.cancelar_turno_afiliado') IS NOT NULL
+    DROP PROCEDURE CLINICA.cancelar_turno_afiliado 
+
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
   DROP FUNCTION CLINICA.verificarUsuario
@@ -750,6 +753,18 @@ GO
 
 USE GD2C2016;
 GO
+CREATE PROCEDURE CLINICA.cancelar_turno_afiliado(@usuario INT, @turno INT)
+AS
+ BEGIN
+	DECLARE @afiliado INT = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)
+ 	UPDATE CLINICA.Turnos
+	SET turn_activo = 0
+	where turn_id = @turno and turn_afiliado = @afiliado
+ END
+GO
+
+USE GD2C2016;
+GO
 --FUNCION QUE DEVUELVE SI UN USUARIO TIENE FAMILIA
 CREATE FUNCTION CLINICA.tieneFamilia(@usuario_id BIGINT)
 RETURNS CHAR(2)
@@ -802,15 +817,16 @@ BEGIN
 	DECLARE @prof_id INT = (select hora_profesional from inserted)
 
 
-	IF (select top 1 count(*)/2
-	from Clinica.horarios
-	where hora_profesional = @prof_id
-	UNION
-	select top 1 count(*)/2
-	from Clinica.horarios
-	where hora_profesional = @prof_id
-	group by hora_profesional, datepart(WEEK,hora_fecha)
-	order by count(*)/2 DESC) > 48
+	IF (select top 1 (count(*) + (select top 1 count(*)
+									from inserted I
+									where I.hora_profesional = @prof_id --todos son de ese prof, asi que da igual.
+									group by I.hora_profesional, datepart(WEEK,I.hora_fecha)
+									having datepart(WEEK,E.hora_fecha) = datepart(WEEK,I.hora_fecha)
+									))/2
+	from Clinica.horarios E
+	where E.hora_profesional = @prof_id
+	group by E.hora_profesional, datepart(WEEK,E.hora_fecha)
+	order by 1) > 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		BEGIN
