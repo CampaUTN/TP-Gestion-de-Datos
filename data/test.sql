@@ -534,7 +534,7 @@ CREATE PROCEDURE CLINICA.getRolesUsuario (@user VARCHAR(15))
 AS
  BEGIN
 	
-	DECLARE @userId INT -- Lo que viene por parametro es el usua_username, necesito el id para comparar con RolXusuario
+	DECLARE @userId BIGINT -- Lo que viene por parametro es el usua_username, necesito el id para comparar con RolXusuario
 
 	SET @userId = (SELECT usua_id FROM CLINICA.Usuarios WHERE usua_username = @user)
 
@@ -593,6 +593,9 @@ BEGIN
 					usua_telefono,usua_fechaNacimiento, usua_sexo, usua_mail)
 
 	VALUES(@nroDoc*100+1,@username,@pass,@nombre,@apellido,@tipoDoc,@nroDoc,@direccion, @telefono,@fechaNacimiento, @sexo, @mail)
+
+	INSERT INTO CLINICA.RolXusuario (usua_id,role_id)
+		VALUES (@nroDoc*100+1, 1)
 
 END
 GO
