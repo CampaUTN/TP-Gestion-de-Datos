@@ -68,7 +68,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 comandoInsertarHorarios.Parameters[2].Value = h.fechaHora.Date;
                 comandoInsertarHorarios.Parameters[3].Value = h.fechaHora.TimeOfDay;
                 comandoInsertarHorarios.ExecuteNonQuery();
-                MessageBox.Show("4.");
+                MessageBox.Show("debug: si este msj aparece al menos dos veces, anda todo OK.");
             }
 
             //conexion.Close();
