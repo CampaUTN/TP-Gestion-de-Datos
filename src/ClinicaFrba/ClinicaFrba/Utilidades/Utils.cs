@@ -392,7 +392,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select * From CLINICA.Afiliados Where afil_usuario = @user", conexion);
+            SqlCommand comando = new SqlCommand("SELECT * From CLINICA.Afiliados WHERE afil_usuario = @user", conexion);
             comando.Parameters.AddWithValue("@user", cod_usuario);
 
             conexion.Open();
@@ -401,6 +401,27 @@ namespace ClinicaFrba.Utilidades
 
             return reader;
         }
+
+
+        static public int obtenerProfesionalDesdeUsername(string username)
+        {
+            int prof = 0;
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("SELECT * From CLINICA.Profesionales, CLINICA.Usuarios WHERE prof_usuario = usua_id AND usua_username = @user", conexion);
+            comando.Parameters.AddWithValue("@user", username);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+            if (reader.Read())
+            {
+                prof = Convert.ToInt32(reader[0]);
+            }
+
+            return prof;
+        }
+
 
         static public SqlDataReader obtenerUsuarioDesdeUsername(long cod_usuario)
         {

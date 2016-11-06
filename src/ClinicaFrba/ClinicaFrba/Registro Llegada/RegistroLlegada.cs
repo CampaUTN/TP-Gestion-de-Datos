@@ -41,13 +41,13 @@ namespace ClinicaFrba.Registro_Llegada
         {
             string id =Convert.ToString(planillaProfesionales.SelectedCells[0].Value);
            
-            string select = "SELECT afil_id, turn_id, usua_nombre, usua_apellido, turn_hora \n ";
-            string from = "FROM CLINICA.Turnos, CLINICA.Afiliados,CLINICA.Usuarios \n";
+            string select = "SELECT afil_id, turn_id, usua_nombre, usua_apellido, hora_inicio \n ";
+            string from = "FROM CLINICA.Turnos, CLINICA.Afiliados,CLINICA.Usuarios, CLINICA.Horarios \n";
 
             string subselect = "SELECT turn_id FROM CLINICA.Turnos, CLINICA.Profesionales, CLINICA.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
             subselect = subselect + id;
-          
-            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_activo = 1 AND turn_id IN(" + subselect + ")";
+
+            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id IN(" + subselect + ")";
 
              DBConnection.cargarPlanilla(listadoTurnos,
                 select + from + where);

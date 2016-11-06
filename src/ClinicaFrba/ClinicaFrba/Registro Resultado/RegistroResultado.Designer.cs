@@ -37,7 +37,6 @@
             this.labelSelecConsulta = new System.Windows.Forms.Label();
             this.labelDiagnostico = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listadoConsultas)).BeginInit();
             this.SuspendLayout();
@@ -57,9 +56,11 @@
             this.listadoConsultas.Size = new System.Drawing.Size(393, 319);
             this.listadoConsultas.TabIndex = 0;
             this.listadoConsultas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoConsultas_CellClick);
+            this.listadoConsultas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoConsultas_CellContentClick);
             // 
             // botonAceptar
             // 
+            this.botonAceptar.Enabled = false;
             this.botonAceptar.Location = new System.Drawing.Point(342, 586);
             this.botonAceptar.Name = "botonAceptar";
             this.botonAceptar.Size = new System.Drawing.Size(75, 23);
@@ -137,15 +138,6 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Ingrese los sintomas";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // botonLimpiar
             // 
             this.botonLimpiar.Location = new System.Drawing.Point(244, 586);
@@ -165,7 +157,6 @@
             this.CancelButton = this.botonCancelar;
             this.ClientSize = new System.Drawing.Size(439, 621);
             this.Controls.Add(this.botonLimpiar);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDiagnostico);
             this.Controls.Add(this.labelSelecConsulta);
@@ -197,7 +188,6 @@
         private System.Windows.Forms.Label labelSelecConsulta;
         private System.Windows.Forms.Label labelDiagnostico;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button botonLimpiar;
     }
 }

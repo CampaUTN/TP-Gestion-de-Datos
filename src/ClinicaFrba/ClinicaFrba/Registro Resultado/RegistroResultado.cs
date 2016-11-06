@@ -27,7 +27,11 @@ namespace ClinicaFrba.Registro_Resultado
         public RegistroResultado(string userActivo)
         {
             InitializeComponent();
-            where = where + (Convert.ToString(1465925));
+
+            int user = Utils.obtenerProfesionalDesdeUsername(userActivo);
+
+            MessageBox.Show(Convert.ToString(user));
+            where = where + (Convert.ToString(user));
             this.cargarPlanilla();
         }
 
@@ -39,6 +43,8 @@ namespace ClinicaFrba.Registro_Resultado
             textBoxDiagnostico.Enabled = true;
             checkBoxFueConcretada.Enabled = true;
             checkBoxFueConcretada.Checked = false;
+
+            botonAceptar.Enabled = true;
 
         }
 
@@ -97,6 +103,11 @@ namespace ClinicaFrba.Registro_Resultado
             textBoxSintomas.ResetText();
 
             checkBoxFueConcretada.Checked = false;
+        }
+
+        private void listadoConsultas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }

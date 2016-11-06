@@ -60,6 +60,7 @@
             // textBoxNombre
             // 
             this.textBoxNombre.Location = new System.Drawing.Point(14, 26);
+            this.textBoxNombre.MaxLength = 255;
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(117, 20);
             this.textBoxNombre.TabIndex = 0;
@@ -85,6 +86,7 @@
             // textBoxApellido
             // 
             this.textBoxApellido.Location = new System.Drawing.Point(148, 26);
+            this.textBoxApellido.MaxLength = 255;
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(117, 20);
             this.textBoxApellido.TabIndex = 2;
@@ -124,6 +126,7 @@
             // textBoxNroDoc
             // 
             this.textBoxNroDoc.Location = new System.Drawing.Point(148, 77);
+            this.textBoxNroDoc.MaxLength = 8;
             this.textBoxNroDoc.Name = "textBoxNroDoc";
             this.textBoxNroDoc.Size = new System.Drawing.Size(117, 20);
             this.textBoxNroDoc.TabIndex = 6;
@@ -140,6 +143,7 @@
             // textBoxDireccion
             // 
             this.textBoxDireccion.Location = new System.Drawing.Point(14, 128);
+            this.textBoxDireccion.MaxLength = 255;
             this.textBoxDireccion.Name = "textBoxDireccion";
             this.textBoxDireccion.Size = new System.Drawing.Size(117, 20);
             this.textBoxDireccion.TabIndex = 8;
@@ -156,6 +160,7 @@
             // textBoxTelefono
             // 
             this.textBoxTelefono.Location = new System.Drawing.Point(148, 128);
+            this.textBoxTelefono.MaxLength = 255;
             this.textBoxTelefono.Name = "textBoxTelefono";
             this.textBoxTelefono.Size = new System.Drawing.Size(117, 20);
             this.textBoxTelefono.TabIndex = 10;
@@ -298,6 +303,7 @@
             // 
             this.textBoxCantHijos.Enabled = false;
             this.textBoxCantHijos.Location = new System.Drawing.Point(202, 295);
+            this.textBoxCantHijos.MaxLength = 2;
             this.textBoxCantHijos.Name = "textBoxCantHijos";
             this.textBoxCantHijos.Size = new System.Drawing.Size(38, 20);
             this.textBoxCantHijos.TabIndex = 17;

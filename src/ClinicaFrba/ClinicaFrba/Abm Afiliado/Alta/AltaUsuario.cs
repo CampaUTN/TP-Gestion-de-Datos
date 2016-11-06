@@ -60,6 +60,8 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);          
             }
+
+            logger.resetear();
         }
 
 
@@ -80,7 +82,7 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             afiliado.setUsername(this.textBoxUsername.Text);
             afiliado.setPassword(this.textBoxPassConfirm.Text);
-            afiliado.setMail(this.textBoxMail.Text);
+            //afiliado.setMail(this.textBoxMail.Text);
         }
 
 
@@ -167,9 +169,6 @@ namespace ClinicaFrba.Abm_Afiliado
             otroFormulario.inhabilitarAgregadoAfiliados();
             otroFormulario.ShowDialog();
         }
-
-     
-
 
 
     }
