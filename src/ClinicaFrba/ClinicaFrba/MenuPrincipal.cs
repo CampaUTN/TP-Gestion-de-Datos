@@ -59,7 +59,7 @@ namespace ClinicaFrba
             this.funcDisponibles.Add(3, () => new Abm_Planes.AbmPlanes());
             this.funcDisponibles.Add(4, () => new Abm_Profesional.AbmProfesional());
             this.funcDisponibles.Add(5, () => new AbmRol.AbmRol());
-            this.funcDisponibles.Add(6, () => new Cancelar_Atencion.CancelarAtencion());
+            this.funcDisponibles.Add(6, () => new Cancelar_Atencion.CancelarAtencion(this.userActivo, this.rolActivo));
             this.funcDisponibles.Add(7, () => new Compra_Bono.CompraBono(this.userActivo,this.rolActivo));
             this.funcDisponibles.Add(8, () => new Listados.Listados());
             this.funcDisponibles.Add(9, () => new Pedir_Turno.PedirTurno(this.userActivo));
@@ -95,6 +95,10 @@ namespace ClinicaFrba
             else
                 Program.loginForm.Show();
             this.Close();
+        }
+
+        private void listFuncionalidades_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }

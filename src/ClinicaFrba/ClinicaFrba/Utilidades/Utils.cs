@@ -454,8 +454,7 @@ namespace ClinicaFrba.Utilidades
 
 
 
-        static public void registrarConsulta(int turno, int bono, int afiliado)
-        {
+        static public void registrarConsulta(int turno, int bono, int afiliado) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("CLINICA.registrarConsulta", conexion);
@@ -467,6 +466,35 @@ namespace ClinicaFrba.Utilidades
             conexion.Open();
 
             SqlDataReader reader = comando.ExecuteReader();
+        }
+
+
+        static public DataTable getTurnos(int usuario) {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select turn_id, turn_hora from CLINICA.Turnos where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
+            comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
+        static public DataTable getAgenda(int usuario) {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select * from CLINICA.Horarios where hora_profesional = (select prof_id from CLINICA.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
+            comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
         }
 
         static public void registrarResultadoConsulta(int consulta, bool realizada, string sintomas, string diagnostico)

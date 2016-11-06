@@ -41,6 +41,7 @@
             this.listFuncionalidades.Name = "listFuncionalidades";
             this.listFuncionalidades.Size = new System.Drawing.Size(405, 108);
             this.listFuncionalidades.TabIndex = 0;
+            this.listFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.listFuncionalidades_SelectedIndexChanged);
             // 
             // botonSeleccionar
             // 
