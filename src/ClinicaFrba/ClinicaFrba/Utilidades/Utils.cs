@@ -485,7 +485,7 @@ namespace ClinicaFrba.Utilidades
 
             conexion.Open();
 
-            SqlDataReader reader = comando.ExecuteReader();
+            comando.ExecuteReader();
         }
 
 
@@ -521,7 +521,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getAgenda(int usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select * from CLINICA.Horarios where hora_profesional = (select prof_id from CLINICA.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
+            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from CLINICA.Horarios where hora_profesional = (select prof_id from CLINICA.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.CommandType = CommandType.Text;
 

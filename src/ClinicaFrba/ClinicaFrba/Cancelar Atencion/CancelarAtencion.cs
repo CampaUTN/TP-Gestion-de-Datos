@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicaFrba.Cancelar_Atencion
@@ -47,6 +40,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
+                Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
             }
             // si es un medico lista la agenda ordenada
@@ -63,7 +57,6 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // cancelar un dia
         private void desde_ValueChanged(object sender, EventArgs e) {
-            Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
         }
     }
 }

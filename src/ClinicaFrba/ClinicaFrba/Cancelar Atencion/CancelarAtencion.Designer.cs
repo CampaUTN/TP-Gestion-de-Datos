@@ -119,7 +119,7 @@
             this.desde.Location = new System.Drawing.Point(148, 243);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.desde.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
