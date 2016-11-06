@@ -8,6 +8,9 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     interface FormularioABM
     {
+
+       // void ShowDialog();
         void Show();
+
     }
 }

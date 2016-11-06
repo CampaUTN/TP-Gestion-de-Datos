@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    class AgregadoFamiliar :Alta
+    public class AgregadoFamiliar :Alta
     {
         private int afiliadoRaiz;
 
@@ -23,8 +23,11 @@ namespace ClinicaFrba.Abm_Afiliado
             this.afiliado.setCodigo(afiliadoRaiz);
             this.afiliado.setAfiliadoRaiz(false);
             //calcular el nuevo id
-            new AltaUsuario(this.afiliado).Show();
+            (new AltaUsuario(this.afiliado)).ShowDialog();
+
+            this.Close();
             
         }
+        
     }
 }
