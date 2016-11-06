@@ -107,8 +107,11 @@ IF OBJECT_ID('CLINICA.eliminarAfiliado') IS NOT NULL
 IF OBJECT_ID('CLINICA.registrarConsulta') IS NOT NULL
     DROP PROCEDURE CLINICA.registrarConsulta
 
-IF OBJECT_ID('CLINICA.registrarResultadoConsulta ') IS NOT NULL
+IF OBJECT_ID('CLINICA.registrarResultadoConsulta') IS NOT NULL
     DROP PROCEDURE CLINICA.registrarResultadoConsulta 
+
+IF OBJECT_ID('CLINICA.cancelar_dia_agenda') IS NOT NULL
+    DROP PROCEDURE CLINICA.cancelar_dia_agenda 
 
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('CLINICA.verificarUsuario') IS NOT NULL)
@@ -734,6 +737,18 @@ GO
 USE GD2C2016;
 GO
 
+CREATE PROCEDURE CLINICA.cancelar_dia_agenda(@usuario INT, @fecha Date)
+AS
+ BEGIN
+ 	UPDATE CLINICA.Turnos
+	SET turn_activo = 0
+	where turn_hora in (select hora_id from CLINICA.Horarios where hora_profesional = @usuario and hora_especialidad = @fecha)
+	DELETE CLINICA.Horarios where hora_profesional = @usuario and hora_especialidad = @fecha
+ END
+GO
+
+USE GD2C2016;
+GO
 --FUNCION QUE DEVUELVE SI UN USUARIO TIENE FAMILIA
 CREATE FUNCTION CLINICA.tieneFamilia(@usuario_id BIGINT)
 RETURNS CHAR(2)
@@ -747,6 +762,19 @@ BEGIN
 END
 
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* CREO TRIGGERS */
 --TRIGGER QUE VERIFICA EL USUARIO
 USE GD2C2016;
