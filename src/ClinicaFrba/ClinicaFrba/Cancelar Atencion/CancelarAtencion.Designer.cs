@@ -102,7 +102,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(17, 243);
+            this.label1.Location = new System.Drawing.Point(83, 247);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 53;
@@ -115,7 +115,7 @@
             this.desde.CustomFormat = "";
             this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.desde.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.desde.Location = new System.Drawing.Point(148, 243);
+            this.desde.Location = new System.Drawing.Point(214, 247);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.desde.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
@@ -133,7 +133,7 @@
             this.from.CustomFormat = "";
             this.from.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.from.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.from.Location = new System.Drawing.Point(244, 275);
+            this.from.Location = new System.Drawing.Point(310, 274);
             this.from.Margin = new System.Windows.Forms.Padding(5);
             this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.from.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
@@ -148,7 +148,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(17, 274);
+            this.label3.Location = new System.Drawing.Point(83, 275);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 20);
             this.label3.TabIndex = 56;
@@ -161,7 +161,7 @@
             this.to.CustomFormat = "";
             this.to.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.to.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.to.Location = new System.Drawing.Point(410, 276);
+            this.to.Location = new System.Drawing.Point(485, 274);
             this.to.Margin = new System.Windows.Forms.Padding(5);
             this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.to.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
@@ -176,7 +176,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(177, 275);
+            this.label4.Location = new System.Drawing.Point(243, 275);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 20);
             this.label4.TabIndex = 58;
@@ -186,7 +186,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label5.Location = new System.Drawing.Point(347, 276);
+            this.label5.Location = new System.Drawing.Point(422, 274);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 20);
             this.label5.TabIndex = 59;
@@ -196,7 +196,7 @@
             // 
             this.selecDia.AutoSize = true;
             this.selecDia.Checked = true;
-            this.selecDia.Location = new System.Drawing.Point(523, 253);
+            this.selecDia.Location = new System.Drawing.Point(16, 250);
             this.selecDia.Name = "selecDia";
             this.selecDia.Size = new System.Drawing.Size(41, 17);
             this.selecDia.TabIndex = 60;
@@ -208,11 +208,10 @@
             // selecPeriodo
             // 
             this.selecPeriodo.AutoSize = true;
-            this.selecPeriodo.Location = new System.Drawing.Point(523, 276);
+            this.selecPeriodo.Location = new System.Drawing.Point(16, 278);
             this.selecPeriodo.Name = "selecPeriodo";
             this.selecPeriodo.Size = new System.Drawing.Size(61, 17);
             this.selecPeriodo.TabIndex = 61;
-            this.selecPeriodo.TabStop = true;
             this.selecPeriodo.Text = "Periodo";
             this.selecPeriodo.UseVisualStyleBackColor = true;
             this.selecPeriodo.CheckedChanged += new System.EventHandler(this.selecPeriodo_CheckedChanged);
