@@ -107,6 +107,7 @@
             this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 53;
             this.label1.Text = "Dia a cancelar:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // desde
             // 
@@ -153,6 +154,7 @@
             this.label3.Size = new System.Drawing.Size(154, 20);
             this.label3.TabIndex = 56;
             this.label3.Text = "Periodo a cancelar:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // to
             // 
@@ -181,6 +183,7 @@
             this.label4.Size = new System.Drawing.Size(59, 20);
             this.label4.TabIndex = 58;
             this.label4.Text = "desde:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -191,6 +194,7 @@
             this.label5.Size = new System.Drawing.Size(55, 20);
             this.label5.TabIndex = 59;
             this.label5.Text = "hasta:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // selecDia
             // 

@@ -16,6 +16,14 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.usuario = Convert.ToInt32(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
             if (esAfiliado()) {
                 desde.Hide();
+                from.Hide();
+                to.Hide();
+                selecDia.Hide();
+                selecPeriodo.Hide();
+                label1.Hide();
+                label3.Hide();
+                label4.Hide();
+                label5.Hide();
             }
             from.Enabled = false;
             to.Enabled = false;
@@ -91,6 +99,22 @@ namespace ClinicaFrba.Cancelar_Atencion
             from.Enabled = true; ;
             to.Enabled = true; ;
             diaUnico = false;
+        }
+
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e) {
+
         }
     }
 }
