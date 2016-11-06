@@ -145,6 +145,14 @@
             // 
             // dia
             // 
+            this.dia.AutoCompleteCustomSource.AddRange(new string[] {
+            "Lunes",
+            "Martes",
+            "Miercoles",
+            "Jueves",
+            "Viernes",
+            "Sabado"});
+            this.dia.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.dia.Cursor = System.Windows.Forms.Cursors.Default;
             this.dia.FormattingEnabled = true;
             this.dia.Items.AddRange(new object[] {

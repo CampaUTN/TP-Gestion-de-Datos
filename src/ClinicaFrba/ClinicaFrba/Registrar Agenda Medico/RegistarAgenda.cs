@@ -16,9 +16,15 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
+            if (hasta.Value.Date < desde.Value.Date) {
+                MessageBox.Show("La fecha final debe ser posterior a la inicial.");
+            }   
         }
 
         private void hasta_ValueChanged(object sender, EventArgs e) {
+            if(hasta.Value.Date<desde.Value.Date){
+                MessageBox.Show("La fecha final debe ser posterior a la inicial.");
+            }                
         }
 
 
@@ -50,25 +56,19 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             }
 
             SqlConnection conexion = DBConnection.getConnection();
-
-            string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
-            SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
-            comandoInsertarHorarios.CommandType = CommandType.Text;
-            comandoInsertarHorarios.Connection = conexion;
-            comandoInsertarHorarios.Parameters.AddWithValue("@profesional", DbType.Int32);
-            comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", DbType.Int32);
-            comandoInsertarHorarios.Parameters.AddWithValue("@fecha", DbType.Date);
-            comandoInsertarHorarios.Parameters.AddWithValue("@inicio", DbType.Time);
-
             conexion.Open();
-            MessageBox.Show(horarios.Count.ToString());
+            // debug: MessageBox.Show(horarios.Count.ToString());
             foreach (Horario h in horarios) {
-                comandoInsertarHorarios.Parameters[0].Value = h.profesional_id;
-                comandoInsertarHorarios.Parameters[1].Value = h.especialidad_id;
-                comandoInsertarHorarios.Parameters[2].Value = h.fechaHora.Date;
-                comandoInsertarHorarios.Parameters[3].Value = h.fechaHora.TimeOfDay;
+                string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
+                SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
+                //comandoInsertarHorarios.CommandType = CommandType.Text;
+                //comandoInsertarHorarios.Connection = conexion;
+                comandoInsertarHorarios.Parameters.AddWithValue("@profesional", h.profesional_id);
+                comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", h.especialidad_id);
+                comandoInsertarHorarios.Parameters.AddWithValue("@fecha", h.fechaHora.Date);
+                comandoInsertarHorarios.Parameters.AddWithValue("@inicio", h.fechaHora.TimeOfDay);
                 comandoInsertarHorarios.ExecuteNonQuery();
-                MessageBox.Show("debug: si este msj aparece al menos dos veces, anda todo OK.");
+                // debug: MessageBox.Show("debug: si este msj aparece al menos dos veces, anda todo OK.");
             }
 
             //conexion.Close();
@@ -120,7 +120,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                         MessageBox.Show("No se permite agregar estos horarios: El profesional ya atiende en alguno de los horarios indicados, o se superaria el limite de 48 horas semanales de agregar estos horarios.", "Error", MessageBoxButtons.OK);
                     }
                 }
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales2();
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
             }
