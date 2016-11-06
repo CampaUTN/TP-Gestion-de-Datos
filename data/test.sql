@@ -819,7 +819,7 @@ BEGIN
 		where H.hora_profesional = @prof_id) > 0
 			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,1)
 		ELSE
-			INSERT INTO Horarios select * from inserted
+			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
 		END
 END
 GO
