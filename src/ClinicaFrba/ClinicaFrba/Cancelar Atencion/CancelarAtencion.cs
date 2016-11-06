@@ -19,14 +19,22 @@ namespace ClinicaFrba.Cancelar_Atencion
             InitializeComponent();
             this.rol = rol;
             this.usuario = Convert.ToInt32(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
+            if (esAfiliado()) {
+                desde.Hide();
+            }
         }
 
         private bool esAfiliado(){
             return rol == 1;
         }
+
         // Boton de borrar
         private void button2_Click(object sender, EventArgs e) {
-            // borrar lo seleccionado
+            if (esAfiliado()) {
+                
+            } else {
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+            }
             this.listar();
         }
 
@@ -50,6 +58,11 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        // cancelar un dia
+        private void desde_ValueChanged(object sender, EventArgs e) {
 
         }
     }
