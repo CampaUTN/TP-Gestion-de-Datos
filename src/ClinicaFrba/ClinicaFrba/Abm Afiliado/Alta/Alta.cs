@@ -78,16 +78,6 @@ namespace ClinicaFrba.Abm_Afiliado
           //  this.selecEstadoCivil.ResetText();
         }
 
-        private void limpiarCajitas(){
-            foreach (TextBox cajita in cajasTexto){
-                cajita.Clear();
-            }
-
-            this.selecPlan.ResetText();
-            this.selecEstadoCivil.ResetText();
-            this.checkBoxHijos.CheckState = CheckState.Unchecked;
-        }
-
         private void botonCancelar_Click(object sender, EventArgs e){
             if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes){
                 this.Close();
@@ -107,23 +97,18 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void botonAgregarFamiliar_Click(object sender, EventArgs e){
-            if (faltaCompletarDatos()){
-                MessageBox.Show("Debe completar los datos del afiliado\nprincipal para poder continuar", "Aviso", MessageBoxButtons.OK);
-            }
-            else{
-                //aca agrego a los conyuges
-            }
+
+        private void limpiarCajitas(){
+            foreach (TextBox cajita in cajasTexto){ cajita.Clear();  }
+
+            this.selecPlan.ResetText();
+            this.selecEstadoCivil.ResetText();
+            this.checkBoxHijos.CheckState = CheckState.Unchecked;
         }
 
-        private void botonAfiliarFamiliar_Click(object sender, EventArgs e){
-            if (faltaCompletarDatos()){
-                MessageBox.Show("Debe completar los datos del afiliado\nprincipal para poder continuar", "Aviso", MessageBoxButtons.OK);
-            }
-            else{
-                //aca agrego a los familiares a cargo
-            }
-        }
+        
+
+        
 
         #endregion
 

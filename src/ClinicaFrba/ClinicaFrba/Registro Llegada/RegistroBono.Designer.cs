@@ -42,18 +42,18 @@
             this.listaBonos.AllowUserToResizeColumns = false;
             this.listaBonos.AllowUserToResizeRows = false;
             this.listaBonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listaBonos.Location = new System.Drawing.Point(23, 29);
+            this.listaBonos.Location = new System.Drawing.Point(23, 25);
             this.listaBonos.Name = "listaBonos";
             this.listaBonos.ReadOnly = true;
             this.listaBonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listaBonos.Size = new System.Drawing.Size(492, 213);
+            this.listaBonos.Size = new System.Drawing.Size(492, 226);
             this.listaBonos.TabIndex = 0;
             this.listaBonos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaBonos_CellClick);
             // 
             // botonSelecBono
             // 
             this.botonSelecBono.Enabled = false;
-            this.botonSelecBono.Location = new System.Drawing.Point(399, 249);
+            this.botonSelecBono.Location = new System.Drawing.Point(401, 257);
             this.botonSelecBono.Name = "botonSelecBono";
             this.botonSelecBono.Size = new System.Drawing.Size(116, 23);
             this.botonSelecBono.TabIndex = 1;
@@ -64,7 +64,7 @@
             // labelSelecBono
             // 
             this.labelSelecBono.AutoSize = true;
-            this.labelSelecBono.Location = new System.Drawing.Point(23, 13);
+            this.labelSelecBono.Location = new System.Drawing.Point(23, 9);
             this.labelSelecBono.Name = "labelSelecBono";
             this.labelSelecBono.Size = new System.Drawing.Size(102, 13);
             this.labelSelecBono.TabIndex = 2;
@@ -74,12 +74,13 @@
             // 
             this.botonCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.botonCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.botonCancelar.Location = new System.Drawing.Point(23, 249);
+            this.botonCancelar.Location = new System.Drawing.Point(23, 257);
             this.botonCancelar.Name = "botonCancelar";
             this.botonCancelar.Size = new System.Drawing.Size(75, 23);
             this.botonCancelar.TabIndex = 3;
-            this.botonCancelar.Text = "Cancelar";
+            this.botonCancelar.Text = "<- Atrás";
             this.botonCancelar.UseVisualStyleBackColor = true;
+            this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
             // RegistroBono
             // 

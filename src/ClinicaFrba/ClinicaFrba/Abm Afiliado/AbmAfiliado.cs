@@ -23,17 +23,14 @@ namespace ClinicaFrba.Abm_Afiliado
         private void botonSeguir_Click(object sender, EventArgs e)
         {
 
-            if (selecBaja.Checked)
-            {
+            if (selecBaja.Checked){
                ListadoAfiliados.ListadoBaja().Show();
             }
-            else if (selecModif.Checked)
-            {
+            else if (selecModif.Checked){
                 (new ListadoAfiliados()).Show();
                 
             }
-            else if (seleccionAlta.Checked)
-            {
+            else if (seleccionAlta.Checked){
                 (new Alta()).Show();
             }
 
@@ -46,18 +43,14 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void seleccionAlta_CheckedChanged(object sender, EventArgs e)
         {
-            formulario = new Alta();
         }
 
         private void selecBaja_CheckedChanged(object sender, EventArgs e)
         {
-            formulario = ListadoAfiliados.ListadoBaja();
-    
         }
 
         private void selecModif_CheckedChanged(object sender, EventArgs e)
         {
-            formulario = new ListadoAfiliados();
         }
     }
 }
