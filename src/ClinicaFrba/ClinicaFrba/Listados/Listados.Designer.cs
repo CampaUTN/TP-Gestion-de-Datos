@@ -148,6 +148,10 @@
             // 
             // dataGridViewListado2
             // 
+            this.dataGridViewListado2.AllowUserToAddRows = false;
+            this.dataGridViewListado2.AllowUserToDeleteRows = false;
+            this.dataGridViewListado2.AllowUserToResizeColumns = false;
+            this.dataGridViewListado2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewListado2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListado2.Location = new System.Drawing.Point(6, 106);
             this.dataGridViewListado2.Name = "dataGridViewListado2";
@@ -189,6 +193,10 @@
             // 
             // dataGridViewListado5
             // 
+            this.dataGridViewListado5.AllowUserToAddRows = false;
+            this.dataGridViewListado5.AllowUserToDeleteRows = false;
+            this.dataGridViewListado5.AllowUserToResizeColumns = false;
+            this.dataGridViewListado5.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewListado5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListado5.Location = new System.Drawing.Point(6, 106);
             this.dataGridViewListado5.Name = "dataGridViewListado5";
@@ -222,6 +230,10 @@
             // 
             // dataGridViewListado4
             // 
+            this.dataGridViewListado4.AllowUserToAddRows = false;
+            this.dataGridViewListado4.AllowUserToDeleteRows = false;
+            this.dataGridViewListado4.AllowUserToResizeColumns = false;
+            this.dataGridViewListado4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewListado4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListado4.Location = new System.Drawing.Point(6, 106);
             this.dataGridViewListado4.Name = "dataGridViewListado4";
@@ -266,6 +278,10 @@
             // 
             // dataGridViewListado3
             // 
+            this.dataGridViewListado3.AllowUserToAddRows = false;
+            this.dataGridViewListado3.AllowUserToDeleteRows = false;
+            this.dataGridViewListado3.AllowUserToResizeColumns = false;
+            this.dataGridViewListado3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewListado3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListado3.Location = new System.Drawing.Point(6, 106);
             this.dataGridViewListado3.Name = "dataGridViewListado3";
@@ -332,6 +348,10 @@
             // 
             // dataGridViewListado1
             // 
+            this.dataGridViewListado1.AllowUserToAddRows = false;
+            this.dataGridViewListado1.AllowUserToDeleteRows = false;
+            this.dataGridViewListado1.AllowUserToResizeColumns = false;
+            this.dataGridViewListado1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewListado1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListado1.Location = new System.Drawing.Point(6, 106);
             this.dataGridViewListado1.Name = "dataGridViewListado1";
@@ -423,6 +443,7 @@
             this.Controls.Add(this.buttonConsultar);
             this.Controls.Add(this.dateTimePickerAnio);
             this.Name = "Listados";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Estadístico";
             this.Load += new System.EventHandler(this.Listados_Load);
             this.tabPage2.ResumeLayout(false);
