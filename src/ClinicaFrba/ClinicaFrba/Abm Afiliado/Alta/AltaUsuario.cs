@@ -72,9 +72,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public void verificarDatos(){
 
-            if(!Parser.esEntero(this.textBoxPass)){
-                logger.agregarAlLog("La contraseña debe ser un numero entero");            
-            }
 
             if (!chequearPass()){
                 logger.agregarAlLog("Las contraseñas no coinciden");
@@ -138,6 +135,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 otroFormulario.Show();
 
             }
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }

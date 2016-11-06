@@ -43,8 +43,9 @@
             // textBoxUsername
             // 
             this.textBoxUsername.Location = new System.Drawing.Point(12, 31);
+            this.textBoxUsername.MaxLength = 20;
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
+            this.textBoxUsername.Size = new System.Drawing.Size(170, 20);
             this.textBoxUsername.TabIndex = 0;
             // 
             // labelNombreUsuario
@@ -103,8 +104,9 @@
             // textBoxMail
             // 
             this.textBoxMail.Location = new System.Drawing.Point(15, 74);
+            this.textBoxMail.MaxLength = 255;
             this.textBoxMail.Name = "textBoxMail";
-            this.textBoxMail.Size = new System.Drawing.Size(127, 20);
+            this.textBoxMail.Size = new System.Drawing.Size(167, 20);
             this.textBoxMail.TabIndex = 1;
             // 
             // labelMail
@@ -124,6 +126,7 @@
             this.botonCancelar.TabIndex = 9;
             this.botonCancelar.Text = "Cancelar";
             this.botonCancelar.UseVisualStyleBackColor = true;
+            this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
             // AltaUsuario
             // 
