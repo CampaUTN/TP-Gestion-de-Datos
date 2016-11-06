@@ -146,6 +146,20 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
+
+        static public DataTable getProfesionales2()
+        {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_id as Especialidad, e.espe_nombre as Detalle from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
         static public DataTable getEspecialidades()
 {
             var conexion = DBConnection.getConnection();
