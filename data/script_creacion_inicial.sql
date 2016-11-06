@@ -36,6 +36,9 @@ IF OBJECT_ID('CLINICA.Consultas','U') IS NOT NULL
 IF OBJECT_ID('CLINICA.Turnos','U') IS NOT NULL
     DROP TABLE CLINICA.Turnos;
 
+IF OBJECT_ID('CLINICA.HistorialAfiliado','U') IS NOT NULL
+    DROP TABLE CLINICA.HistorialAfiliado;
+
 IF OBJECT_ID('CLINICA.Afiliados','U') IS NOT NULL
     DROP TABLE CLINICA.Afiliados;
 	
@@ -47,9 +50,6 @@ IF OBJECT_ID('CLINICA.Planes','U') IS NOT NULL
 
 IF OBJECT_ID('CLINICA.Horarios','U') IS NOT NULL
     DROP TABLE CLINICA.Horarios;
-
-IF OBJECT_ID('CLINICA.HistorialAfiliado','U') IS NOT NULL
-    DROP TABLE CLINICA.HistorialAfiliado;
 
 IF OBJECT_ID('CLINICA.Especialidades','U') IS NOT NULL
     DROP TABLE CLINICA.Especialidades;
