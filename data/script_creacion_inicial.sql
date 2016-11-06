@@ -816,17 +816,21 @@ BEGIN
 
 	DECLARE @prof_id INT = (select hora_profesional from inserted)
 
-
-	IF (select top 1 (count(*) + (select top 1 count(*)
-									from inserted I
-									where I.hora_profesional = @prof_id --todos son de ese prof, asi que da igual.
-									group by I.hora_profesional, datepart(WEEK,I.hora_fecha)
-									having datepart(WEEK,E.hora_fecha) = datepart(WEEK,I.hora_fecha)
-									))/2
-	from Clinica.horarios E
-	where E.hora_profesional = @prof_id
-	group by E.hora_profesional, datepart(WEEK,E.hora_fecha)
-	order by 1) > 48
+	IF (SELECT top 1 count(*)/2
+		FROM (
+			(select *
+			from inserted I
+			where I.hora_profesional = @prof_id
+			)
+			UNION
+			(select *
+			from CLINICA.Horarios E
+			where E.hora_profesional = @prof_id
+			)
+		) AS tabla
+		group by tabla.hora_profesional, datepart(WEEK,tabla.hora_fecha)
+		order by 1 DESC
+	) > 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		BEGIN
