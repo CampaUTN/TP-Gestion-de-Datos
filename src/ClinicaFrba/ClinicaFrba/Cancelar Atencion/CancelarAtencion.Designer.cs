@@ -59,6 +59,7 @@
             this.grillaProfesionales.ShowEditingIcon = false;
             this.grillaProfesionales.Size = new System.Drawing.Size(588, 228);
             this.grillaProfesionales.TabIndex = 45;
+            this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
             // botonListar
             // 
@@ -108,7 +109,8 @@
             this.Controls.Add(this.botonListar);
             this.Controls.Add(this.botonCancelar);
             this.Name = "CancelarAtencion";
-            this.Text = "Form1";
+            this.Text = "Cancelacion Atencion";
+            this.Load += new System.EventHandler(this.CancelarAtencion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
