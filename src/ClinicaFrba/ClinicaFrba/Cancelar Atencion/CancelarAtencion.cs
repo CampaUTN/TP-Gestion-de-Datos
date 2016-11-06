@@ -37,15 +37,23 @@ namespace ClinicaFrba.Cancelar_Atencion
         // Boton de borrar
         private void button2_Click(object sender, EventArgs e) {
             if (esAfiliado()) {
-                
+                if (grillaProfesionales.SelectedRows.Count >0 ) {
+                    int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                    Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value));
+                    MessageBox.Show("Turno cancelado correctamente.");
+                }else {
+                    MessageBox.Show("Seleccione un turno a cancelar.");
+                }
             } else {
                 if(diaUnico) {
                     Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
+                    MessageBox.Show("Dia dado de baja correctamente.");
                 } else {
                     while(from.Value.Date <= to.Value.Date){
                         Utilidades.Utils.bajaDia(usuario, from.Value.Date);
                         from.Value = from.Value.AddDays(1);
                     }
+                    MessageBox.Show("Periodo dado de baja correctamente.");
                 }
             }
             this.listar();
@@ -56,7 +64,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void listar() {
-            //getTurnos
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
