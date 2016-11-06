@@ -507,7 +507,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getTurnos(int usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select turn_id, turn_hora from CLINICA.Turnos where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
+            SqlCommand comando = new SqlCommand("select turn_id numero, turn_hora hora from CLINICA.Turnos where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.CommandType = CommandType.Text;
 

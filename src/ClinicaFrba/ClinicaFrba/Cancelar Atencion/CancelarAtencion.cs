@@ -7,6 +7,8 @@ namespace ClinicaFrba.Cancelar_Atencion
     {
         private int usuario;
         private int rol;
+        private bool diaUnico = true;
+
         public CancelarAtencion(string usuario, int rol)
         {
             InitializeComponent();
@@ -15,6 +17,9 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 desde.Hide();
             }
+            from.Enabled = false;
+            to.Enabled = false;
+            desde.Enabled = true;
         }
 
         private bool esAfiliado(){
@@ -26,7 +31,14 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 
             } else {
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+                if(diaUnico) {
+                    Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
+                } else {
+                    while(from.Value.Date <= to.Value.Date){
+                        Utilidades.Utils.bajaDia(usuario, from.Value.Date);
+                        from.Value = from.Value.AddDays(1);
+                    }
+                }
             }
             this.listar();
         }
@@ -40,7 +52,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
-                Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
             }
             // si es un medico lista la agenda ordenada
@@ -57,6 +68,29 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // cancelar un dia
         private void desde_ValueChanged(object sender, EventArgs e) {
+        }
+
+        private void from_ValueChanged(object sender, EventArgs e) {
+            desde.SuspendLayout();
+        }
+
+        private void to_ValueChanged(object sender, EventArgs e) {
+        }
+
+        private void selecDia_CheckedChanged(object sender, EventArgs e) {
+            from.Enabled = false;
+            to.Enabled = false;
+
+            desde.Enabled = true;
+            diaUnico = true;
+        }
+
+        private void selecPeriodo_CheckedChanged(object sender, EventArgs e) {
+            desde.Enabled = false; ;
+
+            from.Enabled = true; ;
+            to.Enabled = true; ;
+            diaUnico = false;
         }
     }
 }

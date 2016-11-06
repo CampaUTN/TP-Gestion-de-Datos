@@ -31,11 +31,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.grillaProfesionales = new System.Windows.Forms.DataGridView();
             this.botonListar = new System.Windows.Forms.Button();
-            this.botonCancelar = new System.Windows.Forms.Button();
             this.botonAtras = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.desde = new System.Windows.Forms.DateTimePicker();
+            this.from = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.to = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.selecDia = new System.Windows.Forms.RadioButton();
+            this.selecPeriodo = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +65,7 @@
             this.grillaProfesionales.Location = new System.Drawing.Point(12, 32);
             this.grillaProfesionales.Name = "grillaProfesionales";
             this.grillaProfesionales.ShowEditingIcon = false;
-            this.grillaProfesionales.Size = new System.Drawing.Size(588, 189);
+            this.grillaProfesionales.Size = new System.Drawing.Size(588, 203);
             this.grillaProfesionales.TabIndex = 45;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
@@ -73,13 +79,6 @@
             this.botonListar.UseVisualStyleBackColor = true;
             this.botonListar.Click += new System.EventHandler(this.botonListar_Click);
             // 
-            // botonCancelar
-            // 
-            this.botonCancelar.Location = new System.Drawing.Point(21, 119);
-            this.botonCancelar.Name = "botonCancelar";
-            this.botonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.botonCancelar.TabIndex = 48;
-            // 
             // botonAtras
             // 
             this.botonAtras.Location = new System.Drawing.Point(12, 368);
@@ -91,7 +90,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(224, 308);
+            this.button2.Location = new System.Drawing.Point(226, 304);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 51;
@@ -127,11 +126,109 @@
             this.desde.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
             this.desde.ValueChanged += new System.EventHandler(this.desde_ValueChanged);
             // 
+            // from
+            // 
+            this.from.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.from.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.from.CustomFormat = "";
+            this.from.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.from.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.from.Location = new System.Drawing.Point(244, 275);
+            this.from.Margin = new System.Windows.Forms.Padding(5);
+            this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
+            this.from.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
+            this.from.Name = "from";
+            this.from.RightToLeftLayout = true;
+            this.from.Size = new System.Drawing.Size(95, 20);
+            this.from.TabIndex = 55;
+            this.from.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.from.ValueChanged += new System.EventHandler(this.from_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label3.Location = new System.Drawing.Point(17, 274);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(154, 20);
+            this.label3.TabIndex = 56;
+            this.label3.Text = "Periodo a cancelar:";
+            // 
+            // to
+            // 
+            this.to.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.to.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.to.CustomFormat = "";
+            this.to.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.to.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.to.Location = new System.Drawing.Point(410, 276);
+            this.to.Margin = new System.Windows.Forms.Padding(5);
+            this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
+            this.to.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
+            this.to.Name = "to";
+            this.to.RightToLeftLayout = true;
+            this.to.Size = new System.Drawing.Size(95, 20);
+            this.to.TabIndex = 57;
+            this.to.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.to.ValueChanged += new System.EventHandler(this.to_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label4.Location = new System.Drawing.Point(177, 275);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 20);
+            this.label4.TabIndex = 58;
+            this.label4.Text = "desde:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label5.Location = new System.Drawing.Point(347, 276);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 20);
+            this.label5.TabIndex = 59;
+            this.label5.Text = "hasta:";
+            // 
+            // selecDia
+            // 
+            this.selecDia.AutoSize = true;
+            this.selecDia.Checked = true;
+            this.selecDia.Location = new System.Drawing.Point(523, 253);
+            this.selecDia.Name = "selecDia";
+            this.selecDia.Size = new System.Drawing.Size(41, 17);
+            this.selecDia.TabIndex = 60;
+            this.selecDia.TabStop = true;
+            this.selecDia.Text = "Dia";
+            this.selecDia.UseVisualStyleBackColor = true;
+            this.selecDia.CheckedChanged += new System.EventHandler(this.selecDia_CheckedChanged);
+            // 
+            // selecPeriodo
+            // 
+            this.selecPeriodo.AutoSize = true;
+            this.selecPeriodo.Location = new System.Drawing.Point(523, 276);
+            this.selecPeriodo.Name = "selecPeriodo";
+            this.selecPeriodo.Size = new System.Drawing.Size(61, 17);
+            this.selecPeriodo.TabIndex = 61;
+            this.selecPeriodo.TabStop = true;
+            this.selecPeriodo.Text = "Periodo";
+            this.selecPeriodo.UseVisualStyleBackColor = true;
+            this.selecPeriodo.CheckedChanged += new System.EventHandler(this.selecPeriodo_CheckedChanged);
+            // 
             // CancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 403);
+            this.Controls.Add(this.selecPeriodo);
+            this.Controls.Add(this.selecDia);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.to);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.from);
             this.Controls.Add(this.desde);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
@@ -139,7 +236,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.grillaProfesionales);
             this.Controls.Add(this.botonListar);
-            this.Controls.Add(this.botonCancelar);
             this.Name = "CancelarAtencion";
             this.Text = "Cancelacion Atencion";
             this.Load += new System.EventHandler(this.CancelarAtencion_Load);
@@ -154,10 +250,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView grillaProfesionales;
         private System.Windows.Forms.Button botonListar;
-        protected System.Windows.Forms.Button botonCancelar;
         private System.Windows.Forms.Button botonAtras;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         protected System.Windows.Forms.DateTimePicker desde;
+        protected System.Windows.Forms.DateTimePicker from;
+        private System.Windows.Forms.Label label3;
+        protected System.Windows.Forms.DateTimePicker to;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton selecDia;
+        private System.Windows.Forms.RadioButton selecPeriodo;
     }
 }
