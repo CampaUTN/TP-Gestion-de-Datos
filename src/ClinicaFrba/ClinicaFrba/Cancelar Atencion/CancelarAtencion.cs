@@ -63,7 +63,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // cancelar un dia
         private void desde_ValueChanged(object sender, EventArgs e) {
-
+            Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
         }
     }
 }

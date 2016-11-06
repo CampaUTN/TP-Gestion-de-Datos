@@ -740,10 +740,11 @@ GO
 CREATE PROCEDURE CLINICA.cancelar_dia_agenda(@usuario INT, @fecha Date)
 AS
  BEGIN
+	DECLARE @profesional INT = (select prof_id from CLINICA.Profesionales where prof_usuario = @usuario)
  	UPDATE CLINICA.Turnos
 	SET turn_activo = 0
-	where turn_hora in (select hora_id from CLINICA.Horarios where hora_profesional = @usuario and hora_especialidad = @fecha)
-	DELETE CLINICA.Horarios where hora_profesional = @usuario and hora_especialidad = @fecha
+	where turn_hora in (select hora_id from CLINICA.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
+	DELETE CLINICA.Horarios where hora_profesional = @profesional and hora_fecha = @fecha
  END
 GO
 
