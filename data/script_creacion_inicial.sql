@@ -97,6 +97,7 @@ IF OBJECT_ID('CLINICA.agregarFamiliar') IS NOT NULL
 
 IF OBJECT_ID('CLINICA.modificarAfiliado') IS NOT NULL
  DROP PROCEDURE CLINICA.modificarAfiliado
+
  IF OBJECT_ID('CLINICA.registrarMotivo') IS NOT NULL
 DROP PROCEDURE CLINICA.registrarMotivo
 
@@ -688,6 +689,10 @@ BEGIN
 	DECLARE @afil INT
 
 	SET @afil = (SELECT afil_id FROM CLINICA.Afiliados WHERE afil_usuario = @user)
+
+	DELETE FROM CLINICA.HistorialAfiliado
+		WHERE hist_afil = @afil
+
 	DELETE FROM CLINICA.ComprasBonos
 			WHERE comp_afil = @afil
 
