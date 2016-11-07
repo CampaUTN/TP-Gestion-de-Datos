@@ -55,6 +55,21 @@ namespace ClinicaFrba.Compra_Bono
 
         private void CompraBono_Load(object sender, EventArgs e)
         {
+            using (SqlConnection conexion = DBConnection.getConnection())
+            {
+                conexion.Open();
+                AutoCompleteStringCollection numeroAfiliado = new AutoCompleteStringCollection();
+                SqlCommand queryAfiliados = new SqlCommand("SELECT DISTINCT afil_id from GEDDES.Afiliados", conexion);
+                SqlDataReader readerNombres = queryAfiliados.ExecuteReader();
+                while (readerNombres.Read())
+                {
+                    numeroAfiliado.Add(readerNombres["afil_id"].ToString());
+                }
+                readerNombres.Close();
+                textAfiliado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                textAfiliado.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                textAfiliado.AutoCompleteCustomSource = numeroAfiliado;
+            }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -123,7 +138,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void textAfiliado_TextChanged(object sender, EventArgs e)
         {
-
+            textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
         }
 
 
