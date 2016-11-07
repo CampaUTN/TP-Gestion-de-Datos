@@ -35,7 +35,6 @@ namespace ClinicaFrba.AbmRol {
                 try {
                     queryDehabilitarRol.ExecuteNonQuery();
                 } catch { }
-                // TODO: TESTEAR ESTO
                 SqlCommand queryDesasignarRol = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE role_id=" + item.Key, conexion);
                 try {
                     queryDesasignarRol.ExecuteNonQuery();
