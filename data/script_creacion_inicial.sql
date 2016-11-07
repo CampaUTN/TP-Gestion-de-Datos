@@ -713,10 +713,10 @@ GO
 USE GD2C2016;
 GO
 
-CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario INT, @fecha Date)
+CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id INT, @fecha Date)
 AS
  BEGIN
-	DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario)
+	DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario_id)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)

@@ -12,7 +12,12 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private DateTime horaInicio, horaFin;
         private int numeroDia = 99;
         private Logger logErrores;
-
+        private string usuario;
+        private int rol;
+        
+        private bool esProfesional(){
+            return rol == 3;
+        }
 
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
             if (hasta.Value.Date < desde.Value.Date) {
@@ -27,11 +32,13 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         }
 
 
-        public RegistarAgenda() {
+        public RegistarAgenda(string usuario, int rol) {
             InitializeComponent();
             this.logErrores = new Logger();
             horaInicio = inicio.Value;
             horaFin = fin.Value;
+            this.usuario = usuario;
+            this.rol = rol;
         }
 
         //todo ver si pasa de mes al pasar el limite de 30/31 dias.
@@ -92,7 +99,11 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
 
         private void botonListar_Click(object sender, EventArgs e) {
-            this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales2();
+            if (esProfesional()){
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales3(usuario);
+            } else {
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales2();
+            }
         }
 
 

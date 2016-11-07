@@ -175,6 +175,20 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
+        static public DataTable getProfesionales3(string usuario) {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_id as Especialidad, e.espe_nombre as Detalle from GEDDES.Profesionales p, GEDDES.Usuarios u, GEDDES.EspecialidadXProfesional espe, GEDDES.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id and u.usua_username = @usuario", conexion);
+            comando.CommandType = CommandType.Text;
+            comando.Parameters.AddWithValue("@usuario", usuario);
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
+
+
         static public DataTable getEspecialidades()
 {
             var conexion = DBConnection.getConnection();
@@ -498,13 +512,13 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public void bajaDia(int profesional, DateTime fecha) {
+        static public void bajaDia(int usuario_id, DateTime fecha) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_dia_agenda", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@profesional", profesional);
+            comando.Parameters.AddWithValue("@usuario_id", usuario_id);
             comando.Parameters.AddWithValue("@fecha", fecha);
 
             conexion.Open();

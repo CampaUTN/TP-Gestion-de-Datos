@@ -87,6 +87,7 @@
             this.botonAtras.TabIndex = 50;
             this.botonAtras.Text = "<- Atrás";
             this.botonAtras.UseVisualStyleBackColor = true;
+            this.botonAtras.Click += new System.EventHandler(this.botonAtras_Click);
             // 
             // button2
             // 
