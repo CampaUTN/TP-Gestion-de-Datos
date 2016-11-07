@@ -733,14 +733,13 @@ GO
 USE GD2C2016;
 GO
 
-CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id INT, @fecha Date)
+CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id BIGINT, @fecha Date)
 AS
  BEGIN
 	DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario_id)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
-	DELETE GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha
  END
 GO
 
@@ -748,7 +747,7 @@ GO
 
 USE GD2C2016;
 GO
-CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario INT, @turno INT)
+CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario BIGINT, @turno INT)
 AS
  BEGIN
 	DECLARE @afiliado INT = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)
