@@ -19,6 +19,7 @@ namespace ClinicaFrba.Listados
         }
 
         private void Listados_Load(object sender, EventArgs e) {
+            // Asignamos formato a los diferentes datetimepicker
             dateTimePickerAnio.Format = DateTimePickerFormat.Custom;
             dateTimePickerAnio.CustomFormat = "yyyy";
             dateTimePickerAnio.ShowUpDown = true;
@@ -39,12 +40,16 @@ namespace ClinicaFrba.Listados
             comboBoxListado1Filtro.SelectedIndex = 0;
 
             /* LISTADO 2 */
+            // Completamos el filtro del listado 2, que incluye los planes del sistema
+            // Ademas incluimos la opcion "Todos" para ver totales globales
             List<KeyValuePair<int, string>> planes = Utilidades.Utils.getPlanes();
             planes.Insert(0, new KeyValuePair<int, string>(-1, "Todos"));
             Utilidades.Utils.llenar(comboBoxListado2Filtro, planes);
             comboBoxListado2Filtro.SelectedIndex=0;
 
             /* LISTADO 3 */
+            // Completamos el filtro del listado 3, que incluye las especialidades del sistema
+            // Ademas incluimos la opcion "Todas" para ver totales globales
             DataTable especialdidades = Utilidades.Utils.getEspecialidades();
             List<KeyValuePair<int, string>> listaEspecialidades = new List<KeyValuePair<int, string>>();
             foreach (DataRow especialidad in especialdidades.Rows) {
@@ -52,19 +57,21 @@ namespace ClinicaFrba.Listados
             }
             listaEspecialidades.Insert(0, new KeyValuePair<int, string>(-1, "Todas"));
             Utilidades.Utils.llenar(comboBoxListado3Filtro, listaEspecialidades);
-            
             comboBoxListado3Filtro.SelectedIndex = 0;
 
             /* LISTADO 4 */
+            // Rellenamos la grilla 4
             llenarDataGridView(dataGridViewListado4, generarQueryListado4());
 
             /* LISTADO 5 */
+            // Rellenamos la grilla 5
             llenarDataGridView(dataGridViewListado5, generarQueryListado5());
 
-            // Los listados con combobox se rellenan solos
+            // Los listados con combobox se rellenan en el evento SelectedIndexChanged
         }
 
         private void llenarListados(){
+            // Para actualizar todos los listados al actualizar la fecha
             llenarDataGridView(dataGridViewListado1, generarQueryListado1());
             llenarDataGridView(dataGridViewListado2, generarQueryListado2());
             llenarDataGridView(dataGridViewListado3, generarQueryListado3());
@@ -73,6 +80,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado1() {
+            // Generamos la query del listado 1, agregando los parametros de fecha y filtro especificos
             string where = "";
             if (comboBoxListado1Filtro.SelectedIndex == 0)
                 where = "canc_tipo = 1 AND ";
@@ -91,6 +99,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado2() {
+            // Generamos la query del listado 2, agregando los parametros de fecha y filtro especificos
             string queryListado = "SELECT TOP 5 COUNT(DISTINCT cons_id) AS 'Consultas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', espe_nombre AS 'Especialidad' " +
                                     "FROM GEDDES.Bonos " +
                                     "JOIN GEDDES.Consultas ON cons_id = bono_nroConsulta " +
@@ -109,6 +118,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado3(){
+            // Generamos la query del listado 3, agregando los parametros de fecha y filtro especificos
             string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario' " +
                                     "FROM GEDDES.Horarios " +
                                     "JOIN GEDDES.Profesionales ON prof_id = hora_profesional " +
@@ -124,6 +134,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado4() {
+            // Generamos la query del listado 4, agregando los parametros de fecha
             string queryListado = "SELECT TOP 5 SUM(comp_cantidad) AS 'Bonos comprados', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', GEDDES.tieneFamilia(usua_id) AS 'Tiene familia' " +
                                     "FROM GEDDES.ComprasBonos " +
                                     "JOIN GEDDES.Afiliados afil ON afil_id = comp_afil " +
@@ -135,6 +146,7 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado5() {
+            // Generamos la query del listado 5, agregando los parametros de fecha
             string queryListado = "SELECT TOP 5 COUNT(cons_id) AS 'Bonos utilizados' , espe_nombre AS 'Especialidad' " +
                                     "FROM GEDDES.Consultas " +
                                     "JOIN GEDDES.Turnos ON turn_id = cons_turno " +
