@@ -293,17 +293,6 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
 INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
 VALUES (0,'admin', @hash, 3);
 
-DECLARE @hash2 VARBINARY(225)
-SELECT @hash2 = HASHBYTES('SHA2_256', 'soyafiliado');
-
-DECLARE @hash3 VARBINARY(225)
-SELECT @hash3 = HASHBYTES('SHA2_256', 'soyprofesional');
-
-update GEDDES.Usuarios set usua_username='afiliado' where usua_id=7564290401
-update GEDDES.Usuarios set usua_password=@hash2 where usua_id=7564290401
-
-update GEDDES.Usuarios set usua_username='profesional' where usua_id=146592501
-update GEDDES.Usuarios set usua_password=@hash3 where usua_id=146592501
 
 -- Usuarios desde Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
@@ -473,6 +462,19 @@ insert into GEDDES.EspecialidadXProfesional values (10012,18756896)
 insert into GEDDES.Horarios values (9999,10032,'20151013','12:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151014','12:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151015','12:30:00.0000000')
+
+DECLARE @hash2 VARBINARY(225)
+SELECT @hash2 = HASHBYTES('SHA2_256', 'afi');
+
+update GEDDES.Usuarios set usua_username='afiliado' where usua_id=7564290401
+update GEDDES.Usuarios set usua_password=@hash2 where usua_id=7564290401
+
+DECLARE @hash3 VARBINARY(225)
+SELECT @hash3 = HASHBYTES('SHA2_256', 'prof');
+
+update GEDDES.Usuarios set usua_username='profesional' where usua_id=146592501
+update GEDDES.Usuarios set usua_password=@hash3 where usua_id=146592501
+
 /*
 insert into GEDDES.Horarios values (9999,10032,'20151016','11:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151017','10:30:00.0000000')
