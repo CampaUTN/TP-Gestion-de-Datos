@@ -293,6 +293,18 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
 INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
 VALUES (0,'admin', @hash, 3);
 
+DECLARE @hash2 VARBINARY(225)
+SELECT @hash2 = HASHBYTES('SHA2_256', 'soyafiliado');
+
+DECLARE @hash3 VARBINARY(225)
+SELECT @hash3 = HASHBYTES('SHA2_256', 'soyprofesional');
+
+update GEDDES.Usuarios set usua_username='afiliado' where usua_id=7564290401
+update GEDDES.Usuarios set usua_password=@hash2 where usua_id=7564290401
+
+update GEDDES.Usuarios set usua_username='profesional' where usua_id=146592501
+update GEDDES.Usuarios set usua_password=@hash3 where usua_id=146592501
+
 -- Usuarios desde Afiliados. Funciona
   /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
 INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
@@ -406,6 +418,7 @@ insert into GEDDES.Administradores values (0)  --usario
 insert into GEDDES.Profesionales values (9999,0,null) --prof if, user, algo
 update GEDDES.Usuarios set usua_nombre= 'NombreAdmin' where usua_id=0
 update GEDDES.Usuarios set usua_apellido= 'ApellidoAdmin' where usua_id=0
+
 ---
 
 
