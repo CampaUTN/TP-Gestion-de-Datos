@@ -60,12 +60,18 @@ namespace ClinicaFrba
         //le muestro al usuario la ventanita segun los roles
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
         {
+            this.Hide();
             if (rolesAsignados.Count == 1)
                 (new MenuPrincipal(Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).Show();
             else
             if (rolesAsignados.Count > 1)
                 (new EleccionRol(this.textUsuario.Text, rolesAsignados)).Show();
-            this.Hide();
+            else {
+                MessageBox.Show("El usuario no tiene roles asignados. Ingrese con otro usuario.");
+                this.Show();
+            }
+            
+
             
         }
 
