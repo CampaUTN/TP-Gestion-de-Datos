@@ -46,6 +46,11 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             botonModificar.Enabled = false;
             botonDesactivar.Enabled = false;
+
+            checkBoxApellido.Checked = false;
+            checkBoxNombre.Checked = false;
+            checkBoxDoc.Checked = false;
+
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -197,7 +202,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 plan_id = Convert.ToInt32(reader[0]);
                 estado = Convert.ToString(reader[1]);
                 cantidadHijos = Convert.ToInt32(reader[2]);
-                cod_usuario = Convert.ToInt32(reader[3]);
+                cod_usuario = Convert.ToInt64(reader[3]);
 
             //obtengo los datos de direccion, tipo de documento, etc...
            reader = Utils.obtenerUsuarioDesdeUsername(cod_usuario);
