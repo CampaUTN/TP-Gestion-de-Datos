@@ -29,7 +29,15 @@ namespace ClinicaFrba
 
         private void botonSeleccionar_Click(object sender, EventArgs e)
         {
-            if (comboRolesPosibles.Items.Contains(comboRolesPosibles.Text)) {
+            bool esValido = false;
+            foreach (KeyValuePair<int, string> item in comboRolesPosibles.Items){
+                if (item.Value == comboRolesPosibles.Text) {
+                    esValido = true;
+                    break;
+                }
+            }
+
+            if (esValido) {
                 int rolSeleccionado = ((KeyValuePair<int, string>)this.comboRolesPosibles.SelectedItem).Key;
                 new MenuPrincipal(rolSeleccionado, this.userActivo).Show();
                 this.Close();
