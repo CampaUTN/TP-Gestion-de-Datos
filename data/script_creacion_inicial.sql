@@ -475,6 +475,11 @@ SELECT @hash3 = HASHBYTES('SHA2_256', 'prof');
 update GEDDES.Usuarios set usua_username='profesional' where usua_id=146592501
 update GEDDES.Usuarios set usua_password=@hash3 where usua_id=146592501
 
+insert into GEDDES.RolXusuario values (7564290401,1) //Afiliado
+
+insert into GEDDES.RolXusuario values (146592501,3) //Profesional
+
+
 /*
 insert into GEDDES.Horarios values (9999,10032,'20151016','11:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151017','10:30:00.0000000')

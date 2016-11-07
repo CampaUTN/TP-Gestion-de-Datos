@@ -141,7 +141,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void textAfiliado_TextChanged(object sender, EventArgs e)
         {
-            botonConfirmar.Enabled = textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
+            //botonConfirmar.Enabled = textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
         }
 
         private void textAfiliado_LostFocus(object sender, EventArgs e)

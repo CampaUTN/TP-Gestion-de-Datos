@@ -108,7 +108,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void botonReservar_Click(object sender, EventArgs e)
         {
-            if (grillaHorarios.SelectedCells.Count > 0)
+            if (grillaHorarios.SelectedCells.Count > 0 && grillaHorarios.Rows.Count > 1)
             {
                 int rowindex = grillaHorarios.CurrentCell.RowIndex;
                 string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString();
@@ -116,7 +116,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO GEDDES.Turnos values (@afiliado, @hora, 1)"; 
+                string insert = "INSERT INTO GEDDES.Turnos values (@afiliado, @hora, 1)";
                 SqlCommand comando = new SqlCommand(insert, conexion);
                 comando.Parameters.AddWithValue("@afiliado", nroAfiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
@@ -128,7 +128,10 @@ namespace ClinicaFrba.Pedir_Turno
                 MessageBox.Show("El turno se ha registrado correctamente");
 
                 this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
-
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un horario disponible si es que lo existe");
             }
         }
 
