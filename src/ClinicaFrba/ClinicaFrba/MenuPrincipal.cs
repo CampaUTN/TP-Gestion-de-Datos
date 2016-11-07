@@ -24,7 +24,7 @@ namespace ClinicaFrba
             this.userActivo = userActivo;
             this.rolActivo = rolActivo;
             this.inicializarDiccFuncionalidades();
-            this.getFuncionalidadesAsignadas(rolActivo);
+            this.getFuncionalidadesAsignadas(rolActivo); //Me traigo las funcionalidades del user conectado
         }
 
         private void getFuncionalidadesAsignadas(int rolActivo)
@@ -45,13 +45,13 @@ namespace ClinicaFrba
             
             Utilidades.Utils.llenar(this.listFuncionalidades, funcionalidades);
 
-            if (this.listFuncionalidades.Items.Count < 1)
+            if (this.listFuncionalidades.Items.Count < 1) //Si no seleccione ninguna funcionalidad no puedo continuar
             {
                 this.botonSeleccionar.Enabled = false;
             }
         }
 
-        private void inicializarDiccFuncionalidades()
+        private void inicializarDiccFuncionalidades() //Se agregan a un diccionario todas las funcionalidades con su referencia a los formularios correspondientes y sus parametros
         {
             this.funcDisponibles = new Dictionary<int, Func<Form>>();
             this.funcDisponibles.Add(1, () => new Abm_Afiliado.AbmAfiliado());
@@ -91,7 +91,7 @@ namespace ClinicaFrba
 
         private void buttonVolver_Click(object sender, EventArgs e) {
             if (Utilidades.Utils.getRoles(userActivo).Count > 1)
-                new EleccionRol(userActivo, Utilidades.Utils.getRoles(userActivo)).Show();
+                new EleccionRol(userActivo, Utilidades.Utils.getRoles(userActivo)).Show(); 
             else
                 Program.loginForm.Show();
             this.Close();

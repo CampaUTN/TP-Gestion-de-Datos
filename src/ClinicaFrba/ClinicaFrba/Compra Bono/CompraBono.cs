@@ -22,7 +22,7 @@ namespace ClinicaFrba.Compra_Bono
         int plan;
         int precioPlan;
 
-        public CompraBono(string userActivo, int rolActivo)
+        public CompraBono(string userActivo, int rolActivo)  //Al crearse la pantalla, entra por aca y segun el rol que este entrando setea diferentes valores
         {
             InitializeComponent();
             this.userActivo = userActivo;
@@ -30,19 +30,19 @@ namespace ClinicaFrba.Compra_Bono
 
 
             if (rolActivo == 1) { //Afiliado
-                this.nroAfiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
+                this.nroAfiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo); //El usuario que entro es el mismo afiliado, uso su usuario para buscar su numero de afiliado
                 this.textAfiliado.Text = nroAfiliado.ToString();
-                this.textAfiliado.ReadOnly = true;
+                this.textAfiliado.ReadOnly = true; //Hago que no lo pueda cambiar
                 this.botonSeleccionar.Enabled = false;
 
-                this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
-                this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
+                this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado); //Busco su plan con una query sin necesidad de SP
+                this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan); //Idem pero para el precio del plan
                 this.textPlan.Text = this.plan.ToString();
                 this.textPrecioBono.Text = this.precioPlan.ToString();
             }
             else if (rolActivo == 2) //Administrativo
             {
-                this.textAfiliado.Text = "";
+                this.textAfiliado.Text = ""; //Limpio el text para que el administrador ingrese el afiliado
             }
 
             
@@ -55,7 +55,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void CompraBono_Load(object sender, EventArgs e)
         {
-            using (SqlConnection conexion = DBConnection.getConnection())
+            using (SqlConnection conexion = DBConnection.getConnection()) //Se setea el 'autocompletador'
             {
                 conexion.Open();
                 AutoCompleteStringCollection numeroAfiliado = new AutoCompleteStringCollection();
@@ -74,12 +74,12 @@ namespace ClinicaFrba.Compra_Bono
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            this.textPrecioFinal.Text = (this.contadorBonos.Value * this.precioPlan).ToString();
+            this.textPrecioFinal.Text = (this.contadorBonos.Value * this.precioPlan).ToString(); //Cambia la cant de bonos y cambia automaticamente el precio final
         }
 
         private void botonSeleccionar_Click(object sender, EventArgs e)
         {
-            if(this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text)){
+            if(this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text)){ //Chequeo si el afiliado existe
                 this.nroAfiliado = Int32.Parse(this.textAfiliado.Text);
                 this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
                 this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
@@ -87,7 +87,7 @@ namespace ClinicaFrba.Compra_Bono
                 this.textPrecioBono.Text = this.precioPlan.ToString();
                 MessageBox.Show("Afiliado correcto");
             }
-            if (this.plan == -1 || this.precioPlan == -1)
+            if (this.plan == -1 || this.precioPlan == -1) //Control de si no se trajo bien el plan
             {
                 MessageBox.Show("El afiliado ingresado no existe, intente nuevamente");
                 this.textAfiliado.Text = "";
@@ -96,7 +96,7 @@ namespace ClinicaFrba.Compra_Bono
 
         private void botonConfirmar_Click(object sender, EventArgs e)
         {
-            if (this.textAfiliado.Text != "" && this.plan != -1 && this.textPlan.Text != "" && this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text))
+            if (this.textAfiliado.Text != "" && this.plan != -1 && this.textPlan.Text != "" && this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text)) //Controles que si existe el afiliado y se cargaron bien los datos antes de guardar los bonos
             {
                 if (this.contadorBonos.Value > 0)
                 {
@@ -111,7 +111,7 @@ namespace ClinicaFrba.Compra_Bono
 
                     conexion.Open();
 
-                    for (int i = 0; i < (int)this.contadorBonos.Value; i++)
+                    for (int i = 0; i < (int)this.contadorBonos.Value; i++) //Hago un for desde 0 hasta la cantidad de bonos seleccionados
                     {
                         string insertBonos = "INSERT INTO GEDDES.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
                         SqlCommand comandoBonos = new SqlCommand(insertBonos, conexion);
