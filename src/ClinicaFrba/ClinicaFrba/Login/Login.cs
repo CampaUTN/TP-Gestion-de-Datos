@@ -79,7 +79,7 @@ namespace ClinicaFrba
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.Login_procedure", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.Login_procedure", conexion);
             
             comando.CommandType = CommandType.StoredProcedure;
 

@@ -40,7 +40,7 @@ namespace ClinicaFrba.AbmRol
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 conexion.Open();
 
-                SqlCommand queryObtenerModificable = new SqlCommand("SELECT * FROM CLINICA.roles WHERE role_id="+rolId, conexion);
+                SqlCommand queryObtenerModificable = new SqlCommand("SELECT * FROM GEDDES.roles WHERE role_id="+rolId, conexion);
                 SqlDataReader readerDatos = queryObtenerModificable.ExecuteReader();
                 if (readerDatos.Read()) {
                     textBoxNombre.Text = Convert.ToString(readerDatos["role_nombre"]);
@@ -50,14 +50,14 @@ namespace ClinicaFrba.AbmRol
                 readerDatos.Close();
                 var parametrosSP = new List<KeyValuePair<string, object>>();
                 parametrosSP.Add(new KeyValuePair<string, object>("@role_id", rolId));
-                SqlCommand query = Utilidades.Utils.crearSp("CLINICA.getFuncionalidadXRol", parametrosSP, conexion);
+                SqlCommand query = Utilidades.Utils.crearSp("GEDDES.getFuncionalidadXRol", parametrosSP, conexion);
                 SqlDataReader readerAsignadas = query.ExecuteReader();
                 while (readerAsignadas.Read()) {
                     asignadas.Add(new KeyValuePair<int, string>(Int32.Parse(readerAsignadas["func_id"].ToString()), readerAsignadas["func_nombre"].ToString()));
                 }
                 readerAsignadas.Close();
 
-                SqlCommand queryFuncionalidades = new SqlCommand("SELECT * FROM CLINICA.funcionalidades", conexion);
+                SqlCommand queryFuncionalidades = new SqlCommand("SELECT * FROM GEDDES.funcionalidades", conexion);
                 SqlDataReader readerFuncionalidades = queryFuncionalidades.ExecuteReader();
                 while (readerFuncionalidades.Read()) {
                     KeyValuePair<int, string> item = new KeyValuePair<int, string>(Int32.Parse(readerFuncionalidades["func_id"].ToString()), readerFuncionalidades["func_nombre"].ToString());
@@ -66,7 +66,7 @@ namespace ClinicaFrba.AbmRol
                 }
                 readerFuncionalidades.Close();
 
-                SqlCommand queryRoles = new SqlCommand("SELECT * FROM CLINICA.roles", conexion);
+                SqlCommand queryRoles = new SqlCommand("SELECT * FROM GEDDES.roles", conexion);
                 SqlDataReader readerRoles = queryRoles.ExecuteReader();
                 while (readerRoles.Read()) {
                     roles.Add(new KeyValuePair<int, string>(Int32.Parse(readerRoles["role_id"].ToString()), readerRoles["role_nombre"].ToString()));
@@ -133,13 +133,13 @@ namespace ClinicaFrba.AbmRol
             using (SqlConnection conexion = DBConnection.getConnection()) {                
                 conexion.Open();
 
-                SqlCommand queryUpdate = new SqlCommand("UPDATE CLINICA.Roles SET role_nombre='" + textBoxNombre.Text + "', role_habilitado=" + Convert.ToInt32(checkBoxHabilitado.Checked).ToString() + " WHERE role_id=" + rolId, conexion);
+                SqlCommand queryUpdate = new SqlCommand("UPDATE GEDDES.Roles SET role_nombre='" + textBoxNombre.Text + "', role_habilitado=" + Convert.ToInt32(checkBoxHabilitado.Checked).ToString() + " WHERE role_id=" + rolId, conexion);
                 queryUpdate.ExecuteNonQuery();
 
                 foreach (KeyValuePair<int, string> item in listAsignadas.Items) {
                     if (!asignadas.Contains(item)) {
                         // (SQL) INSERT QUERY
-                        SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO CLINICA.RolXFuncionalidad(func_id, role_id) VALUES(" + item.Key.ToString() + "," + rolId.ToString() + ")", conexion);
+                        SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO GEDDES.RolXFuncionalidad(func_id, role_id) VALUES(" + item.Key.ToString() + "," + rolId.ToString() + ")", conexion);
                         queryInsertFunc.ExecuteNonQuery();
                     }
 
@@ -148,7 +148,7 @@ namespace ClinicaFrba.AbmRol
                 foreach (KeyValuePair<int, string> item in asignadas) {
                     if (!listAsignadas.Items.Contains(item)) {
                         // (SQL) DELETE QUERY
-                        SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM CLINICA.RolXFuncionalidad WHERE role_id="+rolId, conexion);
+                        SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXFuncionalidad WHERE role_id="+rolId, conexion);
                         queryDeleteFunc.ExecuteNonQuery();
                     }
                 }

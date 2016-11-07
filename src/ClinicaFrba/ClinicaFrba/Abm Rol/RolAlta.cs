@@ -31,13 +31,13 @@ namespace ClinicaFrba.AbmRol
 
         private void AbmRol_Load(object sender, EventArgs e) {
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("SELECT * FROM CLINICA.funcionalidades",conexion);
+                SqlCommand query = new SqlCommand("SELECT * FROM GEDDES.funcionalidades",conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()) {
                     funcionalidades.Add(new KeyValuePair<int, string>(Int32.Parse(reader["func_id"].ToString()), reader["func_nombre"].ToString()));
                 }
-                query = new SqlCommand("SELECT * FROM CLINICA.roles", conexion);
+                query = new SqlCommand("SELECT * FROM GEDDES.roles", conexion);
                 reader.Close();
                 reader = query.ExecuteReader();
                 while (reader.Read()) {
@@ -103,17 +103,17 @@ namespace ClinicaFrba.AbmRol
 
         private void buttonGuardar_Click(object sender, EventArgs e) {
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("INSERT INTO CLINICA.Roles(role_nombre, role_habilitado) VALUES('" + textBoxNombre.Text + "', 1)", conexion);
+                SqlCommand query = new SqlCommand("INSERT INTO GEDDES.Roles(role_nombre, role_habilitado) VALUES('" + textBoxNombre.Text + "', 1)", conexion);
                 conexion.Open();
                 try {
                     query.ExecuteNonQuery();
 
-                    SqlCommand queryObtenerId = new SqlCommand("SELECT role_id FROM CLINICA.Roles WHERE role_nombre='" + textBoxNombre.Text + "'", conexion);
+                    SqlCommand queryObtenerId = new SqlCommand("SELECT role_id FROM GEDDES.Roles WHERE role_nombre='" + textBoxNombre.Text + "'", conexion);
 
                     int rolId = Convert.ToInt32(queryObtenerId.ExecuteScalar());
 
                     foreach (KeyValuePair<int, string> funcionalidad in listAsignadas.Items) {
-                        SqlCommand queryFunc = new SqlCommand("INSERT INTO CLINICA.RolXFuncionalidad(func_id, role_id) VALUES(" + funcionalidad.Key.ToString() + "," + rolId.ToString() + ")", conexion);
+                        SqlCommand queryFunc = new SqlCommand("INSERT INTO GEDDES.RolXFuncionalidad(func_id, role_id) VALUES(" + funcionalidad.Key.ToString() + "," + rolId.ToString() + ")", conexion);
                         queryFunc.ExecuteNonQuery();
                     }
 

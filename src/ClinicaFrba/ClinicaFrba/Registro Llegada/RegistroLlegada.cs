@@ -42,9 +42,9 @@ namespace ClinicaFrba.Registro_Llegada
             string id =Convert.ToString(planillaProfesionales.SelectedCells[0].Value);
            
             string select = "SELECT afil_id iDAfiliado, turn_id Turno, usua_nombre +' '+ usua_apellido AS Afiliado, hora_inicio Hora \n ";
-            string from = "FROM CLINICA.Turnos, CLINICA.Afiliados,CLINICA.Usuarios, CLINICA.Horarios \n";
+            string from = "FROM GEDDES.Turnos, GEDDES.Afiliados,GEDDES.Usuarios, GEDDES.Horarios \n";
 
-            string subselect = "SELECT turn_id FROM CLINICA.Turnos, CLINICA.Profesionales, CLINICA.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
+            string subselect = "SELECT turn_id FROM GEDDES.Turnos, GEDDES.Profesionales, GEDDES.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
             subselect = subselect + id;
 
             string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND hora_fecha = CONVERT(DATE,SYSDATETIME()) AND turn_activo = 1 AND turn_id IN(" + subselect + ")";

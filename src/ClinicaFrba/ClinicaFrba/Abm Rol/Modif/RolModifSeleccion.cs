@@ -31,7 +31,7 @@ namespace ClinicaFrba.AbmRol {
             roles.Clear();
             listRoles.Items.Clear();
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre, role_habilitado FROM CLINICA.roles", conexion);
+                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre, role_habilitado FROM GEDDES.roles", conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()) {

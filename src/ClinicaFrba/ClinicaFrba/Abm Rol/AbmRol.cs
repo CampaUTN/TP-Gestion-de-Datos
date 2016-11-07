@@ -25,7 +25,7 @@ namespace ClinicaFrba.AbmRol
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 conexion.Open();
                 AutoCompleteStringCollection nombresUsuarios = new AutoCompleteStringCollection();
-                SqlCommand queryNombres = new SqlCommand("SELECT DISTINCT usua_username from CLINICA.Usuarios", conexion);
+                SqlCommand queryNombres = new SqlCommand("SELECT DISTINCT usua_username from GEDDES.Usuarios", conexion);
                 SqlDataReader readerNombres = queryNombres.ExecuteReader();
                 while (readerNombres.Read()) {
                     nombresUsuarios.Add(readerNombres["usua_username"].ToString());

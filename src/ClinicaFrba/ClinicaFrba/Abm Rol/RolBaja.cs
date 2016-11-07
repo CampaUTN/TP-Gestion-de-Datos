@@ -30,13 +30,13 @@ namespace ClinicaFrba.AbmRol {
         private void buttonEliminar_Click(object sender, EventArgs e) {
             KeyValuePair<int, string> item = (KeyValuePair<int, string>) listRoles.SelectedItem;
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand queryDehabilitarRol = new SqlCommand("UPDATE CLINICA.Roles SET role_habilitado=0 WHERE role_nombre='"+item.Value+"'", conexion);
+                SqlCommand queryDehabilitarRol = new SqlCommand("UPDATE GEDDES.Roles SET role_habilitado=0 WHERE role_nombre='"+item.Value+"'", conexion);
                 conexion.Open();
                 try {
                     queryDehabilitarRol.ExecuteNonQuery();
                 } catch { }
                 // TODO: TESTEAR ESTO
-                SqlCommand queryDesasignarRol = new SqlCommand("DELETE FROM CLINICA.RolXUsuario WHERE role_id=" + item.Key, conexion);
+                SqlCommand queryDesasignarRol = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE role_id=" + item.Key, conexion);
                 try {
                     queryDesasignarRol.ExecuteNonQuery();
                 } catch { }
@@ -48,7 +48,7 @@ namespace ClinicaFrba.AbmRol {
             roles.Clear();
             listRoles.Items.Clear();
             using (SqlConnection conexion = DBConnection.getConnection()) {
-                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre FROM CLINICA.roles WHERE role_habilitado=1", conexion);
+                SqlCommand query = new SqlCommand("SELECT role_id, role_nombre FROM GEDDES.roles WHERE role_habilitado=1", conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()) {

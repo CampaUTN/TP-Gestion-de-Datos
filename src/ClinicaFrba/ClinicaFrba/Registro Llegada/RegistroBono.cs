@@ -13,7 +13,7 @@ namespace ClinicaFrba.Registro_Llegada
 {
     public partial class RegistroBono : Form
     {
-        string consulta = "SELECT* FROM CLINICA.Bonos WHERE bono_afilUsado IS NULL AND bono_afilCompra =";
+        string consulta = "SELECT* FROM GEDDES.Bonos WHERE bono_afilUsado IS NULL AND bono_afilCompra =";
 
         int nroAfiliado;
         int nroTurno;
@@ -28,7 +28,7 @@ namespace ClinicaFrba.Registro_Llegada
 
             consulta = consulta + id;
             DBConnection.cargarPlanilla(listaBonos,
-                  "SELECT* FROM CLINICA.Bonos WHERE bono_afilUsado IS NULL");
+                  "SELECT* FROM GEDDES.Bonos WHERE bono_afilUsado IS NULL");
         }
 
         private void button1_Click(object sender, EventArgs e)

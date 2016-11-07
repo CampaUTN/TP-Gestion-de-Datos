@@ -35,7 +35,7 @@ namespace ClinicaFrba
 
             using (SqlConnection conexion = DBConnection.getConnection())
             { 
-                SqlCommand query = Utilidades.Utils.crearSp("CLINICA.getFuncionalidadXRol", parametrosSP, conexion);
+                SqlCommand query = Utilidades.Utils.crearSp("GEDDES.getFuncionalidadXRol", parametrosSP, conexion);
                 conexion.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 while (reader.Read()){

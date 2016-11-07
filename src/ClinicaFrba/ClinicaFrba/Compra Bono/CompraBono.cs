@@ -84,7 +84,7 @@ namespace ClinicaFrba.Compra_Bono
                 {
                     SqlConnection conexion = DBConnection.getConnection();
 
-                    string insertComprasBonos = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
+                    string insertComprasBonos = "INSERT INTO GEDDES.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
                     SqlCommand comandoComprasBonos = new SqlCommand(insertComprasBonos, conexion);
                     comandoComprasBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                     comandoComprasBonos.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
@@ -95,7 +95,7 @@ namespace ClinicaFrba.Compra_Bono
 
                     for (int i = 0; i < (int)this.contadorBonos.Value; i++)
                     {
-                        string insertBonos = "INSERT INTO CLINICA.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
+                        string insertBonos = "INSERT INTO GEDDES.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
                         SqlCommand comandoBonos = new SqlCommand(insertBonos, conexion);
                         comandoBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                         comandoBonos.Parameters.AddWithValue("@plan", this.plan);
@@ -127,5 +127,5 @@ namespace ClinicaFrba.Compra_Bono
         }
 
 
-    }
 }
+    }
