@@ -15,6 +15,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 {
     public partial class ListadoAfiliados : Form
     {
+        string consulta;
         public ListadoAfiliados()
         {
             InitializeComponent();
@@ -63,7 +64,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
+                this.consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
             }
             else
             {
@@ -83,7 +84,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             }
 
-            DBConnection.cargarPlanilla(planillaResultados, consulta);  
+            DBConnection.cargarPlanilla(planillaResultados, this.consulta);  
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)
@@ -125,6 +126,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                 Utilidades.Utils.bajaLogicaA(afil);
                 MessageBox.Show("Usuario dado de baja");
+
+                DBConnection.cargarPlanilla(planillaResultados, consulta);  
             }
         }
 
@@ -145,6 +148,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                // baja.eliminarAfiliado(afil);
                 MessageBox.Show("Usuario eliminado");
+                DBConnection.cargarPlanilla(planillaResultados, this.consulta);  
             }
         }
 
