@@ -34,6 +34,10 @@ namespace ClinicaFrba.Cancelar_Atencion
             return rol == 1;
         }
 
+        private bool esAdministrativo() {
+            return rol == 2;
+        }
+
         // Boton de borrar
         private void button2_Click(object sender, EventArgs e) {
             if (esAfiliado()) {
@@ -45,12 +49,25 @@ namespace ClinicaFrba.Cancelar_Atencion
                     MessageBox.Show("Seleccione un turno a cancelar.");
                 }
             } else {
+                int profesional;
+                if(esAdministrativo()){
+                    if (grillaProfesionales.SelectedCells.Count == 0) {
+                        MessageBox.Show("Seleccione un profesional en la grilla.", "Error", MessageBoxButtons.OK);
+                        return;
+                    }else{
+                        int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                        profesional = Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString());
+                    }
+                }else{
+                    profesional = usuario;
+                }
+
                 if(diaUnico) {
                     Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
                     MessageBox.Show("Dia dado de baja correctamente.");
                 } else {
                     while(from.Value.Date <= to.Value.Date){
-                        Utilidades.Utils.bajaDia(usuario, from.Value.Date);
+                        Utilidades.Utils.bajaDia(profesional, from.Value.Date);
                         from.Value = from.Value.AddDays(1);
                     }
                     MessageBox.Show("Periodo dado de baja correctamente.");
@@ -67,7 +84,11 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+                if (esAdministrativo()) {
+                    this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
+                 } else {
+                    this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+                }
             }
         }
 
