@@ -22,7 +22,7 @@ namespace ClinicaFrba
         private void button1_Click(object sender, EventArgs e){
 
             //Valido que el usuario haya completado las cajitas
-            if (faltaCompletar()){
+            if (faltaCompletar()){ 
                 MessageBox.Show("Datos incompletos! Complete los datos e intentelo de nuevo.", "Error de Login");
                 this.textContrasenia.Clear();
             }
@@ -61,10 +61,10 @@ namespace ClinicaFrba
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
         {
             this.Hide();
-            if (rolesAsignados.Count == 1)
+            if (rolesAsignados.Count == 1) //SI SOLO TIENE UN ROL DIRECTAMENTE ABRO ESE ROL
                 (new MenuPrincipal(Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).Show();
             else
-            if (rolesAsignados.Count > 1)
+            if (rolesAsignados.Count > 1) //Sino abro un nuevo form para que elija
                 (new EleccionRol(this.textUsuario.Text, rolesAsignados)).Show();
             else {
                 MessageBox.Show("El usuario no tiene roles asignados. Ingrese con otro usuario.");
