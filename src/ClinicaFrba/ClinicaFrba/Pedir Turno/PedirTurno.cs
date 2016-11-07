@@ -18,14 +18,14 @@ namespace ClinicaFrba.Pedir_Turno
         int rolActivo;
         int nroAfiliado = 0;
 
-        public PedirTurno(string userActivo, int rolActivo)
+        public PedirTurno(string userActivo, int rolActivo) 
         {
             InitializeComponent();
             this.userActivo = userActivo;
             this.rolActivo = rolActivo;
             this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
 
-            if (rolActivo == 1)
+            if (rolActivo == 1) //Si el usuario entro en modo Afiliado se setea directamente el numero de afiliado sin posibilidad de cambiarlo
             { //Afiliado
                 this.nroAfiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
                 this.textAfiliado.Text = nroAfiliado.ToString();
@@ -40,7 +40,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void PedirTurno_Load(object sender, EventArgs e)
         {
-            using (SqlConnection conexion = DBConnection.getConnection())
+            using (SqlConnection conexion = DBConnection.getConnection()) //Se setea el autocompletador de afiliado
             {
                 conexion.Open();
                 AutoCompleteStringCollection numeroAfiliado = new AutoCompleteStringCollection();
@@ -59,11 +59,11 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void botonListar_Click(object sender, EventArgs e)
         {
-            if (this.textEspecialidad.Text != "")
+            if (this.textEspecialidad.Text != "") //Busco por filtro de especialidad
             {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesDeEspecialidad(this.textEspecialidad.Text);
             }
-            else
+            else //Si no se escribio ningun filtro, se buscan todos los profesionales
             {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
 
@@ -79,10 +79,10 @@ namespace ClinicaFrba.Pedir_Turno
         {
             if (this.nroAfiliado != 0)
             {
-                if (grillaProfesionales.SelectedCells.Count > 0)
+                if (grillaProfesionales.SelectedCells.Count > 0) //Controlo que se haya seleccionado un valor y que tambien este seteado el afiliado
                 {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                    string profesional = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString();
+                    string profesional = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString(); //Esto me permite que pueda seleccionar cualquier columna de la fila y tome el valor de la fila completa
                     new SeleccionarHorario(this.nroAfiliado, profesional).Show();
                 }
             }
@@ -100,7 +100,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void botonSelecAfil_Click(object sender, EventArgs e)
         {
-            if (this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text))
+            if (this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text)) //Busco la informacion del afiliado seteado en el text
             {
                 this.nroAfiliado = Int32.Parse(this.textAfiliado.Text);
                 MessageBox.Show("Afiliado correcto");
@@ -114,7 +114,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void textAfiliado_TextChanged(object sender, EventArgs e)
         {
-            if (this.rolActivo == 2)
+            if (this.rolActivo == 2) //Evito que si no toma uno de la autosugerencia pueda seleccionar un porfesional ya que implica que no existe el afiliado
             {
                 botonSeleccionar.Enabled = textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
             }

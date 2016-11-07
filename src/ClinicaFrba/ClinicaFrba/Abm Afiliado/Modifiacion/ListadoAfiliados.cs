@@ -1,5 +1,4 @@
-﻿using ClinicaFrba.Abm_Afiliado.Baja;
-using ClinicaFrba.Utilidades;
+﻿using ClinicaFrba.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -133,11 +132,11 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void botonEliminar_Click(object sender, EventArgs e)
         {
-            BajaAfiliado baja;
+         
 
             if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-               // baja = new BajaAfiliado();
+           
 
                 //completo los datos del afiliado
                 Afiliado afil = this.completarDatosDeAfiliado();

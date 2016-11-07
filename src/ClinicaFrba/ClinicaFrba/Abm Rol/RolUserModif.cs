@@ -29,7 +29,7 @@ namespace ClinicaFrba.AbmRol {
         private void RolUserModif_Load(object sender, EventArgs e) {
             buttonAgregar.Enabled = false;
             buttonQuitar.Enabled = false;
-
+            // Obtenemos los roles asignados al usuario
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
                 SqlCommand comando = new SqlCommand("GEDDES.getRolesUsuario", conexion);
@@ -43,26 +43,48 @@ namespace ClinicaFrba.AbmRol {
                 }
                 Utilidades.Utils.llenar(listAsignados, asignados);
                 reader.Close();
-
+                // Obtenemos los roles disponibles en el sistema
                 SqlCommand queryRoles = new SqlCommand("SELECT role_id, role_nombre FROM GEDDES.Roles WHERE role_habilitado=1", conexion);
                 SqlDataReader readerRoles = queryRoles.ExecuteReader();
                 while (readerRoles.Read()) {
                     KeyValuePair<int, string> item = new KeyValuePair<int, string>(Int32.Parse(readerRoles["role_id"].ToString()), readerRoles["role_nombre"].ToString());
+                    // Agregamos a la lista de disponibles aquellos roles que el usuario no tenga asignado
                     if (!asignados.Contains(item))
                         roles.Add(item);
                 }
                 readerRoles.Close();
                 Utilidades.Utils.llenar(listRoles, roles);
-
             }
         }
 
-        private void buttonCancelar_Click(object sender, EventArgs e) {
-            new AbmRol().Show();
-            this.Close();
+        private void buttonGuardar_Click(object sender, EventArgs e) {
+            // Procedemos a guardar las diferencias entre la base y lo modificado
+            using (SqlConnection conexion = DBConnection.getConnection()) {
+                conexion.Open();
+                long userId = Utilidades.Utils.getIdDesdeUserName(username);
+
+                try {
+                    foreach (KeyValuePair<int, string> item in listAsignados.Items) {
+                        if (!asignados.Contains(item)) {
+                            // Insertamos los nuevos roles que posee el usuario
+                            SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO GEDDES.RolXUsuario(usua_id, role_id) VALUES(" + userId + "," + item.Key + ")", conexion);
+                            queryInsertFunc.ExecuteNonQuery();
+                        }
+                    }
+                    foreach (KeyValuePair<int, string> item in asignados) {
+                        if (!listAsignados.Items.Contains(item)) {
+                            // Eliminamos aquellos roles que ya no posee el usuario
+                            SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE usua_id=" + userId + " AND role_id=" + item.Key, conexion);
+                            queryDeleteFunc.ExecuteNonQuery();
+                        }
+                    }
+                    new AbmRol().Show();
+                    this.Close();
+                } catch (Exception) {
+                    throw;
+                }
+            }
         }
-
-
 
         private void listAsignados_SelectedIndexChanged(object sender, EventArgs e) {
             if (listAsignados.SelectedItems.Count > 0) {
@@ -80,6 +102,7 @@ namespace ClinicaFrba.AbmRol {
                 buttonAgregar.Enabled = false;
         }
         private void buttonAgregar_Click(object sender, EventArgs e) {
+            // Transferimos uno de los roles disponibles hacia los roles asignados
             if (listRoles.Items.Count > 0) {
                 listAsignados.Items.Add(listRoles.SelectedItem);
                 int index = listRoles.SelectedIndex;
@@ -91,6 +114,7 @@ namespace ClinicaFrba.AbmRol {
             }
         }
         private void buttonQuitar_Click(object sender, EventArgs e) {
+            // Transferimos uno de los roles asignados hacia los roles disponibles
             if (listAsignados.Items.Count > 0 && listAsignados.SelectedItems.Count > 0) {
                 listRoles.Items.Add(listAsignados.SelectedItem);
                 int index = listAsignados.SelectedIndex;
@@ -102,37 +126,9 @@ namespace ClinicaFrba.AbmRol {
             }
         }
 
-        private void buttonGuardar_Click(object sender, EventArgs e) {
-            using (SqlConnection conexion = DBConnection.getConnection()) {
-                conexion.Open();
-
-                long userId = Utilidades.Utils.getIdDesdeUserName(username);
-
-                try {
-                    foreach (KeyValuePair<int, string> item in listAsignados.Items) {
-                        if (!asignados.Contains(item)) {
-                            // (SQL) INSERT QUERY
-                            SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO GEDDES.RolXUsuario(usua_id, role_id) VALUES(" + userId + "," + item.Key + ")", conexion);
-                            queryInsertFunc.ExecuteNonQuery();
-                        }
-
-                    }
-
-                    foreach (KeyValuePair<int, string> item in asignados) {
-                        if (!listAsignados.Items.Contains(item)) {
-                            // (SQL) DELETE QUERY
-                            SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE usua_id=" + userId + " AND role_id=" + item.Key, conexion);
-                            queryDeleteFunc.ExecuteNonQuery();
-                        }
-                    }
-
-                    new AbmRol().Show();
-                    this.Close();
-
-                } catch (Exception) {
-                    throw;
-                }
-            }
+        private void buttonCancelar_Click(object sender, EventArgs e) {
+            new AbmRol().Show();
+            this.Close();
         }
     }
 }

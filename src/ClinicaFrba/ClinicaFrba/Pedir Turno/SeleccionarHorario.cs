@@ -27,9 +27,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.nroAfiliado = nroAfiliado;
             this.profesional = profesional;
 
-            //MessageBox.Show("Profesiona: " + profesional); Lo use para verificar el tema de que se puede seleccionar cualquier campo de la fila
-
-            this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
+            this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional); //Traigo directamente los horarios del profesional mediante una query
             
         }
 
@@ -108,16 +106,15 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void botonReservar_Click(object sender, EventArgs e)
         {
-            if (grillaHorarios.SelectedCells.Count > 0 && grillaHorarios.Rows.Count > 1)
+            if (grillaHorarios.SelectedCells.Count > 0 && grillaHorarios.Rows.Count > 1) 
             {
                 int rowindex = grillaHorarios.CurrentCell.RowIndex;
-                string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString();
-                //int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
+                string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString(); //Lo mismo que antes, puedo seleccionar cuaqlueir columna y me selecciona la fila entera
 
                 SqlConnection conexion = DBConnection.getConnection();
 
-                string insert = "INSERT INTO GEDDES.Turnos values (@afiliado, @hora, 1)";
-                SqlCommand comando = new SqlCommand(insert, conexion);
+                string insert = "INSERT INTO GEDDES.Turnos values (@afiliado, @hora, 1)"; //Inserto el horario elegido
+                SqlCommand comando = new SqlCommand(insert, conexion); 
                 comando.Parameters.AddWithValue("@afiliado", nroAfiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
 
@@ -127,7 +124,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 MessageBox.Show("El turno se ha registrado correctamente");
 
-                this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional);
+                this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional); //Actualizo los horarios para descartar el reciente elegido
             }
             else
             {

@@ -687,7 +687,7 @@ BEGIN
 		
 	DELETE FROM GEDDES.Turnos
 			WHERE turn_afiliado = @afil
-	--TODO PASAR A UN TRIGGER 
+	
 	DELETE FROM GEDDES.Afiliados
 			WHERE afil_id = @afil
 

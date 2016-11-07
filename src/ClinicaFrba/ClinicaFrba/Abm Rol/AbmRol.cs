@@ -22,6 +22,8 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void AbmRol_Load(object sender, EventArgs e) {
+            // Obtenemos los distintos usuarios del sistema y ofrecemos la opcion de autocompletar para 
+            // la modificacion de roles de un ussuario
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 conexion.Open();
                 AutoCompleteStringCollection nombresUsuarios = new AutoCompleteStringCollection();
@@ -62,6 +64,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void textBoxNombreUsuario_TextChanged(object sender, EventArgs e) {
+            // Validamos que lo ingresado sea uno de los usuarios
             buttonModificarRoles.Enabled = textBoxNombreUsuario.AutoCompleteCustomSource.Contains(textBoxNombreUsuario.Text);
         }
 
