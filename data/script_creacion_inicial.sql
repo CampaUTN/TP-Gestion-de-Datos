@@ -1,8 +1,7 @@
-USE GD2C2016;
+ï»¿USE GD2C2016;
 GO
 
-/* Eliminación de los objetos preexistentes */
-
+/* Eliminacion de los objetos preexistentes */
 
 IF OBJECT_ID('GEDDES.RolXfuncionalidad','U') IS NOT NULL
     DROP TABLE GEDDES.RolXfuncionalidad;
@@ -37,6 +36,9 @@ IF OBJECT_ID('GEDDES.Consultas','U') IS NOT NULL
 IF OBJECT_ID('GEDDES.Turnos','U') IS NOT NULL
     DROP TABLE GEDDES.Turnos;
 
+IF OBJECT_ID('GEDDES.HistorialAfiliado','U') IS NOT NULL
+    DROP TABLE GEDDES.HistorialAfiliado;
+
 IF OBJECT_ID('GEDDES.Afiliados','U') IS NOT NULL
     DROP TABLE GEDDES.Afiliados;
 	
@@ -48,9 +50,6 @@ IF OBJECT_ID('GEDDES.Planes','U') IS NOT NULL
 
 IF OBJECT_ID('GEDDES.Horarios','U') IS NOT NULL
     DROP TABLE GEDDES.Horarios;
-
-IF OBJECT_ID('GEDDES.HistorialAfiliado','U') IS NOT NULL
-    DROP TABLE GEDDES.HistorialAfiliado;
 
 IF OBJECT_ID('GEDDES.Especialidades','U') IS NOT NULL
     DROP TABLE GEDDES.Especialidades;
@@ -65,13 +64,6 @@ IF OBJECT_ID('GEDDES.Usuarios','U') IS NOT NULL
     DROP TABLE GEDDES.Usuarios;
 
     
-
-
-/* DROP FUNCTIONS! 
-IF (OBJECT_ID ('GEDDES._algo_') IS NOT NULL)
-  DROP FUNCTION GEDDES._algo_
-  */
-
 
 /* DROP PROCEDURES! */
   
@@ -99,6 +91,9 @@ IF OBJECT_ID('GEDDES.agregarFamiliar') IS NOT NULL
 IF OBJECT_ID('GEDDES.modificarAfiliado') IS NOT NULL
  DROP PROCEDURE GEDDES.modificarAfiliado
 
+ IF OBJECT_ID('GEDDES.registrarMotivo') IS NOT NULL
+DROP PROCEDURE GEDDES.registrarMotivo
+
 IF OBJECT_ID('GEDDES.darDeBaja') IS NOT NULL
  DROP PROCEDURE GEDDES.darDeBaja 
 
@@ -113,6 +108,9 @@ IF OBJECT_ID('GEDDES.registrarResultadoConsulta') IS NOT NULL
 
 IF OBJECT_ID('GEDDES.cancelar_dia_agenda') IS NOT NULL
     DROP PROCEDURE GEDDES.cancelar_dia_agenda 
+
+IF OBJECT_ID('GEDDES.cancelar_turno_afiliado') IS NOT NULL
+    DROP PROCEDURE GEDDES.cancelar_turno_afiliado 
 
 /* DROP TRIGGERS */
 IF (OBJECT_ID ('GEDDES.verificarUsuario') IS NOT NULL)
@@ -138,19 +136,19 @@ IF OBJECT_ID('GEDDES.LimiteHoras') IS NOT NULL
 /* DROP SCHEMA */
 
 IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'GEDDES')
-    DROP SCHEMA CLINICA
+    DROP SCHEMA GEDDES
 GO
 
 
 
-/* Creación del esquema */
+/* Creacion del esquema */
 
 CREATE SCHEMA GEDDES AUTHORIZATION gd
 GO
 
 
 
-/* Creación de las tablas */
+/* Creacion de las tablas */
 
 CREATE TABLE GEDDES.Usuarios(
     usua_id BIGINT PRIMARY KEY,
@@ -231,13 +229,6 @@ CREATE TABLE GEDDES.Afiliados(
   	afil_estadoCivil VARCHAR(20),
   	afil_cantidadHijos INT DEFAULT 0);
 
-/*
-CREATE TABLE GEDDES.Turnos(
-	turn_id INT NOT NULL PRIMARY KEY,
-  	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Afiliados(afil_id), 
-    turn_hora INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Horarios(hora_id), 
-    turn_activo TINYINT NOT NULL);
- */
  CREATE TABLE GEDDES.Turnos(
 	turn_id INT NOT NULL PRIMARY KEY IDENTITY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Afiliados(afil_id), 
@@ -256,8 +247,9 @@ CREATE TABLE GEDDES.CancelacionesTurnos(
   
 CREATE TABLE GEDDES.HistorialAfiliado(
 	hist_id INT NOT NULL IDENTITY PRIMARY KEY,
-  	hist_profesional INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Profesionales(prof_id), 
-    hist_especialidad INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Especialidades(espe_id));
+	hist_afil INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Afiliados(afil_id),
+  	hist_motivo VARCHAR(225),
+	hist_fecha DATE NOT NULL);
 
 CREATE TABLE GEDDES.Consultas(
 	cons_id INT PRIMARY KEY IDENTITY NOT NULL,
@@ -285,16 +277,7 @@ CREATE TABLE GEDDES.ComprasBonos(
 USE GD2C2016;
 GO
 
-/* Migración de datos desde la tabla maestra */
-
-/* SELECT * INTO GEDDES.Inconsistencias FROM gd_esquema.Maestra WHERE 1 = 2 */
-
- /*
-CREATE INDEX CLINICA ON GEDDES.Contacto (mail);
-CREATE INDEX I_Cliente ON GEDDES.Cliente (cli_nombre, cli_apellido);
-CREATE UNIQUE INDEX I_Empresa ON GEDDES.Empresa (emp_razon_soc, emp_cuit);
-CREATE INDEX I_Publicacion ON GEDDES.Publicacion (cod_rubro, descripcion);
-*/ /* TODO: PONER NUESTROS INDICES SEGUN Q USEMOS MAS */
+/* Migracion de datos desde la tabla maestra */
 
 USE GD2C2016;
 GO
@@ -365,18 +348,6 @@ INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_pro
   GROUP BY Turno_Numero, Turno_Fecha, Especialidad_Codigo, Medico_Dni
   
     -- Turnos. Funciona
-	/* 
-INSERT INTO GEDDES.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
-	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
-                                   FROM GEDDES.Afiliados
-                                   			join GEDDES.Usuarios on (afil_usuario = usua_id)
-                                   WHERE usua_nroDoc = m.Paciente_Dni AND usua_nroDoc IS NOT NULL), (SELECT hora_id FROM GEDDES.Horarios WHERE hora_fecha=CONVERT(DATE,Turno_Fecha) AND hora_inicio=CONVERT(TIME,Turno_Fecha) AND Medico_Dni=hora_profesional), 1 -- asumimos que todos los turnos de la base estan activos (no cancelados).
-	FROM gd_esquema.Maestra m
-	WHERE m.Turno_Numero IS NOT NULL 
-  ORDER BY m.Turno_Numero
-  */
-  -- PRUEBO ALGO
-
   SET IDENTITY_INSERT GEDDES.Turnos ON 
   INSERT INTO GEDDES.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
@@ -416,12 +387,12 @@ SELECT
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL
 
-insert into GEDDES.TipoCancelacion values ('Cancelación Afiliado')
-insert into GEDDES.TipoCancelacion values ('Cancelación Médico')
+insert into GEDDES.TipoCancelacion values ('Cancelacion Afiliado')
+insert into GEDDES.TipoCancelacion values ('Cancelacion Medico')
 
 	-- Cancelaciones. Funciona -- Si un usuario no gasto el bono pero la fecha del turno paso => cancelo el turno
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
-SELECT m.Turno_Numero, 'Migración', 1
+SELECT m.Turno_Numero, 'Migracion', 1
 FROM gd_esquema.Maestra m
 WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE() -- TODO: Cambiar a la fecha del sistema
 
@@ -683,6 +654,10 @@ BEGIN
 	DECLARE @afil INT
 
 	SET @afil = (SELECT afil_id FROM GEDDES.Afiliados WHERE afil_usuario = @user)
+
+	DELETE FROM GEDDES.HistorialAfiliado
+		WHERE hist_afil = @afil
+
 	DELETE FROM GEDDES.ComprasBonos
 			WHERE comp_afil = @afil
 
@@ -749,6 +724,33 @@ AS
  END
 GO
 
+
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario INT, @turno INT)
+AS
+ BEGIN
+	DECLARE @afiliado INT = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)
+ 	UPDATE GEDDES.Turnos
+	SET turn_activo = 0
+	where turn_id = @turno and turn_afiliado = @afiliado
+ END
+GO
+
+USE GD2C2016;
+GO
+CREATE PROCEDURE GEDDES.registrarMotivo(@afil INT, @motivo VARCHAR(255))
+AS
+	BEGIN 
+
+	INSERT INTO GEDDES.HistorialAfiliado(hist_afil, hist_motivo, hist_fecha)
+	VALUES (@afil,@motivo, CONVERT(DATE, SYSDATETIME()) );
+
+	END
+GO
+
+
 USE GD2C2016;
 GO
 --FUNCION QUE DEVUELVE SI UN USUARIO TIENE FAMILIA
@@ -764,11 +766,6 @@ BEGIN
 END
 
 GO
-
-
-
-
-
 
 
 
@@ -802,16 +799,21 @@ BEGIN
 
 	DECLARE @prof_id INT = (select hora_profesional from inserted)
 
-
-	IF (select top 1 count(*)/2
-	from GEDDES.horarios
-	where hora_profesional = @prof_id
-	UNION
-	select top 1 count(*)/2
-	from GEDDES.horarios
-	where hora_profesional = @prof_id
-	group by hora_profesional, datepart(WEEK,hora_fecha)
-	order by count(*)/2 DESC) > 48
+	IF (SELECT top 1 count(*)/2
+		FROM (
+			(select *
+			from inserted I
+			where I.hora_profesional = @prof_id
+			)
+			UNION
+			(select *
+			from GEDDES.Horarios E
+			where E.hora_profesional = @prof_id
+			)
+		) AS tabla
+		group by datepart(WEEK,tabla.hora_fecha)
+		order by count(*) DESC
+	) >= 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		BEGIN
