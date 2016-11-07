@@ -36,6 +36,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.botonSeleccionar = new System.Windows.Forms.Button();
             this.botonSalir = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textAfiliado = new System.Windows.Forms.TextBox();
+            this.botonSelecAfil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,7 +96,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 34);
+            this.label3.Location = new System.Drawing.Point(45, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(508, 13);
             this.label3.TabIndex = 5;
@@ -120,11 +123,42 @@
             this.botonSalir.UseVisualStyleBackColor = true;
             this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label4.Location = new System.Drawing.Point(398, 76);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Afiliado";
+            // 
+            // textAfiliado
+            // 
+            this.textAfiliado.Location = new System.Drawing.Point(401, 103);
+            this.textAfiliado.Name = "textAfiliado";
+            this.textAfiliado.Size = new System.Drawing.Size(152, 20);
+            this.textAfiliado.TabIndex = 9;
+            this.textAfiliado.TextChanged += new System.EventHandler(this.textAfiliado_TextChanged);
+            // 
+            // botonSelecAfil
+            // 
+            this.botonSelecAfil.Location = new System.Drawing.Point(568, 88);
+            this.botonSelecAfil.Name = "botonSelecAfil";
+            this.botonSelecAfil.Size = new System.Drawing.Size(75, 35);
+            this.botonSelecAfil.TabIndex = 10;
+            this.botonSelecAfil.Text = "Seleccionar Afiliado";
+            this.botonSelecAfil.UseVisualStyleBackColor = true;
+            this.botonSelecAfil.Click += new System.EventHandler(this.botonSelecAfil_Click);
+            // 
             // PedirTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 450);
+            this.Controls.Add(this.botonSelecAfil);
+            this.Controls.Add(this.textAfiliado);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label3);
@@ -152,5 +186,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button botonSeleccionar;
         private System.Windows.Forms.Button botonSalir;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textAfiliado;
+        private System.Windows.Forms.Button botonSelecAfil;
     }
 }

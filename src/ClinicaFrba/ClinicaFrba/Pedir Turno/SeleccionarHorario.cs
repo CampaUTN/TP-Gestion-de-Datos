@@ -14,16 +14,17 @@ namespace ClinicaFrba.Pedir_Turno
     public partial class SeleccionarHorario : Form
     {
         string userActivo;
+        int nroAfiliado;
         private DataGridView grillaHorarios;
         private Label label1;
         private Button botonReservar;
         private Button botonSalir;
         string profesional;
 
-        public SeleccionarHorario(string userActivo, string profesional)
+        public SeleccionarHorario(int nroAfiliado, string profesional)
         {
             InitializeComponent();
-            this.userActivo = userActivo;
+            this.nroAfiliado = nroAfiliado;
             this.profesional = profesional;
 
             //MessageBox.Show("Profesiona: " + profesional); Lo use para verificar el tema de que se puede seleccionar cualquier campo de la fila
@@ -111,13 +112,13 @@ namespace ClinicaFrba.Pedir_Turno
             {
                 int rowindex = grillaHorarios.CurrentCell.RowIndex;
                 string hora = grillaHorarios.Rows[rowindex].Cells[0].Value.ToString();
-                int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
+                //int afiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
 
                 SqlConnection conexion = DBConnection.getConnection();
 
                 string insert = "INSERT INTO GEDDES.Turnos values (@afiliado, @hora, 1)"; 
                 SqlCommand comando = new SqlCommand(insert, conexion);
-                comando.Parameters.AddWithValue("@afiliado", afiliado);
+                comando.Parameters.AddWithValue("@afiliado", nroAfiliado);
                 comando.Parameters.AddWithValue("@hora", Int32.Parse(hora));
 
                 conexion.Open();

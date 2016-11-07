@@ -59,7 +59,7 @@ namespace ClinicaFrba.Compra_Bono
             {
                 conexion.Open();
                 AutoCompleteStringCollection numeroAfiliado = new AutoCompleteStringCollection();
-                SqlCommand queryAfiliados = new SqlCommand("SELECT DISTINCT afil_id from GEDDES.Afiliados", conexion);
+                SqlCommand queryAfiliados = new SqlCommand("SELECT DISTINCT a.afil_id from GEDDES.Afiliados a, GEDDES.Usuarios u where a.afil_usuario=u.usua_id and usua_intentos<>0", conexion);
                 SqlDataReader readerNombres = queryAfiliados.ExecuteReader();
                 while (readerNombres.Read())
                 {
@@ -79,12 +79,14 @@ namespace ClinicaFrba.Compra_Bono
 
         private void botonSeleccionar_Click(object sender, EventArgs e)
         {
-            this.nroAfiliado = Int32.Parse(this.textAfiliado.Text);
-            this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
-            this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
-            this.textPlan.Text = this.plan.ToString();
-            this.textPrecioBono.Text = this.precioPlan.ToString();
-
+            if(this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text)){
+                this.nroAfiliado = Int32.Parse(this.textAfiliado.Text);
+                this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
+                this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
+                this.textPlan.Text = this.plan.ToString();
+                this.textPrecioBono.Text = this.precioPlan.ToString();
+                MessageBox.Show("Afiliado correcto");
+            }
             if (this.plan == -1 || this.precioPlan == -1)
             {
                 MessageBox.Show("El afiliado ingresado no existe, intente nuevamente");
@@ -94,7 +96,8 @@ namespace ClinicaFrba.Compra_Bono
 
         private void botonConfirmar_Click(object sender, EventArgs e)
         {
-            if(this.textAfiliado.Text!="" && this.plan!=-1){
+            if (this.textAfiliado.Text != "" && this.plan != -1 && this.textPlan.Text != "" && this.textAfiliado.AutoCompleteCustomSource.Contains(this.textAfiliado.Text))
+            {
                 if (this.contadorBonos.Value > 0)
                 {
                     SqlConnection conexion = DBConnection.getConnection();
@@ -127,7 +130,7 @@ namespace ClinicaFrba.Compra_Bono
                 }
             }
             else{
-                MessageBox.Show("Debe ingresar un Afiliado y que sea valido");
+                MessageBox.Show("Debe ingresar un Afiliado y que sea valido. Presione el boton Seleccionar Afiliado");
             }
         }
 

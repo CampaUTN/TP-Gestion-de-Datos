@@ -62,7 +62,7 @@ namespace ClinicaFrba
             this.funcDisponibles.Add(6, () => new Cancelar_Atencion.CancelarAtencion(this.userActivo, this.rolActivo));
             this.funcDisponibles.Add(7, () => new Compra_Bono.CompraBono(this.userActivo,this.rolActivo));
             this.funcDisponibles.Add(8, () => new Listados.Listados());
-            this.funcDisponibles.Add(9, () => new Pedir_Turno.PedirTurno(this.userActivo));
+            this.funcDisponibles.Add(9, () => new Pedir_Turno.PedirTurno(this.userActivo,this.rolActivo));
             this.funcDisponibles.Add(10, () => new Registrar_Agenda_Medico.RegistarAgenda(this.userActivo, this.rolActivo));
             this.funcDisponibles.Add(11, () => new Registro_Llegada.RegistroLlegada());
             this.funcDisponibles.Add(12, () => new Registro_Resultado.RegistroResultado(this.userActivo));
