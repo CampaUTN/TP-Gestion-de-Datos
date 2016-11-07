@@ -58,7 +58,7 @@ namespace ClinicaFrba.Utilidades
             int userId;
             Int32.TryParse(usuario, out userId);
 
-            SqlCommand comando = new SqlCommand("select afil_id From CLINICA.Afiliados Where afil_usuario = @user", conexion);
+            SqlCommand comando = new SqlCommand("select afil_id From GEDDES.Afiliados Where afil_usuario = @user", conexion);
 
             comando.Parameters.AddWithValue("@user", userId);
 
@@ -77,7 +77,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("SELECT afil_plan, afil_estadoCivil, afil_cantidadHijos, afil_usuario FROM CLINICA.Afiliados WHERE afil_id = @id", conexion);
+            SqlCommand comando = new SqlCommand("SELECT afil_plan, afil_estadoCivil, afil_cantidadHijos, afil_usuario FROM GEDDES.Afiliados WHERE afil_id = @id", conexion);
 
             comando.Parameters.AddWithValue("@id", afil);
 
@@ -92,7 +92,7 @@ namespace ClinicaFrba.Utilidades
         static public int superaLimiteSemanal(int profesional) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select top 1 count(*)/2 from Clinica.horarios where hora_profesional = @profesional group by hora_profesional, datepart(WEEK,hora_fecha) order by count(*)/2 DESC", conexion);
+            SqlCommand comando = new SqlCommand("select top 1 count(*)/2 from GEDDES.horarios where hora_profesional = @profesional group by hora_profesional, datepart(WEEK,hora_fecha) order by count(*)/2 DESC", conexion);
             // divido por dos porque tiene 2 horarios por hora, porque cada uno dura media hora.
             // la cosa de la fecha del final agrupa las cosas si tienen igual profesional e igual semana.
 
@@ -116,7 +116,7 @@ namespace ClinicaFrba.Utilidades
             //int afilId;
             //Int32.TryParse(afiliado, out afilId);
 
-            SqlCommand comando = new SqlCommand("select afil_plan From CLINICA.Afiliados Where afil_id = @afiliado", conexion);
+            SqlCommand comando = new SqlCommand("select afil_plan From GEDDES.Afiliados Where afil_id = @afiliado", conexion);
 
             comando.Parameters.AddWithValue("@afiliado", afiliado); //OJO, TIENEN QUE LLAMARSE IGUAL
 
@@ -135,7 +135,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select plan_precioBono From CLINICA.Planes Where plan_id = @plan", conexion);
+            SqlCommand comando = new SqlCommand("select plan_precioBono From GEDDES.Planes Where plan_id = @plan", conexion);
             comando.Parameters.AddWithValue("@plan", plan);
 
             conexion.Open();
@@ -151,7 +151,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getProfesionales() //Hecho para pedir turno, se puede tomar la forma y cambiar!
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from GEDDES.Profesionales p, GEDDES.Usuarios u, GEDDES.EspecialidadXProfesional espe, GEDDES.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
@@ -165,7 +165,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getProfesionales2()
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_id as Especialidad, e.espe_nombre as Detalle from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_id as Especialidad, e.espe_nombre as Detalle from GEDDES.Profesionales p, GEDDES.Usuarios u, GEDDES.EspecialidadXProfesional espe, GEDDES.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id", conexion);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
@@ -178,7 +178,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getEspecialidades()
 {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select e.espe_id as Especialidad, e.espe_nombre from CLINICA.Especialidades e", conexion);
+            SqlCommand comando = new SqlCommand("select e.espe_id as Especialidad, e.espe_nombre from GEDDES.Especialidades e", conexion);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
@@ -191,7 +191,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getProfesionalesDeEspecialidad(string filtroEspe) 
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from CLINICA.Profesionales p, CLINICA.Usuarios u, CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre like @filtroEspe", conexion); // en vez de LIKE, =
+            SqlCommand comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre, e.espe_nombre as Especialidad from GEDDES.Profesionales p, GEDDES.Usuarios u, GEDDES.EspecialidadXProfesional espe, GEDDES.Especialidades e WHERE p.prof_usuario=u.usua_id AND espe.prof_id = p.prof_id AND espe.espe_id = e.espe_id AND e.espe_nombre like @filtroEspe", conexion); // en vez de LIKE, =
             //comando.Parameters.AddWithValue("@filtroEspe", filtroEspe);
             comando.Parameters.AddWithValue("@filtroEspe", "%" + filtroEspe + "%");
             comando.CommandType = CommandType.Text;
@@ -206,7 +206,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getHorariosDelProfesional(string profesional)
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from CLINICA.Horarios where hora_profesional = @profesional and hora_id NOT IN (select turn_hora from CLINICA.Turnos)", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.CommandType = CommandType.Text;
 
@@ -220,7 +220,7 @@ namespace ClinicaFrba.Utilidades
         static public int getIdDesdePlan(string plan)
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("SELECT plan_id from CLINICA.Planes WHERE plan_nombre = @plan", conexion);
+            SqlCommand comando = new SqlCommand("SELECT plan_id from GEDDES.Planes WHERE plan_nombre = @plan", conexion);
             comando.Parameters.AddWithValue("@plan", plan);
             comando.CommandType = CommandType.Text;
 
@@ -237,7 +237,7 @@ namespace ClinicaFrba.Utilidades
         static public long getIdDesdeUserName(string username)
         {
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("SELECT usua_id FROM CLINICA.Usuarios WHERE usua_username = @username", conexion);
+            SqlCommand comando = new SqlCommand("SELECT usua_id FROM GEDDES.Usuarios WHERE usua_username = @username", conexion);
             comando.Parameters.AddWithValue("@username", username);
             comando.CommandType = CommandType.Text;
 
@@ -258,7 +258,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.ingresarUsuario", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.ingresarUsuario", conexion);
 
             comando.CommandType = CommandType.StoredProcedure;
 
@@ -272,7 +272,16 @@ namespace ClinicaFrba.Utilidades
             comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
             comando.Parameters.AddWithValue("@fechaNacimiento", afiliado.getFechaNac());
             comando.Parameters.AddWithValue("@sexo", afiliado.getSexo());
-            comando.Parameters.AddWithValue("@mail", afiliado.getMail());
+
+            if (afiliado.getMail() != null)
+            {
+                comando.Parameters.AddWithValue("@mail", afiliado.getMail());
+            }
+            else
+            {
+                comando.Parameters.AddWithValue("@mail", DBNull.Value);
+            }
+
 
             conexion.Open();
             comando.ExecuteReader();
@@ -287,7 +296,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.ingresarAfiliado", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.ingresarAfiliado", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             //TODO: Ver si lo puedo retornar desde el SP, cuando registro al usuario
@@ -308,7 +317,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.agregarFamiliar", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.agregarFamiliar", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@afiliado_raiz", afiliado.getCodigoAfiliado());
@@ -329,7 +338,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.modificarAfiliado", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.modificarAfiliado", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             MessageBox.Show(afiliado.getPlan());
@@ -352,7 +361,7 @@ namespace ClinicaFrba.Utilidades
             int afil_id = 0;
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("SELECT MAX(afil_id) FROM CLINICA.Afiliados ", conexion);
+            SqlCommand comando = new SqlCommand("SELECT MAX(afil_id) FROM GEDDES.Afiliados ", conexion);
             conexion.Open();
             SqlDataReader reader = comando.ExecuteReader();
             if (reader.Read())
@@ -368,7 +377,7 @@ namespace ClinicaFrba.Utilidades
             var conexion = DBConnection.getConnection();
             List<KeyValuePair<int, string>> planes = new List<KeyValuePair<int, string>>();
 
-            SqlCommand comando = new SqlCommand("CLINICA.getPlanes", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.getPlanes", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             conexion.Open();
@@ -387,7 +396,7 @@ namespace ClinicaFrba.Utilidades
             var conexion = DBConnection.getConnection();
 
             List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
-            SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.getRolesUsuario", conexion);
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@user", usuario);
             conexion.Open();
@@ -407,7 +416,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("SELECT * From CLINICA.Afiliados WHERE afil_usuario = @user", conexion);
+            SqlCommand comando = new SqlCommand("SELECT * From GEDDES.Afiliados WHERE afil_usuario = @user", conexion);
             comando.Parameters.AddWithValue("@user", cod_usuario);
 
             conexion.Open();
@@ -423,7 +432,7 @@ namespace ClinicaFrba.Utilidades
             int prof = 0;
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("SELECT * From CLINICA.Profesionales, CLINICA.Usuarios WHERE prof_usuario = usua_id AND usua_username = @user", conexion);
+            SqlCommand comando = new SqlCommand("SELECT * From GEDDES.Profesionales, GEDDES.Usuarios WHERE prof_usuario = usua_id AND usua_username = @user", conexion);
             comando.Parameters.AddWithValue("@user", username);
 
             conexion.Open();
@@ -443,7 +452,7 @@ namespace ClinicaFrba.Utilidades
 
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select usua_direccion,usua_tipoDoc, usua_telefono, usua_fechaNacimiento, usua_mail, usua_sexo from CLINICA.Usuarios WHERE usua_id = @user", conexion);
+            SqlCommand comando = new SqlCommand("select usua_direccion,usua_tipoDoc, usua_telefono, usua_fechaNacimiento, usua_mail, usua_sexo from GEDDES.Usuarios WHERE usua_id = @user", conexion);
             comando.Parameters.AddWithValue("@user", cod_usuario);
 
             conexion.Open();
@@ -459,7 +468,7 @@ namespace ClinicaFrba.Utilidades
             string nombre = "";
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("SELECT plan_nombre FROM CLINICA.Planes WHERE plan_id = @id", conexion);
+            SqlCommand comando = new SqlCommand("SELECT plan_nombre FROM GEDDES.Planes WHERE plan_id = @id", conexion);
             comando.Parameters.AddWithValue("@id", plan);
 
             conexion.Open();
@@ -478,7 +487,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.darDeBaja", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.darDeBaja", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@user", afiliado.getUsuaId());
@@ -492,7 +501,7 @@ namespace ClinicaFrba.Utilidades
         static public void bajaDia(int profesional, DateTime fecha) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.cancelar_dia_agenda", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.cancelar_dia_agenda", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@profesional", profesional);
@@ -506,7 +515,7 @@ namespace ClinicaFrba.Utilidades
         static public void bajaTurnoAfiliado(int usuario, int turno_id) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.cancelar_turno_afiliado", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.cancelar_turno_afiliado", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@usuario", usuario);
@@ -521,7 +530,7 @@ namespace ClinicaFrba.Utilidades
         static public void registrarConsulta(int turno, int bono, int afiliado) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.registrarConsulta", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.registrarConsulta", conexion);
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@turno", turno);
             comando.Parameters.AddWithValue("@bono", bono);
@@ -536,7 +545,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getTurnos(int usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from CLINICA.Turnos join CLINICA.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from CLINICA.Afiliados where afil_usuario = @usuario)", conexion);
+            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.CommandType = CommandType.Text;
 
@@ -550,7 +559,7 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getAgenda(int usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from CLINICA.Horarios where hora_profesional = (select prof_id from CLINICA.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
+            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from GEDDES.Horarios where hora_profesional = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.CommandType = CommandType.Text;
 
@@ -565,7 +574,7 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.registrarResultadoConsulta", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.registrarResultadoConsulta", conexion);
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@consulta", consulta);
 
@@ -584,10 +593,25 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("CLINICA.registrarMotivo", conexion);
+            SqlCommand comando = new SqlCommand("GEDDES.registrarMotivo", conexion);
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@afil", afiliado);
             comando.Parameters.AddWithValue("@motivo", motivo);
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+        }
+
+
+        static public void darDeBajaAfiliado(long idUsuario)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("GEDDES.eliminarAfiliado", conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+
+            comando.Parameters.AddWithValue("@user", idUsuario);
+
             conexion.Open();
 
             SqlDataReader reader = comando.ExecuteReader();

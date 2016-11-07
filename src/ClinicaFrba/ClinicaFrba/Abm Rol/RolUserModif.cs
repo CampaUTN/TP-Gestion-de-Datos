@@ -32,7 +32,7 @@ namespace ClinicaFrba.AbmRol {
 
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 List<KeyValuePair<int, string>> rolesAsignados = new List<KeyValuePair<int, string>>();
-                SqlCommand comando = new SqlCommand("CLINICA.getRolesUsuario", conexion);
+                SqlCommand comando = new SqlCommand("GEDDES.getRolesUsuario", conexion);
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@user", username);
                 conexion.Open();
@@ -44,7 +44,7 @@ namespace ClinicaFrba.AbmRol {
                 Utilidades.Utils.llenar(listAsignados, asignados);
                 reader.Close();
 
-                SqlCommand queryRoles = new SqlCommand("SELECT role_id, role_nombre FROM CLINICA.Roles WHERE role_habilitado=1", conexion);
+                SqlCommand queryRoles = new SqlCommand("SELECT role_id, role_nombre FROM GEDDES.Roles WHERE role_habilitado=1", conexion);
                 SqlDataReader readerRoles = queryRoles.ExecuteReader();
                 while (readerRoles.Read()) {
                     KeyValuePair<int, string> item = new KeyValuePair<int, string>(Int32.Parse(readerRoles["role_id"].ToString()), readerRoles["role_nombre"].ToString());
@@ -112,7 +112,7 @@ namespace ClinicaFrba.AbmRol {
                     foreach (KeyValuePair<int, string> item in listAsignados.Items) {
                         if (!asignados.Contains(item)) {
                             // (SQL) INSERT QUERY
-                            SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO CLINICA.RolXUsuario(usua_id, role_id) VALUES(" + userId + "," + item.Key + ")", conexion);
+                            SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO GEDDES.RolXUsuario(usua_id, role_id) VALUES(" + userId + "," + item.Key + ")", conexion);
                             queryInsertFunc.ExecuteNonQuery();
                         }
 
@@ -121,7 +121,7 @@ namespace ClinicaFrba.AbmRol {
                     foreach (KeyValuePair<int, string> item in asignados) {
                         if (!listAsignados.Items.Contains(item)) {
                             // (SQL) DELETE QUERY
-                            SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM CLINICA.RolXUsuario WHERE usua_id=" + userId + " AND role_id=" + item.Key, conexion);
+                            SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE usua_id=" + userId + " AND role_id=" + item.Key, conexion);
                             queryDeleteFunc.ExecuteNonQuery();
                         }
                     }

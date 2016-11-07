@@ -55,7 +55,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
 
 
             foreach (Horario h in horarios) {
-                string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
+                string insertHorarios = "INSERT INTO GEDDES.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
                 SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
                 comandoInsertarHorarios.Parameters.AddWithValue("@profesional", h.profesional_id);
                 comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", h.especialidad_id);

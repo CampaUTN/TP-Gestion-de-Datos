@@ -79,10 +79,10 @@ namespace ClinicaFrba.Listados
             else if (comboBoxListado1Filtro.SelectedIndex == 1)
                 where = "canc_tipo = 2 AND ";
             string queryListado = "SELECT TOP 5  COUNT(DISTINCT canc_id) AS 'Cancelaciones' , espe_nombre AS 'Especialidad'  " +
-                                    "FROM CLINICA.CancelacionesTurnos " +
-                                    "JOIN CLINICA.Turnos ON Turnos.turn_id = CancelacionesTurnos.canc_turno " +
-                                    "JOIN CLINICA.Horarios ON Horarios.hora_id = Turnos.turn_hora " +
-                                    "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
+                                    "FROM GEDDES.CancelacionesTurnos " +
+                                    "JOIN GEDDES.Turnos ON Turnos.turn_id = CancelacionesTurnos.canc_turno " +
+                                    "JOIN GEDDES.Horarios ON Horarios.hora_id = Turnos.turn_hora " +
+                                    "JOIN GEDDES.Especialidades ON espe_id = hora_especialidad " +
                                     "WHERE " + where +
                                     "hora_fecha BETWEEN '" + dateParaSql(generarFechaDesde()) + "' AND '" + dateParaSql(generarFechaHasta()) + "' " + 
                                     "GROUP BY Horarios.hora_especialidad, espe_nombre " +
@@ -92,13 +92,13 @@ namespace ClinicaFrba.Listados
 
         private string generarQueryListado2() {
             string queryListado = "SELECT TOP 5 COUNT(DISTINCT cons_id) AS 'Consultas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', espe_nombre AS 'Especialidad' " +
-                                    "FROM CLINICA.Bonos " +
-                                    "JOIN CLINICA.Consultas ON cons_id = bono_nroConsulta " +
-                                    "JOIN CLINICA.Turnos ON turn_id = cons_turno " +
-                                    "JOIN CLINICA.Horarios ON hora_id = turn_hora " +
-                                    "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
-                                    "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
-                                    "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
+                                    "FROM GEDDES.Bonos " +
+                                    "JOIN GEDDES.Consultas ON cons_id = bono_nroConsulta " +
+                                    "JOIN GEDDES.Turnos ON turn_id = cons_turno " +
+                                    "JOIN GEDDES.Horarios ON hora_id = turn_hora " +
+                                    "JOIN GEDDES.Profesionales ON prof_id = hora_profesional " +
+                                    "JOIN GEDDES.Especialidades ON espe_id = hora_especialidad " +
+                                    "JOIN GEDDES.Usuarios ON usua_id = prof_usuario " +
                                     "WHERE ";
             if (comboBoxListado2Filtro.SelectedIndex !=0)
                 queryListado +=     "bono_plan = " + ((KeyValuePair<int,string>) comboBoxListado2Filtro.SelectedItem).Key + " AND ";
@@ -110,9 +110,9 @@ namespace ClinicaFrba.Listados
 
         private string generarQueryListado3(){
             string queryListado = "SELECT TOP 5  COUNT(hora_id)*0.5 AS 'Horas', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario' " +
-                                    "FROM CLINICA.Horarios " +
-                                    "JOIN CLINICA.Profesionales ON prof_id = hora_profesional " +
-                                    "JOIN CLINICA.Usuarios ON usua_id = prof_usuario " +
+                                    "FROM GEDDES.Horarios " +
+                                    "JOIN GEDDES.Profesionales ON prof_id = hora_profesional " +
+                                    "JOIN GEDDES.Usuarios ON usua_id = prof_usuario " +
                                     "WHERE ";
             if (comboBoxListado3Filtro.SelectedIndex !=0)
                 queryListado +=     "hora_especialidad = " + ((KeyValuePair<int,string>) comboBoxListado3Filtro.SelectedItem).Key + " AND ";        
@@ -124,10 +124,10 @@ namespace ClinicaFrba.Listados
         }
 
         private string generarQueryListado4() {
-            string queryListado = "SELECT TOP 5 SUM(comp_cantidad) AS 'Bonos comprados', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', CLINICA.tieneFamilia(usua_id) AS 'Tiene familia' " +
-                                    "FROM CLINICA.ComprasBonos " +
-                                    "JOIN CLINICA.Afiliados afil ON afil_id = comp_afil " +
-                                    "JOIN CLINICA.Usuarios ON usua_id = afil_usuario " +
+            string queryListado = "SELECT TOP 5 SUM(comp_cantidad) AS 'Bonos comprados', CONCAT(usua_nombre,' ',usua_apellido) AS 'Usuario', GEDDES.tieneFamilia(usua_id) AS 'Tiene familia' " +
+                                    "FROM GEDDES.ComprasBonos " +
+                                    "JOIN GEDDES.Afiliados afil ON afil_id = comp_afil " +
+                                    "JOIN GEDDES.Usuarios ON usua_id = afil_usuario " +
                                     "WHERE comp_fechaCompra BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY comp_afil, usua_nombre, usua_apellido, usua_id " +
                                     "ORDER BY SUM(comp_cantidad) DESC";
@@ -136,10 +136,10 @@ namespace ClinicaFrba.Listados
 
         private string generarQueryListado5() {
             string queryListado = "SELECT TOP 5 COUNT(cons_id) AS 'Bonos utilizados' , espe_nombre AS 'Especialidad' " +
-                                    "FROM CLINICA.Consultas " +
-                                    "JOIN CLINICA.Turnos ON turn_id = cons_turno " +
-                                    "JOIN CLINICA.Horarios ON hora_id = turn_hora " +
-                                    "JOIN CLINICA.Especialidades ON espe_id = hora_especialidad " +
+                                    "FROM GEDDES.Consultas " +
+                                    "JOIN GEDDES.Turnos ON turn_id = cons_turno " +
+                                    "JOIN GEDDES.Horarios ON hora_id = turn_hora " +
+                                    "JOIN GEDDES.Especialidades ON espe_id = hora_especialidad " +
                                     "AND cons_fechaHoraConsulta BETWEEN CONVERT(date,'" + dateTimeParaSql(generarFechaDesde()) + "') AND CONVERT(date,'" + dateTimeParaSql(generarFechaHasta()) + "') " + 
                                     "GROUP BY espe_id, espe_nombre " +
                                     "ORDER BY COUNT(cons_id) DESC";

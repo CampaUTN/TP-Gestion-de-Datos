@@ -44,7 +44,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 
                 if (!this.logErrores.huboErrores())
                 {
-                    //metodo que sobreescribe Modificacion
+                    //metodo que sobreescribe Modificacion. Acá se realiza la operación principal
                     realizarOperacion();
                 }
                 else{
@@ -52,6 +52,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
             }
             else {
+
                 MessageBox.Show("Debe completar los datos del afiliado para continuar", "Aviso", MessageBoxButtons.OK);
       
             }
@@ -170,6 +171,7 @@ namespace ClinicaFrba.Abm_Afiliado
             return !seEligioUnPlan || !seEligioEstadoCivil || cajasVacias;
         }
 
+        //valido el formato de los datos ingresados
         public virtual void validarDatosIngresados() {
 
 

@@ -55,7 +55,7 @@ namespace ClinicaFrba.Utilidades
             //condiciones de filtro
             string criterio = "";
 
-            string tablaUsuarios= ",CLINICA.Usuarios" ;
+            string tablaUsuarios= ",GEDDES.Usuarios" ;
 
             //string resultado sobre la cual se hace el SELECT
             string consulta;
@@ -71,7 +71,7 @@ namespace ClinicaFrba.Utilidades
             {
                 tabla = tabla + " p";
                 parametros = "p.prof_id AS Id, usua_apellido AS Apellido, usua_nombre AS Nombre, e.espe_nombre as Especialidad ";
-               tablaUsuarios = tablaUsuarios + ",CLINICA.EspecialidadXProfesional espe, CLINICA.Especialidades e";
+               tablaUsuarios = tablaUsuarios + ",GEDDES.EspecialidadXProfesional espe, GEDDES.Especialidades e";
                criterio = "\n WHERE usua_id = p.prof_usuario AND p.prof_id = espe.prof_id AND espe.espe_id = e.espe_id AND ";
             }
 
@@ -85,7 +85,7 @@ namespace ClinicaFrba.Utilidades
             }
             criterio = sacarAND(criterio);
 
-            consulta = "SELECT " + parametros + " \nFROM CLINICA." + tabla + tablaUsuarios + criterio;
+            consulta = "SELECT " + parametros + " \nFROM GEDDES." + tabla + tablaUsuarios + criterio;
 
             return consulta;
         }

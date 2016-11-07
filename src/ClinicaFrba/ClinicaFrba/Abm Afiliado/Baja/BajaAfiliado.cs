@@ -19,16 +19,8 @@ namespace ClinicaFrba.Abm_Afiliado.Baja
 
             long idUsuario = afiliado.getUsuaId();
 
-            var conexion = DBConnection.getConnection();
+            Utilidades.Utils.darDeBajaAfiliado(idUsuario);
 
-            SqlCommand comando = new SqlCommand("CLINICA.eliminarAfiliado", conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-
-            comando.Parameters.AddWithValue("@user", idUsuario);
-
-            conexion.Open();
-
-            SqlDataReader reader = comando.ExecuteReader();
 
         }
     }

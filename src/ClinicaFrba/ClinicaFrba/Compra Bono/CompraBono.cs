@@ -55,6 +55,21 @@ namespace ClinicaFrba.Compra_Bono
 
         private void CompraBono_Load(object sender, EventArgs e)
         {
+            using (SqlConnection conexion = DBConnection.getConnection())
+            {
+                conexion.Open();
+                AutoCompleteStringCollection numeroAfiliado = new AutoCompleteStringCollection();
+                SqlCommand queryAfiliados = new SqlCommand("SELECT DISTINCT afil_id from GEDDES.Afiliados", conexion);
+                SqlDataReader readerNombres = queryAfiliados.ExecuteReader();
+                while (readerNombres.Read())
+                {
+                    numeroAfiliado.Add(readerNombres["afil_id"].ToString());
+                }
+                readerNombres.Close();
+                textAfiliado.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                textAfiliado.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                textAfiliado.AutoCompleteCustomSource = numeroAfiliado;
+            }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -84,7 +99,7 @@ namespace ClinicaFrba.Compra_Bono
                 {
                     SqlConnection conexion = DBConnection.getConnection();
 
-                    string insertComprasBonos = "INSERT INTO CLINICA.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
+                    string insertComprasBonos = "INSERT INTO GEDDES.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
                     SqlCommand comandoComprasBonos = new SqlCommand(insertComprasBonos, conexion);
                     comandoComprasBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                     comandoComprasBonos.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
@@ -95,7 +110,7 @@ namespace ClinicaFrba.Compra_Bono
 
                     for (int i = 0; i < (int)this.contadorBonos.Value; i++)
                     {
-                        string insertBonos = "INSERT INTO CLINICA.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
+                        string insertBonos = "INSERT INTO GEDDES.BONOS (bono_afilCompra,bono_plan) values (@afiliado,@plan)";
                         SqlCommand comandoBonos = new SqlCommand(insertBonos, conexion);
                         comandoBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                         comandoBonos.Parameters.AddWithValue("@plan", this.plan);
@@ -123,9 +138,9 @@ namespace ClinicaFrba.Compra_Bono
 
         private void textAfiliado_TextChanged(object sender, EventArgs e)
         {
-
+            textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
         }
 
 
-    }
 }
+    }

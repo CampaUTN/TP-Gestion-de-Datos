@@ -15,8 +15,8 @@ namespace ClinicaFrba.Registro_Resultado
     {
         int user;
         string select =    "SELECT cons_id AS Consulta, hora_inicio AS Hora,";
-        string subselect = "(SELECT (usua_nombre + ' ' + usua_apellido) FROM CLINICA.Afiliados, CLINICA.Usuarios WHERE afil_id = turn_afiliado AND afil_usuario = usua_id) AS Afiliado ";
-        string from =      "FROM CLINICA.Profesionales, CLINICA.Turnos ,CLINICA.Horarios , CLINICA.Consultas ";
+        string subselect = "(SELECT (usua_nombre + ' ' + usua_apellido) FROM GEDDES.Afiliados, GEDDES.Usuarios WHERE afil_id = turn_afiliado AND afil_usuario = usua_id) AS Afiliado ";
+        string from =      "FROM GEDDES.Profesionales, GEDDES.Turnos ,GEDDES.Horarios , GEDDES.Consultas ";
         string where = "WHERE turn_hora = hora_id AND hora_profesional = prof_id AND cons_turno = turn_id AND hora_fecha = CONVERT(DATE,SYSDATETIME()) AND cons_fueConcretada = 0 AND prof_id = ";
 
         bool realizada;
@@ -30,7 +30,6 @@ namespace ClinicaFrba.Registro_Resultado
 
             int user = Utils.obtenerProfesionalDesdeUsername(userActivo);
 
-            MessageBox.Show(Convert.ToString(user));
             where = where + (Convert.ToString(user));
             this.cargarPlanilla();
         }
