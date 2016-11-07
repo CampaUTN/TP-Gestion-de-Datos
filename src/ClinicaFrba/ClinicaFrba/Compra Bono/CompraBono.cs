@@ -33,7 +33,7 @@ namespace ClinicaFrba.Compra_Bono
                 this.nroAfiliado = Utilidades.Utils.getNumeroAfiliadoDesdeUsuario(userActivo);
                 this.textAfiliado.Text = nroAfiliado.ToString();
                 this.textAfiliado.ReadOnly = true;
-                this.botonSeleccionar.Visible = false;
+                this.botonSeleccionar.Enabled = false;
 
                 this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
                 this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
@@ -138,7 +138,15 @@ namespace ClinicaFrba.Compra_Bono
 
         private void textAfiliado_TextChanged(object sender, EventArgs e)
         {
-            textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
+            botonConfirmar.Enabled = textAfiliado.AutoCompleteCustomSource.Contains(textAfiliado.Text);
+        }
+
+        private void textAfiliado_LostFocus(object sender, EventArgs e)
+        {
+            this.plan = Utilidades.Utils.buscarPlanDeAfiliado(this.nroAfiliado);
+            this.precioPlan = Utilidades.Utils.buscarPrecioPlan(this.plan);
+            this.textPlan.Text = this.plan.ToString();
+            this.textPrecioBono.Text = this.precioPlan.ToString();
         }
 
 
