@@ -19,6 +19,7 @@ namespace ClinicaFrba.AbmRol {
         }
 
         private void RolBaja_Load(object sender, EventArgs e) {
+            // Cargamos los roles habilitados del sistema
             cargarRolesHabilitados();
         }
 
@@ -30,11 +31,13 @@ namespace ClinicaFrba.AbmRol {
         private void buttonEliminar_Click(object sender, EventArgs e) {
             KeyValuePair<int, string> item = (KeyValuePair<int, string>) listRoles.SelectedItem;
             using (SqlConnection conexion = DBConnection.getConnection()) {
+                // Inhabilitamos el rol
                 SqlCommand queryDehabilitarRol = new SqlCommand("UPDATE GEDDES.Roles SET role_habilitado=0 WHERE role_nombre='"+item.Value+"'", conexion);
                 conexion.Open();
                 try {
                     queryDehabilitarRol.ExecuteNonQuery();
                 } catch { }
+                // Eliminamos todas las asignaciones de usuarios a ese rol
                 SqlCommand queryDesasignarRol = new SqlCommand("DELETE FROM GEDDES.RolXUsuario WHERE role_id=" + item.Key, conexion);
                 try {
                     queryDesasignarRol.ExecuteNonQuery();

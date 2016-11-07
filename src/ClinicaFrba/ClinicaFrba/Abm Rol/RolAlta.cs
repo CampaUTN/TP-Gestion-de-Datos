@@ -30,6 +30,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void AbmRol_Load(object sender, EventArgs e) {
+            // Cargamos las funcionales disponibles
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 SqlCommand query = new SqlCommand("SELECT * FROM GEDDES.funcionalidades",conexion);
                 conexion.Open();
@@ -37,6 +38,7 @@ namespace ClinicaFrba.AbmRol
                 while (reader.Read()) {
                     funcionalidades.Add(new KeyValuePair<int, string>(Int32.Parse(reader["func_id"].ToString()), reader["func_nombre"].ToString()));
                 }
+                // Cargamos los roles existentes en el sistema para la posterior validacion del nombre del nuevo rol
                 query = new SqlCommand("SELECT * FROM GEDDES.roles", conexion);
                 reader.Close();
                 reader = query.ExecuteReader();
@@ -44,6 +46,7 @@ namespace ClinicaFrba.AbmRol
                     roles.Add(new KeyValuePair<int, string>(Int32.Parse(reader["role_id"].ToString()), reader["role_nombre"].ToString()));
                 }
             }
+            // Llenamos las listas con la informacion obtenida
             Utilidades.Utils.llenar(this.listFuncionalidades, funcionalidades);
             Utilidades.Utils.llenar(this.listAsignadas, new List<KeyValuePair<int, string>>() );
             buttonAgregar.Enabled = true;
@@ -52,6 +55,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonAgregar_Click(object sender, EventArgs e) {
+            // Transferimos una de las funcionalidades disponibles hacia las asignadas
             if (listFuncionalidades.Items.Count > 0) {
                 listAsignadas.Items.Add(listFuncionalidades.SelectedItem);
                 int index = listFuncionalidades.SelectedIndex;
@@ -65,19 +69,21 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonQuitar_Click(object sender, EventArgs e) {
+            // Transferimos una de las funcionalidades asignadas hacia las disponibles
             if (listAsignadas.Items.Count > 0) {
                 listFuncionalidades.Items.Add(listAsignadas.SelectedItem);
                 int index = listAsignadas.SelectedIndex;
                 listAsignadas.Items.Remove(listAsignadas.SelectedItem);
                 if (listAsignadas.Items.Count > index)
                     listAsignadas.SelectedIndex = index;
-                else //if (listFuncionalidades.Items.Count > 0)
+                else 
                     listAsignadas.SelectedIndex = index - 1;
             }
 
         }
 
         private void textBoxNombre_TextChanged(object sender, EventArgs e) {
+            // Validamos el nombre del rol, que no exista ya, que no sea una cadena vacia
             labelNombreValidacion.Visible = true;
             buttonCrear.Enabled = false;
             validacionNombre = false;
@@ -102,6 +108,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonGuardar_Click(object sender, EventArgs e) {
+            // insertamos el rol, e insertamos todas las funcionalidades asignadas
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 SqlCommand query = new SqlCommand("INSERT INTO GEDDES.Roles(role_nombre, role_habilitado) VALUES('" + textBoxNombre.Text + "', 1)", conexion);
                 conexion.Open();
@@ -133,6 +140,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void listAsignadas_SelectedIndexChanged(object sender, EventArgs e) {
+            // Aseguramos que solo se puedan quitar o agregar elementos que esten seleccionados
             if (listAsignadas.SelectedItems.Count > 0 && listAsignadas.SelectedItems.Count > 0) {
                 buttonQuitar.Enabled = true;
                 listFuncionalidades.ClearSelected();
@@ -142,6 +150,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void listFuncionalidades_SelectedIndexChanged(object sender, EventArgs e) {
+            // Aseguramos que solo se puedan quitar o agregar elementos que esten seleccionados
             if (listFuncionalidades.SelectedItems.Count > 0 && listFuncionalidades.SelectedItems.Count > 0) {
                 buttonAgregar.Enabled = true;
                 listAsignadas.ClearSelected();

@@ -39,7 +39,7 @@ namespace ClinicaFrba.AbmRol
 
             using (SqlConnection conexion = DBConnection.getConnection()) {
                 conexion.Open();
-
+                // Obtenemos los datos del rol a modificar y sus funcionalidades
                 SqlCommand queryObtenerModificable = new SqlCommand("SELECT * FROM GEDDES.roles WHERE role_id="+rolId, conexion);
                 SqlDataReader readerDatos = queryObtenerModificable.ExecuteReader();
                 if (readerDatos.Read()) {
@@ -56,7 +56,7 @@ namespace ClinicaFrba.AbmRol
                     asignadas.Add(new KeyValuePair<int, string>(Int32.Parse(readerAsignadas["func_id"].ToString()), readerAsignadas["func_nombre"].ToString()));
                 }
                 readerAsignadas.Close();
-
+                // Obtenemos todas las funcionalidades del sistema y seleccionamos aquellas que no esten asignadas al rol a modificar
                 SqlCommand queryFuncionalidades = new SqlCommand("SELECT * FROM GEDDES.funcionalidades", conexion);
                 SqlDataReader readerFuncionalidades = queryFuncionalidades.ExecuteReader();
                 while (readerFuncionalidades.Read()) {
@@ -72,6 +72,7 @@ namespace ClinicaFrba.AbmRol
                     roles.Add(new KeyValuePair<int, string>(Int32.Parse(readerRoles["role_id"].ToString()), readerRoles["role_nombre"].ToString()));
                 }
             }
+            // Rellenamos los elementos del formulario con la informacion obtenida
             Utilidades.Utils.llenar(this.listFuncionalidades, funcionalidades);
             Utilidades.Utils.llenar(this.listAsignadas, asignadas);
             if (listFuncionalidades.Items.Count>0)
@@ -82,6 +83,7 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonAgregar_Click(object sender, EventArgs e) {
+            // Transferimos una de las funcionalidades disponibles hacia las asignadas
             if (listFuncionalidades.Items.Count > 0) {
                 listAsignadas.Items.Add(listFuncionalidades.SelectedItem);
                 int index = listFuncionalidades.SelectedIndex;
@@ -95,19 +97,21 @@ namespace ClinicaFrba.AbmRol
         }
 
         private void buttonQuitar_Click(object sender, EventArgs e) {
+            // Transferimos una de las funcionalidades asignadas hacia las disponibles
             if (listAsignadas.Items.Count > 0) {
                 listFuncionalidades.Items.Add(listAsignadas.SelectedItem);
                 int index = listAsignadas.SelectedIndex;
                 listAsignadas.Items.Remove(listAsignadas.SelectedItem);
                 if (listAsignadas.Items.Count > index)
                     listAsignadas.SelectedIndex = index;
-                else //if (listFuncionalidades.Items.Count > 0)
+                else 
                     listAsignadas.SelectedIndex = index - 1;
             }
 
         }
 
         private void textBoxNombre_TextChanged(object sender, EventArgs e) {
+            // Validamos el nombre del rol, que no exista ya, que no sea una cadena vacia
             labelNombreValidacion.Visible = true;
             buttonGuardar.Enabled = false;
             if (textBoxNombre.Text == "") {
@@ -138,7 +142,7 @@ namespace ClinicaFrba.AbmRol
 
                 foreach (KeyValuePair<int, string> item in listAsignadas.Items) {
                     if (!asignadas.Contains(item)) {
-                        // (SQL) INSERT QUERY
+                        // Insertamos las nuevas funcionalidades que posee el rol
                         SqlCommand queryInsertFunc = new SqlCommand("INSERT INTO GEDDES.RolXFuncionalidad(func_id, role_id) VALUES(" + item.Key.ToString() + "," + rolId.ToString() + ")", conexion);
                         queryInsertFunc.ExecuteNonQuery();
                     }
@@ -147,7 +151,7 @@ namespace ClinicaFrba.AbmRol
 
                 foreach (KeyValuePair<int, string> item in asignadas) {
                     if (!listAsignadas.Items.Contains(item)) {
-                        // (SQL) DELETE QUERY
+                        // Eliminamos las funcionalidades que ya no posee el rol
                         SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXFuncionalidad WHERE role_id="+rolId, conexion);
                         queryDeleteFunc.ExecuteNonQuery();
                     }
