@@ -272,7 +272,16 @@ namespace ClinicaFrba.Utilidades
             comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());
             comando.Parameters.AddWithValue("@fechaNacimiento", afiliado.getFechaNac());
             comando.Parameters.AddWithValue("@sexo", afiliado.getSexo());
-            comando.Parameters.AddWithValue("@mail", afiliado.getMail());
+
+            if (afiliado.getMail() != null)
+            {
+                comando.Parameters.AddWithValue("@mail", afiliado.getMail());
+            }
+            else
+            {
+                comando.Parameters.AddWithValue("@mail", DBNull.Value);
+            }
+
 
             conexion.Open();
             comando.ExecuteReader();
