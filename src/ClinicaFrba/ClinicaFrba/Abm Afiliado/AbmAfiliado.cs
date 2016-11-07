@@ -11,9 +11,8 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class AbmAfiliado : Form, FormularioABM
+    public partial class AbmAfiliado : Form
     {
-        FormularioABM formulario;
 
         public AbmAfiliado()
         {

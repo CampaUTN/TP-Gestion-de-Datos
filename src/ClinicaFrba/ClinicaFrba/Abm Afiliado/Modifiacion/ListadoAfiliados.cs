@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 {
-    public partial class ListadoAfiliados : Form, FormularioABM
+    public partial class ListadoAfiliados : Form
     {
         public ListadoAfiliados()
         {

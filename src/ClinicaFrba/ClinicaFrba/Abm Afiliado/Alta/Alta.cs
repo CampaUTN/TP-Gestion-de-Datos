@@ -12,7 +12,7 @@ using ClinicaFrba.Utilidades;
 
 namespace ClinicaFrba.Abm_Afiliado
 {
-    public partial class Alta : Form, FormularioABM
+    public partial class Alta : Form
     {
         protected bool esDeAfiliadoPrincipal;
         protected string sexo;
