@@ -69,28 +69,19 @@ namespace ClinicaFrba.Cancelar_Atencion
             } else {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
             }
-            // si es un medico lista la agenda ordenada
-            // por fecha o da la opcion de q el usuario ingrese 2 fechas y cancelar todo lo q este entre esas fechas.
         }
 
-        private void CancelarAtencion_Load(object sender, EventArgs e) {
+        private void CancelarAtencion_Load(object sender, EventArgs e) {}
 
-        }
+        private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {}
 
-        private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-
-        }
-
-        // cancelar un dia
-        private void desde_ValueChanged(object sender, EventArgs e) {
-        }
+        private void desde_ValueChanged(object sender, EventArgs e) {}
 
         private void from_ValueChanged(object sender, EventArgs e) {
             desde.SuspendLayout();
         }
 
-        private void to_ValueChanged(object sender, EventArgs e) {
-        }
+        private void to_ValueChanged(object sender, EventArgs e) {}
 
         private void selecDia_CheckedChanged(object sender, EventArgs e) {
             from.Enabled = false;
@@ -108,20 +99,12 @@ namespace ClinicaFrba.Cancelar_Atencion
             diaUnico = false;
         }
 
-        private void label1_Click(object sender, EventArgs e) {
+        private void label1_Click(object sender, EventArgs e) {}
 
-        }
+        private void label3_Click(object sender, EventArgs e) {}
 
-        private void label3_Click(object sender, EventArgs e) {
+        private void label4_Click(object sender, EventArgs e) {}
 
-        }
-
-        private void label4_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e) {
-
-        }
+        private void label5_Click(object sender, EventArgs e) {}
     }
 }
