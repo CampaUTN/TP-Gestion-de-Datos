@@ -274,6 +274,11 @@ CREATE TABLE GEDDES.ComprasBonos(
 	comp_fechaCompra DATETIME);
 
 
+
+CREATE INDEX I_Username ON GEDDES.Usuarios(usua_username);
+CREATE INDEX I_Horario ON GEDDES.Horarios(hora_fecha);
+CREATE INDEX I_Turno ON GEDDES.Turnos(turn_hora);
+
 USE GD2C2016;
 GO
 
