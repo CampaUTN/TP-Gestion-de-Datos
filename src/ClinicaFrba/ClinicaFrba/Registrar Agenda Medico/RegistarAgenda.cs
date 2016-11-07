@@ -41,7 +41,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             Horario horario;
             DateTime hora;
             double diferencia = (int)desde.Value.DayOfWeek - numeroDia;
-            double correccionDia = diferencia >= 0 ? diferencia : 7+diferencia; //7+differencia<7, pues diferencia <0.
             DateTime fecha = desde.Value.AddDays(Math.Abs((int)desde.Value.DayOfWeek-numeroDia));
            // MessageBox.Show(desde.Value.ToString()+"         "+fecha.ToString()+"      "+hasta.Value.ToString());
             while (fecha <= hasta.Value) {
@@ -54,22 +53,16 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 fecha = fecha.AddDays(7);
             }
 
-            // debug: MessageBox.Show(horarios.Count.ToString());
+
             foreach (Horario h in horarios) {
                 string insertHorarios = "INSERT INTO CLINICA.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
                 SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
-                //comandoInsertarHorarios.CommandType = CommandType.Text;
-                //comandoInsertarHorarios.Connection = conexion;
                 comandoInsertarHorarios.Parameters.AddWithValue("@profesional", h.profesional_id);
                 comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", h.especialidad_id);
                 comandoInsertarHorarios.Parameters.AddWithValue("@fecha", h.fechaHora.Date);
                 comandoInsertarHorarios.Parameters.AddWithValue("@inicio", h.fechaHora.TimeOfDay);
                 comandoInsertarHorarios.ExecuteNonQuery();
-                // debug: MessageBox.Show("debug: si este msj aparece al menos dos veces, anda todo OK.");
             }
-
-            //conexion.Close();
-
             MessageBox.Show("Carga realizada con exito.");
         }
 
@@ -107,6 +100,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private void button2_Click(object sender, EventArgs e) {
             if (grillaProfesionales.SelectedCells.Count == 0) {
                 MessageBox.Show("Seleccione un profesional y especialidad en la grilla.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+            if (horaInicio.TimeOfDay>=horaFin.TimeOfDay) {
+                MessageBox.Show("La hora de inicio no puede ser mayor o igual a la hora de finalizacion.", "Error", MessageBoxButtons.OK);
                 return;
             }
             int rowindex = grillaProfesionales.CurrentCell.RowIndex;
