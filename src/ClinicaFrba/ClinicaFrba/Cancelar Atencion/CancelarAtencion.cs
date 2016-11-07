@@ -5,7 +5,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 {
     public partial class CancelarAtencion : Form
     {
-        private int usuario;
+        private long usuario;
         private int rol;
         private bool diaUnico = true;
 
@@ -13,7 +13,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             InitializeComponent();
             this.rol = rol;
-            this.usuario = Convert.ToInt32(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
+            this.usuario = Convert.ToInt64(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
             if (esAfiliado()) {
                 desde.Hide();
                 from.Hide();
@@ -46,10 +46,10 @@ namespace ClinicaFrba.Cancelar_Atencion
                     Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value));
                     MessageBox.Show("Turno cancelado correctamente.");
                 }else {
-                    MessageBox.Show("Seleccione un turno a cancelar.");
+                    MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
                 }
             } else {
-                int profesional;
+                long profesional;
                 if(esAdministrativo()){
                     if (grillaProfesionales.SelectedCells.Count == 0) {
                         MessageBox.Show("Seleccione un profesional en la grilla.", "Error", MessageBoxButtons.OK);
@@ -84,11 +84,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
-                if (esAdministrativo()) {
-                    this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
-                 } else {
-                    this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
-                }
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
             }
         }
 

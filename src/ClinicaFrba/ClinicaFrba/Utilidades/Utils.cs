@@ -512,7 +512,7 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public void bajaDia(int usuario_id, DateTime fecha) {
+        static public void bajaDia(long usuario_id, DateTime fecha) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_dia_agenda", conexion);
@@ -526,7 +526,7 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
-        static public void bajaTurnoAfiliado(int usuario, int turno_id) {
+        static public void bajaTurnoAfiliado(long usuario, int turno_id) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_turno_afiliado", conexion);
@@ -556,7 +556,7 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public DataTable getTurnos(int usuario) {
+        static public DataTable getTurnos(long usuario) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)", conexion);
@@ -570,7 +570,7 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
-        static public DataTable getAgenda(int usuario) {
+        static public DataTable getAgenda(long usuario) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from GEDDES.Horarios where hora_profesional = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
