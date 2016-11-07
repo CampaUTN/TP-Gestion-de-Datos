@@ -69,7 +69,6 @@
     <Compile Include="Abm Afiliado\Alta\AltaUsuario.Designer.cs">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Afiliado\Baja\BajaAfiliado.cs" />
     <Compile Include="Abm Afiliado\Modifiacion\ListadoAfiliados.cs">
       <SubType>Form</SubType>
     </Compile>
