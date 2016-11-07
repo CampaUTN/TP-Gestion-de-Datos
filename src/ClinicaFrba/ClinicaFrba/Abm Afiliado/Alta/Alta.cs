@@ -174,8 +174,6 @@ namespace ClinicaFrba.Abm_Afiliado
         //valido el formato de los datos ingresados
         public virtual void validarDatosIngresados() {
 
-
-            MessageBox.Show("Pase por aca");
             if (!Parser.esEntero(textBoxNroDoc)){
                 this.logErrores.agregarAlLog("El numero de documento debe ser numerico");
                 textBoxNroDoc.Clear();
