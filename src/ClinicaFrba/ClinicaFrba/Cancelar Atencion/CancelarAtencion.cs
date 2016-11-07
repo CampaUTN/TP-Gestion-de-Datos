@@ -9,6 +9,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         private int rol;
         private bool diaUnico = true;
 
+        //constructor
         public CancelarAtencion(string usuario, int rol)
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             return rol == 2;
         }
 
-        // Boton de borrar
+        // Boton de borrar. Se encarga de hacer validaciones y llamar a los metodos para concretar las bajas.
         private void button2_Click(object sender, EventArgs e) {
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
@@ -49,28 +50,16 @@ namespace ClinicaFrba.Cancelar_Atencion
                     MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
                 }
             } else {
-                long profesional;
-                if(esAdministrativo()){
-                    if (grillaProfesionales.SelectedCells.Count == 0) {
-                        MessageBox.Show("Seleccione un profesional en la grilla.", "Error", MessageBoxButtons.OK);
-                        return;
-                    }else{
-                        int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                        profesional = Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString());
-                    }
-                }else{
-                    profesional = usuario;
-                }
-
+                long profesional = usuario;
                 if(diaUnico) {
                     Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
-                    MessageBox.Show("Dia dado de baja correctamente.");
+                    MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
                     while(from.Value.Date <= to.Value.Date){
                         Utilidades.Utils.bajaDia(profesional, from.Value.Date);
                         from.Value = from.Value.AddDays(1);
                     }
-                    MessageBox.Show("Periodo dado de baja correctamente.");
+                    MessageBox.Show("Todos los turnos del periodo dados de baja correctamente.");
                 }
             }
             this.listar();
@@ -80,6 +69,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.listar();
         }
 
+        // actualiza la grilla
         private void listar() {
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
@@ -100,6 +90,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void to_ValueChanged(object sender, EventArgs e) {}
 
+        //deshabilita lo de seleccion por periodo y habilita lo de seleccion por dia
         private void selecDia_CheckedChanged(object sender, EventArgs e) {
             from.Enabled = false;
             to.Enabled = false;
@@ -108,6 +99,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             diaUnico = true;
         }
 
+        //habilita lo de seleccion por periodo y deshabilita lo de seleccion por dia
         private void selecPeriodo_CheckedChanged(object sender, EventArgs e) {
             desde.Enabled = false; ;
 

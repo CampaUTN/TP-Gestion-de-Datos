@@ -19,19 +19,21 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             return rol == 3;
         }
 
+        //valida que la fecha final sea posterior a la inicial
         private void selectorFecha_ValueChanged(object sender, EventArgs e) {
             if (hasta.Value.Date < desde.Value.Date) {
                 MessageBox.Show("La fecha final debe ser posterior a la inicial.");
             }   
         }
 
+        //valida que la fecha final sea posterior a la inicial
         private void hasta_ValueChanged(object sender, EventArgs e) {
             if(hasta.Value.Date<desde.Value.Date){
                 MessageBox.Show("La fecha final debe ser posterior a la inicial.");
             }                
         }
 
-
+        //constructor
         public RegistarAgenda(string usuario, int rol) {
             InitializeComponent();
             this.logErrores = new Logger();
@@ -41,15 +43,13 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.rol = rol;
         }
 
-        //todo ver si pasa de mes al pasar el limite de 30/31 dias.
+        //genera muchos horarios en base a los datos ingresados, y los guarda en la basa de datos.
         public virtual void cargarHorario(SqlConnection conexion) {
             int rowindex = grillaProfesionales.CurrentCell.RowIndex;
             List<Horario> horarios = new List<Horario>();
             Horario horario;
             DateTime hora;
-            double diferencia = (int)desde.Value.DayOfWeek - numeroDia;
             DateTime fecha = desde.Value.AddDays(Math.Abs((int)desde.Value.DayOfWeek-numeroDia));
-           // MessageBox.Show(desde.Value.ToString()+"         "+fecha.ToString()+"      "+hasta.Value.ToString());
             while (fecha <= hasta.Value) {
                 hora = horaInicio;
                 while (hora.AddMinutes(30) <= horaFin) {
@@ -73,6 +73,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             MessageBox.Show("Carga realizada con exito.");
         }
 
+        // verifica que el horario este en los rangos correctos
         private bool horarioValido(DateTime fechaHora) {
             String hora = fechaHora.ToString("HH:mm");
             if (numeroDia == 99) {
@@ -85,9 +86,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             }
         }
 
-        private void RegistarAgenda_Load(object sender, EventArgs e) {
+        private void RegistarAgenda_Load(object sender, EventArgs e) {}
 
-        }
 
         private void grillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if (grillaProfesionales.SelectedCells.Count > 0) {
@@ -97,7 +97,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             }
         }
 
-
+        //Actualiza la grilla de profesionales
         private void botonListar_Click(object sender, EventArgs e) {
             if (esProfesional()){
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales3(usuario);
