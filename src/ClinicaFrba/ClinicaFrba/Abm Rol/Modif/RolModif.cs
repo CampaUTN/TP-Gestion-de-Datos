@@ -152,7 +152,7 @@ namespace ClinicaFrba.AbmRol
                 foreach (KeyValuePair<int, string> item in asignadas) {
                     if (!listAsignadas.Items.Contains(item)) {
                         // Eliminamos las funcionalidades que ya no posee el rol
-                        SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXFuncionalidad WHERE role_id="+rolId, conexion);
+                        SqlCommand queryDeleteFunc = new SqlCommand("DELETE FROM GEDDES.RolXFuncionalidad WHERE role_id=" + rolId + "AND func_id=" + item.Key, conexion);
                         queryDeleteFunc.ExecuteNonQuery();
                     }
                 }
