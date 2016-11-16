@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
 using ClinicaFrba.Abm_Afiliado;
+using System.Configuration;
 
 namespace ClinicaFrba.Utilidades
 {
@@ -219,9 +220,14 @@ namespace ClinicaFrba.Utilidades
 
         static public DataTable getHorariosDelProfesional(string profesional)
         {
+            DateTime fecha = DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime hora = DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString(), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where hora_fecha>@fechaActual and hora_inicio>@horaActual and hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
+            comando.Parameters.AddWithValue("@fechaActual", fecha);
+            comando.Parameters.AddWithValue("@horaActual", hora);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
