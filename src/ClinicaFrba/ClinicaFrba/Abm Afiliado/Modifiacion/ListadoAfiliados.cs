@@ -14,7 +14,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 {
     public partial class ListadoAfiliados : Form
     {
-        string consulta;
+        string consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
         public ListadoAfiliados()
         {
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
+                consulta = this.consulta;
             }
             else
             {
