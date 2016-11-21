@@ -63,7 +63,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                this.consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
+                consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id";
             }
             else
             {
@@ -79,11 +79,10 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                 parametros.SetValue(new Parametro(usua_nroDoc, esExacta), 2);
 
-                consulta = Parser.armarConsulta("Afiliados", parametros); 
-
+                consulta = Parser.armarConsulta("Afiliados", parametros);
             }
 
-            DBConnection.cargarPlanilla(planillaResultados, this.consulta);  
+            DBConnection.cargarPlanilla(planillaResultados, consulta);  
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)

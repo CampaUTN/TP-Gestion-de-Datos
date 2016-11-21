@@ -31,10 +31,12 @@ namespace ClinicaFrba
 
             try
             {
+
                 dataAdapter = new SqlDataAdapter(consulta, connection);
                 dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
+
                 dataGridView.DataSource = dataTable;
+                dataAdapter.Fill(dataTable);
             }
             catch (Exception e)
             {
