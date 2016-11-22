@@ -33,6 +33,8 @@ namespace ClinicaFrba.Registro_Llegada
 
             consulta = Parser.armarConsulta("Profesionales",parametros);
             //prof_espe.Text = "";
+
+            MessageBox.Show(consulta);
             DBConnection.cargarPlanilla(planillaProfesionales, consulta); 
 
         }
@@ -57,6 +59,7 @@ namespace ClinicaFrba.Registro_Llegada
         private void planillaResultados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             botonVerTurnos.Enabled = true;
+            this.AcceptButton = botonVerTurnos;
         }
 
 
@@ -73,6 +76,12 @@ namespace ClinicaFrba.Registro_Llegada
             //MessageBox.Show("Registrando llegada");
             RegistroBono seleccionarBono = new RegistroBono(id, turno);
             seleccionarBono.Show();
+        }
+
+
+        private void espe_nombre_Click(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = botonListarProfesionales;
         }
     }
 }

@@ -19,8 +19,6 @@ namespace ClinicaFrba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(loginForm = new Login());
-           // Application.Run(new AbmAfiliado());
-           // Application.Run(new Alta());
         }
     }
 }

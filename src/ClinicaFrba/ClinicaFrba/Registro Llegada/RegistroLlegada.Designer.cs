@@ -48,6 +48,7 @@
             this.espe_nombre.Name = "espe_nombre";
             this.espe_nombre.Size = new System.Drawing.Size(175, 20);
             this.espe_nombre.TabIndex = 0;
+            this.espe_nombre.Click += new System.EventHandler(this.espe_nombre_Click);
             // 
             // labelFiltroEspecialidad
             // 
@@ -140,7 +141,7 @@
             // 
             // RegistroLlegada
             // 
-            this.AcceptButton = this.botonVerTurnos;
+            this.AcceptButton = this.botonListarProfesionales;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -165,7 +166,7 @@
             this.PerformLayout();
 
         }
-
+        
         #endregion
 
         private System.Windows.Forms.TextBox espe_nombre;

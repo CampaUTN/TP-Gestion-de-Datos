@@ -39,10 +39,10 @@ namespace ClinicaFrba.Utilidades
         {
             if (textbox.Name == "espe_nombre")
             {
-                //this.nombreColumna = "e." + textbox.Name;
+                this.nombreColumna = "e." + textbox.Name;
             }
             else{
-            this.nombreColumna = textbox.Name;
+                this.nombreColumna = textbox.Name;
             }
             this.valorAComparar = textbox.Text;
             this.exacto = esExacta;
