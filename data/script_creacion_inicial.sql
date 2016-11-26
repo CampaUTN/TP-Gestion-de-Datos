@@ -828,11 +828,13 @@ BEGIN
 			(select *
 			from inserted I
 			where I.hora_profesional = @prof_id
+				and I.hora_fecha >= GETDATE()
 			)
 			UNION
 			(select *
 			from GEDDES.Horarios E
 			where E.hora_profesional = @prof_id
+				and E.hora_fecha >= GETDATE()
 			)
 		) AS tabla
 		group by datepart(WEEK,tabla.hora_fecha)
@@ -840,7 +842,7 @@ BEGIN
 	) >= 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
-		BEGIN
+		BEGIN -- TODO en base a los comentarios tengo dudas. Es legal esto? en cualquier caso, todo: aclarar la decision tomada en la estrategia.
 		IF(select isnull(count(*),0)
 		from GEDDES.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio)
 		where H.hora_profesional = @prof_id) > 0

@@ -220,11 +220,12 @@ namespace ClinicaFrba.Utilidades
 
         static public DataTable getHorariosDelProfesional(string profesional)
         {
-            DateTime fecha = DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime hora = DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString(), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+            TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
 
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where hora_fecha>@fechaActual and hora_inicio>@horaActual and hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual))  and hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.Parameters.AddWithValue("@fechaActual", fecha);
             comando.Parameters.AddWithValue("@horaActual", hora);
@@ -565,8 +566,15 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getTurnos(long usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)", conexion);
+
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+            TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
+
+            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario) and  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual)) " , conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.Parameters.AddWithValue("@fechaActual", fecha);
+            comando.Parameters.AddWithValue("@horaActual", hora);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
@@ -579,8 +587,13 @@ namespace ClinicaFrba.Utilidades
         static public DataTable getAgenda(long usuario) {
             var conexion = DBConnection.getConnection();
 
-            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from GEDDES.Horarios where hora_profesional = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario) order by hora_fecha, hora_inicio", conexion);
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+            TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length+1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
+            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from GEDDES.Horarios where hora_profesional = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario) and  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual))  order by hora_fecha, hora_inicio", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
+            comando.Parameters.AddWithValue("@fechaActual", fecha);
+            comando.Parameters.AddWithValue("@horaActual", hora);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
