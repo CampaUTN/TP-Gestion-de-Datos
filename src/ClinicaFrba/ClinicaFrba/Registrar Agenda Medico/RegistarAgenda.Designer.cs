@@ -58,12 +58,12 @@
             this.desde.Location = new System.Drawing.Point(129, 252);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.desde.MinDate = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
             this.desde.TabIndex = 14;
-            this.desde.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.desde.Value = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.desde.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
             // botonCancelar
@@ -178,12 +178,12 @@
             this.hasta.Location = new System.Drawing.Point(129, 282);
             this.hasta.Margin = new System.Windows.Forms.Padding(5);
             this.hasta.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.hasta.MinDate = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.hasta.MinDate = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.hasta.Name = "hasta";
             this.hasta.RightToLeftLayout = true;
             this.hasta.Size = new System.Drawing.Size(95, 20);
             this.hasta.TabIndex = 35;
-            this.hasta.Value = new System.DateTime(2017, 5, 20, 0, 0, 0, 0);
+            this.hasta.Value = new System.DateTime(2016, 11, 26, 0, 0, 0, 0);
             this.hasta.ValueChanged += new System.EventHandler(this.hasta_ValueChanged);
             // 
             // label5

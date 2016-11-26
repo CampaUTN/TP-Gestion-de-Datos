@@ -120,12 +120,12 @@
             this.desde.Location = new System.Drawing.Point(214, 247);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
+            this.desde.MinDate = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
             this.desde.TabIndex = 54;
-            this.desde.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.desde.Value = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.desde.ValueChanged += new System.EventHandler(this.desde_ValueChanged);
             // 
             // from
@@ -138,12 +138,12 @@
             this.from.Location = new System.Drawing.Point(310, 274);
             this.from.Margin = new System.Windows.Forms.Padding(5);
             this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.from.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
+            this.from.MinDate = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.from.Name = "from";
             this.from.RightToLeftLayout = true;
             this.from.Size = new System.Drawing.Size(95, 20);
             this.from.TabIndex = 55;
-            this.from.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.from.Value = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.from.ValueChanged += new System.EventHandler(this.from_ValueChanged);
             // 
             // label3
@@ -167,12 +167,12 @@
             this.to.Location = new System.Drawing.Point(485, 274);
             this.to.Margin = new System.Windows.Forms.Padding(5);
             this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.to.MinDate = new System.DateTime(2010, 10, 26, 0, 0, 0, 0);
+            this.to.MinDate = new System.DateTime(2016, 11, 7, 0, 0, 0, 0);
             this.to.Name = "to";
             this.to.RightToLeftLayout = true;
             this.to.Size = new System.Drawing.Size(95, 20);
             this.to.TabIndex = 57;
-            this.to.Value = new System.DateTime(2016, 10, 26, 0, 0, 0, 0);
+            this.to.Value = new System.DateTime(2016, 11, 13, 0, 0, 0, 0);
             this.to.ValueChanged += new System.EventHandler(this.to_ValueChanged);
             // 
             // label4
