@@ -828,13 +828,13 @@ BEGIN
 			(select * -- lo nuevo
 			from inserted I
 			where I.hora_profesional = @prof_id
-				and I.hora_fecha >= GETDATE()
+				and CAST(I.hora_fecha AS DATE) >= CAST(GETDATE() AS DATE)
 			)
 			UNION
 			(select * -- lo que ya estaba cargado
 			from GEDDES.Horarios E
 			where E.hora_profesional = @prof_id
-				and E.hora_fecha >= GETDATE()
+				and CAST(E.hora_fecha AS DATE) >= CAST(GETDATE() AS DATE)
 			)
 		) AS tabla
 		group by datepart(WEEK,tabla.hora_fecha)
