@@ -825,13 +825,13 @@ BEGIN
 
 	IF (SELECT top 1 count(*)/2
 		FROM (
-			(select *
+			(select * -- lo nuevo
 			from inserted I
 			where I.hora_profesional = @prof_id
 				and I.hora_fecha >= GETDATE()
 			)
 			UNION
-			(select *
+			(select * -- lo que ya estaba cargado
 			from GEDDES.Horarios E
 			where E.hora_profesional = @prof_id
 				and E.hora_fecha >= GETDATE()
@@ -845,7 +845,7 @@ BEGIN
 		BEGIN -- TODO en base a los comentarios tengo dudas. Es legal esto? en cualquier caso, todo: aclarar la decision tomada en la estrategia.
 		IF(select isnull(count(*),0)
 		from GEDDES.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio)
-		where H.hora_profesional = @prof_id) > 0
+		where H.hora_profesional = @prof_id) > 0 -- TODO: esta bien este chequeo? en la BD hay cosas raras, aunque tambien hay profs con mas de 48 hrs y no hay drama con eso.
 			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,1)
 		ELSE
 			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
