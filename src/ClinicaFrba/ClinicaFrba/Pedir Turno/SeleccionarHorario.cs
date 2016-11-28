@@ -45,6 +45,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.grillaHorarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaHorarios.Location = new System.Drawing.Point(35, 68);
             this.grillaHorarios.Name = "grillaHorarios";
+            this.grillaHorarios.ReadOnly = true;
             this.grillaHorarios.Size = new System.Drawing.Size(487, 180);
             this.grillaHorarios.TabIndex = 0;
             this.grillaHorarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaHorarios_CellContentClick);
