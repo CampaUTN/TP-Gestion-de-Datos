@@ -13,7 +13,13 @@ namespace ClinicaFrba.Registro_Llegada
 {
     public partial class RegistroBono : Form
     {
-        string consulta = "SELECT* FROM GEDDES.Bonos WHERE bono_afilUsado IS NULL AND bono_afilCompra =";
+        string consulta = "SELECT* FROM GEDDES.Bonos WHERE bono_afilUsado IS NULL AND bono_afilCompra IN ";
+
+        string select = "SELECT afil_id ";
+        string from = "FROM GEDDES.Afiliados ";
+        string where = "WHERE ((afil_id - CONVERT(INT,RIGHT (STR(afil_id),2)) )/ 100 ) IN ";
+
+        string subselect = "SELECT TOP 1 (a1.afil_id - CONVERT(INT,RIGHT (STR(a1.afil_id),2)) )/ 100 FROM GEDDES.Afiliados a1 WHERE a1.afil_id = ";
 
         int nroAfiliado;
         int nroTurno;
@@ -26,9 +32,8 @@ namespace ClinicaFrba.Registro_Llegada
 
             int.TryParse(id, out nroAfiliado);
 
-            consulta = consulta + id;
-            DBConnection.cargarPlanilla(listaBonos,
-                  "SELECT* FROM GEDDES.Bonos WHERE bono_afilUsado IS NULL");
+            DBConnection.cargarPlanilla(listaBonos, consulta + "(" + select + from + where + "(" + subselect + id + ")" + ")" );
+                
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,8 +49,7 @@ namespace ClinicaFrba.Registro_Llegada
 
             Utils.registrarConsulta(nroTurno, nroBono, nroAfiliado);
             MessageBox.Show("Llegada a la consulta efectuada");
-
-
+            this.Close();
         }
 
         private void listaBonos_CellClick(object sender, DataGridViewCellEventArgs e)
