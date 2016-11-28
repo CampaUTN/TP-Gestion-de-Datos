@@ -855,14 +855,7 @@ BEGIN
 	) >= 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
-		BEGIN -- TODO en base a los comentarios tengo dudas. Es legal esto? en cualquier caso, todo: aclarar la decision tomada en la estrategia.
-		IF(select isnull(count(*),0)
-		from GEDDES.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio)
-		where H.hora_profesional = @prof_id) > 0 -- TODO: esta bien este chequeo? en la BD hay cosas raras, aunque tambien hay profs con mas de 48 hrs y no hay drama con eso.
-			RAISERROR('Se quiere uno o mas horarios incopatibles con los existentes (mismo profesional, dia y hora).',16,1)
-		ELSE
-			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
-		END
+		INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
 END
 GO
 
