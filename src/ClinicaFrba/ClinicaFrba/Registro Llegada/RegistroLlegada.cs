@@ -32,9 +32,8 @@ namespace ClinicaFrba.Registro_Llegada
             parametros.SetValue(new Parametro(espe_nombre, false), 0);
 
             consulta = Parser.armarConsulta("Profesionales",parametros);
-            //prof_espe.Text = "";
-
-            MessageBox.Show(consulta);
+            
+            //MessageBox.Show(consulta);
             DBConnection.cargarPlanilla(planillaProfesionales, consulta); 
 
         }
@@ -49,7 +48,7 @@ namespace ClinicaFrba.Registro_Llegada
             string subselect = "SELECT turn_id FROM GEDDES.Turnos, GEDDES.Profesionales, GEDDES.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
             subselect = subselect + id;
 
-            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND hora_fecha = CONVERT(DATE,SYSDATETIME()) AND turn_activo = 1 AND turn_id IN(" + subselect + ")";
+            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id IN(" + subselect + ")";
 
              DBConnection.cargarPlanilla(listadoTurnos, select + from + where); 
         }
