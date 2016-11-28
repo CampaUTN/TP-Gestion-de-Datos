@@ -60,6 +60,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.botonSalir = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,7 +111,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(251, 326);
+            this.button2.Location = new System.Drawing.Point(251, 352);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 51;
@@ -179,7 +180,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.to.CustomFormat = "";
             this.to.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.to.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.to.Location = new System.Drawing.Point(406, 250);
+            this.to.Location = new System.Drawing.Point(417, 250);
             this.to.Margin = new System.Windows.Forms.Padding(5);
             this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.to.Name = "to";
@@ -281,7 +282,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(713, 350);
+            this.botonSalir.Location = new System.Drawing.Point(713, 376);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
             this.botonSalir.TabIndex = 66;
@@ -310,11 +311,21 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 318);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(0, 13);
+            this.label9.TabIndex = 69;
+            this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
+            // 
             // CancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 385);
+            this.ClientSize = new System.Drawing.Size(800, 411);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.botonSalir);
@@ -368,5 +379,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         private Button botonSalir;
         private Label label8;
         private Button button1;
+        private Label label9;
     }
 }
