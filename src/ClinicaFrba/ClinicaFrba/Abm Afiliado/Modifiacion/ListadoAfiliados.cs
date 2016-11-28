@@ -87,7 +87,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void botonCancelar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("¿Está seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.Close();
             }
@@ -117,7 +117,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void botonDesactivar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea dar de baja logica a este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Desea desactivar a este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //lleno los datos del afiliado
                 Afiliado afil = this.completarDatosDeAfiliado();
@@ -133,7 +133,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         {
          
 
-            if (MessageBox.Show("Esta seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Está seguro que desea eliminar este afiliado?", "Desactivar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
            
 
@@ -229,8 +229,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             
             return afiliado;
         }
-
-
         #endregion       
     }
 }

@@ -31,13 +31,13 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         //deberia ser privado, pero me tira error de compilacion
         public override void realizarOperacion(){
 
-            if (MessageBox.Show("Se modificaran los siguientes campos:\n" + this.camposModificados + "Desea continuar?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Se modificarán los siguientes campos:\n" + this.camposModificados + "Desea continuar?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.cargarUsuario();
 
                 Utils.actualizarAfiliado(this.afiliado);
 
-                MessageBox.Show("Modificacion Realizada con exito!");
+                MessageBox.Show("Modificación Realizada con éxito!");
                    this.Close();
                 
             }
@@ -138,7 +138,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             if (textBoxDireccion.Text.Length > 0)
             {
-                camposModificados = camposModificados + "- Direccion\n";
+                camposModificados = camposModificados + "- Dirección\n";
             }
 
             if (textBoxTelefono.Text.Length > 0)
@@ -164,7 +164,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         public override void validarDatosIngresados(){
             if (!Parser.esEntero(textBoxTelefono) && textBoxTelefono.Text.Length >0 )
             {
-                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");
+                this.logErrores.agregarAlLog("El numero de telefono debe ser numérico");
 
                 textBoxTelefono.Clear();
                 this.cajasTexto.Remove(textBoxTelefono);

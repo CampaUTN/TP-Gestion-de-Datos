@@ -79,7 +79,7 @@ namespace ClinicaFrba.Abm_Afiliado
         }
 
         private void botonCancelar_Click(object sender, EventArgs e){
-            if (MessageBox.Show("¿Esta seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes){
+            if (MessageBox.Show("¿Está seguro que desea cancelar?", "Cancelar", MessageBoxButtons.YesNo) == DialogResult.Yes){
                 this.Close();
             }
         }
@@ -154,7 +154,7 @@ namespace ClinicaFrba.Abm_Afiliado
                                     this.selecPlan.Text);
 
             setearCantidadHijos();
-            MessageBox.Show("Registrese como usuario antes de continuar");
+            MessageBox.Show("Regístrese como usuario antes de continuar");
 
         }
         
@@ -175,36 +175,33 @@ namespace ClinicaFrba.Abm_Afiliado
         public virtual void validarDatosIngresados() {
 
             if (!Parser.esEntero(textBoxNroDoc)){
-                this.logErrores.agregarAlLog("El numero de documento debe ser numerico");
+                this.logErrores.agregarAlLog("El número de documento debe ser numérico");
                 textBoxNroDoc.Clear();
             }
 
             if (textBoxCantHijos.Enabled && !Parser.esEntero(textBoxCantHijos)){
-                this.logErrores.agregarAlLog("La cantidad de familiares a cargo debe ser un numero entero");
+                this.logErrores.agregarAlLog("La cantidad de familiares a cargo debe ser un número entero");
                 textBoxCantHijos.Clear(); 
             }
 
             if (Parser.tieneNumeros(textBoxNombre)){
-                this.logErrores.agregarAlLog("El nombre de afiliado no debe contener numeros enteros");
+                this.logErrores.agregarAlLog("El nombre de afiliado no debe contener números enteros");
                 textBoxNombre.Clear();
             }
 
             if (Parser.tieneNumeros(textBoxApellido)){
-                this.logErrores.agregarAlLog("El apellido del afiliado no debe contener numeros enteros");   
+                this.logErrores.agregarAlLog("El apellido del afiliado no debe contener números enteros");   
                 textBoxApellido.Clear();
             }
 
             if (!Parser.esEntero(textBoxTelefono))
             {
-                this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");
+                this.logErrores.agregarAlLog("El nùmero de telefono debe ser númerico");
 
                 textBoxTelefono.Clear();
-            }
-
-            
+            }            
         }
-
-        
+                
        private void setearCantidadHijos(){
             if (checkBoxHijos.Checked){
                 this.afiliado.setHijosACargo(int.Parse(textBoxCantHijos.Text));
@@ -222,7 +219,5 @@ namespace ClinicaFrba.Abm_Afiliado
         }
 
     }
-
     #endregion
-
 }
