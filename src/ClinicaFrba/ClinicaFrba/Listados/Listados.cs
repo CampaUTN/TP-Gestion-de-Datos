@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ClinicaFrba.Listados
 {
@@ -23,8 +24,8 @@ namespace ClinicaFrba.Listados
             dateTimePickerAnio.Format = DateTimePickerFormat.Custom;
             dateTimePickerAnio.CustomFormat = "yyyy";
             dateTimePickerAnio.ShowUpDown = true;
-            dateTimePickerAnio.Value = new DateTime(2015, 12, 1);
-            dateTimePickerAnio.MaxDate = DateTime.Today;
+            dateTimePickerAnio.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            dateTimePickerAnio.MaxDate = dateTimePickerAnio.Value;
 
             dateTimePickerMesDesde.Format = DateTimePickerFormat.Custom;
             dateTimePickerMesDesde.CustomFormat = "MMMM";
@@ -34,8 +35,11 @@ namespace ClinicaFrba.Listados
             dateTimePickerMesHasta.CustomFormat = "MMMM";
             dateTimePickerMesHasta.ShowUpDown = true;
 
-            comboBoxSemestre.SelectedIndex = 1;
-
+            
+            if (dateTimePickerAnio.Value.Month<=6)
+                comboBoxSemestre.SelectedIndex = 0;
+            else
+                comboBoxSemestre.SelectedIndex = 1;
             /* LISTADO 1*/
             comboBoxListado1Filtro.SelectedIndex = 0;
 
