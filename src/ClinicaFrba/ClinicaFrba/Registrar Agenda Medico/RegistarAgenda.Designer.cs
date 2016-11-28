@@ -195,7 +195,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.hasta.RightToLeftLayout = true;
             this.hasta.Size = new System.Drawing.Size(95, 20);
             this.hasta.TabIndex = 35;
-            this.hasta.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(15);
+            this.hasta.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.hasta.ValueChanged += new System.EventHandler(this.hasta_ValueChanged);
             // 
             // label5
