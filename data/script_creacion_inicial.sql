@@ -112,9 +112,12 @@ IF OBJECT_ID('GEDDES.cancelar_dia_agenda') IS NOT NULL
 IF OBJECT_ID('GEDDES.cancelar_turno_afiliado') IS NOT NULL
     DROP PROCEDURE GEDDES.cancelar_turno_afiliado 
 
-/* DROP TRIGGERS */
+/* DROP FUNCTION */
 IF (OBJECT_ID ('GEDDES.verificarUsuario') IS NOT NULL)
   DROP FUNCTION GEDDES.verificarUsuario
+
+ IF (OBJECT_ID ('GEDDES.fecha') IS NOT NULL)
+ DROP FUNCTION  GEDDES.fecha
 
  IF (OBJECT_ID ('GEDDES.LimiteHoras') IS NOT NULL)
   DROP FUNCTION GEDDES.verificarUsuario
@@ -122,6 +125,8 @@ IF (OBJECT_ID ('GEDDES.verificarUsuario') IS NOT NULL)
 IF (OBJECT_ID ('GEDDES.tieneFamilia') IS NOT NULL)
   DROP FUNCTION GEDDES.tieneFamilia
 
+
+/* DROP TRIGGER */
 IF OBJECT_ID('GEDDES.triggerElimTurnos') IS NOT NULL
 	DROP TRIGGER GEDDES.triggerElimTurnos
 
@@ -400,7 +405,7 @@ insert into GEDDES.TipoCancelacion values ('Cancelacion Medico')
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
 SELECT m.Turno_Numero, 'Migracion', 1
 FROM gd_esquema.Maestra m
-WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE() -- TODO: Cambiar a la fecha del sistema
+WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE()
 
   -- Para que el admin tenga todos los roles y poder testear
 insert into GEDDES.RolXusuario values (0,1)
@@ -792,10 +797,17 @@ END
 GO
 
 
-
-
-
-
+USE GD2C2016;
+GO
+CREATE FUNCTION GEDDES.fecha()
+RETURNS CHAR(23)
+AS
+BEGIN
+	return (select CONVERT(DATETIME, CONTEXT_INFO)
+		from sys.dm_exec_sessions
+		where session_id=@@SPID)
+END
+GO
 
 
 /* CREO TRIGGERS */
@@ -829,13 +841,13 @@ BEGIN
 			(select * -- lo nuevo
 			from inserted I
 			where I.hora_profesional = @prof_id
-				and CAST(I.hora_fecha AS DATE) >= CAST(GETDATE() AS DATE)
+				and CAST(I.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
 			)
 			UNION
 			(select * -- lo que ya estaba cargado
 			from GEDDES.Horarios E
 			where E.hora_profesional = @prof_id
-				and CAST(E.hora_fecha AS DATE) >= CAST(GETDATE() AS DATE)
+				and CAST(E.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
 			)
 		) AS tabla
 		group by datepart(WEEK,tabla.hora_fecha)

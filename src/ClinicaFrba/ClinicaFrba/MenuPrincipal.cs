@@ -25,6 +25,7 @@ namespace ClinicaFrba
             this.rolActivo = rolActivo;
             this.inicializarDiccFuncionalidades();
             this.getFuncionalidadesAsignadas(rolActivo); //Me traigo las funcionalidades del user conectado
+
         }
 
         private void getFuncionalidadesAsignadas(int rolActivo)

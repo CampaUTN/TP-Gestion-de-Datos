@@ -89,26 +89,6 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public int superaLimiteSemanal(int profesional) {
-            var conexion = DBConnection.getConnection();
-
-            SqlCommand comando = new SqlCommand("select top 1 count(*)/2 from GEDDES.horarios where hora_profesional = @profesional group by hora_profesional, datepart(WEEK,hora_fecha) order by count(*)/2 DESC", conexion);
-            // divido por dos porque tiene 2 horarios por hora, porque cada uno dura media hora.
-            // la cosa de la fecha del final agrupa las cosas si tienen igual profesional e igual semana.
-
-            comando.Parameters.AddWithValue("@profesional", profesional);
-
-            conexion.Open();
-
-            SqlDataReader reader = comando.ExecuteReader();
-
-            if (reader.Read()) {
-                return Convert.ToInt32(reader[0]);
-            }
-            return -1;
-        }
-
-
         static public int buscarPlanDeAfiliado(int afiliado)
         {
             var conexion = DBConnection.getConnection();
@@ -373,9 +353,6 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
-
-
-
         static public int obtenerNumeroAfiliadoRecienRegistrado()
         {
             int afil_id = 0;
@@ -520,14 +497,20 @@ namespace ClinicaFrba.Utilidades
 
         static public void bajaDia(long usuario_id, DateTime fecha) {
             var conexion = DBConnection.getConnection();
+            conexion.Open();
+            //seteo fecha
+            String textoFechaAux = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime auxFecha = DateTime.ParseExact(textoFechaAux.Substring(0, "yyyy-MM-dd HH:mm:ss,fff".Length), "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
 
+            SqlCommand comandoAux = new SqlCommand("declare @ctx varbinary(128); select @ctx = CONVERT(varbinary(128), @fecha); SET CONTEXT_INFO @ctx;", conexion);
+            comandoAux.Parameters.AddWithValue("@fecha", auxFecha);
+            comandoAux.ExecuteNonQuery();
+            //fin seteo
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_dia_agenda", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
             comando.Parameters.AddWithValue("@usuario_id", usuario_id);
             comando.Parameters.AddWithValue("@fecha", fecha);
-
-            conexion.Open();
 
             comando.ExecuteReader();
         }

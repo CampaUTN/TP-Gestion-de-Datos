@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ClinicaFrba.Abm_Afiliado;
+using System.Configuration;
 
 namespace ClinicaFrba.Registrar_Agenda_Medico
 {
@@ -60,7 +65,14 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                 fecha = fecha.AddDays(7);
             }
 
+            //seteo fecha
+            String textoFechaAux = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime auxFecha = DateTime.ParseExact(textoFechaAux.Substring(0, "yyyy-MM-dd HH:mm:ss,fff".Length), "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
 
+            SqlCommand comandoAux = new SqlCommand("declare @ctx varbinary(128); select @ctx = CONVERT(varbinary(128), @fecha); SET CONTEXT_INFO @ctx;", conexion);
+            comandoAux.Parameters.AddWithValue("@fecha", auxFecha);
+            comandoAux.ExecuteNonQuery();
+            //fin seteo
             foreach (Horario h in horarios) {
                 string insertHorarios = "INSERT INTO GEDDES.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
                 SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
