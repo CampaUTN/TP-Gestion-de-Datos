@@ -749,22 +749,24 @@ GO
 CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id BIGINT, @fecha Date,  @tipo INT, @motivo VARCHAR(225))
 AS
  BEGIN
+	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON
 	DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario_id)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
 
 	DECLARE @TURNO INT
-	FETCH ct NEXT INTO @turno
 	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha)
 	OPEN ct
+	FETCH NEXT from ct INTO @turno
 		while(@@FETCH_STATUS = 0)
 		BEGIN
 			INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
-			FETCH ct NEXT INTO @turno
+			FETCH NEXT from ct INTO @turno
 		END
 	CLOSE ct
 	DEALLOCATE ct
+	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos OFF
  END
 GO
 
@@ -775,11 +777,13 @@ GO
 CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario BIGINT, @turno INT, @tipo INT, @motivo VARCHAR(225))
 AS
  BEGIN
+    SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON 
 	DECLARE @afiliado INT = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_id = @turno and turn_afiliado = @afiliado
 	INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
+	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos OFF
  END
 GO
 

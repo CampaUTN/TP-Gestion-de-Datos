@@ -185,5 +185,9 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private void dia_SelectedIndexChanged(object sender, EventArgs e) {
             numeroDia = dia.SelectedIndex+1;
         }
+
+        private void botonSalir_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

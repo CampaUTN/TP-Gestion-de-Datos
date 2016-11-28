@@ -55,8 +55,8 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.botonAtras = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.botonSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,12 +70,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.desde.Location = new System.Drawing.Point(129, 252);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
             this.desde.TabIndex = 14;
-            this.desde.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.desde.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
             // botonCancelar
@@ -190,12 +188,10 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.hasta.Location = new System.Drawing.Point(129, 282);
             this.hasta.Margin = new System.Windows.Forms.Padding(5);
             this.hasta.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.hasta.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.hasta.Name = "hasta";
             this.hasta.RightToLeftLayout = true;
             this.hasta.Size = new System.Drawing.Size(95, 20);
             this.hasta.TabIndex = 35;
-            this.hasta.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.hasta.ValueChanged += new System.EventHandler(this.hasta_ValueChanged);
             // 
             // label5
@@ -259,16 +255,6 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.label3.TabIndex = 44;
             this.label3.Text = "Dia";
             // 
-            // botonAtras
-            // 
-            this.botonAtras.Location = new System.Drawing.Point(12, 386);
-            this.botonAtras.Name = "botonAtras";
-            this.botonAtras.Size = new System.Drawing.Size(70, 23);
-            this.botonAtras.TabIndex = 45;
-            this.botonAtras.Text = "<- Atrás";
-            this.botonAtras.UseVisualStyleBackColor = true;
-            this.botonAtras.Click += new System.EventHandler(this.botonAtras_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -280,13 +266,23 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             this.label4.Text = "Valido hasta:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // botonSalir
+            // 
+            this.botonSalir.Location = new System.Drawing.Point(598, 386);
+            this.botonSalir.Name = "botonSalir";
+            this.botonSalir.Size = new System.Drawing.Size(75, 23);
+            this.botonSalir.TabIndex = 47;
+            this.botonSalir.Text = "Salir";
+            this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
+            // 
             // RegistarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 421);
+            this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.botonAtras);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
@@ -328,7 +324,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button botonAtras;
         private System.Windows.Forms.Label label4;
+        private Button botonSalir;
     }
 }

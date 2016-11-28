@@ -57,6 +57,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.selecPlan = new System.Windows.Forms.ComboBox();
+            this.botonSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -275,11 +276,22 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.selecPlan.Text = "Seleccione tipo";
             this.selecPlan.SelectedIndexChanged += new System.EventHandler(this.selecPlan_SelectedIndexChanged);
             // 
+            // botonSalir
+            // 
+            this.botonSalir.Location = new System.Drawing.Point(713, 379);
+            this.botonSalir.Name = "botonSalir";
+            this.botonSalir.Size = new System.Drawing.Size(75, 23);
+            this.botonSalir.TabIndex = 66;
+            this.botonSalir.Text = "Salir";
+            this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
+            // 
             // CancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 414);
+            this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.selecPlan);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -327,5 +339,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         private Label label6;
         private Label label7;
         protected ComboBox selecPlan;
+        private Button botonSalir;
     }
 }
