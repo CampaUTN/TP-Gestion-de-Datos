@@ -56,12 +56,11 @@ namespace ClinicaFrba.Utilidades
         {
             var conexion = DBConnection.getConnection();
 
-            int userId;
-            Int32.TryParse(usuario, out userId);
+            long user = getIdDesdeUserName(usuario);
 
             SqlCommand comando = new SqlCommand("select afil_id From GEDDES.Afiliados Where afil_usuario = @user", conexion);
 
-            comando.Parameters.AddWithValue("@user", userId);
+            comando.Parameters.AddWithValue("@user", user);
 
             conexion.Open();
 
