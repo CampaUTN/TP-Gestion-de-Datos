@@ -90,7 +90,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             if (textBoxDireccion.Text.Length > 0)
             {
                 afiliado.setDireccion(textBoxDireccion.Text);
-                MessageBox.Show(afiliado.getDireccion());
             }
 
 
@@ -119,26 +118,19 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                     MotivoCambioPlan formulario = new MotivoCambioPlan(afiliado.getCodigoAfiliado());
                     formulario.ShowDialog();
 
-                    MessageBox.Show(Convert.ToString(afiliado.getCodigoAfiliado()));
                     afiliado.setPlan(plan.Value.ToString());
-                    
-
                 }
-
             }
-
         }
 
-        private void vaciar()
-        {
+        private void vaciar(){
             textBoxDireccion.Clear();
             textBoxTelefono.Clear();
             textBoxCantHijos.Clear();
                         
         }
 
-        public override bool faltaCompletarDatos()
-        {
+        public override bool faltaCompletarDatos(){
             bool cajasVacias = cajasTexto.FindAll(cajita => cajita.Text.Length.Equals(0)).Count().Equals(cajasTexto.Count());
 
             bool noSeEligioUnPlan = selecPlan.SelectedItem == null;
@@ -169,8 +161,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             return noSeEligioUnPlan && noSeEligioEstadoCivil && cajasVacias;
         }
 
-        public override void validarDatosIngresados() 
-        {
+        public override void validarDatosIngresados(){
             if (!Parser.esEntero(textBoxTelefono) && textBoxTelefono.Text.Length >0 )
             {
                 this.logErrores.agregarAlLog("El numero de telefono debe ser numerico");

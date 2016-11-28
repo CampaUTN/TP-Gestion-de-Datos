@@ -224,7 +224,7 @@ namespace ClinicaFrba.Utilidades
             TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
 
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual))  and hora_profesional = @profesional and hora_id NOT IN (select turn_hora from GEDDES.Turnos)", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual))  and hora_profesional = @profesional and (hora_id NOT IN (select turn_hora from GEDDES.Turnos) or 1<>(select TOP 1 turn_activo from GEDDES.Turnos where turn_hora=hora_id order by turn_activo DESC))", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.Parameters.AddWithValue("@fechaActual", fecha);
             comando.Parameters.AddWithValue("@horaActual", hora);
