@@ -236,6 +236,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(686, 20);
             this.textBox1.TabIndex = 62;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label6
             // 
@@ -272,6 +273,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.selecPlan.Size = new System.Drawing.Size(124, 21);
             this.selecPlan.TabIndex = 65;
             this.selecPlan.Text = "Seleccione tipo";
+            this.selecPlan.SelectedIndexChanged += new System.EventHandler(this.selecPlan_SelectedIndexChanged);
             // 
             // CancelarAtencion
             // 

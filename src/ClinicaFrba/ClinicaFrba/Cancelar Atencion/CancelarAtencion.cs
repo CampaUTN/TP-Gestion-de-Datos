@@ -41,10 +41,14 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // Boton de borrar. Se encarga de hacer validaciones y llamar a los metodos para concretar las bajas.
         private void button2_Click(object sender, EventArgs e) {
+            if (selecPlan.SelectedIndex<0) {
+                MessageBox.Show("Seleccione un tipo.");
+                return;
+            }
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                    Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value));
+                    Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
                     MessageBox.Show("Turno cancelado correctamente.");
                 }else {
                     MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
@@ -52,12 +56,12 @@ namespace ClinicaFrba.Cancelar_Atencion
             } else {
                 long profesional = usuario;
                 if(diaUnico) {
-                    Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
+                    Utilidades.Utils.bajaDia(usuario, desde.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
                     MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
                     DateTime aux = from.Value;
                     while(from.Value.Date <= to.Value.Date){
-                        Utilidades.Utils.bajaDia(profesional, from.Value.Date);
+                        Utilidades.Utils.bajaDia(profesional, from.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
                         from.Value = from.Value.AddDays(1);
                     }
                     from.Value = aux;
@@ -127,6 +131,14 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void label7_Click(object sender, EventArgs e) {
+
+        }
+
+        private void selecPlan_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e) {
 
         }
     }

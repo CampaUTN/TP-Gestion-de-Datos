@@ -495,7 +495,7 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public void bajaDia(long usuario_id, DateTime fecha) {
+        static public void bajaDia(long usuario_id, DateTime fecha, int tipo, string motivo) {
             var conexion = DBConnection.getConnection();
             conexion.Open();
             //seteo fecha
@@ -511,6 +511,8 @@ namespace ClinicaFrba.Utilidades
 
             comando.Parameters.AddWithValue("@usuario_id", usuario_id);
             comando.Parameters.AddWithValue("@fecha", fecha);
+            comando.Parameters.AddWithValue("@tipo", tipo);
+            comando.Parameters.AddWithValue("@motivo", motivo);
 
             comando.ExecuteReader();
         }
