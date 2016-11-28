@@ -5,16 +5,18 @@ namespace ClinicaFrba.Cancelar_Atencion
 {
     public partial class CancelarAtencion : Form
     {
-        private long usuario;
+        private long usuarioId;
         private int rol;
         private bool diaUnico = true;
+        private String username;
 
         //constructor
         public CancelarAtencion(string usuario, int rol)
         {
             InitializeComponent();
             this.rol = rol;
-            this.usuario = Convert.ToInt64(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
+            this.username = usuario;
+            this.usuarioId = Convert.ToInt64(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
             if (esAfiliado()) {
                 desde.Hide();
                 from.Hide();
@@ -26,11 +28,12 @@ namespace ClinicaFrba.Cancelar_Atencion
                 label4.Hide();
                 label5.Hide();
                 label8.Hide();
+                button1.Hide();
             }
             if(!esAfiliado()){
-                grillaProfesionales.Hide();
                 botonListar.Hide();
                 label2.Hide();
+                botonListar.Hide();
             }
             from.Enabled = false;
             to.Enabled = false;
@@ -58,16 +61,16 @@ namespace ClinicaFrba.Cancelar_Atencion
                         MessageBox.Show("No se puede cancelar turnos del dia de hoy.");
                         return;
                     }else{
-                        Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
+                        Utilidades.Utils.bajaTurnoAfiliado(usuarioId, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
                         MessageBox.Show("Turno cancelado correctamente.");
                     }
                 }else {
                     MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
                 }
             } else {
-                long profesional = usuario;
+                long profesional = usuarioId;
                 if(diaUnico) {
-                    Utilidades.Utils.bajaDia(usuario, desde.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
+                    Utilidades.Utils.bajaDia(usuarioId, desde.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
                     MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
                     DateTime aux = from.Value;
@@ -89,9 +92,14 @@ namespace ClinicaFrba.Cancelar_Atencion
         // actualiza la grilla
         private void listar() {
             if (esAfiliado()) {
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuarioId);
             } else {
-                //this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesPosta(esAdministrativo()?"":username);
+                if (grillaProfesionales.Rows.Count > 0) {
+                    grillaProfesionales.MultiSelect = false; //esto hace que no quede nada seleccionado.
+                    grillaProfesionales.MultiSelect = true;
+                    grillaProfesionales.Rows[0].Selected = true;
+                }
             }
         }
 
@@ -163,6 +171,10 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void label8_Click(object sender, EventArgs e) {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.listar();
         }
     }
 }

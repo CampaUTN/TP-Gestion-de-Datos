@@ -168,6 +168,23 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
+        static public DataTable getProfesionalesPosta(String usuario) {
+            var conexion = DBConnection.getConnection();
+            SqlCommand comando;
+            if(usuario!=""){
+                comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre from GEDDES.Profesionales p, GEDDES.Usuarios u WHERE p.prof_usuario=u.usua_id and u.usua_username = @usuario", conexion);
+                comando.Parameters.AddWithValue("@usuario", usuario);
+            } else {
+                comando = new SqlCommand("select p.prof_id as Profesional, u.usua_apellido as Apellido, u.usua_nombre as Nombre from GEDDES.Profesionales p, GEDDES.Usuarios u WHERE p.prof_usuario=u.usua_id ", conexion);
+            }
+            comando.CommandType = CommandType.Text;
+
+            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
+            DataTable tabla = new DataTable();
+            sqlDataAdap.Fill(tabla);
+
+            return tabla;
+        }
 
         static public DataTable getEspecialidades()
 {
