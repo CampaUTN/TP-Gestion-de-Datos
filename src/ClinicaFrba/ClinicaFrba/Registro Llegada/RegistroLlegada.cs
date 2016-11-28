@@ -38,17 +38,18 @@ namespace ClinicaFrba.Registro_Llegada
 
         }
 
+        //me retorna los turnos que aun no tienen asignada una consulta medica
         private void botonVerTurnos_Click(object sender, EventArgs e)
         {
             string id =Convert.ToString(planillaProfesionales.SelectedCells[0].Value);
            
-            string select = "SELECT afil_id iDAfiliado, turn_id Turno, usua_nombre +' '+ usua_apellido AS Afiliado, hora_inicio Hora \n ";
+            string select ="SELECT afil_id iDAfiliado, turn_id Turno, usua_nombre +' '+ usua_apellido AS Afiliado, hora_inicio Hora \n ";
             string from = "FROM GEDDES.Turnos, GEDDES.Afiliados,GEDDES.Usuarios, GEDDES.Horarios \n";
 
             string subselect = "SELECT turn_id FROM GEDDES.Turnos, GEDDES.Profesionales, GEDDES.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
             subselect = subselect + id;
 
-            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id IN(" + subselect + ")";
+            string where = "WHERE turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id NOT IN (SELECT cons_turno FROM GEDDES.Turnos, GEDDES.Consultas WHERE turn_id = cons_id) AND turn_id IN(" + subselect + ")";
 
              DBConnection.cargarPlanilla(listadoTurnos, select + from + where); 
         }
