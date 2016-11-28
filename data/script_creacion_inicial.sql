@@ -398,8 +398,10 @@ SELECT
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL
 
-insert into GEDDES.TipoCancelacion values ('Cancelacion Afiliado')
-insert into GEDDES.TipoCancelacion values ('Cancelacion Medico')
+insert into GEDDES.TipoCancelacion values ('Viaje')
+insert into GEDDES.TipoCancelacion values ('Enfermedad')
+insert into GEDDES.TipoCancelacion values ('Asuntos familiares')
+insert into GEDDES.TipoCancelacion values ('Otra causa')
 
 	-- Cancelaciones. Funciona -- Si un usuario no gasto el bono pero la fecha del turno paso => cancelo el turno
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
@@ -743,13 +745,25 @@ GO
 USE GD2C2016;
 GO
 
-CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id BIGINT, @fecha Date)
+CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@usuario_id BIGINT, @fecha Date,  @tipo INT, @motivo VARCHAR(225))
 AS
  BEGIN
 	DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario_id)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
+
+	DECLARE @TURNO INT
+	FETCH ct NEXT INTO @turno
+	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha)
+	OPEN ct
+		while(@@FETCH_STATUS = 0)
+		BEGIN
+			INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
+			FETCH ct NEXT INTO @turno
+		END
+	CLOSE ct
+	DEALLOCATE ct
  END
 GO
 
@@ -757,13 +771,14 @@ GO
 
 USE GD2C2016;
 GO
-CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario BIGINT, @turno INT)
+CREATE PROCEDURE GEDDES.cancelar_turno_afiliado(@usuario BIGINT, @turno INT, @tipo INT, @motivo VARCHAR(225))
 AS
  BEGIN
 	DECLARE @afiliado INT = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario)
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_id = @turno and turn_afiliado = @afiliado
+	INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
  END
 GO
 

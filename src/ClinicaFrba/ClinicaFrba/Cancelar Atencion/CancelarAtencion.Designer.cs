@@ -53,6 +53,10 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.label5 = new System.Windows.Forms.Label();
             this.selecDia = new System.Windows.Forms.RadioButton();
             this.selecPeriodo = new System.Windows.Forms.RadioButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.selecPlan = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,13 +80,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.grillaProfesionales.Location = new System.Drawing.Point(12, 32);
             this.grillaProfesionales.Name = "grillaProfesionales";
             this.grillaProfesionales.ShowEditingIcon = false;
-            this.grillaProfesionales.Size = new System.Drawing.Size(588, 203);
+            this.grillaProfesionales.Size = new System.Drawing.Size(671, 203);
             this.grillaProfesionales.TabIndex = 45;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
             // botonListar
             // 
-            this.botonListar.Location = new System.Drawing.Point(614, 32);
+            this.botonListar.Location = new System.Drawing.Point(689, 32);
             this.botonListar.Name = "botonListar";
             this.botonListar.Size = new System.Drawing.Size(88, 71);
             this.botonListar.TabIndex = 44;
@@ -92,7 +96,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // botonAtras
             // 
-            this.botonAtras.Location = new System.Drawing.Point(12, 368);
+            this.botonAtras.Location = new System.Drawing.Point(12, 446);
             this.botonAtras.Name = "botonAtras";
             this.botonAtras.Size = new System.Drawing.Size(70, 23);
             this.botonAtras.TabIndex = 50;
@@ -102,7 +106,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(226, 304);
+            this.button2.Location = new System.Drawing.Point(301, 341);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 51;
@@ -128,15 +132,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.desde.CustomFormat = "";
             this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.desde.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.desde.Location = new System.Drawing.Point(214, 247);
+            this.desde.Location = new System.Drawing.Point(206, 246);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.desde.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.desde.Name = "desde";
             this.desde.RightToLeftLayout = true;
             this.desde.Size = new System.Drawing.Size(95, 20);
             this.desde.TabIndex = 54;
-            this.desde.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.desde.ValueChanged += new System.EventHandler(this.desde_ValueChanged);
             // 
             // from
@@ -146,15 +148,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.from.CustomFormat = "";
             this.from.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.from.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.from.Location = new System.Drawing.Point(310, 274);
+            this.from.Location = new System.Drawing.Point(309, 274);
             this.from.Margin = new System.Windows.Forms.Padding(5);
             this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.from.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.from.Name = "from";
             this.from.RightToLeftLayout = true;
             this.from.Size = new System.Drawing.Size(95, 20);
             this.from.TabIndex = 55;
-            this.from.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.from.ValueChanged += new System.EventHandler(this.from_ValueChanged);
             // 
             // label3
@@ -175,15 +175,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.to.CustomFormat = "";
             this.to.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.to.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.to.Location = new System.Drawing.Point(485, 274);
+            this.to.Location = new System.Drawing.Point(484, 275);
             this.to.Margin = new System.Windows.Forms.Padding(5);
             this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
-            this.to.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.to.Name = "to";
             this.to.RightToLeftLayout = true;
             this.to.Size = new System.Drawing.Size(95, 20);
             this.to.TabIndex = 57;
-            this.to.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.to.ValueChanged += new System.EventHandler(this.to_ValueChanged);
             // 
             // label4
@@ -232,11 +230,58 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.selecPeriodo.UseVisualStyleBackColor = true;
             this.selecPeriodo.CheckedChanged += new System.EventHandler(this.selecPeriodo_CheckedChanged);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(83, 303);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(686, 20);
+            this.textBox1.TabIndex = 62;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label6.Location = new System.Drawing.Point(14, 301);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 20);
+            this.label6.TabIndex = 63;
+            this.label6.Text = "Motivo:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label7.Location = new System.Drawing.Point(14, 331);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 20);
+            this.label7.TabIndex = 64;
+            this.label7.Text = "Tipo:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // selecPlan
+            // 
+            this.selecPlan.FormattingEnabled = true;
+            this.selecPlan.Items.AddRange(new object[] {
+            "Viaje",
+            "Enfermedad",
+            "Asuntos familiares",
+            "Otra causa"});
+            this.selecPlan.Location = new System.Drawing.Point(66, 333);
+            this.selecPlan.Name = "selecPlan";
+            this.selecPlan.Size = new System.Drawing.Size(124, 21);
+            this.selecPlan.TabIndex = 65;
+            this.selecPlan.Text = "Seleccione tipo";
+            // 
             // CancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 403);
+            this.ClientSize = new System.Drawing.Size(800, 414);
+            this.Controls.Add(this.selecPlan);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.selecPeriodo);
             this.Controls.Add(this.selecDia);
             this.Controls.Add(this.label5);
@@ -276,5 +321,9 @@ namespace ClinicaFrba.Cancelar_Atencion
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RadioButton selecDia;
         private System.Windows.Forms.RadioButton selecPeriodo;
+        private TextBox textBox1;
+        private Label label6;
+        private Label label7;
+        protected ComboBox selecPlan;
     }
 }

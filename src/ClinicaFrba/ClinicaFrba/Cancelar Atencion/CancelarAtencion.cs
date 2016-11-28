@@ -121,5 +121,13 @@ namespace ClinicaFrba.Cancelar_Atencion
         private void botonAtras_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void label6_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e) {
+
+        }
     }
 }

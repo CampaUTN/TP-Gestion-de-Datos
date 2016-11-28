@@ -515,7 +515,7 @@ namespace ClinicaFrba.Utilidades
             comando.ExecuteReader();
         }
 
-        static public void bajaTurnoAfiliado(long usuario, int turno_id) {
+        static public void bajaTurnoAfiliado(long usuario, int turno_id, int tipo, string motivo) {
             var conexion = DBConnection.getConnection();
 
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_turno_afiliado", conexion);
@@ -523,6 +523,8 @@ namespace ClinicaFrba.Utilidades
 
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.Parameters.AddWithValue("@turno", turno_id);
+            comando.Parameters.AddWithValue("@tipo", tipo);
+            comando.Parameters.AddWithValue("@motivo", motivo);
 
             conexion.Open();
 
