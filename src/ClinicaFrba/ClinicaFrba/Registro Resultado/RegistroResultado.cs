@@ -14,15 +14,13 @@ namespace ClinicaFrba.Registro_Resultado
     public partial class RegistroResultado : Form
     {
         int user;
-        string select =    "SELECT cons_id AS Consulta, hora_inicio AS Hora,";
+        string select =    "SELECT cons_id AS Consulta, hora_inicio AS Hora, ";
         string subselect = "(SELECT (usua_nombre + ' ' + usua_apellido) FROM GEDDES.Afiliados, GEDDES.Usuarios WHERE afil_id = turn_afiliado AND afil_usuario = usua_id) AS Afiliado ";
-        string from =      "FROM GEDDES.Profesionales, GEDDES.Turnos ,GEDDES.Horarios , GEDDES.Consultas ";
-        string where = "WHERE turn_hora = hora_id AND hora_profesional = prof_id AND cons_turno = turn_id AND hora_fecha = CONVERT(DATE,SYSDATETIME()) AND cons_fueConcretada = 0 AND prof_id = ";
+        string from =      "FROM GEDDES.Turnos ,GEDDES.Horarios , GEDDES.Consultas ";
+        string where = "WHERE cons_turno = turn_id AND turn_hora = hora_id AND cons_fueConcretada IS NULL AND hora_profesional = ";
 
         bool realizada;
         int consulta;
-
-
 
         public RegistroResultado(string userActivo)
         {
@@ -31,6 +29,7 @@ namespace ClinicaFrba.Registro_Resultado
             int user = Utils.obtenerProfesionalDesdeUsername(userActivo);
 
             where = where + (Convert.ToString(user));
+           
             this.cargarPlanilla();
         }
 
