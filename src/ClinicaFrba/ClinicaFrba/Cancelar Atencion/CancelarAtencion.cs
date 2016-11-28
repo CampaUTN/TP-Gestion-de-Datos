@@ -25,6 +25,12 @@ namespace ClinicaFrba.Cancelar_Atencion
                 label3.Hide();
                 label4.Hide();
                 label5.Hide();
+                label8.Hide();
+            }
+            if(!esAfiliado()){
+                grillaProfesionales.Hide();
+                botonListar.Hide();
+                label2.Hide();
             }
             from.Enabled = false;
             to.Enabled = false;
@@ -48,8 +54,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                    Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
-                    MessageBox.Show("Turno cancelado correctamente.");
+                    if (grillaProfesionales.Rows[rowindex].Cells[5].Value.Equals("No")) {
+                        MessageBox.Show("No se puede cancelar turnos del dia de hoy.");
+                        return;
+                    }else{
+                        Utilidades.Utils.bajaTurnoAfiliado(usuario, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
+                        MessageBox.Show("Turno cancelado correctamente.");
+                    }
                 }else {
                     MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
                 }
@@ -80,7 +91,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuario);
             } else {
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
+                //this.grillaProfesionales.DataSource = Utilidades.Utils.getAgenda(usuario);
             }
         }
 
@@ -144,6 +155,14 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void botonSalir_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e) {
+
         }
     }
 }

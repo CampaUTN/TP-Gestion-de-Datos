@@ -58,6 +58,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.label7 = new System.Windows.Forms.Label();
             this.selecPlan = new System.Windows.Forms.ComboBox();
             this.botonSalir = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grillaProfesionales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,9 +68,10 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(173, 20);
+            this.label2.Size = new System.Drawing.Size(61, 20);
             this.label2.TabIndex = 49;
-            this.label2.Text = "Seleccion de atencion";
+            this.label2.Text = "Turnos";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // grillaProfesionales
             // 
@@ -81,13 +83,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.grillaProfesionales.Location = new System.Drawing.Point(12, 32);
             this.grillaProfesionales.Name = "grillaProfesionales";
             this.grillaProfesionales.ShowEditingIcon = false;
-            this.grillaProfesionales.Size = new System.Drawing.Size(671, 203);
+            this.grillaProfesionales.Size = new System.Drawing.Size(627, 149);
             this.grillaProfesionales.TabIndex = 45;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
             // botonListar
             // 
-            this.botonListar.Location = new System.Drawing.Point(689, 32);
+            this.botonListar.Location = new System.Drawing.Point(645, 32);
             this.botonListar.Name = "botonListar";
             this.botonListar.Size = new System.Drawing.Size(88, 71);
             this.botonListar.TabIndex = 44;
@@ -107,7 +109,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(301, 341);
+            this.button2.Location = new System.Drawing.Point(298, 225);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 51;
@@ -119,7 +121,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(83, 247);
+            this.label1.Location = new System.Drawing.Point(12, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 53;
@@ -133,7 +135,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.desde.CustomFormat = "";
             this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.desde.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.desde.Location = new System.Drawing.Point(206, 246);
+            this.desde.Location = new System.Drawing.Point(143, 112);
             this.desde.Margin = new System.Windows.Forms.Padding(5);
             this.desde.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.desde.Name = "desde";
@@ -149,7 +151,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.from.CustomFormat = "";
             this.from.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.from.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.from.Location = new System.Drawing.Point(309, 274);
+            this.from.Location = new System.Drawing.Point(239, 144);
             this.from.Margin = new System.Windows.Forms.Padding(5);
             this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.from.Name = "from";
@@ -162,7 +164,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(83, 275);
+            this.label3.Location = new System.Drawing.Point(12, 144);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 20);
             this.label3.TabIndex = 56;
@@ -176,7 +178,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.to.CustomFormat = "";
             this.to.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.to.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.to.Location = new System.Drawing.Point(484, 275);
+            this.to.Location = new System.Drawing.Point(405, 144);
             this.to.Margin = new System.Windows.Forms.Padding(5);
             this.to.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.to.Name = "to";
@@ -189,7 +191,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(243, 275);
+            this.label4.Location = new System.Drawing.Point(172, 144);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 20);
             this.label4.TabIndex = 58;
@@ -200,7 +202,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label5.Location = new System.Drawing.Point(422, 274);
+            this.label5.Location = new System.Drawing.Point(342, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 20);
             this.label5.TabIndex = 59;
@@ -211,7 +213,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.selecDia.AutoSize = true;
             this.selecDia.Checked = true;
-            this.selecDia.Location = new System.Drawing.Point(16, 250);
+            this.selecDia.Location = new System.Drawing.Point(18, 58);
             this.selecDia.Name = "selecDia";
             this.selecDia.Size = new System.Drawing.Size(41, 17);
             this.selecDia.TabIndex = 60;
@@ -223,7 +225,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // selecPeriodo
             // 
             this.selecPeriodo.AutoSize = true;
-            this.selecPeriodo.Location = new System.Drawing.Point(16, 278);
+            this.selecPeriodo.Location = new System.Drawing.Point(18, 86);
             this.selecPeriodo.Name = "selecPeriodo";
             this.selecPeriodo.Size = new System.Drawing.Size(61, 17);
             this.selecPeriodo.TabIndex = 61;
@@ -233,7 +235,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 303);
+            this.textBox1.Location = new System.Drawing.Point(80, 187);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(686, 20);
             this.textBox1.TabIndex = 62;
@@ -243,7 +245,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label6.Location = new System.Drawing.Point(14, 301);
+            this.label6.Location = new System.Drawing.Point(11, 185);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 20);
             this.label6.TabIndex = 63;
@@ -254,7 +256,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label7.Location = new System.Drawing.Point(14, 331);
+            this.label7.Location = new System.Drawing.Point(11, 215);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 20);
             this.label7.TabIndex = 64;
@@ -269,7 +271,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             "Enfermedad",
             "Asuntos familiares",
             "Otra causa"});
-            this.selecPlan.Location = new System.Drawing.Point(66, 333);
+            this.selecPlan.Location = new System.Drawing.Point(63, 217);
             this.selecPlan.Name = "selecPlan";
             this.selecPlan.Size = new System.Drawing.Size(124, 21);
             this.selecPlan.TabIndex = 65;
@@ -278,7 +280,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(713, 379);
+            this.botonSalir.Location = new System.Drawing.Point(710, 263);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
             this.botonSalir.TabIndex = 66;
@@ -286,11 +288,23 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.botonSalir.UseVisualStyleBackColor = true;
             this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label8.Location = new System.Drawing.Point(14, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(177, 20);
+            this.label8.TabIndex = 67;
+            this.label8.Text = "Cancelar dia o periodo";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
             // CancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 414);
+            this.ClientSize = new System.Drawing.Size(800, 295);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.selecPlan);
             this.Controls.Add(this.label7);
@@ -340,5 +354,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         private Label label7;
         protected ComboBox selecPlan;
         private Button botonSalir;
+        private Label label8;
     }
 }

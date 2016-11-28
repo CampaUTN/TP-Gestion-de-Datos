@@ -557,26 +557,7 @@ namespace ClinicaFrba.Utilidades
             DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
             TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
 
-            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario) and  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual)) " , conexion);
-            comando.Parameters.AddWithValue("@usuario", usuario);
-            comando.Parameters.AddWithValue("@fechaActual", fecha);
-            comando.Parameters.AddWithValue("@horaActual", hora);
-            comando.CommandType = CommandType.Text;
-
-            SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);
-            DataTable tabla = new DataTable();
-            sqlDataAdap.Fill(tabla);
-
-            return tabla;
-        }
-
-        static public DataTable getAgenda(long usuario) {
-            var conexion = DBConnection.getConnection();
-
-            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
-            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length+1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
-            SqlCommand comando = new SqlCommand("select hora_profesional profesional, hora_especialidad especialidad, hora_fecha fecha, hora_inicio hora from GEDDES.Horarios where hora_profesional = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario) and  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>@horaActual))  order by hora_fecha, hora_inicio", conexion);
+            SqlCommand comando = new SqlCommand("select turn_id numero, hora_fecha fecha, hora_inicio hora, hora_profesional profesional, hora_especialidad especialidad, CASE WHEN (hora_fecha=@fechaActual) THEN 'No' else 'Si' END 'Se puede cancelar' from GEDDES.Turnos join GEDDES.Horarios on (turn_hora = hora_id) where turn_activo = 1 and turn_afiliado = (select afil_id from GEDDES.Afiliados where afil_usuario = @usuario) and  (hora_fecha>@fechaActual or (hora_fecha=@fechaActual and hora_inicio>=@horaActual)) ", conexion);
             comando.Parameters.AddWithValue("@usuario", usuario);
             comando.Parameters.AddWithValue("@fechaActual", fecha);
             comando.Parameters.AddWithValue("@horaActual", hora);
