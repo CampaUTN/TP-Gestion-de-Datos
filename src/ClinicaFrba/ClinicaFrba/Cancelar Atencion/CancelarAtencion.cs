@@ -55,10 +55,12 @@ namespace ClinicaFrba.Cancelar_Atencion
                     Utilidades.Utils.bajaDia(usuario, desde.Value.Date);
                     MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
+                    DateTime aux = from.Value;
                     while(from.Value.Date <= to.Value.Date){
                         Utilidades.Utils.bajaDia(profesional, from.Value.Date);
                         from.Value = from.Value.AddDays(1);
                     }
+                    from.Value = aux;
                     MessageBox.Show("Todos los turnos del periodo dados de baja correctamente.");
                 }
             }
