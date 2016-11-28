@@ -761,7 +761,7 @@ AS
 	FETCH NEXT from ct INTO @turno
 		while(@@FETCH_STATUS = 0)
 		BEGIN
-			INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
+			INSERT INTO GEDDES.CancelacionesTurnos(canc_id,canc_turno,canc_tipo,canc_detalle) VALUES ((SELECT MAX(canc_id)+1 FROM GEDDES.CancelacionesTurnos),@turno, @tipo,@motivo)
 			FETCH NEXT from ct INTO @turno
 		END
 	CLOSE ct
