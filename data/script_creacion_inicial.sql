@@ -125,6 +125,8 @@ IF (OBJECT_ID ('GEDDES.verificarUsuario') IS NOT NULL)
 IF (OBJECT_ID ('GEDDES.tieneFamilia') IS NOT NULL)
   DROP FUNCTION GEDDES.tieneFamilia
 
+IF (OBJECT_ID ('GEDDES.RemoverTildes') IS NOT NULL)
+  DROP FUNCTION GEDDES.RemoverTildes 
 
 /* DROP TRIGGER */
 IF OBJECT_ID('GEDDES.triggerElimTurnos') IS NOT NULL
@@ -826,6 +828,17 @@ BEGIN
 	return (select CONVERT(DATETIME, CONTEXT_INFO)
 		from sys.dm_exec_sessions
 		where session_id=@@SPID)
+END
+GO
+
+ USE GD2C2016;
+ GO
+CREATE FUNCTION GEDDES.RemoverTildes (@cadena VARCHAR(100) )
+RETURNS VARCHAR(100)
+AS BEGIN
+--Reemplazamos las vocales acentuadas
+    RETURN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(@cadena, 'á', 'a'), 'é','e'), 'í', 'i'), 'ó', 'o'), 'ú','u')
+ 
 END
 GO
 

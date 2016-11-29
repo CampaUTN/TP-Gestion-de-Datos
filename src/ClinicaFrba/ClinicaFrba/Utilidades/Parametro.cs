@@ -21,7 +21,7 @@ namespace ClinicaFrba.Utilidades
                     ret = ret + nombreColumna + "=" + valorAComparar + " ";
                 }
                 else{
-                    ret = ret + nombreColumna + "='" + valorAComparar + "' ";
+                    ret = ret + "GEDDES.RemoverTildes(" + nombreColumna + ") ='" + valorAComparar + "' ";
                 }
             }
             else{
@@ -30,25 +30,19 @@ namespace ClinicaFrba.Utilidades
 
                 }
                 else{
-                    ret = ret + nombreColumna + " LIKE '" + valorAComparar + "%'";
+
+                    if (Parser.esEntero(nombreColumna))
+                    {
+                        ret = ret + nombreColumna + "=" + valorAComparar + " ";
+                    }
+                    else
+                    {
+                        ret = ret + "GEDDES.RemoverTildes(" + nombreColumna + ") LIKE '" + valorAComparar + "%'";
+                    }
                 }
             }
             return ret;
         }
-
-       /* public Parametro(TextBox textbox, bool esExacta)
-        {
-            if (textbox.Name == "espe_nombre")
-            {
-                this.nombreColumna = "e." + textbox.Name;
-            }
-            else{
-                this.nombreColumna = textbox.Name;
-            }
-            this.valorAComparar = textbox.Text;
-            this.exacto = esExacta;
-            
-        }*/
 
         public static Parametro fromTextBox(TextBox textbox, bool esExacta)
         {
