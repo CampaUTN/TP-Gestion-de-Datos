@@ -144,7 +144,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 Afiliado afil = this.completarDatosDeAfiliado();
 
                 Utilidades.Utils.bajaLogicaA(afil);
-                MessageBox.Show("Usuario dado de baja");
 
                 this.buscar();
                 //DBConnection.cargarPlanilla(planillaResultados, consulta);  

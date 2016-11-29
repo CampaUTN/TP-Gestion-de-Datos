@@ -507,8 +507,16 @@ namespace ClinicaFrba.Utilidades
             comando.Parameters.AddWithValue("@user", afiliado.getUsuaId());
 
             conexion.Open();
+            try
+            {
+                SqlDataReader reader = comando.ExecuteReader();
 
-            SqlDataReader reader = comando.ExecuteReader();
+                MessageBox.Show("Usuario dado de baja");
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
 

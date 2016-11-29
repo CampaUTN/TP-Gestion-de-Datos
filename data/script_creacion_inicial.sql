@@ -138,7 +138,8 @@ IF OBJECT_ID('GEDDES.triggerElimUsua') IS NOT NULL
 IF OBJECT_ID('GEDDES.LimiteHoras') IS NOT NULL
 	DROP TRIGGER GEDDES.LimiteHoras
 	
-
+IF OBJECT_ID('GEDDES.verificarBaja') IS NOT NULL	
+	DROP TRIGGER GEDDES.verificarBaja
 
 /* DROP SCHEMA */
 
@@ -147,13 +148,10 @@ IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME
 GO
 
 
-
 /* Creacion del esquema */
 
 CREATE SCHEMA GEDDES AUTHORIZATION gd
 GO
-
-
 
 /* Creacion de las tablas */
 
@@ -922,4 +920,21 @@ AS
 			WHERE usua_id IN (SELECT d.usua_id FROM deleted d)
 	
 	END
+GO
+
+
+USE GD2C2016;
+GO
+CREATE TRIGGER GEDDES.verificarBaja ON GEDDES.Usuarios INSTEAD OF UPDATE 
+AS
+	BEGIN
+		IF EXISTS (SELECT* FROM GEDDES.Usuarios u, inserted i WHERE u.usua_id = i.usua_id AND u.usua_intentos = 0)		 
+			RAISERROR('El usuario ya ha sido dado de baja anteriormente',16,2)
+		ELSE		 
+			UPDATE GEDDES.Usuarios 
+			SET usua_intentos = inserted.usua_intentos
+			FROM inserted
+			WHERE inserted.usua_id = GEDDES.Usuarios.usua_id
+		
+	END 
 GO
