@@ -78,7 +78,7 @@ namespace ClinicaFrba.Utilidades
             foreach (Parametro parametro in values){
                     //si el campo esta vacio, lo omito
                 //if (Parser.estaVacio(parametro)) ;
-                    if (parametro.getSize() != 0){
+                    if (parametro != null && parametro.getSize() != 0){
 
                         criterio = criterio + parametro.pasateAWhere() + " AND ";
                     }

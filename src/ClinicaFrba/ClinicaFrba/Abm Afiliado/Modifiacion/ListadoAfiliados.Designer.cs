@@ -45,6 +45,7 @@
             this.botonModificar = new System.Windows.Forms.Button();
             this.botonDesactivar = new System.Windows.Forms.Button();
             this.botonEliminar = new System.Windows.Forms.Button();
+            this.usua_intentos = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).BeginInit();
             this.SuspendLayout();
@@ -225,6 +226,16 @@
             this.botonEliminar.Visible = false;
             this.botonEliminar.Click += new System.EventHandler(this.botonEliminar_Click);
             // 
+            // usua_intentos
+            // 
+            this.usua_intentos.AutoSize = true;
+            this.usua_intentos.Location = new System.Drawing.Point(30, 102);
+            this.usua_intentos.Name = "usua_intentos";
+            this.usua_intentos.Size = new System.Drawing.Size(126, 17);
+            this.usua_intentos.TabIndex = 14;
+            this.usua_intentos.Text = "Ocultar desactivados";
+            this.usua_intentos.UseVisualStyleBackColor = true;
+            // 
             // ListadoAfiliados
             // 
             this.AcceptButton = this.botonBuscar;
@@ -233,6 +244,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonCancelar;
             this.ClientSize = new System.Drawing.Size(484, 454);
+            this.Controls.Add(this.usua_intentos);
             this.Controls.Add(this.botonEliminar);
             this.Controls.Add(this.botonDesactivar);
             this.Controls.Add(this.botonModificar);
@@ -249,6 +261,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.planillaResultados)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -271,5 +284,6 @@
         private System.Windows.Forms.CheckBox checkBoxApellido;
         private System.Windows.Forms.Button botonDesactivar;
         private System.Windows.Forms.Button botonEliminar;
+        private System.Windows.Forms.CheckBox usua_intentos;
     }
 }

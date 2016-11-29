@@ -29,7 +29,7 @@ namespace ClinicaFrba.Registro_Llegada
             string consulta;
             bool esExacta;
 
-            parametros.SetValue(new Parametro(espe_nombre, false), 0);
+            parametros.SetValue(Parametro.fromTextBox(espe_nombre, false), 0);
 
             consulta = Parser.armarConsulta("Profesionales",parametros);
             

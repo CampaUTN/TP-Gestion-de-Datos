@@ -50,12 +50,18 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             checkBoxApellido.Checked = false;
             checkBoxNombre.Checked = false;
             checkBoxDoc.Checked = false;
+            usua_intentos.Checked = false;
 
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-            Parametro[] parametros = new Parametro[3];
+            this.buscar();
+        }
+
+        private void buscar()
+        {
+            Parametro[] parametros = new Parametro[4];
             string consulta;
             bool esExacta;
 
@@ -63,25 +69,40 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             botonDesactivar.Enabled = false;
             if (camposVacios())
             {
-                consulta = this.consulta;
+                if (this.usua_intentos.Checked)
+                {
+                    consulta = "SELECT afil_id Afiliado, usua_apellido Apellido, usua_nombre Nombre, usua_nroDoc Documento FROM GEDDES.Usuarios, GEDDES.Afiliados WHERE afil_usuario = usua_id AND usua_intentos <> 0 ";
+
+                }
+                else
+                {
+                    consulta = this.consulta;
+                }
             }
             else
             {
                 esExacta = checkBoxNombre.Checked;
 
-                parametros.SetValue(new Parametro(usua_nombre, esExacta), 0);
+                parametros.SetValue(Parametro.fromTextBox(usua_nombre, esExacta), 0);
 
                 esExacta = checkBoxApellido.Checked;
 
-                parametros.SetValue(new Parametro(usua_apellido, esExacta), 1);
+                parametros.SetValue(Parametro.fromTextBox(usua_apellido, esExacta), 1);
 
                 esExacta = checkBoxDoc.Checked;
 
-                parametros.SetValue(new Parametro(usua_nroDoc, esExacta), 2);
+                parametros.SetValue(Parametro.fromTextBox(usua_nroDoc, esExacta), 2);
+
+                if (this.usua_intentos.Checked)
+                {
+                    parametros.SetValue(Parametro.fromCheckBox(usua_intentos), 3);
+                }
 
                 consulta = Parser.armarConsulta("Afiliados", parametros);
+                
             }
 
+            MessageBox.Show(consulta);
             DBConnection.cargarPlanilla(planillaResultados, consulta);  
         }
 
@@ -125,7 +146,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 Utilidades.Utils.bajaLogicaA(afil);
                 MessageBox.Show("Usuario dado de baja");
 
-                DBConnection.cargarPlanilla(planillaResultados, consulta);  
+                this.buscar();
+                //DBConnection.cargarPlanilla(planillaResultados, consulta);  
             }
         }
 
@@ -146,7 +168,9 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
                // baja.eliminarAfiliado(afil);
                 MessageBox.Show("Usuario eliminado");
-                DBConnection.cargarPlanilla(planillaResultados, this.consulta);  
+                this.buscar();
+                
+                //DBConnection.cargarPlanilla(planillaResultados, this.consulta);  
             }
         }
 
