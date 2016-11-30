@@ -89,21 +89,20 @@ namespace ClinicaFrba.Registro_Llegada
             this.AcceptButton = botonListarProfesionales;
         }
 
-<<<<<<< HEAD
-        private void listadoTurnos_SelectionChanged(object sender, EventArgs e) {
-            if (listadoTurnos.SelectedRows.Count!=0)
-            botonSelecAfil.Enabled = true;
-=======
-        private void planillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-        }
 
-        private void listadoTurnos_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void listadoTurnos_SelectionChanged(object sender, EventArgs e) {
+            if (listadoTurnos.SelectedRows.Count != 0)
+                botonSelecAfil.Enabled = true;
         }
 
         private void clearSelections() {
             planillaProfesionales.ClearSelection();
             listadoTurnos.ClearSelection();
->>>>>>> 309c53172686c19fe81234d339696e60889443e9
+
+        }
+
+        private void RegistroLlegada_Load(object sender, EventArgs e) {
+
         }
     }
 }
