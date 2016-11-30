@@ -402,7 +402,7 @@ insert into GEDDES.TipoCancelacion values ('Cancelacion por profesional')
 
 	-- Cancelaciones. Si un usuario no gasto el bono pero la fecha del turno paso, entonces cancelo el turno
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
-SELECT m.Turno_Numero, 'Migracion', 5
+SELECT m.Turno_Numero, 'Migracion', 1
 FROM gd_esquema.Maestra m
 WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE()
 
