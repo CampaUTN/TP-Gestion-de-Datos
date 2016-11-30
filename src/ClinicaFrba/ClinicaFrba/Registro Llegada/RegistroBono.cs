@@ -52,11 +52,6 @@ namespace ClinicaFrba.Registro_Llegada
             this.Close();
         }
 
-        private void listaBonos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            botonSelecBono.Enabled = true;
-        }
-
         private void botonCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -64,6 +59,12 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void RegistroBono_Load(object sender, EventArgs e) {
             listaBonos.ClearSelection();
+            botonSelecBono.Enabled = false;
+        }
+
+        private void listaBonos_SelectionChanged(object sender, EventArgs e) {
+            if (listaBonos.SelectedRows.Count!=0)
+                botonSelecBono.Enabled = true;
         }
     }
 }

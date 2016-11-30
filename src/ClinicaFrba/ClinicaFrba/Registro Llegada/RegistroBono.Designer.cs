@@ -43,12 +43,13 @@
             this.listaBonos.AllowUserToResizeRows = false;
             this.listaBonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listaBonos.Location = new System.Drawing.Point(23, 25);
+            this.listaBonos.MultiSelect = false;
             this.listaBonos.Name = "listaBonos";
             this.listaBonos.ReadOnly = true;
             this.listaBonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listaBonos.Size = new System.Drawing.Size(492, 226);
             this.listaBonos.TabIndex = 0;
-            this.listaBonos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listaBonos_CellClick);
+            this.listaBonos.SelectionChanged += new System.EventHandler(this.listaBonos_SelectionChanged);
             // 
             // botonSelecBono
             // 

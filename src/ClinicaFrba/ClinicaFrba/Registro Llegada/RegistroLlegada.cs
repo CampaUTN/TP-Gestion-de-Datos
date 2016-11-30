@@ -68,12 +68,6 @@ namespace ClinicaFrba.Registro_Llegada
             this.AcceptButton = botonVerTurnos;
         }
 
-
-        private void listadoTurnos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            botonSelecAfil.Enabled = true;
-        }
-
         private void botonSelecAfil_Click(object sender, EventArgs e)
         {
             string id = Convert.ToString(listadoTurnos.SelectedCells[0].Value);
@@ -89,6 +83,11 @@ namespace ClinicaFrba.Registro_Llegada
         private void espe_nombre_Click(object sender, System.EventArgs e)
         {
             this.AcceptButton = botonListarProfesionales;
+        }
+
+        private void listadoTurnos_SelectionChanged(object sender, EventArgs e) {
+            if (listadoTurnos.SelectedRows.Count!=0)
+            botonSelecAfil.Enabled = true;
         }
     }
 }

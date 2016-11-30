@@ -77,6 +77,7 @@
             this.planillaProfesionales.AllowUserToResizeRows = false;
             this.planillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.planillaProfesionales.Location = new System.Drawing.Point(9, 58);
+            this.planillaProfesionales.MultiSelect = false;
             this.planillaProfesionales.Name = "planillaProfesionales";
             this.planillaProfesionales.ReadOnly = true;
             this.planillaProfesionales.RowHeadersVisible = false;
@@ -120,15 +121,18 @@
             // 
             // listadoTurnos
             // 
+            this.listadoTurnos.AllowUserToAddRows = false;
+            this.listadoTurnos.AllowUserToDeleteRows = false;
             this.listadoTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listadoTurnos.Location = new System.Drawing.Point(12, 352);
+            this.listadoTurnos.MultiSelect = false;
             this.listadoTurnos.Name = "listadoTurnos";
             this.listadoTurnos.ReadOnly = true;
             this.listadoTurnos.RowHeadersVisible = false;
             this.listadoTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listadoTurnos.Size = new System.Drawing.Size(455, 273);
             this.listadoTurnos.TabIndex = 7;
-            this.listadoTurnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoTurnos_CellClick);
+            this.listadoTurnos.SelectionChanged += new System.EventHandler(this.listadoTurnos_SelectionChanged);
             // 
             // botonSelecAfil
             // 
