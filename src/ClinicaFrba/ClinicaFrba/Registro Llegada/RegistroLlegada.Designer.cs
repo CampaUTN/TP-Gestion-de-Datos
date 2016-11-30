@@ -84,6 +84,7 @@
             this.planillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.planillaProfesionales.Size = new System.Drawing.Size(455, 238);
             this.planillaProfesionales.TabIndex = 3;
+            this.planillaProfesionales.SelectionChanged += new System.EventHandler(this.planillaProfesionales_SelectionChanged);
             // 
             // botonVerTurnos
             // 

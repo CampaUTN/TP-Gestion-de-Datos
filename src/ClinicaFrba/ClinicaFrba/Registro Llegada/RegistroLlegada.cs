@@ -46,6 +46,7 @@ namespace ClinicaFrba.Registro_Llegada
         {
             this.buscarTurnos();
             listadoTurnos.ClearSelection();
+            botonSelecAfil.Enabled = false;
         }
 
 
@@ -61,14 +62,6 @@ namespace ClinicaFrba.Registro_Llegada
             string where = "WHERE espe_nombre= '" + Convert.ToString(planillaProfesionales.SelectedCells[3].Value) + "' AND turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id NOT IN (SELECT cons_turno FROM GEDDES.Turnos, GEDDES.Consultas WHERE turn_id = cons_id) AND turn_id IN(" + subselect + ")";
             DBConnection.cargarPlanilla(listadoTurnos, select + from + where);
 
-        }
-
-        
-
-        private void planillaResultados_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            botonVerTurnos.Enabled = true;
-            this.AcceptButton = botonVerTurnos;
         }
 
         private void botonSelecAfil_Click(object sender, EventArgs e)
@@ -103,6 +96,11 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void RegistroLlegada_Load(object sender, EventArgs e) {
 
+        }
+
+        private void planillaProfesionales_SelectionChanged(object sender, EventArgs e) {
+            botonVerTurnos.Enabled = true;
+            this.AcceptButton = botonVerTurnos;
         }
     }
 }
