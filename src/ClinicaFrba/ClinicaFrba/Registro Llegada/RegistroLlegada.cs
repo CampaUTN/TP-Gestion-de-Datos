@@ -16,10 +16,12 @@ namespace ClinicaFrba.Registro_Llegada
         public RegistroLlegada()
         {
             InitializeComponent();
+            clearSelections();
         }
 
         private void botonAtras_Click(object sender, EventArgs e)
         {
+            clearSelections();
             this.Close();
         }
 
@@ -43,6 +45,7 @@ namespace ClinicaFrba.Registro_Llegada
         private void botonVerTurnos_Click(object sender, EventArgs e)
         {
             this.buscarTurnos();
+            listadoTurnos.ClearSelection();
         }
 
 
@@ -77,6 +80,7 @@ namespace ClinicaFrba.Registro_Llegada
             RegistroBono seleccionarBono = new RegistroBono(id, turno);
             seleccionarBono.ShowDialog();
             this.buscarTurnos();
+            listadoTurnos.ClearSelection();
         }
 
 
@@ -85,9 +89,21 @@ namespace ClinicaFrba.Registro_Llegada
             this.AcceptButton = botonListarProfesionales;
         }
 
+<<<<<<< HEAD
         private void listadoTurnos_SelectionChanged(object sender, EventArgs e) {
             if (listadoTurnos.SelectedRows.Count!=0)
             botonSelecAfil.Enabled = true;
+=======
+        private void planillaProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        }
+
+        private void listadoTurnos_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        }
+
+        private void clearSelections() {
+            planillaProfesionales.ClearSelection();
+            listadoTurnos.ClearSelection();
+>>>>>>> 309c53172686c19fe81234d339696e60889443e9
         }
     }
 }
