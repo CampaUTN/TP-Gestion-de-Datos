@@ -116,6 +116,7 @@ namespace ClinicaFrba.Abm_Afiliado
             //abro el formulario de usuario
             this.cargarUsuario();
             (new AltaUsuario(this.afiliado)).ShowDialog();
+            this.limpiarCajitas();
 
             if (MessageBox.Show("Agregar otro afiliado?", "Alta", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -199,7 +200,14 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.logErrores.agregarAlLog("El nùmero de telefono debe ser númerico");
 
                 textBoxTelefono.Clear();
-            }            
+            }
+            
+            if (Utils.dniOcupado(textBoxNroDoc.Text))
+            {
+                this.logErrores.agregarAlLog("El número de DNI ya se encuentra registrado en el sistema");
+
+                textBoxNroDoc.Clear();
+            }
         }
                 
        private void setearCantidadHijos(){

@@ -641,5 +641,19 @@ namespace ClinicaFrba.Utilidades
 
             SqlDataReader reader = comando.ExecuteReader();
         }
+
+        static public bool dniOcupado(string dni)
+        {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("SELECT * FROM GEDDES.Usuarios WHERE usua_nroDoc = @dni OR usua_id = @dni", conexion);
+            comando.Parameters.AddWithValue("@dni", Convert.ToInt32(dni));
+
+            conexion.Open();
+            SqlDataReader reader = comando.ExecuteReader();
+
+            return reader.Read();
+
+        }
     }
 }
