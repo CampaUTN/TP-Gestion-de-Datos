@@ -34,8 +34,9 @@ namespace ClinicaFrba.Registro_Llegada
             consulta = Parser.armarConsulta("Profesionales",parametros);
             
             //MessageBox.Show(consulta);
-            DBConnection.cargarPlanilla(planillaProfesionales, consulta); 
+            DBConnection.cargarPlanilla(planillaProfesionales, consulta);
 
+            planillaProfesionales.ClearSelection();
         }
 
         //me retorna los turnos que aun no tienen asignada una consulta medica

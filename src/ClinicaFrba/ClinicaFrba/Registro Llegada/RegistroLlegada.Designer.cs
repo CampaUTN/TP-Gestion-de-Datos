@@ -78,6 +78,7 @@
             this.planillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.planillaProfesionales.Location = new System.Drawing.Point(9, 58);
             this.planillaProfesionales.Name = "planillaProfesionales";
+            this.planillaProfesionales.ReadOnly = true;
             this.planillaProfesionales.RowHeadersVisible = false;
             this.planillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.planillaProfesionales.Size = new System.Drawing.Size(455, 238);
@@ -122,6 +123,7 @@
             this.listadoTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listadoTurnos.Location = new System.Drawing.Point(12, 352);
             this.listadoTurnos.Name = "listadoTurnos";
+            this.listadoTurnos.ReadOnly = true;
             this.listadoTurnos.RowHeadersVisible = false;
             this.listadoTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listadoTurnos.Size = new System.Drawing.Size(455, 273);
