@@ -21,6 +21,7 @@ namespace ClinicaFrba.AbmRol {
         private void RolBaja_Load(object sender, EventArgs e) {
             // Cargamos los roles habilitados del sistema
             cargarRolesHabilitados();
+            buttonEliminar.Enabled = false;
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e) {

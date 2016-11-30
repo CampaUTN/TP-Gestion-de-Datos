@@ -16,10 +16,12 @@ namespace ClinicaFrba.AbmRol {
 
         public RolModifSeleccion() {
             InitializeComponent();
+
         }
 
         private void RolBaja_Load(object sender, EventArgs e) {
             cargarRolesHabilitados();
+            buttonModif.Enabled = false;
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e) {

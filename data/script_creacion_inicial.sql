@@ -639,13 +639,13 @@ AS
 		DECLARE @afil INT
 		SET @afil = (SELECT afil_id FROM GEDDES.Afiliados WHERE afil_usuario = @username)
 
-		UPDATE GEDDES.Usuarios set usua_direccion = @direccion WHERE usua_id =@username  AND usua_direccion != @direccion
+		UPDATE GEDDES.Usuarios set usua_direccion = @direccion WHERE usua_id =@username  AND (usua_direccion != @direccion OR usua_direccion IS NULL)
 		--UPDATE GEDDES.Afiliados set afil_estadoCivil = @estado WHERE afil_id = @afil AND @estado != afil_estadoCivil
 
-		UPDATE GEDDES.Usuarios set usua_telefono = @telefono WHERE usua_id =@username  AND usua_telefono != @telefono
+		UPDATE GEDDES.Usuarios set usua_telefono = @telefono WHERE usua_id =@username  AND (usua_telefono != @telefono OR usua_telefono IS NULL)
 		
-		UPDATE GEDDES.Afiliados set afil_estadoCivil = @estado WHERE afil_usuario = @username  AND afil_estadoCivil != @estado
-				OR afil_estadoCivil IS NULL
+		UPDATE GEDDES.Afiliados set afil_estadoCivil = @estado WHERE afil_usuario = @username  AND (afil_estadoCivil != @estado
+				OR afil_estadoCivil IS NULL)
 
 	END
 GO
