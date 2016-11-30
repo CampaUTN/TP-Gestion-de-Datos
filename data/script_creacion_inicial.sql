@@ -304,19 +304,19 @@ INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
 VALUES (0,'admin', @hash, 3);
 
 
--- Usuarios desde Afiliados. Funciona
+-- Usuarios desde Afiliados.
 INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
   SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
   FROM gd_esquema.Maestra
   WHERE Paciente_Dni IS NOT NULL
 
--- Usuarios desde Profesionales. Funciona
+-- Usuarios desde Profesionales.
 INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
 	SELECT DISTINCT Medico_Dni*100+1, Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
 	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
 
-	--Planes. Funciona
+	--Planes.
 	--Lo pongo arriba de antes porque sino tira error con las FK al no tener los planes cargados
 INSERT INTO GEDDES.Planes(plan_id, plan_nombre, plan_precioBono)
 	SELECT DISTINCT Plan_Med_Codigo, Plan_Med_Descripcion, Plan_Med_Precio_Bono_Consulta
@@ -330,34 +330,34 @@ INSERT INTO GEDDES.Afiliados(afil_usuario, afil_plan, afil_cantidadHijos,afil_es
 	FROM gd_esquema.Maestra
 	WHERE Paciente_Dni IS NOT NULL
 
--- Profesionales. Funciona
+-- Profesionales.
 INSERT INTO GEDDES.Profesionales(prof_id,prof_matricula,prof_usuario)
 	SELECT DISTINCT Medico_Dni, NULL, (SELECT usua_id FROM GEDDES.Usuarios WHERE usua_nroDoc=Medico_Dni)
 	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
     
-  --Tipo Especialidad. Funciona
+  --Tipo Especialidad.
 INSERT INTO GEDDES.TipoEspecialidad(tipo_id, tipo_nombre)
 	SELECT DISTINCT Tipo_Especialidad_Codigo, Tipo_Especialidad_Descripcion 
 	FROM gd_esquema.Maestra 
 	WHERE Tipo_Especialidad_Codigo IS NOT NULL 
 	ORDER BY Tipo_Especialidad_Codigo
     
-  -- Especialidad. Funciona
+  -- Especialidad.
 INSERT INTO GEDDES.Especialidades(espe_id, espe_tipo, espe_nombre)
   SELECT DISTINCT Especialidad_Codigo, Tipo_Especialidad_Codigo, Especialidad_Descripcion
   FROM gd_esquema.Maestra
   WHERE Especialidad_Codigo IS NOT NULL
   ORDER BY Especialidad_Codigo  
 
--- Horarios. Funciona
+-- Horarios.
 INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional)
   SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni
   FROM gd_esquema.Maestra m
   WHERE Medico_Dni IS NOT NULL
   GROUP BY Turno_Numero, Turno_Fecha, Especialidad_Codigo, Medico_Dni
   
-    -- Turnos. Funciona
+    -- Turnos.
   SET IDENTITY_INSERT GEDDES.Turnos ON 
   INSERT INTO GEDDES.Turnos(turn_id, turn_afiliado, turn_hora, turn_activo)
 	SELECT DISTINCT m.Turno_Numero, (SELECT top 1 afil_id
@@ -371,7 +371,7 @@ INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_pro
   GO
 
 
-  	-- Consultas. Funciona. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
+  	-- Consultas. Suponemos que todas se concretaron y el tipo nunca dio el presente y se fue antes de que lo atiendan (caso de concretada=0).
 SET IDENTITY_INSERT GEDDES.Consultas ON
 INSERT INTO GEDDES.Consultas(cons_id, cons_turno, cons_fechaHoraConsulta, cons_fueConcretada, cons_sintomas, 
 cons_diagnostico)
@@ -403,7 +403,7 @@ insert into GEDDES.TipoCancelacion values ('Asuntos familiares')
 insert into GEDDES.TipoCancelacion values ('Otra causa')
 insert into GEDDES.TipoCancelacion values ('Migracion')
 
-	-- Cancelaciones. Funciona -- Si un usuario no gasto el bono pero la fecha del turno paso => cancelo el turno
+	-- Cancelaciones. Si un usuario no gasto el bono pero la fecha del turno paso, entonces cancelo el turno
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)
 SELECT m.Turno_Numero, 'Migracion', 5
 FROM gd_esquema.Maestra m
