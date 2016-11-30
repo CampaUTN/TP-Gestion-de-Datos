@@ -44,6 +44,7 @@ namespace ClinicaFrba.AbmRol {
                     queryDesasignarRol.ExecuteNonQuery();
                 } catch { }
             }
+            buttonEliminar.Enabled = false;
             cargarRolesHabilitados();
         }
 
