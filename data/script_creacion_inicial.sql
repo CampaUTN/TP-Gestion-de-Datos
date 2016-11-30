@@ -397,11 +397,8 @@ SELECT
 FROM gd_esquema.Maestra m
 WHERE m.Compra_Bono_Fecha IS NOT NULL
 
-insert into GEDDES.TipoCancelacion values ('Viaje')
-insert into GEDDES.TipoCancelacion values ('Enfermedad')
-insert into GEDDES.TipoCancelacion values ('Asuntos familiares')
-insert into GEDDES.TipoCancelacion values ('Otra causa')
-insert into GEDDES.TipoCancelacion values ('Migracion')
+insert into GEDDES.TipoCancelacion values ('Cancelacion por afiliado')
+insert into GEDDES.TipoCancelacion values ('Cancelacion por profesional')
 
 	-- Cancelaciones. Si un usuario no gasto el bono pero la fecha del turno paso, entonces cancelo el turno
 INSERT INTO GEDDES.CancelacionesTurnos(canc_turno, canc_detalle, canc_tipo)

@@ -17,6 +17,8 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.rol = rol;
             this.username = usuario;
             this.usuarioId = Convert.ToInt64(Utilidades.Utils.getIdDesdeUserName(usuario).ToString());
+            selecPlan.Hide();
+            label7.Hide();
             if (esAfiliado()) {
                 desde.Hide();
                 from.Hide();
@@ -50,10 +52,6 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // Boton de borrar. Se encarga de hacer validaciones y llamar a los metodos para concretar las bajas.
         private void button2_Click(object sender, EventArgs e) {
-            if (selecPlan.SelectedIndex<0) {
-                MessageBox.Show("Seleccione un tipo.");
-                return;
-            }
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
@@ -61,7 +59,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                         MessageBox.Show("No se puede cancelar turnos del dia de hoy.");
                         return;
                     }else{
-                        Utilidades.Utils.bajaTurnoAfiliado(usuarioId, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), selecPlan.SelectedIndex+1, textBox1.Text);
+                        Utilidades.Utils.bajaTurnoAfiliado(usuarioId, Convert.ToInt32(grillaProfesionales.Rows[rowindex].Cells[0].Value), 1, textBox1.Text);
                         MessageBox.Show("Turno cancelado correctamente.");
                     }
                 }else {
@@ -70,12 +68,12 @@ namespace ClinicaFrba.Cancelar_Atencion
             } else {
                 long profesional = usuarioId;
                 if(diaUnico) {
-                    Utilidades.Utils.bajaDia(usuarioId, desde.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
+                    Utilidades.Utils.bajaDia(usuarioId, desde.Value.Date, 2, textBox1.Text);
                     MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
                     DateTime aux = from.Value;
                     while(from.Value.Date <= to.Value.Date){
-                        Utilidades.Utils.bajaDia(profesional, from.Value.Date, selecPlan.SelectedIndex, textBox1.Text);
+                        Utilidades.Utils.bajaDia(profesional, from.Value.Date, 2, textBox1.Text);
                         from.Value = from.Value.AddDays(1);
                     }
                     from.Value = aux;
