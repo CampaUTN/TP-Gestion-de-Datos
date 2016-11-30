@@ -158,7 +158,7 @@ GO
 CREATE TABLE GEDDES.Usuarios(
     usua_id BIGINT PRIMARY KEY,
     usua_username VARCHAR(20),
-  	usua_password VARBINARY(500), --  255 TODO: inventar users y pass
+  	usua_password VARBINARY(500),
   	usua_intentos TINYINT DEFAULT 3,
     usua_nombre VARCHAR(255),
     usua_apellido VARCHAR(255),
@@ -305,7 +305,6 @@ VALUES (0,'admin', @hash, 3);
 
 
 -- Usuarios desde Afiliados. Funciona
-  /* TODO: ver q username/pass tienen los usuarios q se migran de la base vieja */
 INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
   SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
   FROM gd_esquema.Maestra
@@ -324,8 +323,8 @@ INSERT INTO GEDDES.Planes(plan_id, plan_nombre, plan_precioBono)
 	FROM gd_esquema.Maestra
 	WHERE Plan_Med_Codigo IS NOT NULL
 
---Afiliados. TODO: Ver tema del ID
-INSERT INTO GEDDES.Afiliados(afil_usuario, afil_plan, afil_cantidadHijos,afil_estadoCivil)  -- TODO: hacer bien
+--Afiliados
+INSERT INTO GEDDES.Afiliados(afil_usuario, afil_plan, afil_cantidadHijos,afil_estadoCivil)
 	SELECT DISTINCT ((SELECT usua_id FROM GEDDES.Usuarios WHERE usua_nroDoc=Paciente_Dni)),
 					Plan_Med_Codigo, 0, NULL
 	FROM gd_esquema.Maestra
