@@ -655,5 +655,13 @@ namespace ClinicaFrba.Utilidades
             return reader.Read();
 
         }
+
+
+        public static string fechaSistema()
+        {
+            string textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+
+            return textoFecha.Substring(0, "yyyy-MM-dd".Length);
+        }
     }
 }

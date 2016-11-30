@@ -17,7 +17,7 @@ namespace ClinicaFrba.Registro_Resultado
         string select = "SELECT cons_id AS Consulta, hora_inicio AS Hora, ";
         string subselect = "(SELECT (usua_nombre + ' ' + usua_apellido) FROM GEDDES.Afiliados, GEDDES.Usuarios WHERE afil_id = turn_afiliado AND afil_usuario = usua_id) AS Afiliado ";
         string from = "FROM GEDDES.Turnos ,GEDDES.Horarios , GEDDES.Consultas ";
-        string where = "WHERE cons_turno = turn_id AND turn_hora = hora_id" + " AND hora_fecha =  CONVERT(DATE,'" + RegistroResultado.fechaSistema() + "') AND cons_fueConcretada IS NULL AND hora_profesional = ";
+        string where = "WHERE cons_turno = turn_id AND turn_hora = hora_id" + " AND hora_fecha =  CONVERT(DATE,'" + Utils.fechaSistema() + "') AND cons_fueConcretada IS NULL AND hora_profesional = ";
 
         bool realizada;
         int consulta;
@@ -121,12 +121,5 @@ namespace ClinicaFrba.Registro_Resultado
 
         }
 
-        private static string fechaSistema()
-        {
-            string textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
-
-            return textoFecha.Substring(0, "yyyy-MM-dd".Length);
-        }
-
-    }
+     }
 }
