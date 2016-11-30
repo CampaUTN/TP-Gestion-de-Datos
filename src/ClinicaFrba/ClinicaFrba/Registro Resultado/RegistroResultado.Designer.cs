@@ -50,6 +50,7 @@
             this.listadoConsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listadoConsultas.EnableHeadersVisualStyles = false;
             this.listadoConsultas.Location = new System.Drawing.Point(24, 25);
+            this.listadoConsultas.MultiSelect = false;
             this.listadoConsultas.Name = "listadoConsultas";
             this.listadoConsultas.ReadOnly = true;
             this.listadoConsultas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
