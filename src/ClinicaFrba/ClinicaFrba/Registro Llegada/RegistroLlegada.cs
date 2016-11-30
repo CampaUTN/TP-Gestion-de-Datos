@@ -77,14 +77,17 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void botonSelecAfil_Click(object sender, EventArgs e)
         {
-            string id = Convert.ToString(listadoTurnos.SelectedCells[0].Value);
-            int turno = Convert.ToInt32(listadoTurnos.SelectedCells[1].Value);
+            if (listadoTurnos.SelectedRows.Count == 1) {
+                string id = Convert.ToString(listadoTurnos.SelectedCells[0].Value);
+                int turno = Convert.ToInt32(listadoTurnos.SelectedCells[1].Value);
 
-            //MessageBox.Show("Registrando llegada");
-            RegistroBono seleccionarBono = new RegistroBono(id, turno);
-            seleccionarBono.ShowDialog();
-            this.buscarTurnos();
-            listadoTurnos.ClearSelection();
+                //MessageBox.Show("Registrando llegada");
+                RegistroBono seleccionarBono = new RegistroBono(id, turno);
+                seleccionarBono.ShowDialog();
+                this.buscarTurnos();
+                listadoTurnos.ClearSelection();
+                botonSelecAfil.Enabled = false;
+            }
         }
 
 
