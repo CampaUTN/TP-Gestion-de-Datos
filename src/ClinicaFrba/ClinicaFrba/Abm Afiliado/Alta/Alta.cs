@@ -218,6 +218,10 @@ namespace ClinicaFrba.Abm_Afiliado
 
         }
 
+        private void Alta_Load(object sender, EventArgs e) {
+            comboBoxTipoDoc.SelectedIndex = 0;
+        }
+
     }
     #endregion
 }

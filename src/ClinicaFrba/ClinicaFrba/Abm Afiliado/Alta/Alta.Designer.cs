@@ -363,6 +363,7 @@
             this.Name = "Alta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta";
+            this.Load += new System.EventHandler(this.Alta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
