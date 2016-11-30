@@ -46,6 +46,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             horaFin = fin.Value;
             this.usuario = usuario;
             this.rol = rol;
+            grillaProfesionales.ReadOnly = true;
         }
 
         //genera muchos horarios en base a los datos ingresados, y los guarda en la basa de datos.
