@@ -766,7 +766,7 @@ AS
  	UPDATE GEDDES.Turnos
 	SET turn_activo = 0
 	where turn_id = @turno and turn_afiliado = @afiliado
-	INSERT INTO GEDDES.CancelacionesTurnos(canc_turno,canc_tipo,canc_detalle) VALUES (@turno, @tipo,@motivo)
+	INSERT INTO GEDDES.CancelacionesTurnos(canc_id,canc_turno,canc_tipo,canc_detalle) VALUES ((SELECT MAX(canc_id)+1 FROM GEDDES.CancelacionesTurnos),@turno, @tipo,@motivo)
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos OFF
  END
 GO
