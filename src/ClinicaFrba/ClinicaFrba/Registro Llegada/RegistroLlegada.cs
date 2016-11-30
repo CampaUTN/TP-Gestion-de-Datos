@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -53,6 +54,9 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void buscarTurnos()
         {
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+
             string id = Convert.ToString(planillaProfesionales.SelectedCells[0].Value);
             string select = "SELECT afil_id iDAfiliado, turn_id Turno, usua_nombre +' '+ usua_apellido AS Afiliado, hora_inicio Hora \n ";
             string from = "FROM GEDDES.Turnos, GEDDES.Afiliados,GEDDES.Usuarios, GEDDES.Horarios join GEDDES.Especialidades ON hora_especialidad = espe_id \n";
@@ -60,8 +64,11 @@ namespace ClinicaFrba.Registro_Llegada
             string subselect = "SELECT turn_id FROM GEDDES.Turnos, GEDDES.Profesionales, GEDDES.Horarios WHERE turn_hora = hora_id AND prof_id = hora_profesional AND prof_id = ";
             subselect = subselect + id;
 
-            string where = "WHERE espe_nombre= '" + Convert.ToString(planillaProfesionales.SelectedCells[3].Value) + "' AND turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND turn_id NOT IN (SELECT cons_turno FROM GEDDES.Turnos, GEDDES.Consultas WHERE turn_id = cons_id) AND turn_id IN(" + subselect + ")";
+            string where = "WHERE espe_nombre= '" + Convert.ToString(planillaProfesionales.SelectedCells[3].Value)
+                            + "' AND turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND hora_fecha =  CONVERT(DATE,'" + textoFecha.Substring(0, "yyyy-MM-dd".Length) + "')"
+                            + " AND turn_id NOT IN (SELECT cons_turno FROM GEDDES.Turnos, GEDDES.Consultas WHERE turn_id = cons_id) AND turn_id IN(" + subselect + ")";
             DBConnection.cargarPlanilla(listadoTurnos, select + from + where);
+
 
         }
 
