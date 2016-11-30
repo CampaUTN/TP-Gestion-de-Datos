@@ -102,7 +102,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 
             }
 
-            MessageBox.Show(consulta);
             DBConnection.cargarPlanilla(planillaResultados, consulta);  
         }
 

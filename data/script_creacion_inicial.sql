@@ -300,8 +300,8 @@ DECLARE @hash VARBINARY(225)
 SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
   
 --Administrativo
-INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos)
-VALUES (0,'admin', @hash, 3);
+INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos, usua_tipoDoc, usua_nroDoc)
+VALUES (0,'admin', @hash, 3, 'DNI', 36740233);
 
 
 -- Usuarios desde Afiliados.

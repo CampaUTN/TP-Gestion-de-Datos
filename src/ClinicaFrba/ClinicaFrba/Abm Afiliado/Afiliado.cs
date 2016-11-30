@@ -35,9 +35,18 @@ namespace ClinicaFrba.Abm_Afiliado
             this.apellido = apellido;
             this.fechaNac = fechaNac.Date;
             this.tipoDoc = tipoDoc;
-            this.numeroDoc = int.Parse(numeroDoc);
             this.direccion = direccion;
-            this.telefono = int.Parse(telefono);
+            try {
+                this.numeroDoc = int.Parse(numeroDoc);
+            } catch (FormatException) {
+                this.numeroDoc = -1;
+            }
+            try {
+                this.telefono = int.Parse(telefono);
+            } catch (FormatException) {
+                this.telefono = -1;
+            }
+
             this.sexo = sexo;
             this.estadoCivil = estadoCivil;
             this.plan = plan;
