@@ -411,7 +411,7 @@ insert into GEDDES.RolXusuario values (0,1)
 insert into GEDDES.RolXusuario values (0,2)
 insert into GEDDES.RolXusuario values (0,3)
 
-insert into GEDDES.Afiliados values (0,555558,'Casado',3) --usuario, plan, estado civ, hijos
+insert into GEDDES.Afiliados values (0,555558,'Casado',0) --usuario, plan, estado civ, hijos
 insert into GEDDES.Administradores values (0)  --usario
 insert into GEDDES.Profesionales values (9999,0,null) --prof if, user, algo
 update GEDDES.Usuarios set usua_nombre= 'NombreAdmin' where usua_id=0
