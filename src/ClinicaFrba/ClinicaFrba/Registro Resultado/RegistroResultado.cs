@@ -31,6 +31,7 @@ namespace ClinicaFrba.Registro_Resultado
             where = where + (Convert.ToString(user));
            
             this.cargarPlanilla();
+            listadoConsultas.ClearSelection();
         }
 
         private void listadoConsultas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -54,8 +55,8 @@ namespace ClinicaFrba.Registro_Resultado
                 MessageBox.Show("Consulta realizada");
                 this.resetearCajitas();
                 this.cargarPlanilla();
+                listadoConsultas.ClearSelection();
             }
-         
         }
 
         private void textBoxDiagnostico_TextChanged(object sender, EventArgs e)
@@ -77,11 +78,12 @@ namespace ClinicaFrba.Registro_Resultado
             textBoxDiagnostico.Enabled = false;
             checkBoxFueConcretada.Enabled = false;
             checkBoxFueConcretada.Checked = false;
+            listadoConsultas.ClearSelection();
         }
 
         private void RegistroResultado_Load(object sender, EventArgs e)
         {
-
+            listadoConsultas.ClearSelection();
         }
 
         private void cargarPlanilla()

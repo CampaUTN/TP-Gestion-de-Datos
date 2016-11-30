@@ -84,6 +84,7 @@
             this.planillaProfesionales.Size = new System.Drawing.Size(455, 238);
             this.planillaProfesionales.TabIndex = 3;
             this.planillaProfesionales.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaResultados_CellClick);
+            this.planillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.planillaProfesionales_CellContentClick);
             // 
             // botonVerTurnos
             // 
@@ -129,6 +130,7 @@
             this.listadoTurnos.Size = new System.Drawing.Size(455, 273);
             this.listadoTurnos.TabIndex = 7;
             this.listadoTurnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoTurnos_CellClick);
+            this.listadoTurnos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listadoTurnos_CellContentClick);
             // 
             // botonSelecAfil
             // 
