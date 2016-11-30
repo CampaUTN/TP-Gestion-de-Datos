@@ -117,9 +117,9 @@
             this.labelSelecConsulta.AutoSize = true;
             this.labelSelecConsulta.Location = new System.Drawing.Point(21, 9);
             this.labelSelecConsulta.Name = "labelSelecConsulta";
-            this.labelSelecConsulta.Size = new System.Drawing.Size(124, 13);
+            this.labelSelecConsulta.Size = new System.Drawing.Size(301, 13);
             this.labelSelecConsulta.TabIndex = 6;
-            this.labelSelecConsulta.Text = "Seleccione una consulta";
+            this.labelSelecConsulta.Text = "Seleccione una consulta (Solo se visualizan las del día actual)";
             // 
             // labelDiagnostico
             // 
