@@ -84,6 +84,8 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.grillaProfesionales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaProfesionales.Location = new System.Drawing.Point(15, 33);
             this.grillaProfesionales.Name = "grillaProfesionales";
+            this.grillaProfesionales.ReadOnly = true;
+            this.grillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grillaProfesionales.ShowEditingIcon = false;
             this.grillaProfesionales.Size = new System.Drawing.Size(627, 149);
             this.grillaProfesionales.TabIndex = 45;
@@ -145,8 +147,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.desde.Size = new System.Drawing.Size(95, 20);
             this.desde.TabIndex = 54;
             this.desde.ValueChanged += new System.EventHandler(this.desde_ValueChanged);
-            this.desde.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
-            this.desde.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
             // 
             // from
             // 
@@ -163,8 +163,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.from.Size = new System.Drawing.Size(95, 20);
             this.from.TabIndex = 55;
             this.from.ValueChanged += new System.EventHandler(this.from_ValueChanged);
-            this.from.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
-            this.from.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
             // 
             // label3
             // 
@@ -192,8 +190,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.to.Size = new System.Drawing.Size(97, 20);
             this.to.TabIndex = 57;
             this.to.ValueChanged += new System.EventHandler(this.to_ValueChanged);
-            this.to.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
-            this.to.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
             // 
             // label4
             // 
@@ -324,7 +320,6 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 69;
-            this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual ("+ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length)+")";
             // 
             // CancelarAtencion
             // 
