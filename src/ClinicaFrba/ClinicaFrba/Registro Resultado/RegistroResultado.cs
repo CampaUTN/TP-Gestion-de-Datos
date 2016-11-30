@@ -52,7 +52,6 @@ namespace ClinicaFrba.Registro_Resultado
             if (MessageBox.Show("Confirmar datos?", "Consulta", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 cargarDatos();
-                MessageBox.Show("Consulta realizada");
                 this.resetearCajitas();
                 this.cargarPlanilla();
                 listadoConsultas.ClearSelection();
@@ -93,8 +92,13 @@ namespace ClinicaFrba.Registro_Resultado
 
         private void cargarDatos()
         {
-            consulta = Convert.ToInt32(listadoConsultas.SelectedCells[0].Value);
-            Utils.registrarResultadoConsulta(consulta, checkBoxFueConcretada.Checked, textBoxSintomas.Text, textBoxDiagnostico.Text);
+            if (listadoConsultas.SelectedCells.Count>0) {
+                   consulta = Convert.ToInt32(listadoConsultas.SelectedCells[0].Value);
+                   Utils.registrarResultadoConsulta(consulta, checkBoxFueConcretada.Checked, textBoxSintomas.Text, textBoxDiagnostico.Text);
+                   MessageBox.Show("Consulta realizada");
+            }else {
+                    MessageBox.Show("Seleccione una fila.");
+            }
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
