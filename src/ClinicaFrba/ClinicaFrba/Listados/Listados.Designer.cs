@@ -264,8 +264,8 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(402, 37);
             this.textBox3.TabIndex = 13;
-            this.textBox3.Text = "Top 5 de los profesionales con menos horas trabajadas filtrando por Plan y\r\nEspec" +
-    "ialidad. (Aclararon solo especialidad por el google groups)";
+            this.textBox3.Text = "Top 5 de los profesionales con menos horas trabajadas filtrando por Especialidad." +
+    "";
             // 
             // label4
             // 
