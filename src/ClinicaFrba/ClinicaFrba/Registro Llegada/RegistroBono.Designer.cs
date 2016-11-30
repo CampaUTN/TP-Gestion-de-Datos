@@ -98,6 +98,7 @@
             this.Name = "RegistroBono";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Bono";
+            this.Load += new System.EventHandler(this.RegistroBono_Load);
             ((System.ComponentModel.ISupportInitialize)(this.listaBonos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

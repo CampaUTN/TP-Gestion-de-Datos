@@ -61,5 +61,9 @@ namespace ClinicaFrba.Registro_Llegada
         {
             this.Close();
         }
+
+        private void RegistroBono_Load(object sender, EventArgs e) {
+            listaBonos.ClearSelection();
+        }
     }
 }
