@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace ClinicaFrba.Cancelar_Atencion
@@ -40,6 +41,17 @@ namespace ClinicaFrba.Cancelar_Atencion
             from.Enabled = false;
             to.Enabled = false;
             desde.Enabled = true;
+
+            this.desde.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+            this.desde.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+           
+            this.from.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+            this.from.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+            
+            this.to.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+            this.to.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
+
+            this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
         }
 
         private bool esAfiliado(){
