@@ -49,12 +49,19 @@ namespace ClinicaFrba.Registro_Resultado
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirmar datos?", "Consulta", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (textBoxDiagnostico.Text.Length.Equals(0) || textBoxSintomas.Text.Length.Equals(0))
             {
-                cargarDatos();
-                this.resetearCajitas();
-                this.cargarPlanilla();
-                listadoConsultas.ClearSelection();
+                MessageBox.Show("Debe completar los resultados de la consulta", "Consulta", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (MessageBox.Show("Confirmar datos?", "Consulta", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    cargarDatos();
+                    this.resetearCajitas();
+                    this.cargarPlanilla();
+                    listadoConsultas.ClearSelection();
+                }
             }
         }
 
