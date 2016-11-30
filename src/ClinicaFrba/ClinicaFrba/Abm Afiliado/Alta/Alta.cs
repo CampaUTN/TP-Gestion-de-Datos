@@ -134,9 +134,9 @@ namespace ClinicaFrba.Abm_Afiliado
             this.cajasTexto.Add(textBoxApellido);
             this.cajasTexto.Add(textBoxNroDoc);
             this.cajasTexto.Add(textBoxDireccion);
+            this.cajasTexto.Add(textBoxTelefono);
 
             this.selecPlan.ResetText();
-            //this.cajasTexto.Add(textBoxTelefono);
         }
 
 

@@ -143,7 +143,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             if (textBoxTelefono.Text.Length > 0)
             {
-                camposModificados = camposModificados + "- Teléfono\n";
+                camposModificados = camposModificados + "- Teléfono\n";              
             }
 
             if (!noSeEligioUnPlan)
@@ -165,9 +165,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             if (!Parser.esEntero(textBoxTelefono) && textBoxTelefono.Text.Length >0 )
             {
                 this.logErrores.agregarAlLog("El numero de telefono debe ser numérico");
-
                 textBoxTelefono.Clear();
-                this.cajasTexto.Remove(textBoxTelefono);
+                camposModificados = "";
             }
 
 
