@@ -39,7 +39,10 @@ namespace ClinicaFrba.Registro_Llegada
             DBConnection.cargarPlanilla(planillaProfesionales, consulta);
 
             planillaProfesionales.ClearSelection();
+            botonSelecAfil.Enabled = false;
             botonVerTurnos.Enabled = false;
+            listadoTurnos.DataSource = null;
+            listadoTurnos.Refresh();
         }
 
         //me retorna los turnos que aun no tienen asignada una consulta medica
