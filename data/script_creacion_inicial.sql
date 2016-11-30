@@ -445,9 +445,8 @@ insert into GEDDES.RolXfuncionalidad values (1,7) -- Afiliado - CompraBono
 insert into GEDDES.RolXfuncionalidad values (1,9) -- Afiliado - PedirTurno
 
 insert into GEDDES.RolXfuncionalidad values (3,6) -- Profesional - Cancelar Atencion 
-insert into GEDDES.RolXfuncionalidad values (3,8) -- Profesional - Listados????? CONFIRMAR
+insert into GEDDES.RolXfuncionalidad values (3,8) -- Profesional - Listados
 insert into GEDDES.RolXfuncionalidad values (3,10) -- Profesional - Registrar Agenda
-insert into GEDDES.RolXfuncionalidad values (3,11) -- Profesional - Registrar Llegada???? CONFIRMAR
 insert into GEDDES.RolXfuncionalidad values (3,12) -- Profesional - Registrar Resultado
 
 insert into GEDDES.RolXfuncionalidad values (2,1) -- Administrativo - Todas
@@ -492,19 +491,10 @@ insert into GEDDES.RolXusuario values (7564290401,1) --Afiliado
 insert into GEDDES.RolXusuario values (146592501,3) --Profesional
 
 
-/*
-insert into GEDDES.Horarios values (9999,10032,'20151016','11:30:00.0000000')
-insert into GEDDES.Horarios values (9999,10032,'20151017','10:30:00.0000000')
-insert into GEDDES.Horarios values (9999,10032,'20151018','09:30:00.0000000')
-insert into GEDDES.Horarios values (46998467,10032,'20151016','11:30:00.0000000')
-insert into GEDDES.Horarios values (46998467,10032,'20151017','10:30:00.0000000')
-insert into GEDDES.Horarios values (18756896,10032,'20151018','09:30:00.0000000')
-*/
-
 /* CREO STORE PROCEDURES */
 
 --PROCEDURE QUE CHEQUEA LOS INTENTOS
-USE GD2C2016; --ESTO ES PARA QUE NO TE DIGA QUE EL PROCEDURE TIENE QUE SER LA UNICA INSTRUCCION Y BLAH...
+USE GD2C2016;
 GO
 
 CREATE PROCEDURE GEDDES.Login_procedure(@username VARCHAR(20) , @password VARCHAR(10))
@@ -616,8 +606,6 @@ BEGIN
 	INSERT INTO GEDDES.Afiliados(afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
 
 	VALUES(@usuario, @plan, @estado, @hijos)	
-
-	--RETURN (SELECT MAX(afil_id) FROM GEDDES.Afiliados)
 END
 GO
 
