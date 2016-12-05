@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.motivo = new System.Windows.Forms.RichTextBox();
             this.labelMotivo = new System.Windows.Forms.Label();
             this.botonAceptar = new System.Windows.Forms.Button();
             this.botonAtras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // motivo
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(21, 33);
-            this.richTextBox1.MaxLength = 255;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(318, 120);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.motivo.Location = new System.Drawing.Point(21, 33);
+            this.motivo.MaxLength = 255;
+            this.motivo.Name = "motivo";
+            this.motivo.Size = new System.Drawing.Size(318, 120);
+            this.motivo.TabIndex = 0;
+            this.motivo.Text = "";
             // 
             // labelMotivo
             // 
@@ -65,12 +65,12 @@
             // 
             // botonAtras
             // 
-            this.botonAtras.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.botonAtras.CausesValidation = false;
             this.botonAtras.Location = new System.Drawing.Point(21, 159);
             this.botonAtras.Name = "botonAtras";
             this.botonAtras.Size = new System.Drawing.Size(75, 23);
             this.botonAtras.TabIndex = 3;
-            this.botonAtras.Text = "<- Atrás";
+            this.botonAtras.Text = "Limpiar";
             this.botonAtras.UseVisualStyleBackColor = true;
             this.botonAtras.Click += new System.EventHandler(this.botonAtras_Click);
             // 
@@ -80,12 +80,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CancelButton = this.botonAtras;
             this.ClientSize = new System.Drawing.Size(361, 199);
             this.Controls.Add(this.botonAtras);
             this.Controls.Add(this.botonAceptar);
             this.Controls.Add(this.labelMotivo);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.motivo);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MotivoCambioPlan";
@@ -98,9 +97,9 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox motivo;
         private System.Windows.Forms.Label labelMotivo;
         private System.Windows.Forms.Button botonAceptar;
-        private System.Windows.Forms.Button botonAtras;
+        public System.Windows.Forms.Button botonAtras;
     }
 }

@@ -24,14 +24,21 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private void botonAtras_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.motivo.ResetText();
         }
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            Utils.registrarMotivoModificacion(this.afiliado, this.richTextBox1.Text);
-            MessageBox.Show("El motivo fue registrado");
-            this.Close();
+            if (motivo.Text.Length.Equals(0))
+            {
+                MessageBox.Show("Debe ingresar un motivo","Importante",MessageBoxButtons.OK);
+            }
+            else
+            {
+                Utils.registrarMotivoModificacion(this.afiliado, this.motivo.Text);
+                MessageBox.Show("El motivo fue registrado");
+                this.Close();
+            }
         }
     }
 }

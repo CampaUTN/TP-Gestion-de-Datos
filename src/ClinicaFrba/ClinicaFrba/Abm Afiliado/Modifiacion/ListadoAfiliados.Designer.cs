@@ -155,7 +155,9 @@
             this.planillaResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.planillaResultados.EnableHeadersVisualStyles = false;
             this.planillaResultados.Location = new System.Drawing.Point(12, 142);
+            this.planillaResultados.MultiSelect = false;
             this.planillaResultados.Name = "planillaResultados";
+            this.planillaResultados.ReadOnly = true;
             this.planillaResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.planillaResultados.Size = new System.Drawing.Size(460, 264);
             this.planillaResultados.TabIndex = 7;
