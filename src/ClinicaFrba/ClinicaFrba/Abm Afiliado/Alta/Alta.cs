@@ -175,8 +175,15 @@ namespace ClinicaFrba.Abm_Afiliado
         //valido el formato de los datos ingresados
         public virtual void validarDatosIngresados() {
 
-            if (!Parser.esEntero(textBoxNroDoc)){
+            if (!Parser.esEntero(textBoxNroDoc))
+            {
                 this.logErrores.agregarAlLog("El número de documento debe ser numérico");
+                textBoxNroDoc.Clear();
+            }
+            else if (Utils.dniOcupado(textBoxNroDoc.Text))
+            {
+                this.logErrores.agregarAlLog("El número de DNI ya se encuentra registrado en el sistema");
+
                 textBoxNroDoc.Clear();
             }
 
@@ -200,14 +207,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.logErrores.agregarAlLog("El nùmero de telefono debe ser númerico");
 
                 textBoxTelefono.Clear();
-            }
-            
-            if (Utils.dniOcupado(textBoxNroDoc.Text))
-            {
-                this.logErrores.agregarAlLog("El número de DNI ya se encuentra registrado en el sistema");
-
-                textBoxNroDoc.Clear();
-            }
+            }       
         }
                 
        private void setearCantidadHijos(){
