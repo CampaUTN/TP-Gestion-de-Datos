@@ -17,13 +17,13 @@ namespace ClinicaFrba.Pedir_Turno
         string userActivo;
         int rolActivo;
         int nroAfiliado = 0;
-
         public PedirTurno(string userActivo, int rolActivo) 
         {
             InitializeComponent();
             this.userActivo = userActivo;
             this.rolActivo = rolActivo;
             this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionales();
+            this.grillaProfesionales.ReadOnly = true;
 
             if (rolActivo == 1) //Si el usuario entro en modo Afiliado se setea directamente el numero de afiliado sin posibilidad de cambiarlo
             { //Afiliado

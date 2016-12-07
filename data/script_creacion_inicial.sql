@@ -237,7 +237,7 @@ CREATE TABLE GEDDES.Afiliados(
  CREATE TABLE GEDDES.Turnos(
 	turn_id INT NOT NULL PRIMARY KEY IDENTITY,
   	turn_afiliado INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Afiliados(afil_id), 
-    turn_hora INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Horarios(hora_id), 
+    turn_hora INT FOREIGN KEY REFERENCES GEDDES.Horarios(hora_id), 
     turn_activo TINYINT NOT NULL);
 
 CREATE TABLE GEDDES.TipoCancelacion(

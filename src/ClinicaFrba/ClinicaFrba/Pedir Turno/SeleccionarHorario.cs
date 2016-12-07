@@ -28,7 +28,7 @@ namespace ClinicaFrba.Pedir_Turno
             this.profesional = profesional;
 
             this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional); //Traigo directamente los horarios del profesional mediante una query
-            
+            this.grillaHorarios.ReadOnly = true;
         }
 
         private void InitializeComponent()
