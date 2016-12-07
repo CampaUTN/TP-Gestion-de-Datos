@@ -305,14 +305,14 @@ VALUES (0,'admin', @hash, 3, 'DNI', 36740233);
 
 
 -- Usuarios desde Afiliados.
-INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-  SELECT DISTINCT Paciente_Dni*100+1, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
+INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+  SELECT DISTINCT Paciente_Dni*100+1,Paciente_Dni, @hash, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
   FROM gd_esquema.Maestra
   WHERE Paciente_Dni IS NOT NULL
 
--- Usuarios desde Profesionales.
-INSERT INTO GEDDES.Usuarios(usua_id,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-	SELECT DISTINCT Medico_Dni*100+1, Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
+
+INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+	SELECT DISTINCT Medico_Dni*100+1,Medico_Dni, @hash,Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
 	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
 
@@ -406,11 +406,6 @@ SELECT m.Turno_Numero, 'Migracion', 1
 FROM gd_esquema.Maestra m
 WHERE m.Bono_Consulta_Numero IS NULL AND m.Turno_Numero IS NOT NULL AND m.Turno_Fecha < GETDATE()
 
-  -- Para que el admin tenga todos los roles y poder testear
-insert into GEDDES.RolXusuario values (0,1)
-insert into GEDDES.RolXusuario values (0,2)
-insert into GEDDES.RolXusuario values (0,3)
-
 insert into GEDDES.Afiliados values (0,555558,'Casado',0) --usuario, plan, estado civ, hijos
 insert into GEDDES.Administradores values (0)  --usario
 insert into GEDDES.Profesionales values (9999,0,null) --prof if, user, algo
@@ -418,8 +413,6 @@ update GEDDES.Usuarios set usua_nombre= 'NombreAdmin' where usua_id=0
 update GEDDES.Usuarios set usua_apellido= 'ApellidoAdmin' where usua_id=0
 
 ---
-
-
 insert into GEDDES.FUNCIONALIDADES values ('AbmAfiliado') --1
 insert into GEDDES.FUNCIONALIDADES values ('AbmEspMedicas') --2
 insert into GEDDES.FUNCIONALIDADES values ('AbmPlanes') --3
@@ -471,6 +464,21 @@ insert into GEDDES.Horarios values (9999,10032,'20151013','12:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151014','12:30:00.0000000')
 insert into GEDDES.Horarios values (9999,10032,'20151015','12:30:00.0000000')
 
+-- ASIGNO ROL DE ADMINISTRADOR AL USER Admin
+insert into GEDDES.RolXusuario values (0,2)
+
+--ASIGNO A LOS AFILIADOS SU RESPECTIVO ROL (INCLUYENDO ADMIN)
+INSERT INTO GEDDES.RolXusuario
+SELECT usua_id, 1
+FROM GEDDES.Usuarios, GEDDES.Afiliados
+WHERE usua_id = afil_usuario
+
+ --ASIGNO A LOS PROFESIONALES SU RESPECTIVO ROL (INCLUYENDO ADMIN)
+INSERT INTO GEDDES.RolXusuario
+SELECT usua_id, 3
+FROM GEDDES.Usuarios, GEDDES.Profesionales
+WHERE usua_id = prof_usuario
+
 DECLARE @hash2 VARBINARY(225)
 SELECT @hash2 = HASHBYTES('SHA2_256', 'afi');
 
@@ -482,10 +490,6 @@ SELECT @hash3 = HASHBYTES('SHA2_256', 'prof');
 
 update GEDDES.Usuarios set usua_username='profesional' where usua_id=146592501
 update GEDDES.Usuarios set usua_password=@hash3 where usua_id=146592501
-
-insert into GEDDES.RolXusuario values (7564290401,1) --Afiliado
-
-insert into GEDDES.RolXusuario values (146592501,3) --Profesional
 
 
 /* CREO STORE PROCEDURES */
