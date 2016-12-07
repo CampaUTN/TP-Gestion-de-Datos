@@ -52,8 +52,7 @@ namespace ClinicaFrba.Utilidades
 
 
 
-        static public int getNumeroAfiliadoDesdeUsuario(string usuario)
-        {
+        static public int getNumeroAfiliadoDesdeUsuario(string usuario) {
             var conexion = DBConnection.getConnection();
 
             long user = getIdDesdeUserName(usuario);
@@ -66,9 +65,25 @@ namespace ClinicaFrba.Utilidades
 
             SqlDataReader reader = comando.ExecuteReader();
 
-            if (reader.Read())
-            {
+            if (reader.Read()) {
                 return Convert.ToInt32(reader[0]); //afil_plan
+            }
+            return -1;
+        }
+
+        static public int getNumeroProfesionalDesdeUsuario(long user) {
+            var conexion = DBConnection.getConnection();
+
+            SqlCommand comando = new SqlCommand("select prof_id from GEDDES.Profesionales where prof_usuario = @user", conexion);
+
+            comando.Parameters.AddWithValue("@user", user);
+
+            conexion.Open();
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read()) {
+                return Convert.ToInt32(reader[0]);
             }
             return -1;
         }
@@ -520,7 +535,7 @@ namespace ClinicaFrba.Utilidades
         }
 
 
-        static public void bajaDia(long usuario_id, DateTime fecha, int tipo, string motivo) {
+        static public void bajaDia(int profesional, DateTime fecha, int tipo, string motivo) {
             var conexion = DBConnection.getConnection();
             conexion.Open();
             //seteo fecha
@@ -534,7 +549,7 @@ namespace ClinicaFrba.Utilidades
             SqlCommand comando = new SqlCommand("GEDDES.cancelar_dia_agenda", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
-            comando.Parameters.AddWithValue("@usuario_id", usuario_id);
+            comando.Parameters.AddWithValue("@profesional", profesional);
             comando.Parameters.AddWithValue("@fecha", fecha);
             comando.Parameters.AddWithValue("@tipo", tipo);
             comando.Parameters.AddWithValue("@motivo", motivo);

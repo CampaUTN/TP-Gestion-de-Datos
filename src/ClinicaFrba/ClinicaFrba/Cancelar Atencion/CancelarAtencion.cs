@@ -78,9 +78,21 @@ namespace ClinicaFrba.Cancelar_Atencion
                     MessageBox.Show("Seleccione una fila para cancelar el turno asociado a ella.");
                 }
             } else {
-                long profesional = usuarioId;
+                int profesional;
+                if (esAdministrativo()) {
+                    int rowindex = grillaProfesionales.CurrentCell.RowIndex;
+                    if (grillaProfesionales.SelectedRows.Count <= 0) {
+                        MessageBox.Show("Seleccione un profesional.");
+                        return;
+                    } else {
+                        int rowindex2 = grillaProfesionales.CurrentCell.RowIndex;
+                        profesional = Convert.ToInt32(grillaProfesionales.Rows[rowindex2].Cells[0].Value);
+                    }
+                } else { // es profesional
+                    profesional = Utilidades.Utils.getNumeroProfesionalDesdeUsuario(usuarioId);
+                }
                 if(diaUnico) {
-                    Utilidades.Utils.bajaDia(usuarioId, desde.Value.Date, 2, textBox1.Text);
+                    Utilidades.Utils.bajaDia(profesional, desde.Value.Date, 2, textBox1.Text);
                     MessageBox.Show("Todos los turnos del dia dados de baja correctamente.");
                 } else {
                     DateTime aux = from.Value;
