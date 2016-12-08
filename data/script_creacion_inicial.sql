@@ -517,11 +517,10 @@ AS
 				IF(@intentos<> 0)  --verifico la cantidad de ceros. si aun le quedan, hago el update
 					UPDATE GEDDES.Usuarios SET usua_intentos = @intentos - 1 WHERE usua_username=@username
 			END				
-	ELSE
+	ELSE IF (@intentos<> 0) 
 			BEGIN
 			SET @cantidad = 4   --Todo bien! Contrasenia correcta!
 			UPDATE GEDDES.Usuarios SET usua_intentos = 3 WHERE usua_username=@username
-
 			END
 	RETURN @cantidad
  END

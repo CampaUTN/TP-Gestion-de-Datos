@@ -29,33 +29,9 @@ namespace ClinicaFrba
             else {
                 //comienzo las validaciones de contraseña y asignacion del menu segun los roles
                 conectar();
-               
             }          
         }
         
-        //verifico la contrasenia
-        private void chequearPassWord(SqlDataReader reader, List<KeyValuePair<int, string>> rolesAsignados)
-        {
-            while (reader.Read())
-            {
-                if (!(bool)reader["login_valido"]){
-
-                    string message;
-                    if ((bool)reader["habilitado"])
-                        message = "La contraseña es incorrecta. Tiene " + (3 - (Int32.Parse(reader["intentos"].ToString()))) + " intentos restantes";
-                    else
-                        message = "El usuario ha sido bloqueado";
-
-                    MessageBox.Show(message, "Error al iniciar sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-
-                }
-                else{
-                    rolesAsignados.Add(new KeyValuePair<int, string>(Int32.Parse(reader["cod_rol"].ToString()),//TODO Mejorar nombres
-                                                                         reader["nombre"].ToString()));
-                }
-            }
-        }
 
         //le muestro al usuario la ventanita segun los roles
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
@@ -70,9 +46,6 @@ namespace ClinicaFrba
                 MessageBox.Show("El usuario no tiene roles asignados. Ingrese con otro usuario.");
                 this.Show();
             }
-            
-
-            
         }
 
         private bool faltaCompletar(){
