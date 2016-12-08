@@ -898,7 +898,7 @@ BEGIN
 				  AND H.hora_activo = 1) >0
 			RAISERROR('El profesional ya atiende en ese dia, hora y fecha con esa especialidad.',16,7)
 		ELSE
-			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio,hora_activo) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio hora_activo from inserted
+			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio,hora_activo) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio, hora_activo from inserted
 END
 GO
 
