@@ -887,7 +887,7 @@ BEGIN
 		) AS tabla
 		group by datepart(WEEK,tabla.hora_fecha)
 		order by count(*) DESC
-	) >= 48
+	) > 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
 		IF (select isnull(count(*),0)
