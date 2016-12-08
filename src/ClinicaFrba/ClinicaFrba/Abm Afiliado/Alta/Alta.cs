@@ -28,7 +28,7 @@ namespace ClinicaFrba.Abm_Afiliado
             Utils.llenar(this.selecPlan,Utils.getPlanes());
 
             cargarCajitas();
-            this.selectorFecha.MaxDate = DateTime.Today;
+            this.selectorFecha.MaxDate = System.DateTime.ParseExact(Utils.fechaSistema(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             this.logErrores = new Logger();
         }
 
