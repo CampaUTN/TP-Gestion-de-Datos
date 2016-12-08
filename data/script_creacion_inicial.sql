@@ -887,7 +887,14 @@ BEGIN
 	) >= 48
 		RAISERROR('En al menos una semana, se supera el limite de 48 horas semanales por profesional.',16,1)
 	ELSE
-		INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
+		IF (select isnull(count(*),0)
+			from GEDDES.Horarios H join inserted I on (H.hora_fecha = I.hora_fecha AND H.hora_inicio = I.hora_inicio
+													   AND H.hora_especialidad = I.hora_especialidad
+													   AND H.hora_profesional = I.hora_profesional)
+			where H.hora_profesional = @prof_id) >0
+			RAISERROR('El profesional ya atiende en ese dia, hora y fecha con esa especialidad.',16,1)
+		ELSE
+			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
 END
 GO
 
