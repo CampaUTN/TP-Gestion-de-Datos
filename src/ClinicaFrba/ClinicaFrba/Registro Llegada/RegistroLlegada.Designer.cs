@@ -37,6 +37,7 @@
             this.groupProfesionales = new System.Windows.Forms.GroupBox();
             this.listadoTurnos = new System.Windows.Forms.DataGridView();
             this.botonSelecAfil = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.planillaProfesionales)).BeginInit();
             this.groupProfesionales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listadoTurnos)).BeginInit();
@@ -145,6 +146,16 @@
             this.botonSelecAfil.UseVisualStyleBackColor = true;
             this.botonSelecAfil.Click += new System.EventHandler(this.botonSelecAfil_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(109, 638);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(213, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "(Sólo se visualizan los turnos del día actual)";
+            // 
             // RegistroLlegada
             // 
             this.AcceptButton = this.botonListarProfesionales;
@@ -153,6 +164,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.botonAtras;
             this.ClientSize = new System.Drawing.Size(488, 666);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.botonSelecAfil);
             this.Controls.Add(this.botonVerTurnos);
             this.Controls.Add(this.listadoTurnos);
@@ -185,5 +197,6 @@
         private System.Windows.Forms.GroupBox groupProfesionales;
         private System.Windows.Forms.DataGridView listadoTurnos;
         private System.Windows.Forms.Button botonSelecAfil;
+        private System.Windows.Forms.Label label1;
     }
 }

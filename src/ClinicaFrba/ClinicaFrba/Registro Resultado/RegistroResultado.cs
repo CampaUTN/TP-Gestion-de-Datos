@@ -121,5 +121,9 @@ namespace ClinicaFrba.Registro_Resultado
 
         }
 
+        private void labelSelecConsulta_Click(object sender, EventArgs e) {
+
+        }
+
      }
 }
