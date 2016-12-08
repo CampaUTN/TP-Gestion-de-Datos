@@ -98,7 +98,7 @@ namespace ClinicaFrba.Listados
                                     "WHERE " + where +
                                     "hora_fecha BETWEEN '" + dateParaSql(generarFechaDesde()) + "' AND '" + dateParaSql(generarFechaHasta()) + "' " + 
                                     "GROUP BY Horarios.hora_especialidad, espe_nombre " +
-                                    "ORDER BY COUNT(DISTINCT canc_id), espe_nombre DESC ";
+                                    "ORDER BY COUNT(DISTINCT canc_id) DESC, espe_nombre ";
             return queryListado;
         }
 
