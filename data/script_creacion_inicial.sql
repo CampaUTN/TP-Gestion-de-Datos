@@ -750,15 +750,10 @@ AS
 	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
 
-	-- Desactivo los horarios
-	UPDATE GEDDES.Horarios
-	SET hora_activo = 0
-	where hora_id in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
-
 	-- Registro cancelaciones
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON
 	DECLARE @TURNO INT
-	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha and turn_activo = 0)
+	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha and turn_activo = 1)
 	OPEN ct
 	FETCH NEXT from ct INTO @turno
 		while(@@FETCH_STATUS = 0)
@@ -769,6 +764,11 @@ AS
 	CLOSE ct
 	DEALLOCATE ct
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos OFF
+
+	-- Desactivo los horarios
+	UPDATE GEDDES.Horarios
+	SET hora_activo = 0
+	where hora_id in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
  END
 GO
 
