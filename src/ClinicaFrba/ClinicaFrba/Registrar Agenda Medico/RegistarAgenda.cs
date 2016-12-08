@@ -75,7 +75,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             comandoAux.ExecuteNonQuery();
             //fin seteo
             foreach (Horario h in horarios) {
-                string insertHorarios = "INSERT INTO GEDDES.Horarios values (@profesional, @especialidad, @fecha, @inicio)";
+                string insertHorarios = "INSERT INTO GEDDES.Horarios values (@profesional, @especialidad, @fecha, @inicio, 1)";
                 SqlCommand comandoInsertarHorarios = new SqlCommand(insertHorarios, conexion);
                 comandoInsertarHorarios.Parameters.AddWithValue("@profesional", h.profesional_id);
                 comandoInsertarHorarios.Parameters.AddWithValue("@especialidad", h.especialidad_id);
@@ -138,7 +138,11 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
                     cargarHorario(conexion);
                 }
                 catch (SqlException ex){
+                   if( ex.State.Equals(7) ){
+                       MessageBox.Show("El profesional ya atiende en ese dia, hora y fecha con esa especialidad.", "Error", MessageBoxButtons.OK);
+                   } else {
                        MessageBox.Show("No se permite agregar estos horarios: se superaria el limite de 48 horas semanales de agregarlos. Se han insertado todos los horarios posibles hasta alcanzar dicho limite.", "Error", MessageBoxButtons.OK);
+                    }
                 }
             } else {
                 MessageBox.Show("La fecha debe estar comprendida entre 7:00 y 20:00 para horarios de lunes a viernes, y entre 10:00 y 15:00 para los sabados.", "Error", MessageBoxButtons.OK);
