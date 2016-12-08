@@ -215,7 +215,8 @@ CREATE TABLE GEDDES.Horarios(
   	hora_profesional INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Profesionales(prof_id), 
     hora_especialidad INT NOT NULL FOREIGN KEY REFERENCES GEDDES.Especialidades(espe_id), 
     hora_fecha DATE NOT NULL,
-    hora_inicio TIME NOT NULL);
+    hora_inicio TIME NOT NULL,
+	hora_activo TINYINT NOT NULL);
   
 CREATE TABLE GEDDES.EspecialidadXProfesional(
 	espe_id INT FOREIGN KEY REFERENCES GEDDES.Especialidades(espe_id),
@@ -351,8 +352,8 @@ INSERT INTO GEDDES.Especialidades(espe_id, espe_tipo, espe_nombre)
   ORDER BY Especialidad_Codigo  
 
 -- Horarios.
-INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional)
-  SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni
+INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional, hora_activo)
+  SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni, 1
   FROM gd_esquema.Maestra m
   WHERE Medico_Dni IS NOT NULL
   GROUP BY Turno_Numero, Turno_Fecha, Especialidad_Codigo, Medico_Dni
@@ -460,9 +461,9 @@ insert into GEDDES.EspecialidadXProfesional values (10012,65090855)
 insert into GEDDES.EspecialidadXProfesional values (10007,1465925)
 insert into GEDDES.EspecialidadXProfesional values (10012,18756896)
 
-insert into GEDDES.Horarios values (9999,10032,'20151013','12:30:00.0000000')
-insert into GEDDES.Horarios values (9999,10032,'20151014','12:30:00.0000000')
-insert into GEDDES.Horarios values (9999,10032,'20151015','12:30:00.0000000')
+insert into GEDDES.Horarios values (9999,10032,'20151013','12:30:00.0000000',1)
+insert into GEDDES.Horarios values (9999,10032,'20151014','12:30:00.0000000',1)
+insert into GEDDES.Horarios values (9999,10032,'20151015','12:30:00.0000000',1)
 
 -- ASIGNO ROL DE ADMINISTRADOR AL USER Admin
 insert into GEDDES.RolXusuario values (0,2)
