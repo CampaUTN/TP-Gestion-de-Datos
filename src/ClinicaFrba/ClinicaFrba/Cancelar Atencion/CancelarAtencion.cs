@@ -67,7 +67,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
-                    if (grillaProfesionales.Rows[rowindex].Cells[5].Value.Equals("No")) {
+                    if (!grillaProfesionales.Rows[rowindex].Cells[5].Value.Equals("Si")) {
                         MessageBox.Show("No se puede cancelar turnos del dia de hoy.");
                         return;
                     }else{

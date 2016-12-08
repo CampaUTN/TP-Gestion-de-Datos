@@ -87,13 +87,13 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.grillaProfesionales.ReadOnly = true;
             this.grillaProfesionales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grillaProfesionales.ShowEditingIcon = false;
-            this.grillaProfesionales.Size = new System.Drawing.Size(627, 149);
+            this.grillaProfesionales.Size = new System.Drawing.Size(767, 149);
             this.grillaProfesionales.TabIndex = 45;
             this.grillaProfesionales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaProfesionales_CellContentClick);
             // 
             // botonListar
             // 
-            this.botonListar.Location = new System.Drawing.Point(645, 32);
+            this.botonListar.Location = new System.Drawing.Point(788, 33);
             this.botonListar.Name = "botonListar";
             this.botonListar.Size = new System.Drawing.Size(88, 71);
             this.botonListar.TabIndex = 44;
@@ -113,7 +113,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(251, 352);
+            this.button2.Location = new System.Drawing.Point(327, 352);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(224, 47);
             this.button2.TabIndex = 51;
@@ -155,7 +155,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.from.CustomFormat = "";
             this.from.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.from.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.from.Location = new System.Drawing.Point(251, 250);
+            this.from.Location = new System.Drawing.Point(248, 250);
             this.from.Margin = new System.Windows.Forms.Padding(5);
             this.from.MaxDate = new System.DateTime(3000, 10, 26, 0, 0, 0, 0);
             this.from.Name = "from";
@@ -241,7 +241,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.textBox1.Location = new System.Drawing.Point(80, 300);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(686, 20);
+            this.textBox1.Size = new System.Drawing.Size(796, 20);
             this.textBox1.TabIndex = 62;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -284,7 +284,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // botonSalir
             // 
-            this.botonSalir.Location = new System.Drawing.Point(713, 376);
+            this.botonSalir.Location = new System.Drawing.Point(801, 376);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(75, 23);
             this.botonSalir.TabIndex = 66;
@@ -305,7 +305,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(645, 111);
+            this.button1.Location = new System.Drawing.Point(788, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 71);
             this.button1.TabIndex = 68;
@@ -325,7 +325,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 411);
+            this.ClientSize = new System.Drawing.Size(888, 411);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
