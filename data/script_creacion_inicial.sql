@@ -748,14 +748,15 @@ AS
 
 	-- Desactivo los turnos
  	UPDATE GEDDES.Turnos
-	SET turn_activo = 0, turn_hora = NULL
+	SET turn_activo = 0
 	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
 
-	-- Borro horarios
-	DELETE GEDDES.Horarios
+	-- Desactivo los horarios
+	UPDATE GEDDES.Horarios
+	SET hora_activo = 0
 	where hora_id in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
 
-	-- registro cancelaciones
+	-- Registro cancelaciones
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON
 	DECLARE @TURNO INT
 	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha)
