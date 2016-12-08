@@ -107,14 +107,8 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.listar();
         }
 
-        private void botonListar_Click(object sender, EventArgs e) {
-            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
-            String extra = ". Los turnos del dia solo se muestran si tienen hora posterior a la del sistema (" + textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss".Length) + ").";
-            String basee = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
-            if(esAfiliado()){
-                basee = basee+extra;
-            }
-            this.label9.Text = basee;
+        private void botonListar_Click(object sender, EventArgs e) {    
+            this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
             this.listar();
         }
 
