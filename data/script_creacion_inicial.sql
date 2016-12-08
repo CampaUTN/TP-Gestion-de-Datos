@@ -312,8 +312,8 @@ INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua
   WHERE Paciente_Dni IS NOT NULL
 
 
-INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua_intentos,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-	SELECT DISTINCT Medico_Dni*100+1,Medico_Dni, @hash,Medico_Dni,0, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
+INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
+	SELECT DISTINCT Medico_Dni*100+1,Medico_Dni, @hash,Medico_Dni, Medico_Nombre, Medico_Apellido, 'DNI',Medico_Direccion, Medico_Telefono, Medico_Fecha_Nac, NULL, Medico_Mail
 	FROM gd_esquema.Maestra
 	WHERE Medico_Dni IS NOT NULL
 
