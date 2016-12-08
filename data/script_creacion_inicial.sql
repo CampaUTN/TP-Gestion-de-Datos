@@ -758,7 +758,7 @@ AS
 	-- Registro cancelaciones
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON
 	DECLARE @TURNO INT
-	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha)
+	DECLARE ct CURSOR for (select turn_id from GEDDES.Horarios join GEDDES.Turnos on (turn_hora = hora_id) where hora_profesional = @profesional and hora_fecha = @fecha and turn_activo = 0)
 	OPEN ct
 	FETCH NEXT from ct INTO @turno
 		while(@@FETCH_STATUS = 0)
