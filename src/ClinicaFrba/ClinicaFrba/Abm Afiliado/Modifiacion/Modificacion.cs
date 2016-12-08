@@ -22,6 +22,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             this.Text = "Modificación";
             this.afiliado = afiliado;
+            this.selectorFecha.MaxDate = afiliado.getFechaNac();
 
             this.cargarDatosAfiliado();
             this.deshabilitarCajitas();

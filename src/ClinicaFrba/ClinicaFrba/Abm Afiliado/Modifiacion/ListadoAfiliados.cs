@@ -199,14 +199,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
         private Afiliado completarDatosDeAfiliado()
         {
-            string direccion;
-            string tipoDoc;
-            string telefono;
-            string mail;
-            string genero;
-            int plan_id;
-            string estado;
-            int cantidadHijos;
+            string direccion, tipoDoc, telefono, mail, genero, estado;
+            int plan_id, cantidadHijos;
             DateTime fechaNac;
 
             // obtengo los datos asociados al afiliado como usuario
@@ -235,9 +229,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 direccion = Convert.ToString(reader[0]);
                 tipoDoc = Convert.ToString(reader[1]);
                 telefono = Convert.ToString(reader[2]);
-                //fechaNac = Convert.ToDateTime(reader[3]);
-                fechaNac = DateTime.Today;
-
+                fechaNac = Convert.ToDateTime(reader[3]);
                 mail = Convert.ToString(reader[4]);
                 genero = Convert.ToString(reader[5]);
 

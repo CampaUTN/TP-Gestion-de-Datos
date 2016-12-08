@@ -307,7 +307,7 @@ VALUES (0,'admin', @hash, 3, 'DNI', 36740233);
 
 -- Usuarios desde Afiliados.
 INSERT INTO GEDDES.Usuarios(usua_id,usua_username,usua_password,usua_nroDoc,usua_nombre,usua_apellido,usua_tipoDoc,usua_direccion,usua_telefono,usua_fechaNacimiento,usua_sexo,usua_mail)
-  SELECT DISTINCT Paciente_Dni*100+1,Paciente_Dni, @hash, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, null, null, Paciente_Mail
+  SELECT DISTINCT Paciente_Dni*100+1,Paciente_Dni, @hash, Paciente_Dni,Paciente_Nombre, Paciente_Apellido, 'DNI', Paciente_Direccion, Paciente_Telefono, Paciente_Fecha_Nac, null, Paciente_Mail
   FROM gd_esquema.Maestra
   WHERE Paciente_Dni IS NOT NULL
 
