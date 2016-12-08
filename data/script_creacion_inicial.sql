@@ -880,7 +880,7 @@ BEGIN
 			(select * -- lo que ya estaba cargado
 			from GEDDES.Horarios E
 			where E.hora_profesional = @prof_id
-				  AND E.hora_activo = 0
+				  AND E.hora_activo = 1
 				  AND CAST(E.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
 			)
 		) AS tabla
@@ -894,7 +894,7 @@ BEGIN
 													   AND H.hora_especialidad = I.hora_especialidad
 													   AND H.hora_profesional = I.hora_profesional)
 			where H.hora_profesional = @prof_id
-				  AND H.hora_activo = 0) >0
+				  AND H.hora_activo = 1) >0
 			RAISERROR('El profesional ya atiende en ese dia, hora y fecha con esa especialidad.',16,1)
 		ELSE
 			INSERT INTO Horarios(hora_profesional,hora_especialidad,hora_fecha,hora_inicio) select hora_profesional, hora_especialidad, hora_fecha, hora_inicio from inserted
