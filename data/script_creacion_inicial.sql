@@ -128,6 +128,9 @@ IF (OBJECT_ID ('GEDDES.tieneFamilia') IS NOT NULL)
 IF (OBJECT_ID ('GEDDES.RemoverTildes') IS NOT NULL)
   DROP FUNCTION GEDDES.RemoverTildes 
 
+IF (OBJECT_ID ('GEDDES.CantidadFamiliares') IS NOT NULL)
+  DROP FUNCTION GEDDES.CantidadFamiliares
+
 /* DROP TRIGGER */
 IF OBJECT_ID('GEDDES.triggerElimTurnos') IS NOT NULL
 	DROP TRIGGER GEDDES.triggerElimTurnos
@@ -615,17 +618,27 @@ GO
 
 USE GD2C2016;
 GO
+CREATE FUNCTION GEDDES.CantidadFamiliares(@afiliado INT)
+RETURNS INT
+AS
+BEGIN
+	RETURN (SELECT COUNT(afil_id)
+		    FROM GEDDES.Afiliados 
+            WHERE ((afil_id - RIGHT(afil_id,2))/ 100) 
+				IN (SELECT TOP 1 (a1.afil_id - RIGHT(a1.afil_id,2))/ 100 
+				    FROM GEDDES.Afiliados a1 WHERE a1.afil_id = @afiliado ))
+END
+GO
+
+USE GD2C2016;
+GO
 --PROCEDURE QUE AGREGA UN FAMILIAR DEL AFILIADO
 CREATE PROCEDURE GEDDES.agregarFamiliar(@afiliado_raiz INT, @usuario BIGINT, @plan INT, @estado VARCHAR(20), @hijos INT)
 AS
 BEGIN
 	DECLARE @numero_nuevo_afiliado INT
-	SET @numero_nuevo_afiliado = (SELECT MAX(CONVERT(INT, RIGHT(STR(afil_id),2)))
-								  FROM GEDDES.Afiliados
-								  WHERE afil_id = @afiliado_raiz)
-
-	--SET @numero_nuevo_afiliado = CONVERT(INT, RIGHT(STR(@afiliado_raiz),2))
-
+	SET @numero_nuevo_afiliado = GEDDES.CantidadFamiliares(@afiliado_raiz)
+	
 	SET IDENTITY_INSERT GEDDES.Afiliados ON
 
 	INSERT INTO GEDDES.Afiliados(afil_id, afil_usuario, afil_plan, afil_estadoCivil, afil_cantidadHijos)
@@ -634,8 +647,6 @@ BEGIN
 	SET IDENTITY_INSERT GEDDES.Afiliados OFF
 END
 GO
-
-
 
 USE GD2C2016;
 GO
