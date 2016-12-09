@@ -51,6 +51,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             this.to.MinDate = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
             this.to.Value = System.DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
 
+            textBox1.Text = "";
             this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
         }
 
@@ -64,6 +65,10 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         // Boton de borrar. Se encarga de hacer validaciones y llamar a los metodos para concretar las bajas.
         private void button2_Click(object sender, EventArgs e) {
+            if (textBox1.Text=="") {
+                MessageBox.Show("Complete el motivo.");
+                return;
+            }
             if (esAfiliado()) {
                 if (grillaProfesionales.SelectedRows.Count >0 ) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
@@ -181,7 +186,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
-
         }
 
         private void botonSalir_Click(object sender, EventArgs e) {

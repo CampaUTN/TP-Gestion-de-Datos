@@ -877,21 +877,22 @@ AS
 BEGIN
 
 	DECLARE @prof_id INT = (select hora_profesional from inserted)
-
 	IF (SELECT top 1 count(*)/2
-		FROM (
-			(select * -- lo nuevo
-			from inserted I
-			where I.hora_profesional = @prof_id
-				and CAST(I.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
-			)
-			UNION
-			(select * -- lo que ya estaba cargado
-			from GEDDES.Horarios E
-			where E.hora_profesional = @prof_id
-				  AND E.hora_activo = 1
-				  AND CAST(E.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
-			)
+		FROM (SELECT distinct CONVERT(varchar,hora_fecha,105)+CONVERT(varchar,hora_inicio,108) 'identificador', hora_fecha
+				FROM (
+					(select * -- lo nuevo
+					from inserted I
+					where I.hora_profesional = @prof_id
+						and CAST(I.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
+					)
+					UNION
+					(select * -- lo que ya estaba cargado
+					from GEDDES.Horarios E
+					where E.hora_profesional = @prof_id
+						AND E.hora_activo = 1
+						AND CAST(E.hora_fecha AS DATE) >= CAST(GEDDES.fecha() AS DATE)
+					)
+			  ) AS tabla1
 		) AS tabla
 		group by datepart(WEEK,tabla.hora_fecha)
 		order by count(*) DESC
