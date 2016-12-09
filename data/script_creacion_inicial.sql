@@ -817,9 +817,15 @@ CREATE FUNCTION GEDDES.tieneFamilia(@usuario_id BIGINT)
 RETURNS CHAR(2)
 AS
 BEGIN
+	DECLARE @afiliado BIGINT
 	DECLARE @raiz BIGINT
-	SET @raiz = LEFT(@usuario_id,8)
-	IF EXISTS(SELECT * FROM GEDDES.Usuarios WHERE usua_id <> @usuario_id AND LEFT(usua_id,8) = @raiz)
+	DECLARE @largoRaiz INT 
+
+	SET @afiliado = (SELECT afil_id FROM GEDDES.Afiliados WHERE afil_usuario = @usuario_id)
+	SET @largoRaiz = LEN(CAST(@afiliado AS varchar(10)) )-2
+	SET @raiz = LEFT(@afiliado,@largoRaiz)
+	
+	IF EXISTS(SELECT * FROM GEDDES.Afiliados WHERE afil_id <> @afiliado AND LEFT(afil_id,@largoRaiz) = @raiz)
 		RETURN 'SI'
 	RETURN 'NO'
 END
