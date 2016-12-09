@@ -373,7 +373,6 @@ namespace ClinicaFrba.Utilidades
             SqlCommand comando = new SqlCommand("GEDDES.modificarAfiliado", conexion);
             comando.CommandType = CommandType.StoredProcedure;
 
-            MessageBox.Show(afiliado.getPlan());
             comando.Parameters.AddWithValue("@username", afiliado.getUsuaId());
             comando.Parameters.AddWithValue("@direccion", afiliado.getDireccion());
             comando.Parameters.AddWithValue("@telefono", afiliado.getTelefono());

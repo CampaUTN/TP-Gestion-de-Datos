@@ -69,7 +69,7 @@ namespace ClinicaFrba.Abm_Afiliado
         }
 
         //limpio los datos que el usuario completo
-        private void botonLimpiar_Click(object sender, EventArgs e){
+        public virtual void botonLimpiar_Click(object sender, EventArgs e){
             this.limpiarCajitas();
             selecPlan.ResetText();
             selecEstadoCivil.ResetText();
@@ -98,7 +98,7 @@ namespace ClinicaFrba.Abm_Afiliado
         }
 
 
-        private void limpiarCajitas(){
+        protected void limpiarCajitas(){
             foreach (TextBox cajita in cajasTexto){ cajita.Clear();  }
 
             this.selecPlan.ResetText();

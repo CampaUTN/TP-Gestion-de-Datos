@@ -22,7 +22,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
 
             this.Text = "Modificación";
             this.afiliado = afiliado;
-            this.selectorFecha.MaxDate = afiliado.getFechaNac();
 
             this.cargarDatosAfiliado();
             this.deshabilitarCajitas();
@@ -39,15 +38,15 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 Utils.actualizarAfiliado(this.afiliado);
 
                 MessageBox.Show("Modificación Realizada con éxito!");
-                   this.Close();
+                this.Close();
                 
             }
             else
             {
-                selecPlan.ResetText();
+                //selecPlan.ResetText();
                 selecEstadoCivil.ResetText();
 
-                selecPlan.SelectedItem = null;
+                //selecPlan.SelectedItem = null;
                 selecEstadoCivil.SelectedItem = null;
 
             }
@@ -62,7 +61,8 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             this.textBoxApellido.Text = afiliado.getApellido();
             this.textBoxNroDoc.Text = Convert.ToString(afiliado.getNroDoc());
             this.comboBoxTipoDoc.Text = afiliado.getTipoDoc();
-            this.selectorFecha.Value = afiliado.getFechaNac();
+            this.selectorFecha.MaxDate = afiliado.getFechaNac();
+            this.selecPlan.Text = afiliado.getPlan();
         }
 
         private void deshabilitarCajitas()
@@ -80,9 +80,6 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             this.selecMasc.Enabled = false;
             this.selectorFecha.Enabled = false;
             this.comboBoxTipoDoc.Enabled = false;
-
-            this.selecPlan.ResetText();
-
         }
 
         public override void cargarUsuario()
@@ -113,7 +110,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 plan.Value.ToString();
                 if (plan.Value.ToString() != afiliado.getPlan())
                 {
-                    MessageBox.Show("INDIQUE EL MOTIVO POR EL QUE DESEA CAMBIAR EL PLAN Desde " + afiliado.getPlan() + " a " + plan.Value.ToString());
+                    MessageBox.Show("INDIQUE EL MOTIVO POR EL QUE DESEA CAMBIAR EL PLAN \nDesde " + afiliado.getPlan() + " a " + plan.Value.ToString());
 
 
                     MotivoCambioPlan formulario = new MotivoCambioPlan(afiliado.getCodigoAfiliado());
@@ -134,7 +131,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
         public override bool faltaCompletarDatos(){
             bool cajasVacias = cajasTexto.FindAll(cajita => cajita.Text.Length.Equals(0)).Count().Equals(cajasTexto.Count());
 
-            bool noSeEligioUnPlan = selecPlan.SelectedItem == null;
+            bool noSeEligioUnPlan = selecPlan.SelectedItem == null || selecPlan.SelectedItem.Equals(afiliado.getPlan());
 
 
             if (textBoxDireccion.Text.Length > 0)
@@ -147,7 +144,10 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 camposModificados = camposModificados + "- Teléfono\n";              
             }
 
-            if (!noSeEligioUnPlan)
+            //if (!noSeEligioUnPlan)
+            KeyValuePair<int, string> plan = (KeyValuePair<int, string>)selecPlan.SelectedItem;
+
+            if (plan.Value.ToString() != afiliado.getPlan())
             {
                 camposModificados = camposModificados + "- Plan\n";
             }
@@ -159,7 +159,7 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
                 camposModificados = camposModificados + "- Estado Civil\n";
             }
 
-            return noSeEligioUnPlan && noSeEligioEstadoCivil && cajasVacias;
+            return camposModificados.Length.Equals(0) && noSeEligioEstadoCivil && cajasVacias;
         }
 
         public override void validarDatosIngresados(){
@@ -171,19 +171,25 @@ namespace ClinicaFrba.Abm_Afiliado.Modifiacion
             }
 
 
-            if (selecPlan.SelectedItem != null)
+            if (camposModificados.Length.Equals(0))
             {
                 KeyValuePair<int, string> plan = (KeyValuePair<int, string>)selecPlan.SelectedItem;
                 plan.Value.ToString();
                 if (plan.Value.ToString() == afiliado.getPlan())
                 {
                     logErrores.agregarAlLog("El afiliado ya dispone del plan escogido");
-                    this.selecPlan.ResetText();
-
                     camposModificados = "";
                 }
 
             }
+        }
+
+        public override void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCajitas();
+            selecPlan.ResetText();
+            this.selecPlan.Text = afiliado.getPlan();
+            selecEstadoCivil.SelectedItem = null;
         }
     }
 }

@@ -168,7 +168,7 @@
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.botonAceptar);
             this.Controls.Add(this.listadoConsultas);
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.Name = "RegistroResultado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro resultado de atención médica";
