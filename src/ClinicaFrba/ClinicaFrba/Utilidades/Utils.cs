@@ -229,17 +229,18 @@ namespace ClinicaFrba.Utilidades
             return tabla;
         }
 
-        static public DataTable getHorariosDelProfesional(string profesional)
+        static public DataTable getHorariosDelProfesional(string profesional, string especialidadDescripcion)
         {
             String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
             DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
             TimeSpan hora = DateTime.ParseExact(textoFecha.Substring("yyyy-MM-dd".Length + 1, "HH:mm:ss,fff".Length), "HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture).TimeOfDay;
 
             var conexion = DBConnection.getConnection();
-            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where hora_activo=1 AND (CAST(hora_fecha AS DATE)>CAST(@fechaActual AS DATE) or (CAST(hora_fecha AS DATE)=CAST(@fechaActual AS DATE) and hora_inicio>@horaActual))  and hora_profesional = @profesional and (hora_id NOT IN (select turn_hora from GEDDES.Turnos) or 1<>(select TOP 1 turn_activo from GEDDES.Turnos where turn_hora=hora_id order by turn_activo DESC)) order by hora_fecha, hora_inicio ASC", conexion);
+            SqlCommand comando = new SqlCommand("select hora_id as IdHorario, hora_fecha Dia, hora_inicio Hora from GEDDES.Horarios where (select espe_id from GEDDES.Especialidades where espe_nombre=@espeDescrip)=hora_especialidad AND CAST(hora_fecha AS DATETIME)+CAST(hora_inicio AS DATETIME) not in (select CAST(hora_fecha AS DATETIME)+CAST(hora_inicio AS DATETIME) from GEDDES.Turnos,GEDDES.Horarios where turn_hora=hora_id and hora_profesional=@profesional and turn_activo=1) and hora_activo=1 AND (CAST(hora_fecha AS DATE)>CAST(@fechaActual AS DATE) or (CAST(hora_fecha AS DATE)=CAST(@fechaActual AS DATE) and hora_inicio>@horaActual))  and hora_profesional = @profesional and (hora_id NOT IN (select turn_hora from GEDDES.Turnos) or 1<>(select TOP 1 turn_activo from GEDDES.Turnos where turn_hora=hora_id order by turn_activo DESC)) order by hora_fecha, hora_inicio ASC", conexion);
             comando.Parameters.AddWithValue("@profesional", Int32.Parse(profesional));
             comando.Parameters.AddWithValue("@fechaActual", fecha);
             comando.Parameters.AddWithValue("@horaActual", hora);
+            comando.Parameters.AddWithValue("@espeDescrip", especialidadDescripcion);
             comando.CommandType = CommandType.Text;
 
             SqlDataAdapter sqlDataAdap = new SqlDataAdapter(comando);

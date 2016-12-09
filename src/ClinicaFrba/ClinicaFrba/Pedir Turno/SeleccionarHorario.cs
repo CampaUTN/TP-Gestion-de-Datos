@@ -20,14 +20,16 @@ namespace ClinicaFrba.Pedir_Turno
         private Button botonReservar;
         private Button botonSalir;
         string profesional;
+        string especialidad;
 
-        public SeleccionarHorario(int nroAfiliado, string profesional)
+        public SeleccionarHorario(int nroAfiliado, string profesional, string especialidad)
         {
             InitializeComponent();
             this.nroAfiliado = nroAfiliado;
             this.profesional = profesional;
+            this.especialidad = especialidad;
 
-            this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional); //Traigo directamente los horarios del profesional mediante una query
+            this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional, this.especialidad); //Traigo directamente los horarios del profesional mediante una query
             this.grillaHorarios.ReadOnly = true;
         }
 
@@ -125,7 +127,7 @@ namespace ClinicaFrba.Pedir_Turno
 
                 MessageBox.Show("El turno se ha registrado correctamente");
 
-                this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional); //Actualizo los horarios para descartar el reciente elegido
+                this.grillaHorarios.DataSource = Utilidades.Utils.getHorariosDelProfesional(this.profesional,this.especialidad); //Actualizo los horarios para descartar el reciente elegido
             }
             else
             {

@@ -83,7 +83,8 @@ namespace ClinicaFrba.Pedir_Turno
                 {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
                     string profesional = grillaProfesionales.Rows[rowindex].Cells[0].Value.ToString(); //Esto me permite que pueda seleccionar cualquier columna de la fila y tome el valor de la fila completa
-                    new SeleccionarHorario(this.nroAfiliado, profesional).Show();
+                    string especialidad = grillaProfesionales.Rows[rowindex].Cells[3].Value.ToString();
+                    new SeleccionarHorario(this.nroAfiliado, profesional,especialidad).Show();
                 }
             }
             else
