@@ -462,12 +462,7 @@ insert into GEDDES.RolXfuncionalidad values (2,11)
 insert into GEDDES.RolXfuncionalidad values (2,12) 
 
 insert into GEDDES.EspecialidadXProfesional values (10000,9999)
-insert into GEDDES.EspecialidadXProfesional values (10001,92746405)
 insert into GEDDES.EspecialidadXProfesional values (10004,9999)
-insert into GEDDES.EspecialidadXProfesional values (10007,54980698)
-insert into GEDDES.EspecialidadXProfesional values (10012,65090855)
-insert into GEDDES.EspecialidadXProfesional values (10007,1465925)
-insert into GEDDES.EspecialidadXProfesional values (10012,18756896)
 
 insert into GEDDES.Horarios values (9999,10032,'20151013','12:30:00.0000000',1)
 insert into GEDDES.Horarios values (9999,10032,'20151014','12:30:00.0000000',1)
