@@ -351,6 +351,14 @@ INSERT INTO GEDDES.Especialidades(espe_id, espe_tipo, espe_nombre)
   WHERE Especialidad_Codigo IS NOT NULL
   ORDER BY Especialidad_Codigo  
 
+  -- Especialidad por Profesional
+INSERT INTO GEDDES.EspecialidadXProfesional(espe_id, prof_id)
+  SELECT DISTINCT Especialidad_Codigo, Medico_Dni
+  FROM gd_esquema.Maestra
+  WHERE Especialidad_Codigo IS NOT NULL
+  ORDER BY Especialidad_Codigo 
+
+
 -- Horarios.
 INSERT INTO GEDDES.Horarios(hora_especialidad, hora_fecha, hora_inicio, hora_profesional, hora_activo)
   SELECT Especialidad_Codigo, CONVERT(DATE,Turno_Fecha), CONVERT(TIME,Turno_fecha), Medico_Dni, 1
