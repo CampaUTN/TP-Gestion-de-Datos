@@ -37,15 +37,24 @@ namespace ClinicaFrba
         private void dividir(List<KeyValuePair<int, string>> rolesAsignados)
         {
             this.Hide();
-            if (rolesAsignados.Count == 1) //SI SOLO TIENE UN ROL DIRECTAMENTE ABRO ESE ROL
-                (new MenuPrincipal(Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).Show();
-            else
-            if (rolesAsignados.Count > 1) //Sino abro un nuevo form para que elija
-                (new EleccionRol(this.textUsuario.Text, rolesAsignados)).Show();
-            else {
-                MessageBox.Show("El usuario no tiene roles asignados. Ingrese con otro usuario.");
-                this.Show();
+            if (rolesAsignados.Count == 1)
+            {//SI SOLO TIENE UN ROL DIRECTAMENTE ABRO ESE ROL
+                (new MenuPrincipal(Int32.Parse(rolesAsignados[0].Key.ToString()), this.textUsuario.Text)).ShowDialog();
             }
+            else
+            {
+                if (rolesAsignados.Count > 1)
+                {//Sino abro un nuevo form para que elija
+                    (new EleccionRol(this.textUsuario.Text, rolesAsignados)).ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no tiene roles asignados. Ingrese con otro usuario.");
+                    //this.Show();
+                }
+            }
+            this.textUsuario.ResetText();
+            //this.Show();
         }
 
         private bool faltaCompletar(){
