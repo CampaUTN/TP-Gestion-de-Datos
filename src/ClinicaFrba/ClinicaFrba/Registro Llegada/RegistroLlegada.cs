@@ -65,7 +65,7 @@ namespace ClinicaFrba.Registro_Llegada
             subselect = subselect + id;
 
             string where = "WHERE espe_nombre= '" + Convert.ToString(planillaProfesionales.SelectedCells[3].Value)
-                            + "' AND turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND hora_fecha =  CONVERT(DATE,'" + Utils.fechaSistema() + "')"
+                            + "' AND turn_afiliado = afil_id AND afil_usuario = usua_id AND turn_hora = hora_id AND turn_activo = 1 AND hora_fecha = "+ Utils.fechaSistemaBD() 
                             + " AND turn_id NOT IN (SELECT cons_turno FROM GEDDES.Turnos, GEDDES.Consultas WHERE turn_id = cons_id) AND turn_id IN(" + subselect + ")";
             DBConnection.cargarPlanilla(listadoTurnos, select + from + where);
 

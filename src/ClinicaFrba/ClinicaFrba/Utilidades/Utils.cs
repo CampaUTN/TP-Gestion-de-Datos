@@ -678,5 +678,11 @@ namespace ClinicaFrba.Utilidades
 
             return textoFecha.Substring(0, "yyyy-MM-dd".Length);
         }
+
+
+        public static string fechaSistemaBD()
+        {
+            return "CONVERT(DATE,'" + Utils.fechaSistema() + "')";
+        }
     }
 }
