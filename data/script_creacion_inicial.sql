@@ -758,12 +758,7 @@ CREATE PROCEDURE GEDDES.cancelar_dia_agenda(@profesional INT, @fecha Date,  @tip
 AS
  BEGIN
 	--DECLARE @profesional INT = (select prof_id from GEDDES.Profesionales where prof_usuario = @usuario_id)
-
-	-- Desactivo los turnos
- 	UPDATE GEDDES.Turnos
-	SET turn_activo = 0
-	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
-
+	
 	-- Registro cancelaciones
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos ON
 	DECLARE @TURNO INT
@@ -778,6 +773,11 @@ AS
 	CLOSE ct
 	DEALLOCATE ct
 	SET IDENTITY_INSERT GEDDES.CancelacionesTurnos OFF
+	
+	-- Desactivo los turnos
+ 	UPDATE GEDDES.Turnos
+	SET turn_activo = 0
+	where turn_hora in (select hora_id from GEDDES.Horarios where hora_profesional = @profesional and hora_fecha = @fecha)
 
 	-- Desactivo los horarios
 	UPDATE GEDDES.Horarios
