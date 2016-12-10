@@ -53,6 +53,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
             textBox1.Text = "";
             this.label9.Text = "Observacion: No se pueden cancelar turnos del dia actual (" + ConfigurationManager.AppSettings["fecha"].ToString().Substring(0, "yyyy-MM-dd".Length) + ")";
+            this.listar();
         }
 
         private bool esAfiliado(){
