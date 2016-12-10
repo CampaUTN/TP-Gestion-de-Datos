@@ -55,7 +55,7 @@ namespace ClinicaFrba.Registrar_Agenda_Medico
             List<Horario> horarios = new List<Horario>();
             Horario horario;
             DateTime hora;
-            DateTime fecha = desde.Value.AddDays(Math.Abs((int)desde.Value.DayOfWeek-numeroDia));
+            DateTime fecha = desde.Value.AddDays(numeroDia-(int)desde.Value.DayOfWeek);
             while (fecha <= hasta.Value) {
                 hora = horaInicio;
                 while (hora.AddMinutes(30) <= horaFin) {
