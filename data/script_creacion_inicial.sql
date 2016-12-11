@@ -805,12 +805,12 @@ GO
 
 USE GD2C2016;
 GO
-CREATE PROCEDURE GEDDES.registrarMotivo(@afil INT, @motivo VARCHAR(255))
+CREATE PROCEDURE GEDDES.registrarMotivo(@afil INT, @motivo VARCHAR(255), @fecha DATE)
 AS
 	BEGIN 
 
 	INSERT INTO GEDDES.HistorialAfiliado(hist_afil, hist_motivo, hist_fecha)
-	VALUES (@afil,@motivo, CONVERT(DATE, SYSDATETIME()) );
+	VALUES (@afil,@motivo, @fecha);
 
 	END
 GO

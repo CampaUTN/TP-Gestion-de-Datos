@@ -637,11 +637,14 @@ namespace ClinicaFrba.Utilidades
         static public void registrarMotivoModificacion(int afiliado, string motivo)
         {
             var conexion = DBConnection.getConnection();
-
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd".Length), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+       
             SqlCommand comando = new SqlCommand("GEDDES.registrarMotivo", conexion);
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@afil", afiliado);
             comando.Parameters.AddWithValue("@motivo", motivo);
+            comando.Parameters.AddWithValue("@fecha", fecha);
             conexion.Open();
 
             SqlDataReader reader = comando.ExecuteReader();
