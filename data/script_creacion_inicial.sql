@@ -720,13 +720,13 @@ GO
 
 USE GD2C2016;
 GO
-CREATE PROCEDURE GEDDES.registrarConsulta(@turno INT, @bono INT, @afil INT)
+CREATE PROCEDURE GEDDES.registrarConsulta(@turno INT, @bono INT, @afil INT, @fecha DATETIME)
 AS
 	BEGIN 
 		DECLARE @consulta INT
 
 		INSERT INTO GEDDES.Consultas(cons_turno,cons_fechaHoraConsulta)
-		VALUES(@turno, GETDATE());
+		VALUES(@turno, @fecha);
 
 		SET @consulta = (SELECT TOP 1 cons_id FROM GEDDES.Consultas WHERE cons_turno = @turno)
 

@@ -581,6 +581,11 @@ namespace ClinicaFrba.Utilidades
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.AddWithValue("@turno", turno);
             comando.Parameters.AddWithValue("@bono", bono);
+
+            String textoFecha = ConfigurationManager.AppSettings["fecha"].ToString();
+            DateTime fecha = DateTime.ParseExact(textoFecha.Substring(0, "yyyy-MM-dd HH:mm:ss,fff".Length), "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+            comando.Parameters.AddWithValue("@fecha", fecha);
+
             comando.Parameters.AddWithValue("@afil", afiliado);
 
             conexion.Open();
