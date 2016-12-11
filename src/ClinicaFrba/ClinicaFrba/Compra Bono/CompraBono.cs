@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 
 
@@ -101,13 +102,14 @@ namespace ClinicaFrba.Compra_Bono
                 if (this.contadorBonos.Value > 0)
                 {
                     SqlConnection conexion = DBConnection.getConnection();
+                    DateTime fechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["fecha"].ToString(), "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
 
                     string insertComprasBonos = "INSERT INTO GEDDES.ComprasBonos values (@afiliado, @cantidad, @precioFinal,@fechaCompra)";
                     SqlCommand comandoComprasBonos = new SqlCommand(insertComprasBonos, conexion);
                     comandoComprasBonos.Parameters.AddWithValue("@afiliado", this.nroAfiliado);
                     comandoComprasBonos.Parameters.AddWithValue("@cantidad", (int)this.contadorBonos.Value);
                     comandoComprasBonos.Parameters.AddWithValue("@precioFinal", (int)this.contadorBonos.Value * this.precioPlan);
-                    comandoComprasBonos.Parameters.AddWithValue("@fechaCompra", DateTime.Now);
+                    comandoComprasBonos.Parameters.AddWithValue("@fechaCompra", fechaSistema);
 
                     conexion.Open();
 
