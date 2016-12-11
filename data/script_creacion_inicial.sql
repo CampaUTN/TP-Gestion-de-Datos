@@ -305,7 +305,7 @@ SELECT @hash = HASHBYTES('SHA2_256', 'w23e');
   
 --Administrativo
 INSERT INTO GEDDES.Usuarios(usua_id,usua_username, usua_password, usua_intentos, usua_tipoDoc, usua_nroDoc, usua_fechaNacimiento, usua_telefono, usua_mail)
-VALUES (0,'admin', @hash, 3, 'DNI', 36740233, Cast('1979-05-27 00:00:00.000' as datetime), 44324744, 'admin@gmail.com');
+VALUES (0,'admin', @hash, 3, 'DNI', 36740233, CONVERT(DATETIME,'1979-05-27',102), 44324744, 'admin@gmail.com');
 
 
 -- Usuarios desde Afiliados.
