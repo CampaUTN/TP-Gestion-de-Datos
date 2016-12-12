@@ -64,6 +64,10 @@ namespace ClinicaFrba.Cancelar_Atencion
             return rol == 2;
         }
 
+        private bool esProfesional() {
+            return rol == 3;
+        }
+
         // Boton de borrar. Se encarga de hacer validaciones y llamar a los metodos para concretar las bajas.
         private void button2_Click(object sender, EventArgs e) {
             if (textBox1.Text=="") {
@@ -85,7 +89,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                 }
             } else {
                 int profesional;
-                if (esAdministrativo()) {
+                if (!esProfesional()) {
                     int rowindex = grillaProfesionales.CurrentCell.RowIndex;
                     if (grillaProfesionales.SelectedRows.Count <= 0) {
                         MessageBox.Show("Seleccione un profesional.");
@@ -123,7 +127,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             if (esAfiliado()) {
                 this.grillaProfesionales.DataSource = Utilidades.Utils.getTurnos(usuarioId);
             } else {
-                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesPosta(esAdministrativo()?"":username);
+                this.grillaProfesionales.DataSource = Utilidades.Utils.getProfesionalesPosta(!esProfesional() ? "" : username);
                 if (grillaProfesionales.Rows.Count > 0) {
                     grillaProfesionales.MultiSelect = false; //esto hace que no quede nada seleccionado.
                     grillaProfesionales.MultiSelect = true;
